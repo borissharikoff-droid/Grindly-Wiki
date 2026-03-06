@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equipment – Grindly Wiki</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Top Bar -->
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">G</span>
+      <span class="logo-text">Grindly<small>Wiki</small></span>
+    </a>
+    <div class="top-right">
+      <div class="player-count">
+        <span class="pulse-dot"></span>
+        <span>Productivity RPG</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Page Layout -->
+<div class="page-wrap">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="search-box">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search wiki..." autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title"><span class="arrow">&#9660;</span> Pages</div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link"><span class="nav-dot gold"></span> Wiki Home</a></li>
+        <li><a href="equipment.html" class="nav-link active"><span class="nav-dot gold"></span> Equipment</a></li>
+        <li><a href="loot.html" class="nav-link"><span class="nav-dot orange"></span> Loot</a></li>
+        <li><a href="materials.html" class="nav-link"><span class="nav-dot purple"></span> Materials</a></li>
+        <li><a href="arena.html" class="nav-link"><span class="nav-dot red"></span> Arena</a></li>
+        <li><a href="crafting.html" class="nav-link"><span class="nav-dot cyan"></span> Crafting</a></li>
+        <li><a href="farming.html" class="nav-link"><span class="nav-dot green"></span> Farming</a></li>
+        <li><a href="skills.html" class="nav-link"><span class="nav-dot blue"></span> Skills</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+
+    <!-- Bag-Drop Gear -->
+    <section class="content" id="bag-drop">
+      <h2 class="section-title"><span class="section-icon">&#9876;&#65039;</span> Equipment</h2>
+      <p class="section-desc">Gear drops from chests or is crafted at the workbench. Equip items to boost ATK, HP, HP Regen, XP rates and more. Only armor slots (head, body, legs, ring, weapon) contribute to Item Power (IP).</p>
+
+      <h3 class="sub-title">Bag-Drop Gear</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th></th><th>Name</th><th>Slot</th><th>Rarity</th><th>Perks</th></tr></thead>
+          <tbody>
+            <tr><td class="icon-cell">&#129506;</td><td><a href="item.html?id=canvas_cap" style="color:var(--gold)">Canvas Cap</a></td><td><span class="slot-badge">Head</span></td><td><span class="rarity common">Common</span></td><td class="perk">+2 ATK</td></tr>
+            <tr><td class="icon-cell">&#128085;</td><td><a href="item.html?id=plain_tee" style="color:var(--gold)">Plain Tee</a></td><td><span class="slot-badge">Body</span></td><td><span class="rarity common">Common</span></td><td class="perk">+15 HP</td></tr>
+            <tr><td class="icon-cell">&#128255;</td><td><a href="item.html?id=worn_bracelet" style="color:var(--gold)">Worn Bracelet</a></td><td><span class="slot-badge">Ring</span></td><td><span class="rarity common">Common</span></td><td class="perk">+0.5 HP Regen</td></tr>
+            <tr><td class="icon-cell">&#129657;</td><td><a href="item.html?id=code_wraps" style="color:var(--gold)">Code Wraps</a></td><td><span class="slot-badge">Legs</span></td><td><span class="rarity common">Common</span></td><td class="perk">+1 ATK</td></tr>
+            <tr><td class="icon-cell">&#127935;</td><td><a href="item.html?id=zen_beanie" style="color:var(--gold)">Zen Beanie</a></td><td><span class="slot-badge">Head</span></td><td><span class="rarity rare">Rare</span></td><td class="perk">+4 ATK</td></tr>
+            <tr><td class="icon-cell">&#129509;</td><td><a href="item.html?id=cozy_sweater" style="color:var(--gold)">Cozy Sweater</a></td><td><span class="slot-badge">Body</span></td><td><span class="rarity rare">Rare</span></td><td class="perk">+35 HP</td></tr>
+            <tr><td class="icon-cell">&#128141;</td><td><a href="item.html?id=social_ring" style="color:var(--gold)">Social Ring</a></td><td><span class="slot-badge">Ring</span></td><td><span class="rarity rare">Rare</span></td><td class="perk">+1.5 HP Regen</td></tr>
+            <tr><td class="icon-cell">&#129466;</td><td><a href="item.html?id=task_vest" style="color:var(--gold)">Task Vest</a></td><td><span class="slot-badge">Body</span></td><td><span class="rarity rare">Rare</span></td><td class="perk">+5% Developer XP</td></tr>
+            <tr><td class="icon-cell">&#129405;</td><td><a href="item.html?id=neon_visor" style="color:var(--gold)">Neon Visor</a></td><td><span class="slot-badge">Head</span></td><td><span class="rarity epic">Epic</span></td><td class="perk">+7 ATK &middot; +5% chest chance (coding)</td></tr>
+            <tr><td class="icon-cell">&#129509;</td><td><a href="item.html?id=hacker_jacket" style="color:var(--gold)">Hacker Jacket</a></td><td><span class="slot-badge">Body</span></td><td><span class="rarity epic">Epic</span></td><td class="perk">+50 HP &middot; +3 ATK</td></tr>
+            <tr><td class="icon-cell">&#129507;</td><td><a href="item.html?id=scholar_cape" style="color:var(--gold)">Scholar Cape</a></td><td><span class="slot-badge">Body</span></td><td><span class="rarity epic">Epic</span></td><td class="perk">+8% Researcher XP &middot; +30 HP</td></tr>
+            <tr><td class="icon-cell">&#128279;</td><td><a href="item.html?id=sonic_loop" style="color:var(--gold)">Sonic Loop</a></td><td><span class="slot-badge">Ring</span></td><td><span class="rarity epic">Epic</span></td><td class="perk">+5 ATK &middot; +2 HP Regen</td></tr>
+            <tr><td class="icon-cell">&#128123;</td><td><a href="item.html?id=phantom_cloak" style="color:var(--gold)">Phantom Cloak</a></td><td><span class="slot-badge">Body</span></td><td><span class="rarity legendary">Legendary</span></td><td class="perk">+80 HP &middot; +5 ATK &middot; Streak Shield</td></tr>
+            <tr><td class="icon-cell">&#9201;&#65039;</td><td><a href="item.html?id=chrono_visor" style="color:var(--gold)">Chrono Visor</a></td><td><span class="slot-badge">Head</span></td><td><span class="rarity legendary">Legendary</span></td><td class="perk">+8 ATK &middot; +15% Focus &middot; +5% Global XP</td></tr>
+            <tr><td class="icon-cell">&#127744;</td><td><a href="item.html?id=void_aura" style="color:var(--gold)">Void Aura</a></td><td><span class="slot-badge">Ring</span></td><td><span class="rarity mythic">Mythic</span></td><td class="perk">+10 ATK &middot; +4 HP Regen &middot; +8% Global XP</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Crafted Gear -->
+    <section class="content" id="crafted">
+      <h3 class="sub-title">Crafted Gear</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th></th><th>Name</th><th>Slot</th><th>Rarity</th><th>Perks</th></tr></thead>
+          <tbody>
+            <tr><td class="icon-cell">&#9937;&#65039;</td><td><a href="item.html?id=craft_iron_helm" style="color:var(--gold)">Iron Helm</a></td><td><span class="slot-badge">Head</span></td><td><span class="rarity common">Common</span></td><td class="perk">+2 ATK</td></tr>
+            <tr><td class="icon-cell">&#128481;&#65039;</td><td><a href="item.html?id=craft_fang_dagger" style="color:var(--gold)">Fang Dagger</a></td><td><span class="slot-badge">Weapon</span></td><td><span class="rarity common">Common</span></td><td class="perk">+3 ATK</td></tr>
+            <tr><td class="icon-cell">&#128737;&#65039;</td><td><a href="item.html?id=craft_slime_shield" style="color:var(--gold)">Slime Shield</a></td><td><span class="slot-badge">Body</span></td><td><span class="rarity common">Common</span></td><td class="perk">+8 HP</td></tr>
+            <tr><td class="icon-cell">&#128298;</td><td><a href="item.html?id=craft_goblin_blade" style="color:var(--gold)">Goblin Blade</a></td><td><span class="slot-badge">Weapon</span></td><td><span class="rarity common">Common</span></td><td class="perk">+4 ATK</td></tr>
+            <tr><td class="icon-cell">&#128141;</td><td><a href="item.html?id=craft_essence_ring" style="color:var(--gold)">Essence Ring</a></td><td><span class="slot-badge">Ring</span></td><td><span class="rarity rare">Rare</span></td><td class="perk">+8% XP all skills</td></tr>
+            <tr><td class="icon-cell">&#129355;</td><td><a href="item.html?id=craft_scale_robe" style="color:var(--gold)">Scale Robe</a></td><td><span class="slot-badge">Body</span></td><td><span class="rarity rare">Rare</span></td><td class="perk">+20 HP</td></tr>
+            <tr><td class="icon-cell">&#128058;</td><td><a href="item.html?id=craft_wolf_pendant" style="color:var(--gold)">Wolf Fang Pendant</a></td><td><span class="slot-badge">Ring</span></td><td><span class="rarity rare">Rare</span></td><td class="perk">+3 HP Regen/s</td></tr>
+            <tr><td class="icon-cell">&#129704;</td><td><a href="item.html?id=craft_orc_plate" style="color:var(--gold)">Orc Plate</a></td><td><span class="slot-badge">Body</span></td><td><span class="rarity rare">Rare</span></td><td class="perk">+15 HP &middot; +3 ATK</td></tr>
+            <tr><td class="icon-cell">&#9876;&#65039;</td><td><a href="item.html?id=craft_void_blade" style="color:var(--gold)">Void Blade</a></td><td><span class="slot-badge">Weapon</span></td><td><span class="rarity epic">Epic</span></td><td class="perk">+12 ATK</td></tr>
+            <tr><td class="icon-cell">&#129500;</td><td><a href="item.html?id=craft_troll_cloak" style="color:var(--gold)">Troll Cloak</a></td><td><span class="slot-badge">Body</span></td><td><span class="rarity epic">Epic</span></td><td class="perk">+25 HP &middot; +5 HP Regen/s</td></tr>
+            <tr><td class="icon-cell">&#128305;</td><td><a href="item.html?id=craft_warlord_gauntlets" style="color:var(--gold)">Warlord Gauntlets</a></td><td><span class="slot-badge">Ring</span></td><td><span class="rarity epic">Epic</span></td><td class="perk">+6 ATK &middot; +10 HP</td></tr>
+            <tr><td class="icon-cell">&#128081;</td><td><a href="item.html?id=craft_dragon_crown" style="color:var(--gold)">Dragon Crown</a></td><td><span class="slot-badge">Head</span></td><td><span class="rarity legendary">Legendary</span></td><td class="perk">+8 ATK &middot; +30 HP</td></tr>
+            <tr><td class="icon-cell">&#128156;</td><td><a href="item.html?id=craft_troll_aegis" style="color:var(--gold)">Troll Aegis</a></td><td><span class="slot-badge">Body</span></td><td><span class="rarity legendary">Legendary</span></td><td class="perk">+40 HP &middot; +8 HP Regen/s</td></tr>
+            <tr><td class="icon-cell">&#128293;</td><td><a href="item.html?id=craft_dragonfire_blade" style="color:var(--gold)">Dragonfire Blade</a></td><td><span class="slot-badge">Weapon</span></td><td><span class="rarity mythic">Mythic</span></td><td class="perk">+20 ATK &middot; +15 HP &middot; +5 HP Regen/s</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Consumables -->
+    <section class="content" id="consumables">
+      <h3 class="sub-title">Consumables</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th></th><th>Name</th><th>Rarity</th><th>Effect</th></tr></thead>
+          <tbody>
+            <tr><td class="icon-cell">&#9879;&#65039;</td><td><a href="item.html?id=atk_potion" style="color:var(--gold)">Attack Potion</a></td><td><span class="rarity mythic">Mythic</span></td><td class="perk">+1 permanent ATK (max 50)</td></tr>
+            <tr><td class="icon-cell">&#128138;</td><td><a href="item.html?id=hp_potion" style="color:var(--gold)">Vitality Potion</a></td><td><span class="rarity mythic">Mythic</span></td><td class="perk">+1 permanent HP (max 50)</td></tr>
+            <tr><td class="icon-cell">&#128137;</td><td><a href="item.html?id=regen_potion" style="color:var(--gold)">Regen Potion</a></td><td><span class="rarity mythic">Mythic</span></td><td class="perk">+1 permanent HP Regen/s (max 50)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Collapsible nav JS -->
+<script>
+(function() {
+  // Collapsible nav groups
+  document.querySelectorAll('.nav-group-title').forEach(function(title) {
+    title.addEventListener('click', function() {
+      this.parentElement.classList.toggle('collapsed');
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

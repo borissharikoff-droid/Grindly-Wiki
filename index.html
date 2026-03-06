@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grindly Wiki</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Top Bar -->
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">G</span>
+      <span class="logo-text">Grindly<small>Wiki</small></span>
+    </a>
+    <div class="top-right">
+      <div class="player-count">
+        <span class="pulse-dot"></span>
+        <span>Productivity RPG</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Page Layout -->
+<div class="page-wrap">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="search-box">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search wiki..." autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title"><span class="arrow">&#9660;</span> Game</div>
+      <ul class="nav-links">
+        <li><a href="equipment.html" class="nav-link"><span class="nav-dot gold"></span> Equipment</a></li>
+        <li><a href="loot.html" class="nav-link"><span class="nav-dot orange"></span> Loot &amp; Chests</a></li>
+        <li><a href="materials.html" class="nav-link"><span class="nav-dot purple"></span> Materials</a></li>
+        <li><a href="arena.html" class="nav-link"><span class="nav-dot red"></span> Arena &amp; Bosses</a></li>
+        <li><a href="crafting.html" class="nav-link"><span class="nav-dot cyan"></span> Crafting</a></li>
+        <li><a href="farming.html" class="nav-link"><span class="nav-dot green"></span> Farming</a></li>
+        <li><a href="skills.html" class="nav-link"><span class="nav-dot blue"></span> Skills</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title"><span class="arrow">&#9660;</span> Reference</div>
+      <ul class="nav-links">
+        <li><a href="loot.html#pity" class="nav-link"><span class="nav-dot gold"></span> Pity System</a></li>
+        <li><a href="skills.html#xp-formula" class="nav-link"><span class="nav-dot blue"></span> XP Formula</a></li>
+        <li><a href="skills.html#warrior-bonuses" class="nav-link"><span class="nav-dot red"></span> Warrior Skill</a></li>
+        <li><a href="crafting.html#craft-flow" class="nav-link"><span class="nav-dot cyan"></span> Craft Flow</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title"><span class="arrow">&#9660;</span> About</div>
+      <ul class="nav-links">
+        <li><a href="#about" class="nav-link"><span class="nav-dot gold"></span> What is Grindly?</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+
+    <!-- Hero -->
+    <section class="hero">
+      <h1>Welcome to the Grindly Wiki</h1>
+      <p class="hero-sub">The complete guide to skills, loot, arena, crafting &amp; farming.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="hero-stat-num">65+</span><span class="hero-stat-label">Items</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">6</span><span class="hero-stat-label">Zones</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">19</span><span class="hero-stat-label">Recipes</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">9</span><span class="hero-stat-label">Seeds</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">11</span><span class="hero-stat-label">Skills</span></div>
+      </div>
+    </section>
+
+    <!-- Category Cards -->
+    <section class="content">
+      <h2 class="section-title"><span class="section-icon">&#128218;</span> Browse the Wiki</h2>
+      <div class="card-grid">
+        <a href="equipment.html" class="nav-card">
+          <div class="nav-card-icon">&#9876;&#65039;</div>
+          <h3>Equipment</h3>
+          <p>Armor, weapons, rings &amp; cosmetics. Bag drops and crafted gear.</p>
+        </a>
+        <a href="arena.html" class="nav-card">
+          <div class="nav-card-icon">&#128293;</div>
+          <h3>Arena &amp; Bosses</h3>
+          <p>6 dungeon zones with mobs, bosses, gold &amp; material drops.</p>
+        </a>
+        <a href="crafting.html" class="nav-card">
+          <div class="nav-card-icon">&#9874;&#65039;</div>
+          <h3>Crafting</h3>
+          <p>Smelt, refine &amp; forge powerful gear. 19 recipes, Crafter perks.</p>
+        </a>
+        <a href="farming.html" class="nav-card">
+          <div class="nav-card-icon">&#127793;</div>
+          <h3>Farming</h3>
+          <p>Plant seeds, harvest crops, seed zips &amp; plant combat buffs.</p>
+        </a>
+        <a href="skills.html" class="nav-card">
+          <div class="nav-card-icon">&#9889;</div>
+          <h3>Skills</h3>
+          <p>11 skills with 99 levels each. XP formula &amp; leveling guide.</p>
+        </a>
+        <a href="loot.html" class="nav-card">
+          <div class="nav-card-icon">&#127873;</div>
+          <h3>Loot &amp; Chests</h3>
+          <p>4 chest tiers, drop tables, pity system &amp; seed zip chances.</p>
+        </a>
+        <a href="materials.html" class="nav-card">
+          <div class="nav-card-icon">&#128142;</div>
+          <h3>Materials</h3>
+          <p>Raw materials, intermediates &amp; arena mob drops for crafting.</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="content" id="about">
+      <h2 class="section-title"><span class="section-icon">&#128196;</span> What is Grindly?</h2>
+      <div class="info-box">
+        <p><strong>Grindly</strong> is a Windows desktop productivity tracker that turns your daily computer usage into an RPG adventure. It monitors your active window usage, categorizes activities into skills, and rewards you with XP, levels, loot, and achievements.</p>
+        <br>
+        <p><strong>Key Features:</strong></p>
+        <ul style="margin: 8px 0 0 20px; color: var(--text-dim); line-height: 1.8;">
+          <li><strong>11 Skills</strong> &mdash; Developer, Designer, Gamer, Communicator, Researcher, Creator, Learner, Listener, Farmer, Warrior, Crafter</li>
+          <li><strong>Loot System</strong> &mdash; Earn chests from focus sessions, open them for gear with stat bonuses</li>
+          <li><strong>Arena Combat</strong> &mdash; Fight mobs and bosses across 6 dungeon zones for gold &amp; materials</li>
+          <li><strong>Crafting</strong> &mdash; Smelt ores, refine materials, and forge powerful equipment</li>
+          <li><strong>Farming</strong> &mdash; Plant seeds, grow crops, and sell harvests on the marketplace</li>
+          <li><strong>Social</strong> &mdash; Friends, chat, leaderboards via Supabase</li>
+          <li><strong>Streaks &amp; Achievements</strong> &mdash; Daily streaks, missions, and unlock badges</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Quick Reference -->
+    <section class="content">
+      <h2 class="section-title"><span class="section-icon">&#128161;</span> Quick Reference</h2>
+      <div class="card-grid">
+        <div class="info-box" style="flex:1; min-width: 260px;">
+          <h3 style="color: var(--gold); margin-bottom: 8px;">Rarity Tiers</h3>
+          <table>
+            <thead><tr><th>Rarity</th><th>Base IP</th><th>Color</th></tr></thead>
+            <tbody>
+              <tr><td><span class="rarity common">Common</span></td><td>100</td><td style="color:#9ca3af">#9ca3af</td></tr>
+              <tr><td><span class="rarity rare">Rare</span></td><td>200</td><td style="color:#60a5fa">#60a5fa</td></tr>
+              <tr><td><span class="rarity epic">Epic</span></td><td>400</td><td style="color:#c084fc">#c084fc</td></tr>
+              <tr><td><span class="rarity legendary">Legendary</span></td><td>800</td><td style="color:#fbbf24">#fbbf24</td></tr>
+              <tr><td><span class="rarity mythic">Mythic</span></td><td>1600</td><td style="color:#f87171">#f87171</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="info-box" style="flex:1; min-width: 260px;">
+          <h3 style="color: var(--gold); margin-bottom: 8px;">XP Formula</h3>
+          <p style="color: var(--text-dim); margin-bottom: 6px;">Each skill has 99 levels. XP required for level L:</p>
+          <code style="display:block; background: rgba(0,0,0,0.3); padding: 10px 14px; border-radius: 6px; color: #fbbf24; font-size: 13px;">
+            xpForLevel(L) = floor(pow(L/99, 2.2) * 3,600,000)
+          </code>
+          <p style="color: var(--text-dim); margin-top: 8px; font-size: 12px;">Max XP (level 99) = 3,600,000. See <a href="skills.html#xp-formula" style="color: var(--gold);">Skills page</a> for full table.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Search Script -->
+<script>
+(function() {
+  var SEARCH_INDEX = [
+    // Equipment
+    { name: 'Canvas Cap', url: 'item.html?id=canvas_cap', cat: 'Equipment' },
+    { name: 'Plain Tee', url: 'item.html?id=plain_tee', cat: 'Equipment' },
+    { name: 'Worn Bracelet', url: 'item.html?id=worn_bracelet', cat: 'Equipment' },
+    { name: 'Code Wraps', url: 'item.html?id=code_wraps', cat: 'Equipment' },
+    { name: 'Zen Beanie', url: 'item.html?id=zen_beanie', cat: 'Equipment' },
+    { name: 'Cozy Sweater', url: 'item.html?id=cozy_sweater', cat: 'Equipment' },
+    { name: 'Social Ring', url: 'item.html?id=social_ring', cat: 'Equipment' },
+    { name: 'Task Vest', url: 'item.html?id=task_vest', cat: 'Equipment' },
+    { name: 'Neon Visor', url: 'item.html?id=neon_visor', cat: 'Equipment' },
+    { name: 'Hacker Jacket', url: 'item.html?id=hacker_jacket', cat: 'Equipment' },
+    { name: 'Scholar Cape', url: 'item.html?id=scholar_cape', cat: 'Equipment' },
+    { name: 'Sonic Loop', url: 'item.html?id=sonic_loop', cat: 'Equipment' },
+    { name: 'Phantom Cloak', url: 'item.html?id=phantom_cloak', cat: 'Equipment' },
+    { name: 'Chrono Visor', url: 'item.html?id=chrono_visor', cat: 'Equipment' },
+    { name: 'Void Aura', url: 'item.html?id=void_aura', cat: 'Equipment' },
+    // Crafted Gear
+    { name: 'Iron Helm', url: 'item.html?id=craft_iron_helm', cat: 'Equipment' },
+    { name: 'Fang Dagger', url: 'item.html?id=craft_fang_dagger', cat: 'Equipment' },
+    { name: 'Slime Shield', url: 'item.html?id=craft_slime_shield', cat: 'Equipment' },
+    { name: 'Goblin Blade', url: 'item.html?id=craft_goblin_blade', cat: 'Equipment' },
+    { name: 'Essence Ring', url: 'item.html?id=craft_essence_ring', cat: 'Equipment' },
+    { name: 'Scale Robe', url: 'item.html?id=craft_scale_robe', cat: 'Equipment' },
+    { name: 'Wolf Fang Pendant', url: 'item.html?id=craft_wolf_pendant', cat: 'Equipment' },
+    { name: 'Orc Plate', url: 'item.html?id=craft_orc_plate', cat: 'Equipment' },
+    { name: 'Void Blade', url: 'item.html?id=craft_void_blade', cat: 'Equipment' },
+    { name: 'Troll Cloak', url: 'item.html?id=craft_troll_cloak', cat: 'Equipment' },
+    { name: 'Warlord Gauntlets', url: 'item.html?id=craft_warlord_gauntlets', cat: 'Equipment' },
+    { name: 'Dragon Crown', url: 'item.html?id=craft_dragon_crown', cat: 'Equipment' },
+    { name: 'Troll Aegis', url: 'item.html?id=craft_troll_aegis', cat: 'Equipment' },
+    { name: 'Dragonfire Blade', url: 'item.html?id=craft_dragonfire_blade', cat: 'Equipment' },
+    // Potions
+    { name: 'ATK Potion', url: 'item.html?id=atk_potion', cat: 'Consumable' },
+    { name: 'HP Potion', url: 'item.html?id=hp_potion', cat: 'Consumable' },
+    { name: 'Regen Potion', url: 'item.html?id=regen_potion', cat: 'Consumable' },
+    // Raw Materials
+    { name: 'Iron Ore', url: 'item.html?id=ore_iron', cat: 'Material' },
+    { name: 'Monster Fang', url: 'item.html?id=monster_fang', cat: 'Material' },
+    { name: 'Magic Essence', url: 'item.html?id=magic_essence', cat: 'Material' },
+    { name: 'Ancient Scale', url: 'item.html?id=ancient_scale', cat: 'Material' },
+    { name: 'Void Crystal', url: 'item.html?id=void_crystal', cat: 'Material' },
+    // Intermediates
+    { name: 'Iron Bar', url: 'item.html?id=iron_bar', cat: 'Material' },
+    { name: 'Fang Shard', url: 'item.html?id=fang_shard', cat: 'Material' },
+    { name: 'Essence Vial', url: 'item.html?id=essence_vial', cat: 'Material' },
+    { name: 'Ancient Dust', url: 'item.html?id=ancient_dust', cat: 'Material' },
+    { name: 'Void Fragment', url: 'item.html?id=void_fragment', cat: 'Material' },
+    // Arena Mob Materials
+    { name: 'Slime Gel', url: 'item.html?id=slime_gel', cat: 'Material' },
+    { name: 'Goblin Tooth', url: 'item.html?id=goblin_tooth', cat: 'Material' },
+    { name: 'Wolf Fang', url: 'item.html?id=wolf_fang', cat: 'Material' },
+    { name: 'Orc Shard', url: 'item.html?id=orc_shard', cat: 'Material' },
+    { name: 'Troll Hide', url: 'item.html?id=troll_hide', cat: 'Material' },
+    { name: 'Dragon Scale', url: 'item.html?id=dragon_scale', cat: 'Material' },
+    // Boss Materials
+    { name: 'Warlord Sigil', url: 'item.html?id=warlord_sigil', cat: 'Material' },
+    { name: 'Troll Heart', url: 'item.html?id=troll_heart', cat: 'Material' },
+    { name: 'Dragon Heart', url: 'item.html?id=dragon_heart', cat: 'Material' },
+    // Seeds & Plants
+    { name: 'Wheat Seed', url: 'item.html?id=wheat', cat: 'Farming' },
+    { name: 'Herb Seed', url: 'item.html?id=herbs', cat: 'Farming' },
+    { name: 'Apple Seed', url: 'item.html?id=apples', cat: 'Farming' },
+    { name: 'Blossom Seed', url: 'item.html?id=blossoms', cat: 'Farming' },
+    { name: 'Clover Seed', url: 'item.html?id=clovers', cat: 'Farming' },
+    { name: 'Orchid Seed', url: 'item.html?id=orchids', cat: 'Farming' },
+    { name: 'Star Bloom Seed', url: 'item.html?id=star_bloom', cat: 'Farming' },
+    { name: 'Crystal Root Seed', url: 'item.html?id=crystal_root', cat: 'Farming' },
+    { name: 'Void Spore', url: 'item.html?id=void_blossom', cat: 'Farming' },
+    // Pages
+    { name: 'Equipment', url: 'equipment.html', cat: 'Page' },
+    { name: 'Arena & Bosses', url: 'arena.html', cat: 'Page' },
+    { name: 'Crafting', url: 'crafting.html', cat: 'Page' },
+    { name: 'Farming', url: 'farming.html', cat: 'Page' },
+    { name: 'Skills', url: 'skills.html', cat: 'Page' },
+    { name: 'Loot & Chests', url: 'loot.html', cat: 'Page' },
+    { name: 'Materials', url: 'materials.html', cat: 'Page' },
+    // Skills
+    { name: 'Developer', url: 'skills.html', cat: 'Skill' },
+    { name: 'Designer', url: 'skills.html', cat: 'Skill' },
+    { name: 'Gamer', url: 'skills.html', cat: 'Skill' },
+    { name: 'Communicator', url: 'skills.html', cat: 'Skill' },
+    { name: 'Researcher', url: 'skills.html', cat: 'Skill' },
+    { name: 'Creator', url: 'skills.html', cat: 'Skill' },
+    { name: 'Learner', url: 'skills.html', cat: 'Skill' },
+    { name: 'Listener', url: 'skills.html', cat: 'Skill' },
+    { name: 'Farmer', url: 'skills.html', cat: 'Skill' },
+    { name: 'Warrior', url: 'skills.html#warrior-bonuses', cat: 'Skill' },
+    { name: 'Crafter', url: 'skills.html', cat: 'Skill' },
+    // Arena zones
+    { name: 'Slime Cavern', url: 'arena.html', cat: 'Arena' },
+    { name: 'Goblin Outpost', url: 'arena.html', cat: 'Arena' },
+    { name: 'Wild Forest', url: 'arena.html', cat: 'Arena' },
+    { name: 'Orc Stronghold', url: 'arena.html', cat: 'Arena' },
+    { name: 'Troll Bridge', url: 'arena.html', cat: 'Arena' },
+    { name: 'Dragon Lair', url: 'arena.html', cat: 'Arena' },
+  ];
+
+  var input = document.getElementById('searchInput');
+  var resultsEl = document.getElementById('searchResults');
+
+  input.addEventListener('input', function() {
+    var q = this.value.trim().toLowerCase();
+    resultsEl.innerHTML = '';
+    if (q.length < 2) { resultsEl.style.display = 'none'; return; }
+
+    var matches = SEARCH_INDEX.filter(function(entry) {
+      return entry.name.toLowerCase().indexOf(q) !== -1;
+    }).slice(0, 8);
+
+    if (matches.length === 0) {
+      resultsEl.innerHTML = '<div class="search-result-item" style="color:var(--text-dim)">No results</div>';
+    } else {
+      matches.forEach(function(m) {
+        var div = document.createElement('a');
+        div.href = m.url;
+        div.className = 'search-result-item';
+        div.innerHTML = '<span>' + m.name + '</span><span style="color:var(--text-dim);font-size:11px">' + m.cat + '</span>';
+        resultsEl.appendChild(div);
+      });
+    }
+    resultsEl.style.display = 'block';
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.search-wrap')) resultsEl.style.display = 'none';
+  });
+})();
+</script>
+
+</body>
+</html>

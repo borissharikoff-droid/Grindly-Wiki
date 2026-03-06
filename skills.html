@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skills — Grindly Wiki</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ══════ Skills Page Specific Styles ══════ */
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+  padding: 20px 28px;
+}
+.skill-card {
+  --skill-color: #888;
+  background: var(--bg-card);
+  border: 1px solid var(--border-inner);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.skill-card:hover {
+  border-color: var(--skill-color);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--skill-color) 25%, transparent);
+}
+.skill-card-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  border-radius: 8px;
+  border: 2px solid var(--skill-color);
+  background: color-mix(in srgb, var(--skill-color) 8%, var(--bg-card));
+  flex-shrink: 0;
+}
+.skill-card-body {
+  flex: 1;
+  min-width: 0;
+}
+.skill-card-name {
+  font-family: var(--font-title);
+  font-size: 16px;
+  color: var(--skill-color);
+  margin-bottom: 2px;
+}
+.skill-card-category {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+.skill-card-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* ══════ Info Boxes ══════ */
+.info-section {
+  padding: 20px 28px;
+}
+.info-section h2 {
+  font-family: var(--font-title);
+  font-size: 20px;
+  color: var(--gold);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.info-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-inner);
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin-bottom: 18px;
+}
+.info-box h3 {
+  font-family: var(--font-title);
+  font-size: 15px;
+  color: var(--text-bright);
+  margin-bottom: 10px;
+}
+.info-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.info-box li {
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 4px 0;
+  padding-left: 16px;
+  position: relative;
+  line-height: 1.5;
+}
+.info-box li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+.info-box code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  background: rgba(255,255,255,0.04);
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: #00d4ff;
+}
+
+/* ══════ Warrior Bonuses Table ══════ */
+.bonus-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.bonus-table th {
+  font-family: var(--font-title);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 2px solid var(--border-ornate);
+}
+.bonus-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border-inner);
+  color: var(--text-muted);
+}
+.bonus-table tr:hover td {
+  background: rgba(212,168,67,0.04);
+}
+.bonus-table .bonus-level {
+  font-family: var(--font-mono);
+  color: var(--gold);
+  font-weight: 600;
+}
+.bonus-table .bonus-value {
+  color: #57F287;
+}
+
+/* ══════ Page Header ══════ */
+.skills-header {
+  padding: 24px 28px 16px;
+  border-bottom: 2px solid var(--border-ornate);
+  background: linear-gradient(180deg, rgba(212,168,67,0.06) 0%, transparent 100%);
+}
+.skills-header h1 {
+  font-family: var(--font-title);
+  font-size: 24px;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.skills-header p {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+</style>
+</head>
+<body>
+
+<!-- ══════ Top Bar ══════ -->
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">G</span>
+      <span class="logo-text">Grindly<small>Wiki</small></span>
+    </a>
+    <div class="top-right">
+      <div class="player-count">
+        <span class="pulse-dot"></span>
+        <span>Productivity RPG</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══════ Page Layout ══════ -->
+<div class="page-wrap">
+
+  <!-- ══════ Sidebar ══════ -->
+  <aside class="sidebar">
+    <div class="search-box">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search wiki..." autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title"><span class="arrow">&#9660;</span> Navigation</div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link"><span class="nav-dot gold"></span> Home</a></li>
+        <li><a href="index.html#gear" class="nav-link"><span class="nav-dot gold"></span> Equipment</a></li>
+        <li><a href="index.html#items" class="nav-link"><span class="nav-dot orange"></span> Loot</a></li>
+        <li><a href="index.html#materials" class="nav-link"><span class="nav-dot purple"></span> Materials</a></li>
+        <li><a href="index.html#arena" class="nav-link"><span class="nav-dot red"></span> Arena</a></li>
+        <li><a href="index.html#crafting" class="nav-link"><span class="nav-dot cyan"></span> Crafting</a></li>
+        <li><a href="index.html#farming" class="nav-link"><span class="nav-dot green"></span> Farming</a></li>
+        <li><a href="skills.html" class="nav-link active"><span class="nav-dot blue"></span> Skills</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title"><span class="arrow">&#9660;</span> On This Page</div>
+      <ul class="nav-links">
+        <li><a href="#skill-grid" class="nav-link"><span class="nav-dot blue"></span> All Skills</a></li>
+        <li><a href="#xp-formula" class="nav-link"><span class="nav-dot cyan"></span> XP Formula</a></li>
+        <li><a href="#warrior-bonuses" class="nav-link"><span class="nav-dot red"></span> Warrior Bonuses</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- ══════ Main Content ══════ -->
+  <main class="main">
+
+    <!-- Header -->
+    <div class="skills-header">
+      <h1>&#9876;&#65039; Skills</h1>
+      <p>Grindly tracks 11 skills across productivity, creativity, and in-game activities. Each skill has 99 levels.</p>
+    </div>
+
+    <!-- Skill Grid -->
+    <section id="skill-grid">
+      <div class="skill-grid">
+
+        <div class="skill-card" style="--skill-color: #00ff88">
+          <div class="skill-card-icon">&#128187;</div>
+          <div class="skill-card-body">
+            <div class="skill-card-name">Developer</div>
+            <div class="skill-card-category">coding</div>
+            <div class="skill-card-desc">Coding, IDEs, terminals</div>
+          </div>
+        </div>
+
+        <div class="skill-card" style="--skill-color: #ff6b9d">
+          <div class="skill-card-icon">&#127912;</div>
+          <div class="skill-card-body">
+            <div class="skill-card-name">Designer</div>
+            <div class="skill-card-category">design</div>
+            <div class="skill-card-desc">Design tools, creative apps</div>
+          </div>
+        </div>
+
+        <div class="skill-card" style="--skill-color: #5865F2">
+          <div class="skill-card-icon">&#127918;</div>
+          <div class="skill-card-body">
+            <div class="skill-card-name">Gamer</div>
+            <div class="skill-card-category">games</div>
+            <div class="skill-card-desc">Games, game launchers</div>
+          </div>
+        </div>
+
+        <div class="skill-card" style="--skill-color: #57F287">
+          <div class="skill-card-icon">&#128172;</div>
+          <div class="skill-card-body">
+            <div class="skill-card-name">Communicator</div>
+            <div class="skill-card-category">social</div>
+            <div class="skill-card-desc">Chat, email, social</div>
+          </div>
+        </div>
+
+        <div class="skill-card" style="--skill-color: #faa61a">
+          <div class="skill-card-icon">&#128300;</div>
+          <div class="skill-card-body">
+            <div class="skill-card-name">Researcher</div>
+            <div class="skill-card-category">browsing</div>
+            <div class="skill-card-desc">Browsers, documentation, research</div>
+          </div>
+        </div>
+
+        <div class="skill-card" style="--skill-color: #eb459e">
+          <div class="skill-card-icon">&#127916;</div>
+          <div class="skill-card-body">
+            <div class="skill-card-name">Creator</div>
+            <div class="skill-card-category">creative</div>
+            <div class="skill-card-desc">Video, audio, streaming</div>
+          </div>
+        </div>
+
+        <div class="skill-card" style="--skill-color: #00d4ff">
+          <div class="skill-card-icon">&#128218;</div>
+          <div class="skill-card-body">
+            <div class="skill-card-name">Learner</div>
+            <div class="skill-card-category">learning</div>
+            <div class="skill-card-desc">Education, courses</div>
+          </div>
+        </div>
+
+        <div class="skill-card" style="--skill-color: #1db954">
+          <div class="skill-card-icon">&#127925;</div>
+          <div class="skill-card-body">
+            <div class="skill-card-name">Listener</div>
+            <div class="skill-card-category">music</div>
+            <div class="skill-card-desc">Music players, podcasts</div>
+          </div>
+        </div>
+
+        <div class="skill-card" style="--skill-color: #84cc16">
+          <div class="skill-card-icon">&#127806;</div>
+          <div class="skill-card-body">
+            <div class="skill-card-name">Farmer</div>
+            <div class="skill-card-category">farming</div>
+            <div class="skill-card-desc">Farm plots, planting, harvesting</div>
+          </div>
+        </div>
+
+        <div class="skill-card" style="--skill-color: #EF4444">
+          <div class="skill-card-icon">&#9876;&#65039;</div>
+          <div class="skill-card-body">
+            <div class="skill-card-name">Warrior</div>
+            <div class="skill-card-category">warrior</div>
+            <div class="skill-card-desc">Arena combat, boss kills</div>
+          </div>
+        </div>
+
+        <div class="skill-card" style="--skill-color: #f97316">
+          <div class="skill-card-icon">&#9874;&#65039;</div>
+          <div class="skill-card-body">
+            <div class="skill-card-name">Crafter</div>
+            <div class="skill-card-category">crafting</div>
+            <div class="skill-card-desc">Smelting, forging, recipes</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- XP Formula -->
+    <section id="xp-formula" class="info-section">
+      <h2>&#128202; XP Formula</h2>
+      <div class="info-box">
+        <h3>Levelling Curve</h3>
+        <ul>
+          <li>Each skill has <strong style="color:var(--gold)">99 levels</strong>, designed to take roughly <strong style="color:var(--gold)">~1,000 hours</strong> to max.</li>
+          <li>Core formula: <code>xpForLevel(L) = floor(pow(L/99, 2.2) &times; 3,600,000)</code></li>
+          <li><strong>Early levels (1&ndash;10):</strong> Triangular ramp &mdash; <code>120 &times; L(L+1) / 2</code></li>
+          <li><strong>Levels 11&ndash;25:</strong> Smooth interpolation between the L10 and L25 breakpoints.</li>
+          <li><strong>Levels 26+:</strong> Full exponential curve kicks in.</li>
+          <li>Maximum total skill level across all 11 skills: <strong style="color:var(--gold)">11 &times; 99 = 1,089</strong></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Warrior Bonuses -->
+    <section id="warrior-bonuses" class="info-section">
+      <h2>&#9876;&#65039; Warrior Bonuses</h2>
+      <div class="info-box">
+        <p style="font-size:13px;color:var(--text-dim);margin-bottom:14px;">
+          Levelling the Warrior skill grants permanent combat stat bonuses at specific milestones.
+        </p>
+        <table class="bonus-table">
+          <thead>
+            <tr>
+              <th>Level</th>
+              <th>Bonus</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="bonus-level">5</td>
+              <td class="bonus-value">+1 ATK</td>
+            </tr>
+            <tr>
+              <td class="bonus-level">15</td>
+              <td class="bonus-value">+5 HP</td>
+            </tr>
+            <tr>
+              <td class="bonus-level">20</td>
+              <td class="bonus-value">+1 ATK</td>
+            </tr>
+            <tr>
+              <td class="bonus-level">30</td>
+              <td class="bonus-value">+1 HP Regen</td>
+            </tr>
+            <tr>
+              <td class="bonus-level">40</td>
+              <td class="bonus-value">+2 ATK</td>
+            </tr>
+            <tr>
+              <td class="bonus-level">60</td>
+              <td class="bonus-value">+10 HP</td>
+            </tr>
+            <tr>
+              <td class="bonus-level">75</td>
+              <td class="bonus-value">+3 ATK, +2 HP Regen</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ══════ Scripts ══════ -->
+<script>
+// ── Collapsible nav ──
+document.querySelectorAll('.nav-group-title').forEach(function(t) {
+  t.addEventListener('click', function() { this.parentElement.classList.toggle('collapsed'); });
+});
+</script>
+
+</body>
+</html>

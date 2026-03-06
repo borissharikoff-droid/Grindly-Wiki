@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farming – Grindly Wiki</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Top Bar -->
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">G</span>
+      <span class="logo-text">Grindly<small>Wiki</small></span>
+    </a>
+    <div class="top-right">
+      <div class="player-count">
+        <span class="pulse-dot"></span>
+        <span>Productivity RPG</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Page Layout -->
+<div class="page-wrap">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="search-box">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search wiki..." autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title"><span class="arrow">&#9660;</span> Pages</div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link"><span class="nav-dot gold"></span> Wiki Home</a></li>
+        <li><a href="equipment.html" class="nav-link"><span class="nav-dot gold"></span> Equipment</a></li>
+        <li><a href="loot.html" class="nav-link"><span class="nav-dot orange"></span> Loot &amp; Chests</a></li>
+        <li><a href="materials.html" class="nav-link"><span class="nav-dot purple"></span> Materials</a></li>
+        <li><a href="arena.html" class="nav-link"><span class="nav-dot red"></span> Arena</a></li>
+        <li><a href="crafting.html" class="nav-link"><span class="nav-dot cyan"></span> Crafting</a></li>
+        <li><a href="farming.html" class="nav-link active"><span class="nav-dot green"></span> Farming</a></li>
+        <li><a href="skills.html" class="nav-link"><span class="nav-dot blue"></span> Skills</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+
+    <!-- Seeds -->
+    <section class="content" id="seeds">
+      <h2 class="section-title"><span class="section-icon">&#127793;</span> Farming</h2>
+      <p class="section-desc">Plant seeds in your farm plots, wait for them to grow, then harvest crops used in crafting recipes and combat buffs.</p>
+
+      <h3 class="sub-title">Seeds</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th></th><th>Seed</th><th>Rarity</th><th>Grow Time</th><th>Yield</th><th>XP (Plant / Harvest)</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="icon-cell">&#127806;</td>
+              <td><a href="item.html?id=wheat_seed" style="color:var(--gold)">Wheat Seed</a></td>
+              <td><span class="rarity common">Common</span></td>
+              <td>5m</td>
+              <td><a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a> &times;1-3</td>
+              <td class="perk">10 / 50</td>
+            </tr>
+            <tr>
+              <td class="icon-cell">&#127807;</td>
+              <td><a href="item.html?id=herb_seed" style="color:var(--gold)">Herb Seed</a></td>
+              <td><span class="rarity common">Common</span></td>
+              <td>8m</td>
+              <td><a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a> &times;1-2</td>
+              <td class="perk">10 / 50</td>
+            </tr>
+            <tr>
+              <td class="icon-cell">&#127822;</td>
+              <td><a href="item.html?id=apple_seed" style="color:var(--gold)">Apple Seed</a></td>
+              <td><span class="rarity rare">Rare</span></td>
+              <td>20m</td>
+              <td><a href="item.html?id=apples" style="color:var(--gold)">Apples</a> &times;1-4</td>
+              <td class="perk">20 / 100</td>
+            </tr>
+            <tr>
+              <td class="icon-cell">&#127800;</td>
+              <td><a href="item.html?id=blossom_seed" style="color:var(--gold)">Blossom Seed</a></td>
+              <td><span class="rarity rare">Rare</span></td>
+              <td>25m</td>
+              <td><a href="item.html?id=blossoms" style="color:var(--gold)">Blossoms</a> &times;1-3</td>
+              <td class="perk">20 / 100</td>
+            </tr>
+            <tr>
+              <td class="icon-cell">&#9752;&#65039;</td>
+              <td><a href="item.html?id=clover_seed" style="color:var(--gold)">Clover Seed</a></td>
+              <td><span class="rarity epic">Epic</span></td>
+              <td>1h</td>
+              <td><a href="item.html?id=clovers" style="color:var(--gold)">Clovers</a> &times;1-5</td>
+              <td class="perk">40 / 200</td>
+            </tr>
+            <tr>
+              <td class="icon-cell">&#127802;</td>
+              <td><a href="item.html?id=orchid_seed" style="color:var(--gold)">Orchid Seed</a></td>
+              <td><span class="rarity epic">Epic</span></td>
+              <td>1h 30m</td>
+              <td><a href="item.html?id=orchids" style="color:var(--gold)">Orchids</a> &times;1-3</td>
+              <td class="perk">40 / 200</td>
+            </tr>
+            <tr>
+              <td class="icon-cell">&#11088;</td>
+              <td><a href="item.html?id=star_bloom_seed" style="color:var(--gold)">Star Bloom Seed</a></td>
+              <td><span class="rarity legendary">Legendary</span></td>
+              <td>3h</td>
+              <td><a href="item.html?id=star_bloom" style="color:var(--gold)">Star Bloom</a> &times;1-4</td>
+              <td class="perk">80 / 400</td>
+            </tr>
+            <tr>
+              <td class="icon-cell">&#128142;</td>
+              <td><a href="item.html?id=crystal_root_seed" style="color:var(--gold)">Crystal Root Seed</a></td>
+              <td><span class="rarity legendary">Legendary</span></td>
+              <td>4h</td>
+              <td><a href="item.html?id=crystal_root" style="color:var(--gold)">Crystal Root</a> &times;1-3</td>
+              <td class="perk">80 / 400</td>
+            </tr>
+            <tr>
+              <td class="icon-cell">&#127744;</td>
+              <td><a href="item.html?id=void_spore" style="color:var(--gold)">Void Spore</a></td>
+              <td><span class="rarity mythic">Mythic</span></td>
+              <td>8h</td>
+              <td><a href="item.html?id=void_blossom" style="color:var(--gold)">Void Blossom</a> &times;1-6</td>
+              <td class="perk">160 / 800</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Plant Combat Buffs -->
+    <section class="content" id="combat-buffs">
+      <h3 class="sub-title">Plant Combat Buffs</h3>
+      <p class="section-desc">Harvested plants provide passive combat stat bonuses when consumed before an arena fight.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Plant</th><th>ATK</th><th>HP</th><th>HP Regen</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a></td>
+              <td>0</td>
+              <td class="perk">+5</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a></td>
+              <td>0</td>
+              <td>0</td>
+              <td class="perk">+2</td>
+            </tr>
+            <tr>
+              <td><a href="item.html?id=apples" style="color:var(--gold)">Apples</a></td>
+              <td>0</td>
+              <td class="perk">+15</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><a href="item.html?id=blossoms" style="color:var(--gold)">Blossoms</a></td>
+              <td class="perk">+2</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><a href="item.html?id=clovers" style="color:var(--gold)">Clovers</a></td>
+              <td class="perk">+5</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><a href="item.html?id=orchids" style="color:var(--gold)">Orchids</a></td>
+              <td>0</td>
+              <td>0</td>
+              <td class="perk">+4</td>
+            </tr>
+            <tr>
+              <td><a href="item.html?id=star_bloom" style="color:var(--gold)">Star Bloom</a></td>
+              <td class="perk">+8</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><a href="item.html?id=crystal_root" style="color:var(--gold)">Crystal Root</a></td>
+              <td>0</td>
+              <td class="perk">+30</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td><a href="item.html?id=void_blossom" style="color:var(--gold)">Void Blossom</a></td>
+              <td class="perk">+15</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Seed Zips -->
+    <section class="content" id="seed-zips">
+      <h3 class="sub-title">Seed Zips</h3>
+      <div class="info-box">
+        <h4>How Seeds Are Obtained</h4>
+        <p>Seeds are found inside <strong>Seed Zips</strong> that drop alongside loot chests. When you open a chest, there is a rarity-dependent chance that a Seed Zip is included. The Seed Zip contains a random seed whose rarity is weighted by the chest tier that produced it. Higher-tier chests yield rarer seeds more often.</p>
+      </div>
+    </section>
+
+    <!-- Farm Slots -->
+    <section class="content" id="farm-slots">
+      <h3 class="sub-title">Farm Slots</h3>
+      <div class="info-box">
+        <h4>Slot Expansion</h4>
+        <p>You start with <strong>1 farm slot</strong> and can unlock up to <strong>8 total</strong>. Each additional slot costs gold:</p>
+        <ul>
+          <li><strong>Slot 1:</strong> Free</li>
+          <li><strong>Slot 2:</strong> 200g</li>
+          <li><strong>Slot 3:</strong> 600g</li>
+          <li><strong>Slot 4:</strong> 1,500g</li>
+          <li><strong>Slot 5:</strong> 3,500g</li>
+          <li><strong>Slot 6:</strong> 7,000g</li>
+          <li><strong>Slot 7:</strong> 12,000g</li>
+          <li><strong>Slot 8:</strong> 20,000g</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Collapsible nav JS -->
+<script>
+(function() {
+  document.querySelectorAll('.nav-group-title').forEach(function(title) {
+    title.addEventListener('click', function() {
+      this.parentElement.classList.toggle('collapsed');
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

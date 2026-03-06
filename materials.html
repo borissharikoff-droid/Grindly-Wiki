@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Materials – Grindly Wiki</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Top Bar -->
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">G</span>
+      <span class="logo-text">Grindly<small>Wiki</small></span>
+    </a>
+    <div class="top-right">
+      <div class="player-count">
+        <span class="pulse-dot"></span>
+        <span>Productivity RPG</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Page Layout -->
+<div class="page-wrap">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="search-box">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search wiki..." autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title"><span class="arrow">&#9660;</span> Pages</div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link"><span class="nav-dot gold"></span> Wiki Home</a></li>
+        <li><a href="equipment.html" class="nav-link"><span class="nav-dot gold"></span> Equipment</a></li>
+        <li><a href="loot.html" class="nav-link"><span class="nav-dot orange"></span> Loot &amp; Chests</a></li>
+        <li><a href="materials.html" class="nav-link active"><span class="nav-dot purple"></span> Materials</a></li>
+        <li><a href="arena.html" class="nav-link"><span class="nav-dot red"></span> Arena</a></li>
+        <li><a href="crafting.html" class="nav-link"><span class="nav-dot cyan"></span> Crafting</a></li>
+        <li><a href="farming.html" class="nav-link"><span class="nav-dot green"></span> Farming</a></li>
+        <li><a href="skills.html" class="nav-link"><span class="nav-dot blue"></span> Skills</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+
+    <!-- Raw Crafting Materials -->
+    <section class="content" id="raw-materials">
+      <h2 class="section-title"><span class="section-icon">&#128296;</span> Materials</h2>
+      <p class="section-desc">Materials are the building blocks of the crafting system. They come from chests, the smelter, arena mobs, and boss kills.</p>
+
+      <h3 class="sub-title">Raw Crafting Materials (from Chests)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Material</th><th>Rarity</th><th>Source</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="item.html?id=iron_ore" style="color:var(--gold)">Iron Ore</a></td>
+              <td><span class="rarity common">Common</span></td>
+              <td>All chests</td>
+            </tr>
+            <tr>
+              <td><a href="item.html?id=monster_fang" style="color:var(--gold)">Monster Fang</a></td>
+              <td><span class="rarity common">Common</span></td>
+              <td>All chests</td>
+            </tr>
+            <tr>
+              <td><a href="item.html?id=magic_essence" style="color:var(--gold)">Magic Essence</a></td>
+              <td><span class="rarity rare">Rare</span></td>
+              <td>Rare+ chests</td>
+            </tr>
+            <tr>
+              <td><a href="item.html?id=ancient_scale" style="color:var(--gold)">Ancient Scale</a></td>
+              <td><span class="rarity rare">Rare</span></td>
+              <td>Epic+ chests</td>
+            </tr>
+            <tr>
+              <td><a href="item.html?id=void_crystal" style="color:var(--gold)">Void Crystal</a></td>
+              <td><span class="rarity epic">Epic</span></td>
+              <td>Epic+ chests</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Intermediate Materials -->
+    <section class="content" id="intermediates">
+      <h3 class="sub-title">Intermediate Materials (Smelted)</h3>
+      <p class="section-desc">Raw materials are refined at the workbench into intermediate components used in gear recipes.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Output</th><th>Recipe</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="item.html?id=iron_bar" style="color:var(--gold)">Iron Bar</a></td>
+              <td><a href="item.html?id=iron_ore" style="color:var(--gold)">Iron Ore</a> &times;5</td>
+            </tr>
+            <tr>
+              <td><a href="item.html?id=fang_shard" style="color:var(--gold)">Fang Shard</a></td>
+              <td><a href="item.html?id=monster_fang" style="color:var(--gold)">Monster Fang</a> &times;4</td>
+            </tr>
+            <tr>
+              <td><a href="item.html?id=essence_vial" style="color:var(--gold)">Essence Vial</a></td>
+              <td><a href="item.html?id=magic_essence" style="color:var(--gold)">Magic Essence</a> &times;3</td>
+            </tr>
+            <tr>
+              <td><a href="item.html?id=ancient_dust" style="color:var(--gold)">Ancient Dust</a></td>
+              <td><a href="item.html?id=ancient_scale" style="color:var(--gold)">Ancient Scale</a> &times;2</td>
+            </tr>
+            <tr>
+              <td><a href="item.html?id=void_fragment" style="color:var(--gold)">Void Fragment</a></td>
+              <td><a href="item.html?id=void_crystal" style="color:var(--gold)">Void Crystal</a> &times;2</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Arena Mob Materials -->
+    <section class="content" id="mob-materials">
+      <h3 class="sub-title">Arena Mob Materials</h3>
+      <p class="section-desc">Defeating mobs in the arena has a chance to drop zone-specific crafting materials.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Material</th><th>Zone</th><th>Drop Rate</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="item.html?id=slime_gel" style="color:var(--gold)">Slime Gel</a></td>
+              <td>Slime Cavern</td>
+              <td>30-50%</td>
+            </tr>
+            <tr>
+              <td><a href="item.html?id=goblin_tooth" style="color:var(--gold)">Goblin Tooth</a></td>
+              <td>Goblin Outpost</td>
+              <td>30-50%</td>
+            </tr>
+            <tr>
+              <td><a href="item.html?id=wolf_fang" style="color:var(--gold)">Wolf Fang</a></td>
+              <td>Wild Forest</td>
+              <td>30-50%</td>
+            </tr>
+            <tr>
+              <td><a href="item.html?id=orc_shard" style="color:var(--gold)">Orc Shard</a></td>
+              <td>Orc Stronghold</td>
+              <td>30-50%</td>
+            </tr>
+            <tr>
+              <td><a href="item.html?id=troll_hide" style="color:var(--gold)">Troll Hide</a></td>
+              <td>Troll Bridge</td>
+              <td>30-50%</td>
+            </tr>
+            <tr>
+              <td><a href="item.html?id=dragon_scale" style="color:var(--gold)">Dragon Scale</a></td>
+              <td>Dragon Lair</td>
+              <td>30-50%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Boss-Exclusive Materials -->
+    <section class="content" id="boss-materials">
+      <h3 class="sub-title">Boss-Exclusive Materials</h3>
+      <p class="section-desc">These rare materials only drop from defeating zone bosses. Each boss drops exactly one on kill.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Material</th><th>Boss</th><th>Drop Qty</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="item.html?id=warlord_sigil" style="color:var(--gold)">Warlord Sigil</a></td>
+              <td>Orc Warlord</td>
+              <td>&times;1</td>
+            </tr>
+            <tr>
+              <td><a href="item.html?id=troll_heart" style="color:var(--gold)">Troll Heart</a></td>
+              <td>Troll Overlord</td>
+              <td>&times;1</td>
+            </tr>
+            <tr>
+              <td><a href="item.html?id=dragon_heart" style="color:var(--gold)">Dragon Heart</a></td>
+              <td>Ancient Dragon</td>
+              <td>&times;1</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Collapsible nav JS -->
+<script>
+(function() {
+  document.querySelectorAll('.nav-group-title').forEach(function(title) {
+    title.addEventListener('click', function() {
+      this.parentElement.classList.toggle('collapsed');
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
