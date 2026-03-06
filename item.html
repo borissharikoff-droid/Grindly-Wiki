@@ -1065,6 +1065,8 @@ function loadSupabaseConfig() {
   }).then(function(r) { return r.json(); })
     .then(function(rows) {
       if (rows && rows[0] && rows[0].config) {
+        // Update shared cache for instant load next visit
+        try { localStorage.setItem('wiki_admin_config', JSON.stringify(rows[0].config)); } catch(e) {}
         var didChange = applyAdminImages(rows[0].config);
         // Re-render current item if images changed
         if (didChange && currentItemId) {
@@ -1116,6 +1118,12 @@ function loadMarketplacePrice(itemId) {
 }
 
 // ── Init ──
+// Apply cached admin config BEFORE first render (no emoji flash)
+try {
+  var _cached = localStorage.getItem('wiki_admin_config');
+  if (_cached) applyAdminImages(JSON.parse(_cached));
+} catch(e) {}
+
 var params = new URLSearchParams(window.location.search);
 var currentItemId = params.get('id');
 if (currentItemId) {
@@ -1125,7 +1133,7 @@ if (currentItemId) {
   document.getElementById('mainContent').innerHTML = '<div class="item-not-found"><h2>Item Database</h2><p>Use the search bar or select an item from the <a href="index.html">wiki homepage</a>.</p></div>';
 }
 
-// Load admin config images async (will re-render if images found)
+// Fetch fresh config in background (updates cache + re-renders if changed)
 loadSupabaseConfig();
 </script>
 
