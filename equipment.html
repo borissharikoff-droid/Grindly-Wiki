@@ -113,10 +113,10 @@
 
       <!-- Tabs -->
       <div class="eq-tabs">
-        <button class="eq-tab active" onclick="eqSwitchTab('sets')">Armor Sets</button>
-        <button class="eq-tab" onclick="eqSwitchTab('crafted')">Crafted Gear</button>
-        <button class="eq-tab" onclick="eqSwitchTab('consumables')">Consumables</button>
-        <button class="eq-tab" onclick="eqSwitchTab('all')">All Equipment</button>
+        <button class="eq-tab active" onclick="eqSwitchTab('sets',this)">Armor Sets</button>
+        <button class="eq-tab" onclick="eqSwitchTab('crafted',this)">Crafted Gear</button>
+        <button class="eq-tab" onclick="eqSwitchTab('consumables',this)">Consumables</button>
+        <button class="eq-tab" onclick="eqSwitchTab('all',this)">All Equipment</button>
       </div>
 
       <!-- ═══ Sets Panel ═══ -->
@@ -388,11 +388,12 @@
   renderAll();
 
   // ── Tab switching ──────────────────────────────────────────────────────────────
-  window.eqSwitchTab = function(id) {
+  window.eqSwitchTab = function(id, btn) {
     document.querySelectorAll('.eq-tab').forEach(function(t){t.classList.remove('active')});
     document.querySelectorAll('.eq-panel').forEach(function(p){p.classList.remove('active')});
-    event.target.classList.add('active');
-    document.getElementById('panel-'+id).classList.add('active');
+    if(btn) btn.classList.add('active');
+    var panel = document.getElementById('panel-'+id);
+    if(panel) panel.classList.add('active');
   };
 
   // ── Collapsible nav ──────────────────────────────────────────────────────────
