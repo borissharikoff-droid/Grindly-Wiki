@@ -68,7 +68,7 @@
         var m = link.getAttribute('href').match(/item\.html\?id=([^&"]+)/);
         if (!m) return;
         var id = m[1];
-        var ov = itemOv[id];
+        var ov = itemOv[id] || seedOv[id];
         if (!ov || (!ov.image && !ov.icon)) return;
         // Walk up to find a container, then find the icon element
         var container = link.closest('.mat-card, tr, .set-item');

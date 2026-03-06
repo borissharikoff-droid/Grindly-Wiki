@@ -409,7 +409,7 @@ var RARITY_COLORS = {
 
 var SLOT_LABELS = {
   head: 'Head', body: 'Body', legs: 'Legs', ring: 'Ring',
-  weapon: 'Weapon', consumable: 'Consumable', plant: 'Plant', material: 'Material'
+  weapon: 'Weapon', consumable: 'Consumable', plant: 'Plant', material: 'Material', seed: 'Seed'
 };
 
 var ARMOR_SLOTS = ['head','body','legs','ring','weapon'];
@@ -430,6 +430,16 @@ var ITEMS = [
   { id:'star_bloom', name:'Star Bloom', slot:'plant', rarity:'legendary', icon:'\uD83C\uDF1F', desc:'A radiant bloom said to hold cosmic energy.', perks:[{type:'harvested_plant',value:0,desc:'Farm harvest. Sell on the Marketplace.'}] },
   { id:'crystal_root', name:'Crystal Root', slot:'plant', rarity:'legendary', icon:'\uD83D\uDC8E', desc:'A crystalline root pulsing with energy.', perks:[{type:'harvested_plant',value:0,desc:'Farm harvest. Sell on the Marketplace.'}] },
   { id:'void_blossom', name:'Void Blossom', slot:'plant', rarity:'mythic', icon:'\uD83D\uDD2E', desc:'A flower from beyond \u2014 grown from a Void Spore.', perks:[{type:'harvested_plant',value:0,desc:'Farm harvest. Sell on the Marketplace.'}] },
+  // Seeds
+  { id:'wheat_seed', name:'Wheat Seed', slot:'seed', rarity:'common', icon:'\uD83C\uDF3E', desc:'A common seed. Grows into Wheat in 5 minutes.', perks:[], seed:{grow:'5m',yieldId:'wheat',yieldName:'Wheat',yieldMin:1,yieldMax:3,xpPlant:10,xpHarvest:50} },
+  { id:'herb_seed', name:'Herb Seed', slot:'seed', rarity:'common', icon:'\uD83C\uDF3F', desc:'A common herb seed. Grows into Herbs in 8 minutes.', perks:[], seed:{grow:'8m',yieldId:'herbs',yieldName:'Herbs',yieldMin:1,yieldMax:2,xpPlant:10,xpHarvest:50} },
+  { id:'apple_seed', name:'Apple Seed', slot:'seed', rarity:'rare', icon:'\uD83C\uDF4E', desc:'A rare seed. Grows into Apples in 20 minutes.', perks:[], seed:{grow:'20m',yieldId:'apples',yieldName:'Apples',yieldMin:1,yieldMax:4,xpPlant:20,xpHarvest:100} },
+  { id:'blossom_seed', name:'Blossom Seed', slot:'seed', rarity:'rare', icon:'\uD83C\uDF38', desc:'A rare seed. Grows into Blossoms in 25 minutes.', perks:[], seed:{grow:'25m',yieldId:'blossoms',yieldName:'Blossoms',yieldMin:1,yieldMax:3,xpPlant:20,xpHarvest:100} },
+  { id:'clover_seed', name:'Clover Seed', slot:'seed', rarity:'epic', icon:'\uD83C\uDF40', desc:'An epic seed. Grows into Clovers in 1 hour.', perks:[], seed:{grow:'1h',yieldId:'clovers',yieldName:'Clovers',yieldMin:1,yieldMax:5,xpPlant:40,xpHarvest:200} },
+  { id:'orchid_seed', name:'Orchid Seed', slot:'seed', rarity:'epic', icon:'\uD83C\uDF3A', desc:'An exotic seed. Grows into Orchids in 1h 30m.', perks:[], seed:{grow:'1h 30m',yieldId:'orchids',yieldName:'Orchids',yieldMin:1,yieldMax:3,xpPlant:40,xpHarvest:200} },
+  { id:'starbloom_seed', name:'Star Bloom Seed', slot:'seed', rarity:'legendary', icon:'\uD83C\uDF1F', desc:'A legendary seed. Grows into Star Bloom in 3 hours.', perks:[], seed:{grow:'3h',yieldId:'star_bloom',yieldName:'Star Bloom',yieldMin:1,yieldMax:4,xpPlant:80,xpHarvest:400} },
+  { id:'crystal_seed', name:'Crystal Root Seed', slot:'seed', rarity:'legendary', icon:'\uD83D\uDC8E', desc:'A legendary seed. Grows into Crystal Root in 4 hours.', perks:[], seed:{grow:'4h',yieldId:'crystal_root',yieldName:'Crystal Root',yieldMin:1,yieldMax:3,xpPlant:80,xpHarvest:400} },
+  { id:'void_spore', name:'Void Spore', slot:'seed', rarity:'mythic', icon:'\uD83D\uDD2E', desc:'A mythic spore from the void. Grows into Void Blossom in 8 hours.', perks:[], seed:{grow:'8h',yieldId:'void_blossom',yieldName:'Void Blossom',yieldMin:1,yieldMax:6,xpPlant:160,xpHarvest:800} },
   // Arena mob materials
   { id:'slime_gel', name:'Slime Gel', slot:'plant', rarity:'common', icon:'\uD83E\uDEE7', desc:'Dropped by slimes. Craft into Slime Shield.', perks:[{type:'harvested_plant',value:0,desc:'Crafting material \u2014 Slime Cavern'}], source:'Slime Cavern mobs' },
   { id:'goblin_tooth', name:'Goblin Tooth', slot:'plant', rarity:'common', icon:'\uD83E\uDDB7', desc:'Dropped by goblins. Craft into Goblin Blade.', perks:[{type:'harvested_plant',value:0,desc:'Crafting material \u2014 Goblin Outpost'}], source:'Goblin Outpost mobs' },
@@ -773,6 +783,19 @@ function renderItem(itemId) {
     html += '</div></div>';
   }
 
+  // Seed stats
+  if (item.seed) {
+    var s = item.seed;
+    var yieldItem = ITEM_MAP[s.yieldId];
+    var yieldIcon = yieldItem ? (yieldItem.image ? '<img src="'+yieldItem.image+'" style="width:16px;height:16px;object-fit:contain;vertical-align:middle">' : yieldItem.icon) : '';
+    html += '<div class="stats-section"><h3>Seed Stats</h3><div class="stat-grid">';
+    html += '<div class="stat-card"><div class="stat-card-label">Grow Time</div><div class="stat-card-value" style="color:#4ade80">'+s.grow+'</div></div>';
+    html += '<div class="stat-card"><div class="stat-card-label">Yield</div><div class="stat-card-value" style="color:#fbbf24">'+yieldIcon+' <a href="item.html?id='+s.yieldId+'" style="color:#fbbf24">'+s.yieldName+'</a> &times;'+s.yieldMin+'-'+s.yieldMax+'</div></div>';
+    html += '<div class="stat-card"><div class="stat-card-label">XP on Plant</div><div class="stat-card-value" style="color:#a78bfa">+'+s.xpPlant+'</div></div>';
+    html += '<div class="stat-card"><div class="stat-card-label">XP on Harvest</div><div class="stat-card-value" style="color:#a78bfa">+'+s.xpHarvest+'</div></div>';
+    html += '</div></div>';
+  }
+
   // Price chart — only show if real marketplace data exists
   if (HAS_MARKET_DATA) {
     html += '<div class="chart-section"><h3>Price History</h3>';
@@ -991,6 +1014,24 @@ function applyAdminImages(config) {
       }
     }
   }
+  // Seed overrides (image/icon/name changes from dashboard)
+  if (config.seedOverrides) {
+    for (var sid in config.seedOverrides) {
+      var seedItem = ITEM_MAP[sid];
+      if (seedItem && config.seedOverrides[sid].image) {
+        seedItem.image = config.seedOverrides[sid].image;
+        changed = true;
+      }
+      if (seedItem && config.seedOverrides[sid].icon) {
+        seedItem.icon = config.seedOverrides[sid].icon;
+        changed = true;
+      }
+      if (seedItem && config.seedOverrides[sid].name) {
+        seedItem.name = config.seedOverrides[sid].name;
+        changed = true;
+      }
+    }
+  }
   // Custom items (new items added from dashboard)
   if (config.customItems) {
     config.customItems.forEach(function(ci) {
@@ -1026,9 +1067,52 @@ function loadSupabaseConfig() {
       if (rows && rows[0] && rows[0].config) {
         var didChange = applyAdminImages(rows[0].config);
         // Re-render current item if images changed
-        if (didChange && currentItemId) renderItem(currentItemId);
+        if (didChange && currentItemId) {
+          renderItem(currentItemId);
+          loadMarketplacePrice(currentItemId);
+        }
       }
     }).catch(function() { /* offline or no access */ });
+}
+
+// ── Fetch live marketplace price from Supabase ──
+function loadMarketplacePrice(itemId) {
+  if (!SUPABASE_CONFIG.url || !SUPABASE_CONFIG.anonKey) return;
+  var base = SUPABASE_CONFIG.url + '/rest/v1/marketplace_listings';
+  var headers = {
+    'apikey': SUPABASE_CONFIG.anonKey,
+    'Authorization': 'Bearer ' + SUPABASE_CONFIG.anonKey
+  };
+
+  // Fetch all active listings for this item
+  var url = base + '?item_id=eq.' + encodeURIComponent(itemId) + '&status=eq.active&select=price_gold,quantity,created_at&order=price_gold.asc';
+  fetch(url, { headers: headers })
+    .then(function(r) { return r.json(); })
+    .then(function(rows) {
+      if (!rows || !rows.length) return;
+
+      var lowest = rows[0].price_gold;
+      var totalQty = 0;
+      rows.forEach(function(r) { totalQty += (r.quantity || 1); });
+
+      // Update price box
+      var priceEl = document.querySelector('.price-current');
+      if (priceEl) {
+        priceEl.style.color = '';
+        priceEl.style.fontSize = '';
+        priceEl.innerHTML = lowest + ' <span>gold</span>';
+      }
+
+      // Update change rows to show listing count + price range
+      var priceRows = document.querySelectorAll('.price-box .price-row');
+      if (priceRows.length >= 4) {
+        var highest = rows[rows.length - 1].price_gold;
+        priceRows[0].innerHTML = '<span class="price-label">Lowest Listing</span><span class="price-value" style="color:#4ade80">' + lowest + 'g</span>';
+        priceRows[1].innerHTML = '<span class="price-label">Highest Listing</span><span class="price-value" style="color:#f87171">' + highest + 'g</span>';
+        priceRows[2].innerHTML = '<span class="price-label">Active Listings</span><span class="price-value">' + rows.length + '</span>';
+        priceRows[3].innerHTML = '<span class="price-label">Total Quantity</span><span class="price-value">' + totalQty + '</span>';
+      }
+    }).catch(function() { /* offline */ });
 }
 
 // ── Init ──
@@ -1036,6 +1120,7 @@ var params = new URLSearchParams(window.location.search);
 var currentItemId = params.get('id');
 if (currentItemId) {
   renderItem(currentItemId);
+  loadMarketplacePrice(currentItemId);
 } else {
   document.getElementById('mainContent').innerHTML = '<div class="item-not-found"><h2>Item Database</h2><p>Use the search bar or select an item from the <a href="index.html">wiki homepage</a>.</p></div>';
 }
