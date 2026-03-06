@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crafting – Grindly Wiki</title>
 <link rel="stylesheet" href="style.css">
+<style>
+.cr-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:18px}
+.cr-tab{padding:7px 16px;border-radius:8px;border:1px solid var(--border-inner);background:transparent;color:var(--text-dim);font-size:13px;font-family:var(--font-mono);cursor:pointer;transition:all .15s}
+.cr-tab:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
+.cr-tab.active{color:var(--gold);border-color:var(--gold);background:rgba(251,191,36,.08)}
+.cr-panel{display:none}.cr-panel.active{display:block}
+</style>
 </head>
 <body>
 
@@ -57,255 +64,283 @@
   <!-- Main Content -->
   <main class="main">
 
-    <!-- Craft Flow -->
-    <section class="content" id="craft-flow">
+    <section class="content">
       <h2 class="section-title"><span class="section-icon">&#9874;&#65039;</span> Crafting</h2>
       <p class="section-desc">Combine raw materials from chests, mob drops from the arena, and harvested crops from your farm to forge powerful gear at the workbench.</p>
 
-      <div class="info-box">
-        <h4>Craft Flow</h4>
-        <div class="flow-chain">
-          <span class="flow-step">Raw Materials</span>
-          <span class="flow-arrow">&rarr;</span>
-          <span class="flow-step">Intermediates</span>
-          <span class="flow-arrow">&rarr;</span>
-          <span class="flow-step">Gear</span>
+      <!-- Tabs -->
+      <div class="cr-tabs">
+        <button class="cr-tab active" onclick="crSwitch('overview',this)">Overview</button>
+        <button class="cr-tab" onclick="crSwitch('inter',this)">Intermediates</button>
+        <button class="cr-tab" onclick="crSwitch('gear',this)">Gear Recipes</button>
+        <button class="cr-tab" onclick="crSwitch('perks',this)">Crafter Perks</button>
+        <button class="cr-tab" onclick="crSwitch('prog',this)">Progression</button>
+      </div>
+
+      <!-- ═══ Overview Panel ═══ -->
+      <div id="panel-overview" class="cr-panel active">
+        <div class="info-box">
+          <h4>Craft Flow</h4>
+          <div class="flow-chain">
+            <span class="flow-step">Raw Materials</span>
+            <span class="flow-arrow">&rarr;</span>
+            <span class="flow-step">Intermediates</span>
+            <span class="flow-arrow">&rarr;</span>
+            <span class="flow-step">Gear</span>
+          </div>
+        </div>
+        <div class="info-box" style="margin-top:14px">
+          <h4>How It Works</h4>
+          <ul>
+            <li><strong>Raw materials</strong> drop from chests as bonus loot</li>
+            <li><strong>Mob materials</strong> drop from arena mobs (Slime Gel, Goblin Tooth, etc.)</li>
+            <li><strong>Farm crops</strong> are harvested from your farm plots</li>
+            <li>Refine raw materials into <strong>intermediates</strong> (Iron Bar, Fang Shard, etc.)</li>
+            <li>Combine intermediates + mob/farm materials to craft <strong>gear</strong></li>
+            <li>Higher <strong>Crafter level</strong> unlocks better recipes and reduces craft time</li>
+          </ul>
         </div>
       </div>
-    </section>
 
-    <!-- Intermediate Recipes -->
-    <section class="content" id="intermediates">
-      <h3 class="sub-title">Intermediate Recipes</h3>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Output</th><th>Ingredients</th><th>Crafter Lvl</th><th>XP</th><th>Time</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><a href="item.html?id=iron_bar" style="color:var(--gold)">Iron Bar</a></td>
-              <td><a href="item.html?id=ore_iron" style="color:var(--gold)">Iron Ore</a> &times;5</td>
-              <td>Lvl 0</td>
-              <td class="perk">45 XP</td>
-              <td>8s</td>
-            </tr>
-            <tr>
-              <td><a href="item.html?id=fang_shard" style="color:var(--gold)">Fang Shard</a></td>
-              <td><a href="item.html?id=monster_fang" style="color:var(--gold)">Monster Fang</a> &times;4</td>
-              <td>Lvl 0</td>
-              <td class="perk">55 XP</td>
-              <td>10s</td>
-            </tr>
-            <tr>
-              <td><a href="item.html?id=essence_vial" style="color:var(--gold)">Essence Vial</a></td>
-              <td><a href="item.html?id=magic_essence" style="color:var(--gold)">Magic Essence</a> &times;3</td>
-              <td>Lvl 15</td>
-              <td class="perk">20 XP</td>
-              <td>2m</td>
-            </tr>
-            <tr>
-              <td><a href="item.html?id=ancient_dust" style="color:var(--gold)">Ancient Dust</a></td>
-              <td><a href="item.html?id=ancient_scale" style="color:var(--gold)">Ancient Scale</a> &times;2</td>
-              <td>Lvl 30</td>
-              <td class="perk">35 XP</td>
-              <td>2m 30s</td>
-            </tr>
-            <tr>
-              <td><a href="item.html?id=void_fragment" style="color:var(--gold)">Void Fragment</a></td>
-              <td><a href="item.html?id=void_crystal" style="color:var(--gold)">Void Crystal</a> &times;2</td>
-              <td>Lvl 55</td>
-              <td class="perk">60 XP</td>
-              <td>4m</td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- ═══ Intermediates Panel ═══ -->
+      <div id="panel-inter" class="cr-panel">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Output</th><th>Ingredients</th><th>Crafter Lvl</th><th>XP</th><th>Time</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="item.html?id=iron_bar" style="color:var(--gold)">Iron Bar</a></td>
+                <td><a href="item.html?id=ore_iron" style="color:var(--gold)">Iron Ore</a> &times;5</td>
+                <td>Lvl 0</td>
+                <td class="perk">45 XP</td>
+                <td>8s</td>
+              </tr>
+              <tr>
+                <td><a href="item.html?id=fang_shard" style="color:var(--gold)">Fang Shard</a></td>
+                <td><a href="item.html?id=monster_fang" style="color:var(--gold)">Monster Fang</a> &times;4</td>
+                <td>Lvl 0</td>
+                <td class="perk">55 XP</td>
+                <td>10s</td>
+              </tr>
+              <tr>
+                <td><a href="item.html?id=essence_vial" style="color:var(--gold)">Essence Vial</a></td>
+                <td><a href="item.html?id=magic_essence" style="color:var(--gold)">Magic Essence</a> &times;3</td>
+                <td>Lvl 15</td>
+                <td class="perk">20 XP</td>
+                <td>2m</td>
+              </tr>
+              <tr>
+                <td><a href="item.html?id=ancient_dust" style="color:var(--gold)">Ancient Dust</a></td>
+                <td><a href="item.html?id=ancient_scale" style="color:var(--gold)">Ancient Scale</a> &times;2</td>
+                <td>Lvl 30</td>
+                <td class="perk">35 XP</td>
+                <td>2m 30s</td>
+              </tr>
+              <tr>
+                <td><a href="item.html?id=void_fragment" style="color:var(--gold)">Void Fragment</a></td>
+                <td><a href="item.html?id=void_crystal" style="color:var(--gold)">Void Crystal</a> &times;2</td>
+                <td>Lvl 55</td>
+                <td class="perk">60 XP</td>
+                <td>4m</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </section>
 
-    <!-- Gear Recipes -->
-    <section class="content" id="gear-recipes">
-      <h3 class="sub-title">Gear Recipes</h3>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Output</th><th>Ingredients</th><th>Crafter Lvl</th><th>XP</th><th>Time</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><a href="item.html?id=craft_iron_helm" style="color:var(--gold)">Iron Helm</a></td>
-              <td><a href="item.html?id=iron_bar" style="color:var(--gold)">Iron Bar</a> &times;2 + <a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a> &times;3</td>
-              <td>Lvl 3</td>
-              <td class="perk">40 XP</td>
-              <td>20s</td>
-            </tr>
-            <tr>
-              <td><a href="item.html?id=craft_fang_dagger" style="color:var(--gold)">Fang Dagger</a></td>
-              <td><a href="item.html?id=fang_shard" style="color:var(--gold)">Fang Shard</a> &times;2 + <a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a> &times;3</td>
-              <td>Lvl 15</td>
-              <td class="perk">70 XP</td>
-              <td>5m</td>
-            </tr>
-            <tr>
-              <td><a href="item.html?id=craft_slime_shield" style="color:var(--gold)">Slime Shield</a></td>
-              <td><a href="item.html?id=slime_gel" style="color:var(--gold)">Slime Gel</a> &times;5 + <a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a> &times;3</td>
-              <td>Lvl 0</td>
-              <td class="perk">25 XP</td>
-              <td>15s</td>
-            </tr>
-            <tr>
-              <td><a href="item.html?id=craft_goblin_blade" style="color:var(--gold)">Goblin Blade</a></td>
-              <td><a href="item.html?id=goblin_tooth" style="color:var(--gold)">Goblin Tooth</a> &times;4 + <a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a> &times;3</td>
-              <td>Lvl 5</td>
-              <td class="perk">50 XP</td>
-              <td>25s</td>
-            </tr>
-            <tr>
-              <td><a href="item.html?id=craft_wolf_pendant" style="color:var(--gold)">Wolf Fang Pendant</a></td>
-              <td><a href="item.html?id=wolf_fang" style="color:var(--gold)">Wolf Fang</a> &times;3 + <a href="item.html?id=iron_bar" style="color:var(--gold)">Iron Bar</a> &times;1 + <a href="item.html?id=blossoms" style="color:var(--gold)">Blossoms</a> &times;2</td>
-              <td>Lvl 20</td>
-              <td class="perk">100 XP</td>
-              <td>8m</td>
-            </tr>
-            <tr>
-              <td><a href="item.html?id=craft_essence_ring" style="color:var(--gold)">Essence Ring</a></td>
-              <td><a href="item.html?id=essence_vial" style="color:var(--gold)">Essence Vial</a> &times;2 + <a href="item.html?id=blossoms" style="color:var(--gold)">Blossoms</a> &times;2</td>
-              <td>Lvl 30</td>
-              <td class="perk">130 XP</td>
-              <td>10m</td>
-            </tr>
-            <tr>
-              <td><a href="item.html?id=craft_orc_plate" style="color:var(--gold)">Orc Plate</a></td>
-              <td><a href="item.html?id=orc_shard" style="color:var(--gold)">Orc Shard</a> &times;3 + <a href="item.html?id=fang_shard" style="color:var(--gold)">Fang Shard</a> &times;2 + <a href="item.html?id=orchids" style="color:var(--gold)">Orchids</a> &times;2</td>
-              <td>Lvl 35</td>
-              <td class="perk">200 XP</td>
-              <td>15m</td>
-            </tr>
-            <tr>
-              <td><a href="item.html?id=craft_warlord_gauntlets" style="color:var(--gold)">Warlord Gauntlets</a></td>
-              <td><a href="item.html?id=warlord_sigil" style="color:var(--gold)">Warlord Sigil</a> &times;2 + <a href="item.html?id=orc_shard" style="color:var(--gold)">Orc Shard</a> &times;5 + <a href="item.html?id=clovers" style="color:var(--gold)">Clovers</a> &times;3</td>
-              <td>Lvl 40</td>
-              <td class="perk">350 XP</td>
-              <td>25m</td>
-            </tr>
-            <tr>
-              <td><a href="item.html?id=craft_scale_robe" style="color:var(--gold)">Scale Robe</a></td>
-              <td><a href="item.html?id=ancient_dust" style="color:var(--gold)">Ancient Dust</a> &times;2 + <a href="item.html?id=orchids" style="color:var(--gold)">Orchids</a> &times;2</td>
-              <td>Lvl 45</td>
-              <td class="perk">260 XP</td>
-              <td>20m</td>
-            </tr>
-            <tr>
-              <td><a href="item.html?id=craft_troll_cloak" style="color:var(--gold)">Troll Cloak</a></td>
-              <td><a href="item.html?id=troll_hide" style="color:var(--gold)">Troll Hide</a> &times;3 + <a href="item.html?id=essence_vial" style="color:var(--gold)">Essence Vial</a> &times;1 + <a href="item.html?id=orchids" style="color:var(--gold)">Orchids</a> &times;2</td>
-              <td>Lvl 50</td>
-              <td class="perk">400 XP</td>
-              <td>30m</td>
-            </tr>
-            <tr>
-              <td><a href="item.html?id=craft_troll_aegis" style="color:var(--gold)">Troll Aegis</a></td>
-              <td><a href="item.html?id=troll_heart" style="color:var(--gold)">Troll Heart</a> &times;2 + <a href="item.html?id=troll_hide" style="color:var(--gold)">Troll Hide</a> &times;5 + <a href="item.html?id=ancient_dust" style="color:var(--gold)">Ancient Dust</a> &times;2 + <a href="item.html?id=crystal_root" style="color:var(--gold)">Crystal Root</a> &times;1</td>
-              <td>Lvl 60</td>
-              <td class="perk">700 XP</td>
-              <td>50m</td>
-            </tr>
-            <tr>
-              <td><a href="item.html?id=craft_void_blade" style="color:var(--gold)">Void Blade</a></td>
-              <td><a href="item.html?id=void_fragment" style="color:var(--gold)">Void Fragment</a> &times;2 + <a href="item.html?id=star_bloom" style="color:var(--gold)">Star Bloom</a> &times;2</td>
-              <td>Lvl 65</td>
-              <td class="perk">650 XP</td>
-              <td>45m</td>
-            </tr>
-            <tr>
-              <td><a href="item.html?id=craft_dragon_crown" style="color:var(--gold)">Dragon Crown</a></td>
-              <td><a href="item.html?id=dragon_scale" style="color:var(--gold)">Dragon Scale</a> &times;3 + <a href="item.html?id=void_fragment" style="color:var(--gold)">Void Fragment</a> &times;1 + <a href="item.html?id=star_bloom" style="color:var(--gold)">Star Bloom</a> &times;2</td>
-              <td>Lvl 70</td>
-              <td class="perk">850 XP</td>
-              <td>1h</td>
-            </tr>
-            <tr>
-              <td><a href="item.html?id=craft_dragonfire_blade" style="color:var(--gold)">Dragonfire Blade</a></td>
-              <td><a href="item.html?id=dragon_heart" style="color:var(--gold)">Dragon Heart</a> &times;2 + <a href="item.html?id=dragon_scale" style="color:var(--gold)">Dragon Scale</a> &times;5 + <a href="item.html?id=void_fragment" style="color:var(--gold)">Void Fragment</a> &times;2 + <a href="item.html?id=star_bloom" style="color:var(--gold)">Star Bloom</a> &times;3</td>
-              <td>Lvl 80</td>
-              <td class="perk">1500 XP</td>
-              <td>1h 30m</td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- ═══ Gear Recipes Panel ═══ -->
+      <div id="panel-gear" class="cr-panel">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Output</th><th>Ingredients</th><th>Crafter Lvl</th><th>XP</th><th>Time</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="item.html?id=craft_slime_shield" style="color:var(--gold)">Slime Shield</a></td>
+                <td><a href="item.html?id=slime_gel" style="color:var(--gold)">Slime Gel</a> &times;5 + <a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a> &times;3</td>
+                <td>Lvl 0</td>
+                <td class="perk">25 XP</td>
+                <td>15s</td>
+              </tr>
+              <tr>
+                <td><a href="item.html?id=craft_iron_helm" style="color:var(--gold)">Iron Helm</a></td>
+                <td><a href="item.html?id=iron_bar" style="color:var(--gold)">Iron Bar</a> &times;2 + <a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a> &times;3</td>
+                <td>Lvl 3</td>
+                <td class="perk">40 XP</td>
+                <td>20s</td>
+              </tr>
+              <tr>
+                <td><a href="item.html?id=craft_goblin_blade" style="color:var(--gold)">Goblin Blade</a></td>
+                <td><a href="item.html?id=goblin_tooth" style="color:var(--gold)">Goblin Tooth</a> &times;4 + <a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a> &times;3</td>
+                <td>Lvl 5</td>
+                <td class="perk">50 XP</td>
+                <td>25s</td>
+              </tr>
+              <tr>
+                <td><a href="item.html?id=craft_fang_dagger" style="color:var(--gold)">Fang Dagger</a></td>
+                <td><a href="item.html?id=fang_shard" style="color:var(--gold)">Fang Shard</a> &times;2 + <a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a> &times;3</td>
+                <td>Lvl 15</td>
+                <td class="perk">70 XP</td>
+                <td>5m</td>
+              </tr>
+              <tr>
+                <td><a href="item.html?id=craft_wolf_pendant" style="color:var(--gold)">Wolf Fang Pendant</a></td>
+                <td><a href="item.html?id=wolf_fang" style="color:var(--gold)">Wolf Fang</a> &times;3 + <a href="item.html?id=iron_bar" style="color:var(--gold)">Iron Bar</a> &times;1 + <a href="item.html?id=blossoms" style="color:var(--gold)">Blossoms</a> &times;2</td>
+                <td>Lvl 20</td>
+                <td class="perk">100 XP</td>
+                <td>8m</td>
+              </tr>
+              <tr>
+                <td><a href="item.html?id=craft_essence_ring" style="color:var(--gold)">Essence Ring</a></td>
+                <td><a href="item.html?id=essence_vial" style="color:var(--gold)">Essence Vial</a> &times;2 + <a href="item.html?id=blossoms" style="color:var(--gold)">Blossoms</a> &times;2</td>
+                <td>Lvl 30</td>
+                <td class="perk">130 XP</td>
+                <td>10m</td>
+              </tr>
+              <tr>
+                <td><a href="item.html?id=craft_orc_plate" style="color:var(--gold)">Orc Plate</a></td>
+                <td><a href="item.html?id=orc_shard" style="color:var(--gold)">Orc Shard</a> &times;3 + <a href="item.html?id=fang_shard" style="color:var(--gold)">Fang Shard</a> &times;2 + <a href="item.html?id=orchids" style="color:var(--gold)">Orchids</a> &times;2</td>
+                <td>Lvl 35</td>
+                <td class="perk">200 XP</td>
+                <td>15m</td>
+              </tr>
+              <tr>
+                <td><a href="item.html?id=craft_warlord_gauntlets" style="color:var(--gold)">Warlord Gauntlets</a></td>
+                <td><a href="item.html?id=warlord_sigil" style="color:var(--gold)">Warlord Sigil</a> &times;2 + <a href="item.html?id=orc_shard" style="color:var(--gold)">Orc Shard</a> &times;5 + <a href="item.html?id=clovers" style="color:var(--gold)">Clovers</a> &times;3</td>
+                <td>Lvl 40</td>
+                <td class="perk">350 XP</td>
+                <td>25m</td>
+              </tr>
+              <tr>
+                <td><a href="item.html?id=craft_scale_robe" style="color:var(--gold)">Scale Robe</a></td>
+                <td><a href="item.html?id=ancient_dust" style="color:var(--gold)">Ancient Dust</a> &times;2 + <a href="item.html?id=orchids" style="color:var(--gold)">Orchids</a> &times;2</td>
+                <td>Lvl 45</td>
+                <td class="perk">260 XP</td>
+                <td>20m</td>
+              </tr>
+              <tr>
+                <td><a href="item.html?id=craft_troll_cloak" style="color:var(--gold)">Troll Cloak</a></td>
+                <td><a href="item.html?id=troll_hide" style="color:var(--gold)">Troll Hide</a> &times;3 + <a href="item.html?id=essence_vial" style="color:var(--gold)">Essence Vial</a> &times;1 + <a href="item.html?id=orchids" style="color:var(--gold)">Orchids</a> &times;2</td>
+                <td>Lvl 50</td>
+                <td class="perk">400 XP</td>
+                <td>30m</td>
+              </tr>
+              <tr>
+                <td><a href="item.html?id=craft_troll_aegis" style="color:var(--gold)">Troll Aegis</a></td>
+                <td><a href="item.html?id=troll_heart" style="color:var(--gold)">Troll Heart</a> &times;2 + <a href="item.html?id=troll_hide" style="color:var(--gold)">Troll Hide</a> &times;5 + <a href="item.html?id=ancient_dust" style="color:var(--gold)">Ancient Dust</a> &times;2 + <a href="item.html?id=crystal_root" style="color:var(--gold)">Crystal Root</a> &times;1</td>
+                <td>Lvl 60</td>
+                <td class="perk">700 XP</td>
+                <td>50m</td>
+              </tr>
+              <tr>
+                <td><a href="item.html?id=craft_void_blade" style="color:var(--gold)">Void Blade</a></td>
+                <td><a href="item.html?id=void_fragment" style="color:var(--gold)">Void Fragment</a> &times;2 + <a href="item.html?id=star_bloom" style="color:var(--gold)">Star Bloom</a> &times;2</td>
+                <td>Lvl 65</td>
+                <td class="perk">650 XP</td>
+                <td>45m</td>
+              </tr>
+              <tr>
+                <td><a href="item.html?id=craft_dragon_crown" style="color:var(--gold)">Dragon Crown</a></td>
+                <td><a href="item.html?id=dragon_scale" style="color:var(--gold)">Dragon Scale</a> &times;3 + <a href="item.html?id=void_fragment" style="color:var(--gold)">Void Fragment</a> &times;1 + <a href="item.html?id=star_bloom" style="color:var(--gold)">Star Bloom</a> &times;2</td>
+                <td>Lvl 70</td>
+                <td class="perk">850 XP</td>
+                <td>1h</td>
+              </tr>
+              <tr>
+                <td><a href="item.html?id=craft_dragonfire_blade" style="color:var(--gold)">Dragonfire Blade</a></td>
+                <td><a href="item.html?id=dragon_heart" style="color:var(--gold)">Dragon Heart</a> &times;2 + <a href="item.html?id=dragon_scale" style="color:var(--gold)">Dragon Scale</a> &times;5 + <a href="item.html?id=void_fragment" style="color:var(--gold)">Void Fragment</a> &times;2 + <a href="item.html?id=star_bloom" style="color:var(--gold)">Star Bloom</a> &times;3</td>
+                <td>Lvl 80</td>
+                <td class="perk">1500 XP</td>
+                <td>1h 30m</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </section>
 
-    <!-- Crafter Level Perks -->
-    <section class="content" id="crafter-perks">
-      <h3 class="sub-title">Crafter Level Perks</h3>
-      <div class="info-box">
-        <h4>Level Milestones</h4>
-        <ul>
-          <li><strong>Lvl 10:</strong> -10% craft time</li>
-          <li><strong>Lvl 25:</strong> -20% craft time, 15% double output chance</li>
-          <li><strong>Lvl 40:</strong> -30% craft time</li>
-          <li><strong>Lvl 60:</strong> -45% craft time, 45% double output chance</li>
-          <li><strong>Lvl 80:</strong> -60% craft time</li>
-        </ul>
+      <!-- ═══ Crafter Perks Panel ═══ -->
+      <div id="panel-perks" class="cr-panel">
+        <div class="info-box">
+          <h4>Level Milestones</h4>
+          <ul>
+            <li><strong>Lvl 10:</strong> -10% craft time</li>
+            <li><strong>Lvl 25:</strong> -20% craft time, 15% double output chance</li>
+            <li><strong>Lvl 40:</strong> -30% craft time</li>
+            <li><strong>Lvl 60:</strong> -45% craft time, 45% double output chance</li>
+            <li><strong>Lvl 80:</strong> -60% craft time</li>
+          </ul>
+        </div>
       </div>
-    </section>
 
-    <!-- Progression Path -->
-    <section class="content" id="progression">
-      <h3 class="sub-title">Progression Path</h3>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Zone</th><th>Mob Material</th><th>Crafted Gate Item</th><th>Unlocks</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Slime Cavern</td>
-              <td><a href="item.html?id=slime_gel" style="color:var(--gold)">Slime Gel</a></td>
-              <td><a href="item.html?id=craft_slime_shield" style="color:var(--gold)">Slime Shield</a></td>
-              <td>Goblin Outpost</td>
-            </tr>
-            <tr>
-              <td>Goblin Outpost</td>
-              <td><a href="item.html?id=goblin_tooth" style="color:var(--gold)">Goblin Tooth</a></td>
-              <td><a href="item.html?id=craft_goblin_blade" style="color:var(--gold)">Goblin Blade</a></td>
-              <td>Wild Forest</td>
-            </tr>
-            <tr>
-              <td>Wild Forest</td>
-              <td><a href="item.html?id=wolf_fang" style="color:var(--gold)">Wolf Fang</a></td>
-              <td><a href="item.html?id=craft_wolf_pendant" style="color:var(--gold)">Wolf Fang Pendant</a></td>
-              <td>Orc Stronghold</td>
-            </tr>
-            <tr>
-              <td>Orc Stronghold</td>
-              <td><a href="item.html?id=orc_shard" style="color:var(--gold)">Orc Shard</a></td>
-              <td><a href="item.html?id=craft_orc_plate" style="color:var(--gold)">Orc Plate</a></td>
-              <td>Troll Bridge</td>
-            </tr>
-            <tr>
-              <td>Troll Bridge</td>
-              <td><a href="item.html?id=troll_hide" style="color:var(--gold)">Troll Hide</a></td>
-              <td><a href="item.html?id=craft_troll_cloak" style="color:var(--gold)">Troll Cloak</a></td>
-              <td>Dragon Lair</td>
-            </tr>
-            <tr>
-              <td>Dragon Lair</td>
-              <td><a href="item.html?id=dragon_scale" style="color:var(--gold)">Dragon Scale</a></td>
-              <td><a href="item.html?id=craft_dragon_crown" style="color:var(--gold)">Dragon Crown</a></td>
-              <td>Endgame gear</td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- ═══ Progression Panel ═══ -->
+      <div id="panel-prog" class="cr-panel">
+        <p class="section-desc">Each arena zone drops a unique material used to craft a gate item that unlocks the next zone.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Zone</th><th>Mob Material</th><th>Crafted Gate Item</th><th>Unlocks</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Slime Cavern</td>
+                <td><a href="item.html?id=slime_gel" style="color:var(--gold)">Slime Gel</a></td>
+                <td><a href="item.html?id=craft_slime_shield" style="color:var(--gold)">Slime Shield</a></td>
+                <td>Goblin Outpost</td>
+              </tr>
+              <tr>
+                <td>Goblin Outpost</td>
+                <td><a href="item.html?id=goblin_tooth" style="color:var(--gold)">Goblin Tooth</a></td>
+                <td><a href="item.html?id=craft_goblin_blade" style="color:var(--gold)">Goblin Blade</a></td>
+                <td>Wild Forest</td>
+              </tr>
+              <tr>
+                <td>Wild Forest</td>
+                <td><a href="item.html?id=wolf_fang" style="color:var(--gold)">Wolf Fang</a></td>
+                <td><a href="item.html?id=craft_wolf_pendant" style="color:var(--gold)">Wolf Fang Pendant</a></td>
+                <td>Orc Stronghold</td>
+              </tr>
+              <tr>
+                <td>Orc Stronghold</td>
+                <td><a href="item.html?id=orc_shard" style="color:var(--gold)">Orc Shard</a></td>
+                <td><a href="item.html?id=craft_orc_plate" style="color:var(--gold)">Orc Plate</a></td>
+                <td>Troll Bridge</td>
+              </tr>
+              <tr>
+                <td>Troll Bridge</td>
+                <td><a href="item.html?id=troll_hide" style="color:var(--gold)">Troll Hide</a></td>
+                <td><a href="item.html?id=craft_troll_cloak" style="color:var(--gold)">Troll Cloak</a></td>
+                <td>Dragon Lair</td>
+              </tr>
+              <tr>
+                <td>Dragon Lair</td>
+                <td><a href="item.html?id=dragon_scale" style="color:var(--gold)">Dragon Scale</a></td>
+                <td><a href="item.html?id=craft_dragon_crown" style="color:var(--gold)">Dragon Crown</a></td>
+                <td>Endgame gear</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </section>
 
+    </section>
   </main>
 </div>
 
-<!-- Collapsible nav JS -->
 <script>
 (function() {
+  // Tab switching
+  window.crSwitch = function(id, btn) {
+    document.querySelectorAll('.cr-tab').forEach(function(t){t.classList.remove('active')});
+    document.querySelectorAll('.cr-panel').forEach(function(p){p.classList.remove('active')});
+    if(btn) btn.classList.add('active');
+    var panel = document.getElementById('panel-'+id);
+    if(panel) panel.classList.add('active');
+  };
+
+  // Collapsible nav
   document.querySelectorAll('.nav-group-title').forEach(function(title) {
     title.addEventListener('click', function() {
       this.parentElement.classList.toggle('collapsed');

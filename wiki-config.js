@@ -1,0 +1,2 @@
+window.WIKI_SUPABASE_URL = 'https://athiojjreuexcmziqbcn.supabase.co';
+window.WIKI_SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF0aGlvampyZXVleGNtemlxYmNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0MjU1NjksImV4cCI6MjA4NjAwMTU2OX0.VU8aWawpq5zA4y-RTpWGJN_5Gne6THcF2OZPg1RVIKs';

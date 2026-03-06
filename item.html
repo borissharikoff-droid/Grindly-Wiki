@@ -393,6 +393,7 @@ canvas.price-chart {
   </main>
 </div>
 
+<script src="wiki-config.js"></script>
 <script>
 // ═══════════════════════════════════════════════════════════════
 // Grindly Wiki — Item Database (embedded from game source)
@@ -728,7 +729,11 @@ function renderItem(itemId) {
 
   // Header
   html += '<div class="item-header">';
-  html += '<div class="item-header-icon" style="border-color:'+rc.border+'">'+item.icon+'</div>';
+  if (item.image) {
+    html += '<div class="item-header-icon" style="border-color:'+rc.border+'"><img src="'+item.image+'" alt="'+item.name+'"></div>';
+  } else {
+    html += '<div class="item-header-icon" style="border-color:'+rc.border+'">'+item.icon+'</div>';
+  }
   html += '<div class="item-header-info">';
   html += '<h1 style="color:'+rc.color+'">'+item.name+'</h1>';
   html += '<div class="item-tagline">'+item.desc+'</div>';
@@ -954,14 +959,89 @@ document.querySelectorAll('.nav-group-title').forEach(function(t) {
   t.addEventListener('click', function() { this.parentElement.classList.toggle('collapsed'); });
 });
 
+// ── Supabase Admin Config (load item images/skins from dashboard) ──
+var SUPABASE_CONFIG = {
+  // These will be populated from wiki-config.js if it exists
+  url: '',
+  anonKey: ''
+};
+
+// Try to load config from a separate file (create wiki-config.js with your Supabase credentials)
+// Format: window.WIKI_SUPABASE_URL = '...'; window.WIKI_SUPABASE_KEY = '...';
+if (window.WIKI_SUPABASE_URL) SUPABASE_CONFIG.url = window.WIKI_SUPABASE_URL;
+if (window.WIKI_SUPABASE_KEY) SUPABASE_CONFIG.anonKey = window.WIKI_SUPABASE_KEY;
+
+function applyAdminImages(config) {
+  var changed = false;
+  // Item overrides (image/icon changes from dashboard)
+  if (config.itemOverrides) {
+    for (var id in config.itemOverrides) {
+      var item = ITEM_MAP[id];
+      if (item && config.itemOverrides[id].image) {
+        item.image = config.itemOverrides[id].image;
+        changed = true;
+      }
+      if (item && config.itemOverrides[id].icon) {
+        item.icon = config.itemOverrides[id].icon;
+        changed = true;
+      }
+      if (item && config.itemOverrides[id].name) {
+        item.name = config.itemOverrides[id].name;
+        changed = true;
+      }
+    }
+  }
+  // Custom items (new items added from dashboard)
+  if (config.customItems) {
+    config.customItems.forEach(function(ci) {
+      if (!ITEM_MAP[ci.id]) {
+        var newItem = {
+          id: ci.id, name: ci.name, slot: ci.slot || 'material',
+          rarity: ci.rarity || 'common', icon: ci.icon || '?',
+          image: ci.image || '', desc: ci.description || '',
+          perks: ci.perks || []
+        };
+        ITEMS.push(newItem);
+        ITEM_MAP[ci.id] = newItem;
+        changed = true;
+      } else if (ci.image) {
+        ITEM_MAP[ci.id].image = ci.image;
+        changed = true;
+      }
+    });
+  }
+  return changed;
+}
+
+function loadSupabaseConfig() {
+  if (!SUPABASE_CONFIG.url || !SUPABASE_CONFIG.anonKey) return;
+  var url = SUPABASE_CONFIG.url + '/rest/v1/admin_config?id=eq.singleton&select=config';
+  fetch(url, {
+    headers: {
+      'apikey': SUPABASE_CONFIG.anonKey,
+      'Authorization': 'Bearer ' + SUPABASE_CONFIG.anonKey
+    }
+  }).then(function(r) { return r.json(); })
+    .then(function(rows) {
+      if (rows && rows[0] && rows[0].config) {
+        var didChange = applyAdminImages(rows[0].config);
+        // Re-render current item if images changed
+        if (didChange && currentItemId) renderItem(currentItemId);
+      }
+    }).catch(function() { /* offline or no access */ });
+}
+
 // ── Init ──
 var params = new URLSearchParams(window.location.search);
-var itemId = params.get('id');
-if (itemId) {
-  renderItem(itemId);
+var currentItemId = params.get('id');
+if (currentItemId) {
+  renderItem(currentItemId);
 } else {
   document.getElementById('mainContent').innerHTML = '<div class="item-not-found"><h2>Item Database</h2><p>Use the search bar or select an item from the <a href="index.html">wiki homepage</a>.</p></div>';
 }
+
+// Load admin config images async (will re-render if images found)
+loadSupabaseConfig();
 </script>
 
 </body>

@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Loot &amp; Chests – Grindly Wiki</title>
 <link rel="stylesheet" href="style.css">
+<style>
+.lt-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:18px}
+.lt-tab{padding:7px 16px;border-radius:8px;border:1px solid var(--border-inner);background:transparent;color:var(--text-dim);font-size:13px;font-family:var(--font-mono);cursor:pointer;transition:all .15s}
+.lt-tab:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
+.lt-tab.active{color:var(--gold);border-color:var(--gold);background:rgba(251,191,36,.08)}
+.lt-panel{display:none}.lt-panel.active{display:block}
+</style>
 </head>
 <body>
 
@@ -57,104 +64,119 @@
   <!-- Main Content -->
   <main class="main">
 
-    <!-- Chest Tiers -->
-    <section class="content" id="chest-tiers">
+    <section class="content">
       <h2 class="section-title"><span class="section-icon">&#127873;</span> Loot &amp; Chests</h2>
       <p class="section-desc">Chests drop at the end of productive sessions. Each chest contains gear, crafting materials, gold, and possibly a Seed Zip.</p>
 
-      <h3 class="sub-title">Chest Tiers</h3>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th></th><th>Name</th><th>Rarity</th><th>Base Drop Rate</th><th>Bonus Materials</th><th>Gold Range</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="icon-cell">&#128230;</td>
-              <td>Common Bag</td>
-              <td><span class="rarity common">Common</span></td>
-              <td>70%</td>
-              <td><a href="item.html?id=ore_iron" style="color:var(--gold)">Iron Ore</a> (1-2) + <a href="item.html?id=monster_fang" style="color:var(--gold)">Monster Fang</a> (1-2)</td>
-              <td class="perk">15-30g</td>
-            </tr>
-            <tr>
-              <td class="icon-cell">&#127873;</td>
-              <td>Rare Bag</td>
-              <td><span class="rarity rare">Rare</span></td>
-              <td>22%</td>
-              <td><a href="item.html?id=ore_iron" style="color:var(--gold)">Iron Ore</a> (1-3) + <a href="item.html?id=monster_fang" style="color:var(--gold)">Monster Fang</a> (1-3) + <a href="item.html?id=magic_essence" style="color:var(--gold)">Magic Essence</a> (1-2)</td>
-              <td class="perk">30-75g</td>
-            </tr>
-            <tr>
-              <td class="icon-cell">&#129689;</td>
-              <td>Epic Bag</td>
-              <td><span class="rarity epic">Epic</span></td>
-              <td>7%</td>
-              <td><a href="item.html?id=ore_iron" style="color:var(--gold)">Iron Ore</a> (2-4) + <a href="item.html?id=monster_fang" style="color:var(--gold)">Monster Fang</a> (2-4) + <a href="item.html?id=magic_essence" style="color:var(--gold)">Magic Essence</a> (1-3) + <a href="item.html?id=ancient_scale" style="color:var(--gold)">Ancient Scale</a> (1-2) + <a href="item.html?id=void_crystal" style="color:var(--gold)">Void Crystal</a> (1)</td>
-              <td class="perk">75-150g</td>
-            </tr>
-            <tr>
-              <td class="icon-cell">&#128142;</td>
-              <td>Legendary Bag</td>
-              <td><span class="rarity legendary">Legendary</span></td>
-              <td>1%</td>
-              <td><a href="item.html?id=magic_essence" style="color:var(--gold)">Magic Essence</a> (2-4) + <a href="item.html?id=ancient_scale" style="color:var(--gold)">Ancient Scale</a> (2-3) + <a href="item.html?id=void_crystal" style="color:var(--gold)">Void Crystal</a> (1-2)</td>
-              <td class="perk">150-300g</td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- Tabs -->
+      <div class="lt-tabs">
+        <button class="lt-tab active" onclick="ltSwitch('tiers',this)">Chest Tiers</button>
+        <button class="lt-tab" onclick="ltSwitch('pity',this)">Pity System</button>
+        <button class="lt-tab" onclick="ltSwitch('seeds',this)">Seed Zips</button>
+        <button class="lt-tab" onclick="ltSwitch('mods',this)">Drop Modifiers</button>
       </div>
-    </section>
 
-    <!-- Pity System -->
-    <section class="content" id="pity">
-      <h3 class="sub-title">Pity System</h3>
-      <div class="info-box">
-        <h4>Guaranteed Upgrades</h4>
-        <p>The pity system ensures you receive higher-rarity chests after a streak of lower-tier drops:</p>
-        <ul>
-          <li><strong>15 rolls</strong> without a Rare &rarr; guaranteed <span class="rarity rare">Rare</span> chest</li>
-          <li><strong>40 rolls</strong> without an Epic &rarr; guaranteed <span class="rarity epic">Epic</span> chest</li>
-          <li><strong>80 rolls</strong> without a Legendary &rarr; guaranteed <span class="rarity legendary">Legendary</span> chest</li>
-        </ul>
+      <!-- ═══ Chest Tiers ═══ -->
+      <div id="panel-tiers" class="lt-panel active">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th></th><th>Name</th><th>Rarity</th><th>Base Drop Rate</th><th>Bonus Materials</th><th>Gold Range</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="icon-cell">&#128230;</td>
+                <td>Common Bag</td>
+                <td><span class="rarity common">Common</span></td>
+                <td>70%</td>
+                <td><a href="item.html?id=ore_iron" style="color:var(--gold)">Iron Ore</a> (1-2) + <a href="item.html?id=monster_fang" style="color:var(--gold)">Monster Fang</a> (1-2)</td>
+                <td class="perk">15-30g</td>
+              </tr>
+              <tr>
+                <td class="icon-cell">&#127873;</td>
+                <td>Rare Bag</td>
+                <td><span class="rarity rare">Rare</span></td>
+                <td>22%</td>
+                <td><a href="item.html?id=ore_iron" style="color:var(--gold)">Iron Ore</a> (1-3) + <a href="item.html?id=monster_fang" style="color:var(--gold)">Monster Fang</a> (1-3) + <a href="item.html?id=magic_essence" style="color:var(--gold)">Magic Essence</a> (1-2)</td>
+                <td class="perk">30-75g</td>
+              </tr>
+              <tr>
+                <td class="icon-cell">&#129689;</td>
+                <td>Epic Bag</td>
+                <td><span class="rarity epic">Epic</span></td>
+                <td>7%</td>
+                <td><a href="item.html?id=ore_iron" style="color:var(--gold)">Iron Ore</a> (2-4) + <a href="item.html?id=monster_fang" style="color:var(--gold)">Monster Fang</a> (2-4) + <a href="item.html?id=magic_essence" style="color:var(--gold)">Magic Essence</a> (1-3) + <a href="item.html?id=ancient_scale" style="color:var(--gold)">Ancient Scale</a> (1-2) + <a href="item.html?id=void_crystal" style="color:var(--gold)">Void Crystal</a> (1)</td>
+                <td class="perk">75-150g</td>
+              </tr>
+              <tr>
+                <td class="icon-cell">&#128142;</td>
+                <td>Legendary Bag</td>
+                <td><span class="rarity legendary">Legendary</span></td>
+                <td>1%</td>
+                <td><a href="item.html?id=magic_essence" style="color:var(--gold)">Magic Essence</a> (2-4) + <a href="item.html?id=ancient_scale" style="color:var(--gold)">Ancient Scale</a> (2-3) + <a href="item.html?id=void_crystal" style="color:var(--gold)">Void Crystal</a> (1-2)</td>
+                <td class="perk">150-300g</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </section>
 
-    <!-- Seed Zip Drop Chances -->
-    <section class="content" id="seed-zip-drops">
-      <h3 class="sub-title">Seed Zip Drop Chances</h3>
-      <div class="info-box">
-        <h4>Seed Zip by Chest Tier</h4>
-        <p>Each chest tier has a different probability of including a Seed Zip:</p>
-        <ul>
-          <li><span class="rarity common">Common</span> chest &mdash; <strong>40%</strong> Seed Zip chance</li>
-          <li><span class="rarity rare">Rare</span> chest &mdash; <strong>55%</strong> Seed Zip chance</li>
-          <li><span class="rarity epic">Epic</span> chest &mdash; <strong>70%</strong> Seed Zip chance</li>
-          <li><span class="rarity legendary">Legendary</span> chest &mdash; <strong>85%</strong> Seed Zip chance</li>
-        </ul>
+      <!-- ═══ Pity System ═══ -->
+      <div id="panel-pity" class="lt-panel">
+        <div class="info-box">
+          <h4>Guaranteed Upgrades</h4>
+          <p>The pity system ensures you receive higher-rarity chests after a streak of lower-tier drops:</p>
+          <ul>
+            <li><strong>15 rolls</strong> without a Rare &rarr; guaranteed <span class="rarity rare">Rare</span> chest</li>
+            <li><strong>40 rolls</strong> without an Epic &rarr; guaranteed <span class="rarity epic">Epic</span> chest</li>
+            <li><strong>80 rolls</strong> without a Legendary &rarr; guaranteed <span class="rarity legendary">Legendary</span> chest</li>
+          </ul>
+        </div>
       </div>
-    </section>
 
-    <!-- Drop Rate Modifiers -->
-    <section class="content" id="drop-modifiers">
-      <h3 class="sub-title">Drop Rate Modifiers</h3>
-      <div class="info-box">
-        <h4>Activity-Based Boosts</h4>
-        <p>Certain activities modify your chest drop rates:</p>
-        <ul>
-          <li><strong>daily_activity:</strong> Active daily usage provides a boost to chest drop rates</li>
-          <li><strong>goal_complete:</strong> Completing daily goals gives a slight boost</li>
-          <li><strong>skill_grind (coding):</strong> Extended coding sessions provide a slight boost</li>
-        </ul>
+      <!-- ═══ Seed Zips ═══ -->
+      <div id="panel-seeds" class="lt-panel">
+        <div class="info-box">
+          <h4>Seed Zip by Chest Tier</h4>
+          <p>Each chest tier has a different probability of including a Seed Zip:</p>
+          <ul>
+            <li><span class="rarity common">Common</span> chest &mdash; <strong>40%</strong> Seed Zip chance</li>
+            <li><span class="rarity rare">Rare</span> chest &mdash; <strong>55%</strong> Seed Zip chance</li>
+            <li><span class="rarity epic">Epic</span> chest &mdash; <strong>70%</strong> Seed Zip chance</li>
+            <li><span class="rarity legendary">Legendary</span> chest &mdash; <strong>85%</strong> Seed Zip chance</li>
+          </ul>
+        </div>
       </div>
-    </section>
 
+      <!-- ═══ Drop Modifiers ═══ -->
+      <div id="panel-mods" class="lt-panel">
+        <div class="info-box">
+          <h4>Activity-Based Boosts</h4>
+          <p>Certain activities modify your chest drop rates:</p>
+          <ul>
+            <li><strong>daily_activity:</strong> Active daily usage provides a boost to chest drop rates</li>
+            <li><strong>goal_complete:</strong> Completing daily goals gives a slight boost</li>
+            <li><strong>skill_grind (coding):</strong> Extended coding sessions provide a slight boost</li>
+          </ul>
+        </div>
+      </div>
+
+    </section>
   </main>
 </div>
 
-<!-- Collapsible nav JS -->
 <script>
 (function() {
+  // Tab switching
+  window.ltSwitch = function(id, btn) {
+    document.querySelectorAll('.lt-tab').forEach(function(t){t.classList.remove('active')});
+    document.querySelectorAll('.lt-panel').forEach(function(p){p.classList.remove('active')});
+    if(btn) btn.classList.add('active');
+    var panel = document.getElementById('panel-'+id);
+    if(panel) panel.classList.add('active');
+  };
+
+  // Collapsible nav
   document.querySelectorAll('.nav-group-title').forEach(function(title) {
     title.addEventListener('click', function() {
       this.parentElement.classList.toggle('collapsed');
