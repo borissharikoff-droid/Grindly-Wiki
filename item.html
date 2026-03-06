@@ -372,7 +372,7 @@ canvas.price-chart {
       <ul class="nav-links">
         <li><a href="index.html" class="nav-link"><span class="nav-dot gold"></span> Wiki Home</a></li>
         <li><a href="equipment.html" class="nav-link"><span class="nav-dot gold"></span> Equipment</a></li>
-        <li><a href="loot.html" class="nav-link"><span class="nav-dot orange"></span> Loot &amp; Chests</a></li>
+        <li><a href="loot.html" class="nav-link"><span class="nav-dot orange"></span> Loot Bags</a></li>
         <li><a href="materials.html" class="nav-link"><span class="nav-dot purple"></span> Materials</a></li>
         <li><a href="arena.html" class="nav-link"><span class="nav-dot red"></span> Arena &amp; Bosses</a></li>
         <li><a href="crafting.html" class="nav-link"><span class="nav-dot cyan"></span> Crafting</a></li>
@@ -468,31 +468,31 @@ var ITEMS = [
   { id:'wooden_plate', name:'Wooden Plate', slot:'body', rarity:'common', icon:'\uD83E\uDEB5', desc:'Wooden planks strapped together as armor.', perks:[{type:'hp_boost',value:15,desc:'+15 HP'}] },
   { id:'wooden_sword', name:'Wooden Sword', slot:'weapon', rarity:'common', icon:'\uD83D\uDDE1\uFE0F', desc:'A practice sword. Splinters on contact.', perks:[{type:'atk_boost',value:3,desc:'+3 ATK'}] },
   { id:'wooden_legs', name:'Wooden Legs', slot:'legs', rarity:'common', icon:'\uD83E\uDDBF', desc:'Wooden shin guards. Better than bare legs.', perks:[{type:'atk_boost',value:1,desc:'+1 ATK'}] },
-  { id:'wooden_ring', name:'Wooden Ring', slot:'ring', rarity:'common', icon:'\uD83D\uDCFF', desc:'A whittled ring with faint natural energy.', perks:[{type:'hp_regen_boost',value:0.5,desc:'+0.5 HP Regen'}] },
+  { id:'wooden_ring', name:'Wooden Ring', slot:'ring', rarity:'common', icon:'\uD83D\uDCFF', desc:'A whittled ring with faint natural energy.', perks:[{type:'hp_regen_boost',value:1,desc:'+1 HP Regen'}] },
   // Copper Set (Rare)
-  { id:'copper_helm', name:'Copper Helm', slot:'head', rarity:'rare', icon:'\u26D1\uFE0F', desc:'A polished copper helm. Deflects glancing blows.', perks:[{type:'atk_boost',value:4,desc:'+4 ATK'}] },
+  { id:'copper_helm', name:'Copper Helm', slot:'head', rarity:'rare', icon:'\u26D1\uFE0F', desc:'A polished copper helm. Deflects glancing blows.', perks:[{type:'atk_boost',value:4,desc:'+4 ATK'},{type:'hp_boost',value:10,desc:'+10 HP'}] },
   { id:'copper_plate', name:'Copper Plate', slot:'body', rarity:'rare', icon:'\uD83D\uDEE1\uFE0F', desc:'Hammered copper chestplate. Solid protection.', perks:[{type:'hp_boost',value:35,desc:'+35 HP'}] },
   { id:'copper_sword', name:'Copper Sword', slot:'weapon', rarity:'rare', icon:'\u2694\uFE0F', desc:'A copper blade with a keen edge.', perks:[{type:'atk_boost',value:6,desc:'+6 ATK'}] },
-  { id:'copper_legs', name:'Copper Legs', slot:'legs', rarity:'rare', icon:'\uD83E\uDDBF', desc:'Copper greaves forged for agility.', perks:[{type:'atk_boost',value:2,desc:'+2 ATK'}] },
-  { id:'copper_ring', name:'Copper Ring', slot:'ring', rarity:'rare', icon:'\uD83D\uDC8D', desc:'A copper band humming with warmth.', perks:[{type:'hp_regen_boost',value:1.5,desc:'+1.5 HP Regen'}] },
+  { id:'copper_legs', name:'Copper Legs', slot:'legs', rarity:'rare', icon:'\uD83E\uDDBF', desc:'Copper greaves forged for agility.', perks:[{type:'atk_boost',value:3,desc:'+3 ATK'},{type:'hp_boost',value:10,desc:'+10 HP'}] },
+  { id:'copper_ring', name:'Copper Ring', slot:'ring', rarity:'rare', icon:'\uD83D\uDC8D', desc:'A copper band humming with warmth.', perks:[{type:'hp_regen_boost',value:2,desc:'+2 HP Regen'}] },
   // Shadow Set (Epic)
-  { id:'shadow_helm', name:'Shadow Helm', slot:'head', rarity:'epic', icon:'\uD83E\uDE96', desc:'A helm wreathed in living shadow.', perks:[{type:'atk_boost',value:7,desc:'+7 ATK'},{type:'hp_boost',value:15,desc:'+15 HP'}] },
-  { id:'shadow_plate', name:'Shadow Plate', slot:'body', rarity:'epic', icon:'\uD83D\uDEE1\uFE0F', desc:'Dark armor that absorbs incoming strikes.', perks:[{type:'hp_boost',value:50,desc:'+50 HP'},{type:'atk_boost',value:3,desc:'+3 ATK'}] },
+  { id:'shadow_helm', name:'Shadow Helm', slot:'head', rarity:'epic', icon:'\uD83E\uDE96', desc:'A helm wreathed in living shadow.', perks:[{type:'atk_boost',value:7,desc:'+7 ATK'},{type:'hp_boost',value:20,desc:'+20 HP'}] },
+  { id:'shadow_plate', name:'Shadow Plate', slot:'body', rarity:'epic', icon:'\uD83D\uDEE1\uFE0F', desc:'Dark armor that absorbs incoming strikes.', perks:[{type:'hp_boost',value:60,desc:'+60 HP'},{type:'atk_boost',value:3,desc:'+3 ATK'}] },
   { id:'shadow_sword', name:'Shadow Sword', slot:'weapon', rarity:'epic', icon:'\u2694\uFE0F', desc:'A blade forged in darkness. Cuts through armor.', perks:[{type:'atk_boost',value:10,desc:'+10 ATK'},{type:'hp_regen_boost',value:2,desc:'+2 HP Regen'}] },
-  { id:'shadow_legs', name:'Shadow Legs', slot:'legs', rarity:'epic', icon:'\uD83E\uDDBF', desc:'Greaves that let you move like a phantom.', perks:[{type:'atk_boost',value:5,desc:'+5 ATK'},{type:'hp_boost',value:20,desc:'+20 HP'}] },
-  { id:'shadow_ring', name:'Shadow Ring', slot:'ring', rarity:'epic', icon:'\uD83D\uDD17', desc:'A ring pulsing with dark energy.', perks:[{type:'atk_boost',value:5,desc:'+5 ATK'},{type:'hp_regen_boost',value:2,desc:'+2 HP Regen'}] },
+  { id:'shadow_legs', name:'Shadow Legs', slot:'legs', rarity:'epic', icon:'\uD83E\uDDBF', desc:'Greaves that let you move like a phantom.', perks:[{type:'atk_boost',value:5,desc:'+5 ATK'},{type:'hp_boost',value:25,desc:'+25 HP'}] },
+  { id:'shadow_ring', name:'Shadow Ring', slot:'ring', rarity:'epic', icon:'\uD83D\uDD17', desc:'A ring pulsing with dark energy.', perks:[{type:'atk_boost',value:4,desc:'+4 ATK'},{type:'hp_regen_boost',value:3,desc:'+3 HP Regen'}] },
   // Golden Set (Legendary)
-  { id:'golden_helm', name:'Golden Helm', slot:'head', rarity:'legendary', icon:'\uD83D\uDC51', desc:'A crown-helm of pure gold. Radiates power.', perks:[{type:'atk_boost',value:8,desc:'+8 ATK'},{type:'hp_boost',value:30,desc:'+30 HP'},{type:'xp_global_boost',value:0.05,desc:'+5% Global XP'}] },
+  { id:'golden_helm', name:'Golden Helm', slot:'head', rarity:'legendary', icon:'\uD83D\uDC51', desc:'A crown-helm of pure gold. Radiates power.', perks:[{type:'atk_boost',value:10,desc:'+10 ATK'},{type:'hp_boost',value:30,desc:'+30 HP'},{type:'xp_global_boost',value:0.05,desc:'+5% Global XP'}] },
   { id:'golden_plate', name:'Golden Plate', slot:'body', rarity:'legendary', icon:'\uD83D\uDEE1\uFE0F', desc:'Legendary golden armor. Nearly impenetrable.', perks:[{type:'hp_boost',value:80,desc:'+80 HP'},{type:'atk_boost',value:5,desc:'+5 ATK'},{type:'streak_shield',value:1,desc:'Streak Shield'}] },
-  { id:'golden_sword', name:'Golden Sword', slot:'weapon', rarity:'legendary', icon:'\u2694\uFE0F', desc:'A blade of gleaming gold. Strikes true.', perks:[{type:'atk_boost',value:12,desc:'+12 ATK'},{type:'hp_regen_boost',value:3,desc:'+3 HP Regen'}] },
-  { id:'golden_legs', name:'Golden Legs', slot:'legs', rarity:'legendary', icon:'\uD83E\uDDBF', desc:'Golden greaves that bolster the wearer.', perks:[{type:'atk_boost',value:7,desc:'+7 ATK'},{type:'hp_boost',value:40,desc:'+40 HP'}] },
-  { id:'golden_ring', name:'Golden Ring', slot:'ring', rarity:'legendary', icon:'\uD83D\uDC8D', desc:'A ring of ancient kings. Sharpens focus.', perks:[{type:'atk_boost',value:6,desc:'+6 ATK'},{type:'focus_boost',value:0.15,desc:'+15% Focus'}] },
+  { id:'golden_sword', name:'Golden Sword', slot:'weapon', rarity:'legendary', icon:'\u2694\uFE0F', desc:'A blade of gleaming gold. Strikes true.', perks:[{type:'atk_boost',value:15,desc:'+15 ATK'},{type:'hp_regen_boost',value:3,desc:'+3 HP Regen'}] },
+  { id:'golden_legs', name:'Golden Legs', slot:'legs', rarity:'legendary', icon:'\uD83E\uDDBF', desc:'Golden greaves that bolster the wearer.', perks:[{type:'atk_boost',value:8,desc:'+8 ATK'},{type:'hp_boost',value:40,desc:'+40 HP'}] },
+  { id:'golden_ring', name:'Golden Ring', slot:'ring', rarity:'legendary', icon:'\uD83D\uDC8D', desc:'A ring of ancient kings. Sharpens focus.', perks:[{type:'atk_boost',value:6,desc:'+6 ATK'},{type:'hp_regen_boost',value:4,desc:'+4 HP Regen'},{type:'focus_boost',value:0.10,desc:'+10% Focus'}] },
   // Void Set (Mythic)
-  { id:'void_helm', name:'Void Helm', slot:'head', rarity:'mythic', icon:'\uD83C\uDF00', desc:'A helm torn from the void itself.', perks:[{type:'atk_boost',value:12,desc:'+12 ATK'},{type:'hp_boost',value:50,desc:'+50 HP'},{type:'xp_global_boost',value:0.08,desc:'+8% Global XP'}] },
+  { id:'void_helm', name:'Void Helm', slot:'head', rarity:'mythic', icon:'\uD83C\uDF00', desc:'A helm torn from the void itself.', perks:[{type:'atk_boost',value:14,desc:'+14 ATK'},{type:'hp_boost',value:50,desc:'+50 HP'},{type:'xp_global_boost',value:0.08,desc:'+8% Global XP'}] },
   { id:'void_plate', name:'Void Plate', slot:'body', rarity:'mythic', icon:'\uD83D\uDC7B', desc:'Armor woven from void threads. Defies reality.', perks:[{type:'hp_boost',value:120,desc:'+120 HP'},{type:'atk_boost',value:8,desc:'+8 ATK'},{type:'streak_shield',value:1,desc:'Streak Shield'}] },
-  { id:'void_sword', name:'Void Sword', slot:'weapon', rarity:'mythic', icon:'\u2694\uFE0F', desc:'A blade of pure void energy. Unmatchable.', perks:[{type:'atk_boost',value:15,desc:'+15 ATK'},{type:'hp_regen_boost',value:5,desc:'+5 HP Regen'}] },
-  { id:'void_legs', name:'Void Legs', slot:'legs', rarity:'mythic', icon:'\uD83E\uDDBF', desc:'Greaves that phase through attacks.', perks:[{type:'atk_boost',value:10,desc:'+10 ATK'},{type:'hp_boost',value:60,desc:'+60 HP'}] },
-  { id:'void_ring', name:'Void Ring', slot:'ring', rarity:'mythic', icon:'\uD83C\uDF00', desc:'A ring forged from pure void energy.', perks:[{type:'atk_boost',value:10,desc:'+10 ATK'},{type:'hp_regen_boost',value:4,desc:'+4 HP Regen'},{type:'xp_global_boost',value:0.08,desc:'+8% Global XP'}] },
+  { id:'void_sword', name:'Void Sword', slot:'weapon', rarity:'mythic', icon:'\u2694\uFE0F', desc:'A blade of pure void energy. Unmatchable.', perks:[{type:'atk_boost',value:18,desc:'+18 ATK'},{type:'hp_regen_boost',value:5,desc:'+5 HP Regen'}] },
+  { id:'void_legs', name:'Void Legs', slot:'legs', rarity:'mythic', icon:'\uD83E\uDDBF', desc:'Greaves that phase through attacks.', perks:[{type:'atk_boost',value:12,desc:'+12 ATK'},{type:'hp_boost',value:60,desc:'+60 HP'}] },
+  { id:'void_ring', name:'Void Ring', slot:'ring', rarity:'mythic', icon:'\uD83C\uDF00', desc:'A ring forged from pure void energy.', perks:[{type:'atk_boost',value:10,desc:'+10 ATK'},{type:'hp_regen_boost',value:5,desc:'+5 HP Regen'},{type:'xp_global_boost',value:0.08,desc:'+8% Global XP'}] },
   // Crafted gear
   { id:'craft_iron_helm', name:'Iron Helm', slot:'head', rarity:'common', icon:'\u26D1\uFE0F', desc:'A sturdy helm forged from iron bars.', perks:[{type:'atk_boost',value:2,desc:'+2 ATK'}] },
   { id:'craft_fang_dagger', name:'Fang Dagger', slot:'weapon', rarity:'common', icon:'\uD83D\uDDE1\uFE0F', desc:'A blade carved from refined fang shards.', perks:[{type:'atk_boost',value:3,desc:'+3 ATK'}] },

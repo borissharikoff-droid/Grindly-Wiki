@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Loot &amp; Chests – Grindly Wiki</title>
+<title>Loot Bags &ndash; Grindly Wiki</title>
 <link rel="stylesheet" href="style.css">
 <style>
 .lt-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:18px}
@@ -11,6 +11,36 @@
 .lt-tab:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
 .lt-tab.active{color:var(--gold);border-color:var(--gold);background:rgba(251,191,36,.08)}
 .lt-panel{display:none}.lt-panel.active{display:block}
+
+/* ══════ Bag Cards ══════ */
+.bag-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:14px}
+.bag-card{background:var(--bg-card);border:1px solid var(--border-inner);border-radius:10px;padding:18px;transition:border-color .2s,box-shadow .2s}
+.bag-card:hover{border-color:var(--bag-color,var(--gold-dim));box-shadow:0 0 16px color-mix(in srgb, var(--bag-color,var(--gold)) 18%, transparent)}
+.bag-card-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.bag-card-icon{width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:28px;border-radius:8px;border:2px solid var(--bag-color,var(--border-inner));background:color-mix(in srgb, var(--bag-color,#888) 8%, var(--bg-card));flex-shrink:0}
+.bag-card-icon img{width:100%;height:100%;object-fit:contain}
+.bag-card-title{font-family:var(--font-title);font-size:16px;color:var(--bag-color,var(--text-bright))}
+.bag-card-sub{font-family:var(--font-mono);font-size:11px;color:var(--text-dim);margin-top:2px}
+.bag-card-stats{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px}
+.bag-stat{display:flex;justify-content:space-between;padding:4px 8px;background:rgba(255,255,255,.02);border-radius:4px}
+.bag-stat-label{color:var(--text-dim)}
+.bag-stat-val{color:var(--text-bright);font-family:var(--font-mono);font-weight:600}
+
+/* ══════ Loot Pool Tables ══════ */
+.pool-section{margin-bottom:24px}
+.pool-title{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.pool-title-icon{width:28px;height:28px;font-size:18px;display:flex;align-items:center;justify-content:center;border-radius:6px;border:1px solid var(--bag-color,var(--border-inner));background:color-mix(in srgb, var(--bag-color,#888) 6%, var(--bg-card))}
+.pool-title h4{font-family:var(--font-title);font-size:14px;color:var(--bag-color,var(--text-bright));margin:0}
+.pool-title-rate{font-family:var(--font-mono);font-size:11px;color:var(--text-dim);margin-left:auto}
+.pct-bar{display:inline-block;height:4px;border-radius:2px;vertical-align:middle;margin-right:6px}
+
+/* ══════ Modifier Breakdown ══════ */
+.mod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:14px}
+.mod-card{background:var(--bg-card);border:1px solid var(--border-inner);border-radius:8px;padding:14px}
+.mod-card h5{font-family:var(--font-title);font-size:13px;color:var(--text-bright);margin:0 0 8px}
+.mod-card-row{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;border-bottom:1px solid var(--border-inner)}
+.mod-card-row:last-child{border:none}
+.mod-up{color:#57F287}.mod-down{color:#ED4245}
 </style>
 </head>
 <body>
@@ -51,7 +81,7 @@
       <ul class="nav-links">
         <li><a href="index.html" class="nav-link"><span class="nav-dot gold"></span> Wiki Home</a></li>
         <li><a href="equipment.html" class="nav-link"><span class="nav-dot gold"></span> Equipment</a></li>
-        <li><a href="loot.html" class="nav-link active"><span class="nav-dot orange"></span> Loot &amp; Chests</a></li>
+        <li><a href="loot.html" class="nav-link active"><span class="nav-dot orange"></span> Loot Bags</a></li>
         <li><a href="materials.html" class="nav-link"><span class="nav-dot purple"></span> Materials</a></li>
         <li><a href="arena.html" class="nav-link"><span class="nav-dot red"></span> Arena &amp; Bosses</a></li>
         <li><a href="crafting.html" class="nav-link"><span class="nav-dot cyan"></span> Crafting</a></li>
@@ -65,59 +95,250 @@
   <main class="main">
 
     <section class="content">
-      <h2 class="section-title"><span class="section-icon">&#127873;</span> Loot &amp; Chests</h2>
-      <p class="section-desc">Chests drop at the end of productive sessions. Each chest contains gear, crafting materials, gold, and possibly a Seed Zip.</p>
+      <h2 class="section-title"><span class="section-icon">&#127873;</span> Loot Bags</h2>
+      <p class="section-desc">Bags drop at the end of productive sessions. Each bag contains one piece of gear, bonus crafting materials, gold, and possibly a Seed Zip.</p>
 
       <!-- Tabs -->
       <div class="lt-tabs">
-        <button class="lt-tab active" onclick="ltSwitch('tiers',this)">Chest Tiers</button>
+        <button class="lt-tab active" onclick="ltSwitch('overview',this)">All Bags</button>
+        <button class="lt-tab" onclick="ltSwitch('contents',this)">Bag Contents</button>
+        <button class="lt-tab" onclick="ltSwitch('materials',this)">Bonus Materials</button>
         <button class="lt-tab" onclick="ltSwitch('pity',this)">Pity System</button>
-        <button class="lt-tab" onclick="ltSwitch('seeds',this)">Seed Zips</button>
-        <button class="lt-tab" onclick="ltSwitch('mods',this)">Drop Modifiers</button>
+        <button class="lt-tab" onclick="ltSwitch('rates',this)">Drop Rates</button>
       </div>
 
-      <!-- ═══ Chest Tiers ═══ -->
-      <div id="panel-tiers" class="lt-panel active">
-        <div class="table-wrap">
+      <!-- ═══ All Bags Overview ═══ -->
+      <div id="panel-overview" class="lt-panel active">
+        <div class="bag-cards">
+
+          <div class="bag-card" style="--bag-color:#9CA3AF">
+            <div class="bag-card-header">
+              <div class="bag-card-icon" data-chest-id="common_chest">&#128230;</div>
+              <div>
+                <div class="bag-card-title"><a href="item.html?id=common_chest" style="color:inherit;text-decoration:none">Common Bag</a></div>
+                <div class="bag-card-sub"><span class="rarity common">Common</span> &middot; 70% base drop rate</div>
+              </div>
+            </div>
+            <div class="bag-card-stats">
+              <div class="bag-stat"><span class="bag-stat-label">Gold</span><span class="bag-stat-val">15&ndash;30g</span></div>
+              <div class="bag-stat"><span class="bag-stat-label">Bonus Rolls</span><span class="bag-stat-val">1</span></div>
+              <div class="bag-stat"><span class="bag-stat-label">Gear Pool</span><span class="bag-stat-val">Wooden Set</span></div>
+              <div class="bag-stat"><span class="bag-stat-label">Seed Zip</span><span class="bag-stat-val">40%</span></div>
+            </div>
+          </div>
+
+          <div class="bag-card" style="--bag-color:#38BDF8">
+            <div class="bag-card-header">
+              <div class="bag-card-icon" data-chest-id="rare_chest">&#127873;</div>
+              <div>
+                <div class="bag-card-title"><a href="item.html?id=rare_chest" style="color:inherit;text-decoration:none">Rare Bag</a></div>
+                <div class="bag-card-sub"><span class="rarity rare">Rare</span> &middot; 22% base drop rate</div>
+              </div>
+            </div>
+            <div class="bag-card-stats">
+              <div class="bag-stat"><span class="bag-stat-label">Gold</span><span class="bag-stat-val">30&ndash;75g</span></div>
+              <div class="bag-stat"><span class="bag-stat-label">Bonus Rolls</span><span class="bag-stat-val">2</span></div>
+              <div class="bag-stat"><span class="bag-stat-label">Gear Pool</span><span class="bag-stat-val">Wooden + Copper</span></div>
+              <div class="bag-stat"><span class="bag-stat-label">Seed Zip</span><span class="bag-stat-val">55%</span></div>
+            </div>
+          </div>
+
+          <div class="bag-card" style="--bag-color:#C084FC">
+            <div class="bag-card-header">
+              <div class="bag-card-icon" data-chest-id="epic_chest">&#129689;</div>
+              <div>
+                <div class="bag-card-title"><a href="item.html?id=epic_chest" style="color:inherit;text-decoration:none">Epic Bag</a></div>
+                <div class="bag-card-sub"><span class="rarity epic">Epic</span> &middot; 7% base drop rate</div>
+              </div>
+            </div>
+            <div class="bag-card-stats">
+              <div class="bag-stat"><span class="bag-stat-label">Gold</span><span class="bag-stat-val">75&ndash;150g</span></div>
+              <div class="bag-stat"><span class="bag-stat-label">Bonus Rolls</span><span class="bag-stat-val">2</span></div>
+              <div class="bag-stat"><span class="bag-stat-label">Gear Pool</span><span class="bag-stat-val">Copper + Shadow + Potions</span></div>
+              <div class="bag-stat"><span class="bag-stat-label">Seed Zip</span><span class="bag-stat-val">70%</span></div>
+            </div>
+          </div>
+
+          <div class="bag-card" style="--bag-color:#FACC15">
+            <div class="bag-card-header">
+              <div class="bag-card-icon" data-chest-id="legendary_chest">&#128142;</div>
+              <div>
+                <div class="bag-card-title"><a href="item.html?id=legendary_chest" style="color:inherit;text-decoration:none">Legendary Bag</a></div>
+                <div class="bag-card-sub"><span class="rarity legendary">Legendary</span> &middot; 1% base drop rate</div>
+              </div>
+            </div>
+            <div class="bag-card-stats">
+              <div class="bag-stat"><span class="bag-stat-label">Gold</span><span class="bag-stat-val">150&ndash;300g</span></div>
+              <div class="bag-stat"><span class="bag-stat-label">Bonus Rolls</span><span class="bag-stat-val">3</span></div>
+              <div class="bag-stat"><span class="bag-stat-label">Gear Pool</span><span class="bag-stat-val">Shadow + Golden + Void + Potions</span></div>
+              <div class="bag-stat"><span class="bag-stat-label">Seed Zip</span><span class="bag-stat-val">85%</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ═══ Bag Contents ═══ -->
+      <div id="panel-contents" class="lt-panel">
+
+        <!-- Common Bag -->
+        <div class="pool-section" style="--bag-color:#9CA3AF">
+          <div class="pool-title">
+            <div class="pool-title-icon" data-chest-id="common_chest">&#128230;</div>
+            <h4>Common Bag</h4>
+            <span class="pool-title-rate">5 items &middot; equal weight</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Item</th><th>Rarity</th><th>Slot</th><th>Perk</th><th>Drop %</th></tr></thead>
+              <tbody>
+                <tr><td><a href="item.html?id=wooden_helm" style="color:var(--gold)">Wooden Helm</a></td><td><span class="rarity common">Common</span></td><td>Head</td><td class="perk">+2 ATK</td><td>20.0%</td></tr>
+                <tr><td><a href="item.html?id=wooden_plate" style="color:var(--gold)">Wooden Plate</a></td><td><span class="rarity common">Common</span></td><td>Body</td><td class="perk">+15 HP</td><td>20.0%</td></tr>
+                <tr><td><a href="item.html?id=wooden_sword" style="color:var(--gold)">Wooden Sword</a></td><td><span class="rarity common">Common</span></td><td>Weapon</td><td class="perk">+3 ATK</td><td>20.0%</td></tr>
+                <tr><td><a href="item.html?id=wooden_legs" style="color:var(--gold)">Wooden Legs</a></td><td><span class="rarity common">Common</span></td><td>Legs</td><td class="perk">+1 ATK</td><td>20.0%</td></tr>
+                <tr><td><a href="item.html?id=wooden_ring" style="color:var(--gold)">Wooden Ring</a></td><td><span class="rarity common">Common</span></td><td>Ring</td><td class="perk">+1 Regen</td><td>20.0%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Rare Bag -->
+        <div class="pool-section" style="--bag-color:#38BDF8">
+          <div class="pool-title">
+            <div class="pool-title-icon" data-chest-id="rare_chest">&#127873;</div>
+            <h4>Rare Bag</h4>
+            <span class="pool-title-rate">10 items &middot; Copper favoured</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Item</th><th>Rarity</th><th>Slot</th><th>Perk</th><th>Drop %</th></tr></thead>
+              <tbody>
+                <tr><td><a href="item.html?id=copper_helm" style="color:var(--gold)">Copper Helm</a></td><td><span class="rarity rare">Rare</span></td><td>Head</td><td class="perk">+4 ATK, +10 HP</td><td>12.0%</td></tr>
+                <tr><td><a href="item.html?id=copper_plate" style="color:var(--gold)">Copper Plate</a></td><td><span class="rarity rare">Rare</span></td><td>Body</td><td class="perk">+35 HP</td><td>12.0%</td></tr>
+                <tr><td><a href="item.html?id=copper_sword" style="color:var(--gold)">Copper Sword</a></td><td><span class="rarity rare">Rare</span></td><td>Weapon</td><td class="perk">+6 ATK</td><td>12.0%</td></tr>
+                <tr><td><a href="item.html?id=copper_legs" style="color:var(--gold)">Copper Legs</a></td><td><span class="rarity rare">Rare</span></td><td>Legs</td><td class="perk">+3 ATK, +10 HP</td><td>12.0%</td></tr>
+                <tr><td><a href="item.html?id=copper_ring" style="color:var(--gold)">Copper Ring</a></td><td><span class="rarity rare">Rare</span></td><td>Ring</td><td class="perk">+2 Regen</td><td>12.0%</td></tr>
+                <tr style="opacity:.7"><td><a href="item.html?id=wooden_helm" style="color:var(--gold)">Wooden Helm</a></td><td><span class="rarity common">Common</span></td><td>Head</td><td class="perk">+2 ATK</td><td>8.0%</td></tr>
+                <tr style="opacity:.7"><td><a href="item.html?id=wooden_plate" style="color:var(--gold)">Wooden Plate</a></td><td><span class="rarity common">Common</span></td><td>Body</td><td class="perk">+15 HP</td><td>8.0%</td></tr>
+                <tr style="opacity:.7"><td><a href="item.html?id=wooden_sword" style="color:var(--gold)">Wooden Sword</a></td><td><span class="rarity common">Common</span></td><td>Weapon</td><td class="perk">+3 ATK</td><td>8.0%</td></tr>
+                <tr style="opacity:.7"><td><a href="item.html?id=wooden_legs" style="color:var(--gold)">Wooden Legs</a></td><td><span class="rarity common">Common</span></td><td>Legs</td><td class="perk">+1 ATK</td><td>8.0%</td></tr>
+                <tr style="opacity:.7"><td><a href="item.html?id=wooden_ring" style="color:var(--gold)">Wooden Ring</a></td><td><span class="rarity common">Common</span></td><td>Ring</td><td class="perk">+1 Regen</td><td>8.0%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Epic Bag -->
+        <div class="pool-section" style="--bag-color:#C084FC">
+          <div class="pool-title">
+            <div class="pool-title-icon" data-chest-id="epic_chest">&#129689;</div>
+            <h4>Epic Bag</h4>
+            <span class="pool-title-rate">13 items &middot; Shadow favoured + Potions</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Item</th><th>Rarity</th><th>Slot</th><th>Perk</th><th>Drop %</th></tr></thead>
+              <tbody>
+                <tr><td><a href="item.html?id=shadow_helm" style="color:var(--gold)">Shadow Helm</a></td><td><span class="rarity epic">Epic</span></td><td>Head</td><td class="perk">+7 ATK, +20 HP</td><td>10.7%</td></tr>
+                <tr><td><a href="item.html?id=shadow_plate" style="color:var(--gold)">Shadow Plate</a></td><td><span class="rarity epic">Epic</span></td><td>Body</td><td class="perk">+60 HP, +3 ATK</td><td>10.7%</td></tr>
+                <tr><td><a href="item.html?id=shadow_sword" style="color:var(--gold)">Shadow Sword</a></td><td><span class="rarity epic">Epic</span></td><td>Weapon</td><td class="perk">+10 ATK, +2 Regen</td><td>10.7%</td></tr>
+                <tr><td><a href="item.html?id=shadow_legs" style="color:var(--gold)">Shadow Legs</a></td><td><span class="rarity epic">Epic</span></td><td>Legs</td><td class="perk">+5 ATK, +25 HP</td><td>10.7%</td></tr>
+                <tr><td><a href="item.html?id=shadow_ring" style="color:var(--gold)">Shadow Ring</a></td><td><span class="rarity epic">Epic</span></td><td>Ring</td><td class="perk">+4 ATK, +3 Regen</td><td>10.7%</td></tr>
+                <tr style="opacity:.7"><td><a href="item.html?id=copper_helm" style="color:var(--gold)">Copper Helm</a></td><td><span class="rarity rare">Rare</span></td><td>Head</td><td class="perk">+4 ATK, +10 HP</td><td>7.1%</td></tr>
+                <tr style="opacity:.7"><td><a href="item.html?id=copper_plate" style="color:var(--gold)">Copper Plate</a></td><td><span class="rarity rare">Rare</span></td><td>Body</td><td class="perk">+35 HP</td><td>7.1%</td></tr>
+                <tr style="opacity:.7"><td><a href="item.html?id=copper_sword" style="color:var(--gold)">Copper Sword</a></td><td><span class="rarity rare">Rare</span></td><td>Weapon</td><td class="perk">+6 ATK</td><td>7.1%</td></tr>
+                <tr style="opacity:.7"><td><a href="item.html?id=copper_legs" style="color:var(--gold)">Copper Legs</a></td><td><span class="rarity rare">Rare</span></td><td>Legs</td><td class="perk">+3 ATK, +10 HP</td><td>7.1%</td></tr>
+                <tr style="opacity:.7"><td><a href="item.html?id=copper_ring" style="color:var(--gold)">Copper Ring</a></td><td><span class="rarity rare">Rare</span></td><td>Ring</td><td class="perk">+2 Regen</td><td>7.1%</td></tr>
+                <tr><td><a href="item.html?id=atk_potion" style="color:var(--gold)">Attack Potion</a></td><td><span class="rarity mythic">Mythic</span></td><td>Consumable</td><td class="perk">+1 permanent ATK</td><td>3.6%</td></tr>
+                <tr><td><a href="item.html?id=hp_potion" style="color:var(--gold)">Vitality Potion</a></td><td><span class="rarity mythic">Mythic</span></td><td>Consumable</td><td class="perk">+1 permanent HP</td><td>3.6%</td></tr>
+                <tr><td><a href="item.html?id=regen_potion" style="color:var(--gold)">Regen Potion</a></td><td><span class="rarity mythic">Mythic</span></td><td>Consumable</td><td class="perk">+1 permanent Regen</td><td>3.6%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Legendary Bag -->
+        <div class="pool-section" style="--bag-color:#FACC15">
+          <div class="pool-title">
+            <div class="pool-title-icon" data-chest-id="legendary_chest">&#128142;</div>
+            <h4>Legendary Bag</h4>
+            <span class="pool-title-rate">18 items &middot; Golden favoured + Void + Potions</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Item</th><th>Rarity</th><th>Slot</th><th>Perk</th><th>Drop %</th></tr></thead>
+              <tbody>
+                <tr><td><a href="item.html?id=golden_helm" style="color:var(--gold)">Golden Helm</a></td><td><span class="rarity legendary">Legendary</span></td><td>Head</td><td class="perk">+10 ATK, +30 HP, +5% XP</td><td>8.3%</td></tr>
+                <tr><td><a href="item.html?id=golden_plate" style="color:var(--gold)">Golden Plate</a></td><td><span class="rarity legendary">Legendary</span></td><td>Body</td><td class="perk">+80 HP, +5 ATK, Shield</td><td>8.3%</td></tr>
+                <tr><td><a href="item.html?id=golden_sword" style="color:var(--gold)">Golden Sword</a></td><td><span class="rarity legendary">Legendary</span></td><td>Weapon</td><td class="perk">+15 ATK, +3 Regen</td><td>8.3%</td></tr>
+                <tr><td><a href="item.html?id=golden_legs" style="color:var(--gold)">Golden Legs</a></td><td><span class="rarity legendary">Legendary</span></td><td>Legs</td><td class="perk">+8 ATK, +40 HP</td><td>8.3%</td></tr>
+                <tr><td><a href="item.html?id=golden_ring" style="color:var(--gold)">Golden Ring</a></td><td><span class="rarity legendary">Legendary</span></td><td>Ring</td><td class="perk">+6 ATK, +4 Regen, +10% Focus</td><td>8.3%</td></tr>
+                <tr><td><a href="item.html?id=void_helm" style="color:var(--gold)">Void Helm</a></td><td><span class="rarity mythic">Mythic</span></td><td>Head</td><td class="perk">+14 ATK, +50 HP, +8% XP</td><td>2.8%</td></tr>
+                <tr><td><a href="item.html?id=void_plate" style="color:var(--gold)">Void Plate</a></td><td><span class="rarity mythic">Mythic</span></td><td>Body</td><td class="perk">+120 HP, +8 ATK, Shield</td><td>2.8%</td></tr>
+                <tr><td><a href="item.html?id=void_sword" style="color:var(--gold)">Void Sword</a></td><td><span class="rarity mythic">Mythic</span></td><td>Weapon</td><td class="perk">+18 ATK, +5 Regen</td><td>2.8%</td></tr>
+                <tr><td><a href="item.html?id=void_legs" style="color:var(--gold)">Void Legs</a></td><td><span class="rarity mythic">Mythic</span></td><td>Legs</td><td class="perk">+12 ATK, +60 HP</td><td>2.8%</td></tr>
+                <tr><td><a href="item.html?id=void_ring" style="color:var(--gold)">Void Ring</a></td><td><span class="rarity mythic">Mythic</span></td><td>Ring</td><td class="perk">+10 ATK, +5 Regen, +8% XP</td><td>2.8%</td></tr>
+                <tr style="opacity:.7"><td><a href="item.html?id=shadow_helm" style="color:var(--gold)">Shadow Helm</a></td><td><span class="rarity epic">Epic</span></td><td>Head</td><td class="perk">+7 ATK, +20 HP</td><td>5.6%</td></tr>
+                <tr style="opacity:.7"><td><a href="item.html?id=shadow_plate" style="color:var(--gold)">Shadow Plate</a></td><td><span class="rarity epic">Epic</span></td><td>Body</td><td class="perk">+60 HP, +3 ATK</td><td>5.6%</td></tr>
+                <tr style="opacity:.7"><td><a href="item.html?id=shadow_sword" style="color:var(--gold)">Shadow Sword</a></td><td><span class="rarity epic">Epic</span></td><td>Weapon</td><td class="perk">+10 ATK, +2 Regen</td><td>5.6%</td></tr>
+                <tr style="opacity:.7"><td><a href="item.html?id=shadow_legs" style="color:var(--gold)">Shadow Legs</a></td><td><span class="rarity epic">Epic</span></td><td>Legs</td><td class="perk">+5 ATK, +25 HP</td><td>5.6%</td></tr>
+                <tr style="opacity:.7"><td><a href="item.html?id=shadow_ring" style="color:var(--gold)">Shadow Ring</a></td><td><span class="rarity epic">Epic</span></td><td>Ring</td><td class="perk">+4 ATK, +3 Regen</td><td>5.6%</td></tr>
+                <tr><td><a href="item.html?id=atk_potion" style="color:var(--gold)">Attack Potion</a></td><td><span class="rarity mythic">Mythic</span></td><td>Consumable</td><td class="perk">+1 permanent ATK</td><td>5.6%</td></tr>
+                <tr><td><a href="item.html?id=hp_potion" style="color:var(--gold)">Vitality Potion</a></td><td><span class="rarity mythic">Mythic</span></td><td>Consumable</td><td class="perk">+1 permanent HP</td><td>5.6%</td></tr>
+                <tr><td><a href="item.html?id=regen_potion" style="color:var(--gold)">Regen Potion</a></td><td><span class="rarity mythic">Mythic</span></td><td>Consumable</td><td class="perk">+1 permanent Regen</td><td>5.6%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ═══ Bonus Materials ═══ -->
+      <div id="panel-materials" class="lt-panel">
+        <p class="section-desc">Each bag also rolls bonus crafting materials. Higher-tier bags roll more times and from rarer material pools.</p>
+
+        <div class="table-wrap" style="margin-top:14px">
           <table>
             <thead>
-              <tr><th></th><th>Name</th><th>Rarity</th><th>Base Drop Rate</th><th>Bonus Materials</th><th>Gold Range</th></tr>
+              <tr><th>Bag</th><th>Rolls</th><th>Material Pool</th><th>Qty Range</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td class="icon-cell" data-chest-id="common_chest">&#128230;</td>
-                <td><a href="item.html?id=common_chest" style="color:var(--gold)">Common Bag</a></td>
                 <td><span class="rarity common">Common</span></td>
-                <td>70%</td>
-                <td><a href="item.html?id=ore_iron" style="color:var(--gold)">Iron Ore</a> (1-2) + <a href="item.html?id=monster_fang" style="color:var(--gold)">Monster Fang</a> (1-2)</td>
-                <td class="perk">15-30g</td>
+                <td>1</td>
+                <td><a href="item.html?id=ore_iron" style="color:var(--gold)">Iron Ore</a> &middot; <a href="item.html?id=monster_fang" style="color:var(--gold)">Monster Fang</a></td>
+                <td>1&ndash;2 per roll</td>
               </tr>
               <tr>
-                <td class="icon-cell" data-chest-id="rare_chest">&#127873;</td>
-                <td><a href="item.html?id=rare_chest" style="color:var(--gold)">Rare Bag</a></td>
                 <td><span class="rarity rare">Rare</span></td>
-                <td>22%</td>
-                <td><a href="item.html?id=ore_iron" style="color:var(--gold)">Iron Ore</a> (1-3) + <a href="item.html?id=monster_fang" style="color:var(--gold)">Monster Fang</a> (1-3) + <a href="item.html?id=magic_essence" style="color:var(--gold)">Magic Essence</a> (1-2)</td>
-                <td class="perk">30-75g</td>
+                <td>2</td>
+                <td><a href="item.html?id=ore_iron" style="color:var(--gold)">Iron Ore</a> &middot; <a href="item.html?id=monster_fang" style="color:var(--gold)">Monster Fang</a> &middot; <a href="item.html?id=magic_essence" style="color:var(--gold)">Magic Essence</a></td>
+                <td>1&ndash;3 per roll</td>
               </tr>
               <tr>
-                <td class="icon-cell" data-chest-id="epic_chest">&#129689;</td>
-                <td><a href="item.html?id=epic_chest" style="color:var(--gold)">Epic Bag</a></td>
                 <td><span class="rarity epic">Epic</span></td>
-                <td>7%</td>
-                <td><a href="item.html?id=ore_iron" style="color:var(--gold)">Iron Ore</a> (2-4) + <a href="item.html?id=monster_fang" style="color:var(--gold)">Monster Fang</a> (2-4) + <a href="item.html?id=magic_essence" style="color:var(--gold)">Magic Essence</a> (1-3) + <a href="item.html?id=ancient_scale" style="color:var(--gold)">Ancient Scale</a> (1-2) + <a href="item.html?id=void_crystal" style="color:var(--gold)">Void Crystal</a> (1)</td>
-                <td class="perk">75-150g</td>
+                <td>2</td>
+                <td><a href="item.html?id=ore_iron" style="color:var(--gold)">Iron Ore</a> &middot; <a href="item.html?id=monster_fang" style="color:var(--gold)">Monster Fang</a> &middot; <a href="item.html?id=magic_essence" style="color:var(--gold)">Magic Essence</a> &middot; <a href="item.html?id=ancient_scale" style="color:var(--gold)">Ancient Scale</a> &middot; <a href="item.html?id=void_crystal" style="color:var(--gold)">Void Crystal</a></td>
+                <td>1&ndash;4 per roll</td>
               </tr>
               <tr>
-                <td class="icon-cell" data-chest-id="legendary_chest">&#128142;</td>
-                <td><a href="item.html?id=legendary_chest" style="color:var(--gold)">Legendary Bag</a></td>
                 <td><span class="rarity legendary">Legendary</span></td>
-                <td>1%</td>
-                <td><a href="item.html?id=magic_essence" style="color:var(--gold)">Magic Essence</a> (2-4) + <a href="item.html?id=ancient_scale" style="color:var(--gold)">Ancient Scale</a> (2-3) + <a href="item.html?id=void_crystal" style="color:var(--gold)">Void Crystal</a> (1-2)</td>
-                <td class="perk">150-300g</td>
+                <td>3</td>
+                <td><a href="item.html?id=magic_essence" style="color:var(--gold)">Magic Essence</a> &middot; <a href="item.html?id=ancient_scale" style="color:var(--gold)">Ancient Scale</a> &middot; <a href="item.html?id=void_crystal" style="color:var(--gold)">Void Crystal</a></td>
+                <td>1&ndash;4 per roll</td>
               </tr>
             </tbody>
           </table>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h4>How Bonus Rolls Work</h4>
+          <ul>
+            <li>Each roll picks one material from the pool using weighted random selection</li>
+            <li>The quantity per roll is random within the range shown</li>
+            <li>Multiple rolls can pick the same material &mdash; quantities stack</li>
+            <li>These materials are <strong>in addition to</strong> the guaranteed gear piece</li>
+          </ul>
         </div>
       </div>
 
@@ -125,40 +346,92 @@
       <div id="panel-pity" class="lt-panel">
         <div class="info-box">
           <h4>Guaranteed Upgrades</h4>
-          <p>The pity system ensures you receive higher-rarity chests after a streak of lower-tier drops:</p>
+          <p>The pity system ensures you receive higher-rarity bags after a streak of lower-tier drops:</p>
+          <div class="table-wrap" style="margin-top:10px">
+            <table>
+              <thead><tr><th>Condition</th><th>Guarantee</th></tr></thead>
+              <tbody>
+                <tr><td><strong>15 rolls</strong> without a Rare bag</td><td>Next bag is guaranteed <span class="rarity rare">Rare</span></td></tr>
+                <tr><td><strong>40 rolls</strong> without an Epic bag</td><td>Next bag is guaranteed <span class="rarity epic">Epic</span></td></tr>
+                <tr><td><strong>80 rolls</strong> without a Legendary bag</td><td>Next bag is guaranteed <span class="rarity legendary">Legendary</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="info-box" style="margin-top:14px">
+          <h4>Pity Counter Rules</h4>
           <ul>
-            <li><strong>15 rolls</strong> without a Rare &rarr; guaranteed <span class="rarity rare">Rare</span> chest</li>
-            <li><strong>40 rolls</strong> without an Epic &rarr; guaranteed <span class="rarity epic">Epic</span> chest</li>
-            <li><strong>80 rolls</strong> without a Legendary &rarr; guaranteed <span class="rarity legendary">Legendary</span> chest</li>
+            <li>Rare pity counter resets whenever you receive any bag that is <strong>Rare or above</strong></li>
+            <li>Epic pity counter resets only on <strong>Epic or Legendary</strong> bags</li>
+            <li>Legendary pity counter resets only on <strong>Legendary</strong> bags</li>
+            <li>Pity triggers override the normal roll &mdash; Legendary check happens first, then Epic, then Rare</li>
           </ul>
         </div>
       </div>
 
-      <!-- ═══ Seed Zips ═══ -->
-      <div id="panel-seeds" class="lt-panel">
+      <!-- ═══ Drop Rates ═══ -->
+      <div id="panel-rates" class="lt-panel">
         <div class="info-box">
-          <h4>Seed Zip by Chest Tier</h4>
-          <p>Each chest tier has a different probability of including a Seed Zip:</p>
-          <ul>
-            <li><span class="rarity common">Common</span> chest &mdash; <strong>40%</strong> Seed Zip chance</li>
-            <li><span class="rarity rare">Rare</span> chest &mdash; <strong>55%</strong> Seed Zip chance</li>
-            <li><span class="rarity epic">Epic</span> chest &mdash; <strong>70%</strong> Seed Zip chance</li>
-            <li><span class="rarity legendary">Legendary</span> chest &mdash; <strong>85%</strong> Seed Zip chance</li>
-          </ul>
+          <h4>Base Drop Rates</h4>
+          <div class="table-wrap" style="margin-top:10px">
+            <table>
+              <thead><tr><th>Bag</th><th>Base Rate</th></tr></thead>
+              <tbody>
+                <tr><td><span class="rarity common">Common</span></td><td>70%</td></tr>
+                <tr><td><span class="rarity rare">Rare</span></td><td>22%</td></tr>
+                <tr><td><span class="rarity epic">Epic</span></td><td>7%</td></tr>
+                <tr><td><span class="rarity legendary">Legendary</span></td><td>1%</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
 
-      <!-- ═══ Drop Modifiers ═══ -->
-      <div id="panel-mods" class="lt-panel">
-        <div class="info-box">
-          <h4>Activity-Based Boosts</h4>
-          <p>Certain activities modify your chest drop rates:</p>
-          <ul>
-            <li><strong>daily_activity:</strong> Active daily usage provides a boost to chest drop rates</li>
-            <li><strong>goal_complete:</strong> Completing daily goals gives a slight boost</li>
-            <li><strong>skill_grind (coding):</strong> Extended coding sessions provide a slight boost</li>
-          </ul>
+        <div class="info-box" style="margin-top:14px">
+          <h4>Activity-Based Modifiers</h4>
+          <p>Certain loot sources shift the drop rates in your favour. Changes are applied before rolling:</p>
         </div>
+
+        <div class="mod-grid">
+          <div class="mod-card">
+            <h5>Daily Activity</h5>
+            <div class="mod-card-row"><span>Common</span><span class="mod-down">&minus;15%</span></div>
+            <div class="mod-card-row"><span>Rare</span><span class="mod-up">+10%</span></div>
+            <div class="mod-card-row"><span>Epic</span><span class="mod-up">+4%</span></div>
+            <div class="mod-card-row"><span>Legendary</span><span class="mod-up">+1%</span></div>
+          </div>
+          <div class="mod-card">
+            <h5>Goal Complete</h5>
+            <div class="mod-card-row"><span>Common</span><span class="mod-down">&minus;6%</span></div>
+            <div class="mod-card-row"><span>Rare</span><span class="mod-up">+4%</span></div>
+            <div class="mod-card-row"><span>Epic</span><span class="mod-up">+2%</span></div>
+            <div class="mod-card-row"><span>Legendary</span><span style="color:var(--text-dim)">no change</span></div>
+          </div>
+          <div class="mod-card">
+            <h5>Skill Grind (Coding)</h5>
+            <div class="mod-card-row"><span>Common</span><span class="mod-down">&minus;2%</span></div>
+            <div class="mod-card-row"><span>Rare</span><span class="mod-up">+1%</span></div>
+            <div class="mod-card-row"><span>Epic</span><span class="mod-up">+1%</span></div>
+            <div class="mod-card-row"><span>Legendary</span><span style="color:var(--text-dim)">no change</span></div>
+          </div>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h4>Seed Zip Chances</h4>
+          <p>Each bag also has a chance to include a <a href="farming.html" style="color:var(--gold)">Seed Zip</a>:</p>
+          <div class="table-wrap" style="margin-top:10px">
+            <table>
+              <thead><tr><th>Bag</th><th>Seed Zip %</th></tr></thead>
+              <tbody>
+                <tr><td><span class="rarity common">Common</span></td><td>40%</td></tr>
+                <tr><td><span class="rarity rare">Rare</span></td><td>55%</td></tr>
+                <tr><td><span class="rarity epic">Epic</span></td><td>70%</td></tr>
+                <tr><td><span class="rarity legendary">Legendary</span></td><td>85%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:12px;color:var(--text-dim);margin-top:8px">Additionally, harvesting crops has a <strong>15%</strong> chance to produce a bonus Seed Zip (biased: 60% Common, 25% Rare, 12% Epic, 3% Legendary).</p>
+        </div>
+
       </div>
 
     </section>
@@ -167,7 +440,6 @@
 
 <script>
 (function() {
-  // Tab switching
   window.ltSwitch = function(id, btn) {
     document.querySelectorAll('.lt-tab').forEach(function(t){t.classList.remove('active')});
     document.querySelectorAll('.lt-panel').forEach(function(p){p.classList.remove('active')});
@@ -176,7 +448,6 @@
     if(panel) panel.classList.add('active');
   };
 
-  // Collapsible nav
   document.querySelectorAll('.nav-group-title').forEach(function(title) {
     title.addEventListener('click', function() {
       this.parentElement.classList.toggle('collapsed');
