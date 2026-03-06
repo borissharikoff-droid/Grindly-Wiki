@@ -46,7 +46,7 @@
         <li><a href="equipment.html" class="nav-link"><span class="nav-dot gold"></span> Equipment</a></li>
         <li><a href="loot.html" class="nav-link"><span class="nav-dot orange"></span> Loot &amp; Chests</a></li>
         <li><a href="materials.html" class="nav-link"><span class="nav-dot purple"></span> Materials</a></li>
-        <li><a href="arena.html" class="nav-link"><span class="nav-dot red"></span> Arena</a></li>
+        <li><a href="arena.html" class="nav-link"><span class="nav-dot red"></span> Arena &amp; Bosses</a></li>
         <li><a href="crafting.html" class="nav-link"><span class="nav-dot cyan"></span> Crafting</a></li>
         <li><a href="farming.html" class="nav-link"><span class="nav-dot green"></span> Farming</a></li>
         <li><a href="skills.html" class="nav-link"><span class="nav-dot blue"></span> Skills</a></li>
@@ -62,7 +62,7 @@
       <h1>Welcome to the Grindly Wiki</h1>
       <p class="hero-sub">The complete guide to skills, loot, arena, crafting &amp; farming.</p>
       <div class="hero-stats">
-        <div class="hero-stat"><span class="hero-stat-num">57</span><span class="hero-stat-label">Items</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">67</span><span class="hero-stat-label">Items</span></div>
         <div class="hero-stat"><span class="hero-stat-num">6</span><span class="hero-stat-label">Zones</span></div>
         <div class="hero-stat"><span class="hero-stat-num">19</span><span class="hero-stat-label">Recipes</span></div>
         <div class="hero-stat"><span class="hero-stat-num">9</span><span class="hero-stat-label">Seeds</span></div>
@@ -166,22 +166,32 @@
 <script>
 (function() {
   var SEARCH_INDEX = [
-    // Equipment
-    { name: 'Canvas Cap', url: 'item.html?id=canvas_cap', cat: 'Equipment' },
-    { name: 'Plain Tee', url: 'item.html?id=plain_tee', cat: 'Equipment' },
-    { name: 'Worn Bracelet', url: 'item.html?id=worn_bracelet', cat: 'Equipment' },
-    { name: 'Code Wraps', url: 'item.html?id=code_wraps', cat: 'Equipment' },
-    { name: 'Zen Beanie', url: 'item.html?id=zen_beanie', cat: 'Equipment' },
-    { name: 'Cozy Sweater', url: 'item.html?id=cozy_sweater', cat: 'Equipment' },
-    { name: 'Social Ring', url: 'item.html?id=social_ring', cat: 'Equipment' },
-    { name: 'Task Vest', url: 'item.html?id=task_vest', cat: 'Equipment' },
-    { name: 'Neon Visor', url: 'item.html?id=neon_visor', cat: 'Equipment' },
-    { name: 'Hacker Jacket', url: 'item.html?id=hacker_jacket', cat: 'Equipment' },
-    { name: 'Scholar Cape', url: 'item.html?id=scholar_cape', cat: 'Equipment' },
-    { name: 'Sonic Loop', url: 'item.html?id=sonic_loop', cat: 'Equipment' },
-    { name: 'Phantom Cloak', url: 'item.html?id=phantom_cloak', cat: 'Equipment' },
-    { name: 'Chrono Visor', url: 'item.html?id=chrono_visor', cat: 'Equipment' },
-    { name: 'Void Aura', url: 'item.html?id=void_aura', cat: 'Equipment' },
+    // Equipment — Bag-Drop Sets
+    { name: 'Wooden Helm', url: 'item.html?id=wooden_helm', cat: 'Equipment' },
+    { name: 'Wooden Plate', url: 'item.html?id=wooden_plate', cat: 'Equipment' },
+    { name: 'Wooden Sword', url: 'item.html?id=wooden_sword', cat: 'Equipment' },
+    { name: 'Wooden Legs', url: 'item.html?id=wooden_legs', cat: 'Equipment' },
+    { name: 'Wooden Ring', url: 'item.html?id=wooden_ring', cat: 'Equipment' },
+    { name: 'Copper Helm', url: 'item.html?id=copper_helm', cat: 'Equipment' },
+    { name: 'Copper Plate', url: 'item.html?id=copper_plate', cat: 'Equipment' },
+    { name: 'Copper Sword', url: 'item.html?id=copper_sword', cat: 'Equipment' },
+    { name: 'Copper Legs', url: 'item.html?id=copper_legs', cat: 'Equipment' },
+    { name: 'Copper Ring', url: 'item.html?id=copper_ring', cat: 'Equipment' },
+    { name: 'Shadow Helm', url: 'item.html?id=shadow_helm', cat: 'Equipment' },
+    { name: 'Shadow Plate', url: 'item.html?id=shadow_plate', cat: 'Equipment' },
+    { name: 'Shadow Sword', url: 'item.html?id=shadow_sword', cat: 'Equipment' },
+    { name: 'Shadow Legs', url: 'item.html?id=shadow_legs', cat: 'Equipment' },
+    { name: 'Shadow Ring', url: 'item.html?id=shadow_ring', cat: 'Equipment' },
+    { name: 'Golden Helm', url: 'item.html?id=golden_helm', cat: 'Equipment' },
+    { name: 'Golden Plate', url: 'item.html?id=golden_plate', cat: 'Equipment' },
+    { name: 'Golden Sword', url: 'item.html?id=golden_sword', cat: 'Equipment' },
+    { name: 'Golden Legs', url: 'item.html?id=golden_legs', cat: 'Equipment' },
+    { name: 'Golden Ring', url: 'item.html?id=golden_ring', cat: 'Equipment' },
+    { name: 'Void Helm', url: 'item.html?id=void_helm', cat: 'Equipment' },
+    { name: 'Void Plate', url: 'item.html?id=void_plate', cat: 'Equipment' },
+    { name: 'Void Sword', url: 'item.html?id=void_sword', cat: 'Equipment' },
+    { name: 'Void Legs', url: 'item.html?id=void_legs', cat: 'Equipment' },
+    { name: 'Void Ring', url: 'item.html?id=void_ring', cat: 'Equipment' },
     // Crafted Gear
     { name: 'Iron Helm', url: 'item.html?id=craft_iron_helm', cat: 'Equipment' },
     { name: 'Fang Dagger', url: 'item.html?id=craft_fang_dagger', cat: 'Equipment' },
