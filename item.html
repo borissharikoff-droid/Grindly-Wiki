@@ -409,7 +409,7 @@ var RARITY_COLORS = {
 
 var SLOT_LABELS = {
   head: 'Head', body: 'Body', legs: 'Legs', ring: 'Ring',
-  weapon: 'Weapon', consumable: 'Consumable', plant: 'Plant', material: 'Material', seed: 'Seed'
+  weapon: 'Weapon', consumable: 'Consumable', plant: 'Plant', material: 'Material', seed: 'Seed', chest: 'Chest'
 };
 
 var ARMOR_SLOTS = ['head','body','legs','ring','weapon'];
@@ -508,6 +508,11 @@ var ITEMS = [
   { id:'craft_dragon_crown', name:'Dragon Crown', slot:'head', rarity:'legendary', icon:'\uD83D\uDC51', desc:'A crown forged from dragon scales \u2014 radiates ancient power.', perks:[{type:'atk_boost',value:8,desc:'+8 ATK'},{type:'hp_boost',value:30,desc:'+30 HP'}] },
   { id:'craft_troll_aegis', name:'Troll Aegis', slot:'body', rarity:'legendary', icon:'\uD83D\uDC9C', desc:'Armor fueled by a troll heart \u2014 regenerates endlessly.', perks:[{type:'hp_boost',value:40,desc:'+40 HP'},{type:'hp_regen_boost',value:8,desc:'+8 HP Regen/s'}] },
   { id:'craft_dragonfire_blade', name:'Dragonfire Blade', slot:'weapon', rarity:'mythic', icon:'\uD83D\uDD25', desc:'Forged in dragonfire \u2014 the ultimate weapon.', perks:[{type:'atk_boost',value:20,desc:'+20 ATK'},{type:'hp_boost',value:15,desc:'+15 HP'},{type:'hp_regen_boost',value:5,desc:'+5 HP Regen/s'}] },
+  // Chests
+  { id:'common_chest', name:'Common Bag', slot:'chest', rarity:'common', icon:'\uD83D\uDCE6', desc:'A basic loot bag. Contains common equipment.', perks:[], chest:'common_chest' },
+  { id:'rare_chest', name:'Rare Bag', slot:'chest', rarity:'rare', icon:'\uD83C\uDF81', desc:'A quality loot bag. Contains common and rare equipment.', perks:[], chest:'rare_chest' },
+  { id:'epic_chest', name:'Epic Bag', slot:'chest', rarity:'epic', icon:'\uD83E\uDE99', desc:'A superior loot bag. Contains rare and epic equipment, plus potions.', perks:[], chest:'epic_chest' },
+  { id:'legendary_chest', name:'Legendary Bag', slot:'chest', rarity:'legendary', icon:'\uD83D\uDC8E', desc:'An extraordinary loot bag. Contains epic, legendary, and mythic equipment, plus potions.', perks:[], chest:'legendary_chest' },
 ];
 
 var ITEM_MAP = {};
@@ -739,10 +744,11 @@ function renderItem(itemId) {
 
   // Header
   html += '<div class="item-header">';
+  var dataAttr = item.chest ? ' data-chest-id="'+item.chest+'"' : ' data-item-id="'+itemId+'"';
   if (item.image) {
-    html += '<div class="item-header-icon" style="border-color:'+rc.border+'"><img src="'+item.image+'" alt="'+item.name+'"></div>';
+    html += '<div class="item-header-icon"'+dataAttr+' style="border-color:'+rc.border+'"><img src="'+item.image+'" alt="'+item.name+'"></div>';
   } else {
-    html += '<div class="item-header-icon" style="border-color:'+rc.border+'">'+item.icon+'</div>';
+    html += '<div class="item-header-icon"'+dataAttr+' style="border-color:'+rc.border+'">'+item.icon+'</div>';
   }
   html += '<div class="item-header-info">';
   html += '<h1 style="color:'+rc.color+'">'+item.name+'</h1>';
@@ -793,6 +799,26 @@ function renderItem(itemId) {
     html += '<div class="stat-card"><div class="stat-card-label">Yield</div><div class="stat-card-value" style="color:#fbbf24">'+yieldIcon+' <a href="item.html?id='+s.yieldId+'" style="color:#fbbf24">'+s.yieldName+'</a> &times;'+s.yieldMin+'-'+s.yieldMax+'</div></div>';
     html += '<div class="stat-card"><div class="stat-card-label">XP on Plant</div><div class="stat-card-value" style="color:#a78bfa">+'+s.xpPlant+'</div></div>';
     html += '<div class="stat-card"><div class="stat-card-label">XP on Harvest</div><div class="stat-card-value" style="color:#a78bfa">+'+s.xpHarvest+'</div></div>';
+    html += '</div></div>';
+  }
+
+  // Chest loot pool
+  if (item.chest && CHESTS[item.chest]) {
+    var ch = CHESTS[item.chest];
+    html += '<div class="stats-section"><h3>Loot Pool</h3><div class="related-grid">';
+    ch.items.forEach(function(lid) {
+      var li = ITEM_MAP[lid];
+      if (!li) return;
+      var lrc = RARITY_COLORS[li.rarity];
+      html += '<a href="item.html?id='+lid+'" class="related-card">';
+      if (li.image) {
+        html += '<div class="related-icon" style="border-color:'+lrc.border+'"><img src="'+li.image+'" alt="'+li.name+'"></div>';
+      } else {
+        html += '<div class="related-icon" data-item-id="'+lid+'" style="border-color:'+lrc.border+'">'+li.icon+'</div>';
+      }
+      html += '<div class="related-name" style="color:'+lrc.color+'">'+li.name+'</div>';
+      html += '</a>';
+    });
     html += '</div></div>';
   }
 
@@ -1028,6 +1054,20 @@ function applyAdminImages(config) {
       }
       if (seedItem && config.seedOverrides[sid].name) {
         seedItem.name = config.seedOverrides[sid].name;
+        changed = true;
+      }
+    }
+  }
+  // Chest overrides (image/icon changes from dashboard)
+  if (config.chestOverrides) {
+    for (var cid in config.chestOverrides) {
+      var chestItem = ITEM_MAP[cid];
+      if (chestItem && config.chestOverrides[cid].image) {
+        chestItem.image = config.chestOverrides[cid].image;
+        changed = true;
+      }
+      if (chestItem && config.chestOverrides[cid].icon) {
+        chestItem.icon = config.chestOverrides[cid].icon;
         changed = true;
       }
     }

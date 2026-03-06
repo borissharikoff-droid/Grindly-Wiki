@@ -92,6 +92,11 @@
     { name: 'Star Bloom', url: 'item.html?id=star_bloom', cat: 'Farming' },
     { name: 'Crystal Root', url: 'item.html?id=crystal_root', cat: 'Farming' },
     { name: 'Void Blossom', url: 'item.html?id=void_blossom', cat: 'Farming' },
+    // Chests
+    { name: 'Common Bag', url: 'item.html?id=common_chest', cat: 'Chest' },
+    { name: 'Rare Bag', url: 'item.html?id=rare_chest', cat: 'Chest' },
+    { name: 'Epic Bag', url: 'item.html?id=epic_chest', cat: 'Chest' },
+    { name: 'Legendary Bag', url: 'item.html?id=legendary_chest', cat: 'Chest' },
     // Pages
     { name: 'Equipment', url: 'equipment.html', cat: 'Page' },
     { name: 'Arena & Bosses', url: 'arena.html', cat: 'Page' },
