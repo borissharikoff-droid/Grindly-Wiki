@@ -14,7 +14,7 @@
 
 /* ══════ Bag Cards ══════ */
 .bag-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:14px}
-.bag-card{background:var(--bg-card);border:1px solid var(--border-inner);border-radius:10px;padding:18px;transition:border-color .2s,box-shadow .2s}
+.bag-card{background:var(--bg-card);border:1px solid var(--border-inner);border-radius:10px;padding:18px;transition:border-color .2s,box-shadow .2s;text-decoration:none;color:inherit;display:block;cursor:pointer}
 .bag-card:hover{border-color:var(--bag-color,var(--gold-dim));box-shadow:0 0 16px color-mix(in srgb, var(--bag-color,var(--gold)) 18%, transparent)}
 .bag-card-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
 .bag-card-icon{width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:28px;border-radius:8px;border:2px solid var(--bag-color,var(--border-inner));background:color-mix(in srgb, var(--bag-color,#888) 8%, var(--bg-card));flex-shrink:0}
@@ -111,11 +111,11 @@
       <div id="panel-overview" class="lt-panel active">
         <div class="bag-cards">
 
-          <div class="bag-card" style="--bag-color:#9CA3AF">
+          <a href="item.html?id=common_chest" class="bag-card" style="--bag-color:#9CA3AF">
             <div class="bag-card-header">
               <div class="bag-card-icon" data-chest-id="common_chest">&#128230;</div>
               <div>
-                <div class="bag-card-title"><a href="item.html?id=common_chest" style="color:inherit;text-decoration:none">Common Bag</a></div>
+                <div class="bag-card-title">Common Bag</div>
                 <div class="bag-card-sub"><span class="rarity common">Common</span> &middot; 70% base drop rate</div>
               </div>
             </div>
@@ -125,13 +125,13 @@
               <div class="bag-stat"><span class="bag-stat-label">Gear Pool</span><span class="bag-stat-val">Wooden Set</span></div>
               <div class="bag-stat"><span class="bag-stat-label">Seed Zip</span><span class="bag-stat-val">40%</span></div>
             </div>
-          </div>
+          </a>
 
-          <div class="bag-card" style="--bag-color:#38BDF8">
+          <a href="item.html?id=rare_chest" class="bag-card" style="--bag-color:#38BDF8">
             <div class="bag-card-header">
               <div class="bag-card-icon" data-chest-id="rare_chest">&#127873;</div>
               <div>
-                <div class="bag-card-title"><a href="item.html?id=rare_chest" style="color:inherit;text-decoration:none">Rare Bag</a></div>
+                <div class="bag-card-title">Rare Bag</div>
                 <div class="bag-card-sub"><span class="rarity rare">Rare</span> &middot; 22% base drop rate</div>
               </div>
             </div>
@@ -141,13 +141,13 @@
               <div class="bag-stat"><span class="bag-stat-label">Gear Pool</span><span class="bag-stat-val">Wooden + Copper</span></div>
               <div class="bag-stat"><span class="bag-stat-label">Seed Zip</span><span class="bag-stat-val">55%</span></div>
             </div>
-          </div>
+          </a>
 
-          <div class="bag-card" style="--bag-color:#C084FC">
+          <a href="item.html?id=epic_chest" class="bag-card" style="--bag-color:#C084FC">
             <div class="bag-card-header">
               <div class="bag-card-icon" data-chest-id="epic_chest">&#129689;</div>
               <div>
-                <div class="bag-card-title"><a href="item.html?id=epic_chest" style="color:inherit;text-decoration:none">Epic Bag</a></div>
+                <div class="bag-card-title">Epic Bag</div>
                 <div class="bag-card-sub"><span class="rarity epic">Epic</span> &middot; 7% base drop rate</div>
               </div>
             </div>
@@ -157,13 +157,13 @@
               <div class="bag-stat"><span class="bag-stat-label">Gear Pool</span><span class="bag-stat-val">Copper + Shadow + Potions</span></div>
               <div class="bag-stat"><span class="bag-stat-label">Seed Zip</span><span class="bag-stat-val">70%</span></div>
             </div>
-          </div>
+          </a>
 
-          <div class="bag-card" style="--bag-color:#FACC15">
+          <a href="item.html?id=legendary_chest" class="bag-card" style="--bag-color:#FACC15">
             <div class="bag-card-header">
               <div class="bag-card-icon" data-chest-id="legendary_chest">&#128142;</div>
               <div>
-                <div class="bag-card-title"><a href="item.html?id=legendary_chest" style="color:inherit;text-decoration:none">Legendary Bag</a></div>
+                <div class="bag-card-title">Legendary Bag</div>
                 <div class="bag-card-sub"><span class="rarity legendary">Legendary</span> &middot; 1% base drop rate</div>
               </div>
             </div>
@@ -173,7 +173,7 @@
               <div class="bag-stat"><span class="bag-stat-label">Gear Pool</span><span class="bag-stat-val">Shadow + Golden + Void + Potions</span></div>
               <div class="bag-stat"><span class="bag-stat-label">Seed Zip</span><span class="bag-stat-val">85%</span></div>
             </div>
-          </div>
+          </a>
 
         </div>
       </div>
