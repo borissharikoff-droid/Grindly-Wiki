@@ -162,6 +162,8 @@
   </main>
 </div>
 
+<script src="wiki-config.js"></script>
+<script src="wiki-skins.js"></script>
 <script>
 (function() {
   // ── Data ────────────────────────────────────────────────────────────────────
@@ -240,6 +242,11 @@
   function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
   function raritySpan(r){return '<span class="rarity '+r+'" style="color:'+RARITY_COLORS[r]+'">'+r.charAt(0).toUpperCase()+r.slice(1)+'</span>'}
   function slotBadge(s){return '<span class="slot-badge">'+(SLOT_LABELS[s]||s)+'</span>'}
+  function iconHtml(it,size){
+    size=size||18;
+    if(it.image) return '<img src="'+it.image+'" style="width:'+size+'px;height:'+size+'px;object-fit:contain">';
+    return it.icon;
+  }
 
   // ── Sets ─────────────────────────────────────────────────────────────────────
   var grid = document.getElementById('setGrid');
@@ -256,7 +263,7 @@
 
     var itemsHtml = set.items.map(function(it){
       return '<div class="set-item">'+
-        '<span class="set-item-icon">'+it.icon+'</span>'+
+        '<span class="set-item-icon">'+iconHtml(it,22)+'</span>'+
         '<div class="set-item-info">'+
           '<div class="set-item-name"><a href="item.html?id='+it.id+'">'+esc(it.name)+'</a></div>'+
           '<div class="set-item-meta">'+slotBadge(it.slot)+'</div>'+
@@ -314,7 +321,7 @@
     var body = document.getElementById('craftBody');
     var items = CRAFTED.filter(function(c){return !craftFilter.rarity || c.rarity===craftFilter.rarity});
     body.innerHTML = items.map(function(c){
-      return '<tr><td class="icon-cell">'+c.icon+'</td><td><a href="item.html?id='+c.id+'">'+esc(c.name)+'</a></td><td>'+slotBadge(c.slot)+'</td><td>'+raritySpan(c.rarity)+'</td><td class="perk" style="color:'+RARITY_COLORS[c.rarity]+'">'+esc(c.perk)+'</td></tr>';
+      return '<tr><td class="icon-cell">'+iconHtml(c,20)+'</td><td><a href="item.html?id='+c.id+'">'+esc(c.name)+'</a></td><td>'+slotBadge(c.slot)+'</td><td>'+raritySpan(c.rarity)+'</td><td class="perk" style="color:'+RARITY_COLORS[c.rarity]+'">'+esc(c.perk)+'</td></tr>';
     }).join('');
   }
   renderCraftFilter();
@@ -323,7 +330,7 @@
   // ── Consumables ────────────────────────────────────────────────────────────────
   var consumBody = document.getElementById('consumBody');
   consumBody.innerHTML = CONSUMABLES.map(function(c){
-    return '<tr><td class="icon-cell">'+c.icon+'</td><td><a href="item.html?id='+c.id+'">'+esc(c.name)+'</a></td><td>'+raritySpan(c.rarity)+'</td><td class="perk" style="color:'+RARITY_COLORS[c.rarity]+'">'+esc(c.perk)+'</td></tr>';
+    return '<tr><td class="icon-cell">'+iconHtml(c,20)+'</td><td><a href="item.html?id='+c.id+'">'+esc(c.name)+'</a></td><td>'+raritySpan(c.rarity)+'</td><td class="perk" style="color:'+RARITY_COLORS[c.rarity]+'">'+esc(c.perk)+'</td></tr>';
   }).join('');
 
   // ── All Equipment ──────────────────────────────────────────────────────────────
@@ -381,7 +388,7 @@
       return true;
     });
     body.innerHTML = items.map(function(i){
-      return '<tr><td class="icon-cell">'+i.icon+'</td><td><a href="item.html?id='+i.id+'">'+esc(i.name)+'</a></td><td>'+slotBadge(i.slot)+'</td><td>'+raritySpan(i.rarity)+'</td><td class="perk" style="color:'+RARITY_COLORS[i.rarity]+'">'+esc(i.perk)+'</td><td><span class="eq-source">'+i.source+'</span></td></tr>';
+      return '<tr><td class="icon-cell">'+iconHtml(i,20)+'</td><td><a href="item.html?id='+i.id+'">'+esc(i.name)+'</a></td><td>'+slotBadge(i.slot)+'</td><td>'+raritySpan(i.rarity)+'</td><td class="perk" style="color:'+RARITY_COLORS[i.rarity]+'">'+esc(i.perk)+'</td><td><span class="eq-source">'+i.source+'</span></td></tr>';
     }).join('');
   }
   renderAllFilters();
@@ -402,6 +409,67 @@
       this.parentElement.classList.toggle('collapsed');
     });
   });
+
+  // ── Apply custom skins from dashboard (loaded by wiki-skins.js) ─────────────
+  var ITEM_BY_ID = {};
+  SETS.forEach(function(set){ set.items.forEach(function(it){ ITEM_BY_ID[it.id] = it; }); });
+  CRAFTED.forEach(function(it){ ITEM_BY_ID[it.id] = it; });
+  CONSUMABLES.forEach(function(it){ ITEM_BY_ID[it.id] = it; });
+
+  function applyOverridesAndRerender(config) {
+    var changed = false;
+    var ov = config.itemOverrides || {};
+    for (var id in ov) {
+      var it = ITEM_BY_ID[id];
+      if (!it) continue;
+      if (ov[id].image) { it.image = ov[id].image; changed = true; }
+      if (ov[id].icon)  { it.icon = ov[id].icon; changed = true; }
+      if (ov[id].name)  { it.name = ov[id].name; changed = true; }
+    }
+    if (changed) {
+      ALL_ITEMS.forEach(function(ai) {
+        var src = ITEM_BY_ID[ai.id];
+        if (src) { ai.icon = src.icon; ai.image = src.image; ai.name = src.name; }
+      });
+      // Re-render sets
+      grid.innerHTML = '';
+      SETS.forEach(function(set) {
+        var c = RARITY_COLORS[set.rarity];
+        var totals = {atk:0,hp:0,regen:0}; var specials = [];
+        set.items.forEach(function(it){
+          if(it.stats.atk) totals.atk += it.stats.atk;
+          if(it.stats.hp) totals.hp += it.stats.hp;
+          if(it.stats.regen) totals.regen += it.stats.regen;
+          if(it.stats.special && specials.indexOf(String(it.stats.special))===-1) specials.push(String(it.stats.special));
+        });
+        var itemsHtml = set.items.map(function(it){
+          return '<div class="set-item"><span class="set-item-icon">'+iconHtml(it,22)+'</span><div class="set-item-info"><div class="set-item-name"><a href="item.html?id='+it.id+'">'+esc(it.name)+'</a></div><div class="set-item-meta">'+slotBadge(it.slot)+'</div></div><div class="set-item-perk" style="color:'+c+'">'+esc(it.perk)+'</div></div>';
+        }).join('');
+        var tp = [];
+        if(totals.atk) tp.push('<span class="set-total-stat" style="color:#f87171">ATK +'+totals.atk+'</span>');
+        if(totals.hp)  tp.push('<span class="set-total-stat" style="color:#4ade80">HP +'+totals.hp+'</span>');
+        if(totals.regen) tp.push('<span class="set-total-stat" style="color:#34d399">Regen +'+totals.regen+'/s</span>');
+        specials.forEach(function(s){ tp.push('<span class="set-total-stat" style="color:'+c+'">'+esc(s)+'</span>'); });
+        var xpT = set.items.reduce(function(a,i){return a+(i.stats.xp||0)},0);
+        if(xpT) tp.push('<span class="set-total-stat" style="color:#fbbf24">XP +'+xpT+'%</span>');
+        var card = document.createElement('div'); card.className='set-card'; card.style.setProperty('--set-color',c);
+        card.innerHTML='<div class="set-header" onclick="this.parentElement.classList.toggle(\'open\')"><span class="set-rarity-dot" style="background:'+c+'"></span><span class="set-name" style="color:'+c+'">'+esc(set.name)+'</span><span class="set-badge">'+raritySpan(set.rarity)+' \u00B7 5 pieces</span><span class="set-arrow">\u25BC</span></div><div class="set-body">'+itemsHtml+'<div class="set-total"><span style="font-size:10px;color:var(--text-dim);line-height:24px;font-family:var(--font-mono)">Full set:</span>'+tp.join('')+'</div></div>';
+        grid.appendChild(card);
+      });
+      renderCrafted();
+      consumBody.innerHTML = CONSUMABLES.map(function(c){
+        return '<tr><td class="icon-cell">'+iconHtml(c,20)+'</td><td><a href="item.html?id='+c.id+'">'+esc(c.name)+'</a></td><td>'+raritySpan(c.rarity)+'</td><td class="perk" style="color:'+RARITY_COLORS[c.rarity]+'">'+esc(c.perk)+'</td></tr>';
+      }).join('');
+      renderAll();
+    }
+  }
+
+  // Listen for wiki-skins.js loaded event
+  window.addEventListener('wiki-skins-loaded', function(e) {
+    applyOverridesAndRerender(e.detail);
+  });
+  // Also check if already loaded (race condition)
+  if (window.WIKI_ADMIN_CONFIG) applyOverridesAndRerender(window.WIKI_ADMIN_CONFIG);
 })();
 </script>
 
