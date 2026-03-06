@@ -11,6 +11,10 @@
 .ar-tab:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
 .ar-tab.active{color:var(--gold);border-color:var(--gold);background:rgba(251,191,36,.08)}
 .ar-panel{display:none}.ar-panel.active{display:block}
+.zone-drop-chest{display:inline-block;width:18px;height:18px;vertical-align:middle;margin-right:2px}
+.zone-drop-chest img{width:100%;height:100%;object-fit:contain}
+[data-mob-id]{display:inline-block;width:16px;height:16px;vertical-align:middle;text-align:center}
+[data-mob-id] img{width:100%;height:100%;object-fit:contain}
 </style>
 </head>
 <body>
@@ -106,12 +110,12 @@
             </div>
             <div class="zone-body">
               <div class="zone-mobs">
-                <div class="mob-row"><span>&#x1FAE7; Slime Scout</span><span class="mob-stat">1,200 HP</span><span class="mob-stat">0.2 ATK</span><span class="mob-stat">30 XP</span><span class="mob-stat">5-12g</span><span class="mob-stat">30% Slime Gel</span></div>
-                <div class="mob-row"><span>&#x1FAE7; Slime Guard</span><span class="mob-stat">2,100 HP</span><span class="mob-stat">0.3 ATK</span><span class="mob-stat">55 XP</span><span class="mob-stat">8-15g</span><span class="mob-stat">40% Slime Gel</span></div>
-                <div class="mob-row"><span>&#x1FAE7; Slime Brute</span><span class="mob-stat">3,000 HP</span><span class="mob-stat">0.4 ATK</span><span class="mob-stat">90 XP</span><span class="mob-stat">10-20g</span><span class="mob-stat">50% Slime Gel</span></div>
+                <div class="mob-row"><span data-mob-id="slime_scout">&#x1FAE7;</span> Slime Scout<span class="mob-stat">1,200 HP</span><span class="mob-stat">0.2 ATK</span><span class="mob-stat">30 XP</span><span class="mob-stat">5-12g</span><span class="mob-stat">30% Slime Gel</span></div>
+                <div class="mob-row"><span data-mob-id="slime_guard">&#x1FAE7;</span> Slime Guard<span class="mob-stat">2,100 HP</span><span class="mob-stat">0.3 ATK</span><span class="mob-stat">55 XP</span><span class="mob-stat">8-15g</span><span class="mob-stat">40% Slime Gel</span></div>
+                <div class="mob-row"><span data-mob-id="slime_brute">&#x1FAE7;</span> Slime Brute<span class="mob-stat">3,000 HP</span><span class="mob-stat">0.4 ATK</span><span class="mob-stat">90 XP</span><span class="mob-stat">10-20g</span><span class="mob-stat">50% Slime Gel</span></div>
               </div>
               <div class="zone-boss"><span data-boss-id="slime">&#x1F4A7;</span> <strong>Slime King</strong><span class="mob-stat">14,400 HP</span><span class="mob-stat">1.5 ATK</span><span class="mob-stat">No stat req</span><span class="mob-stat">120 Warrior XP</span></div>
-              <div class="zone-drops">Boss drops: Slime Gel &times;5 &middot; Reward: <span class="rarity common">Common Bag</span></div>
+              <div class="zone-drops">Boss drops: Slime Gel &times;5 &middot; Reward: <span data-chest-id="common_chest" class="zone-drop-chest">&#x1F4E6;</span> <a href="item.html?id=common_chest" class="rarity common">Common Bag</a></div>
             </div>
           </div>
 
@@ -126,12 +130,12 @@
             </div>
             <div class="zone-body">
               <div class="zone-mobs">
-                <div class="mob-row"><span>&#x1F47A; Goblin Scout</span><span class="mob-stat">3,200 HP</span><span class="mob-stat">1.0 ATK</span><span class="mob-stat">120 XP</span><span class="mob-stat">15-30g</span><span class="mob-stat">30% Goblin Tooth</span></div>
-                <div class="mob-row"><span>&#x1F47A; Goblin Warrior</span><span class="mob-stat">5,600 HP</span><span class="mob-stat">1.8 ATK</span><span class="mob-stat">220 XP</span><span class="mob-stat">25-40g</span><span class="mob-stat">40% Goblin Tooth</span></div>
-                <div class="mob-row"><span>&#x1F47A; Goblin Shaman</span><span class="mob-stat">8,000 HP</span><span class="mob-stat">2.2 ATK</span><span class="mob-stat">350 XP</span><span class="mob-stat">30-55g</span><span class="mob-stat">50% Goblin Tooth</span></div>
+                <div class="mob-row"><span data-mob-id="goblin_scout">&#x1F47A;</span> Goblin Scout<span class="mob-stat">3,200 HP</span><span class="mob-stat">1.0 ATK</span><span class="mob-stat">120 XP</span><span class="mob-stat">15-30g</span><span class="mob-stat">30% Goblin Tooth</span></div>
+                <div class="mob-row"><span data-mob-id="goblin_warrior">&#x1F47A;</span> Goblin Warrior<span class="mob-stat">5,600 HP</span><span class="mob-stat">1.8 ATK</span><span class="mob-stat">220 XP</span><span class="mob-stat">25-40g</span><span class="mob-stat">40% Goblin Tooth</span></div>
+                <div class="mob-row"><span data-mob-id="goblin_shaman">&#x1F47A;</span> Goblin Shaman<span class="mob-stat">8,000 HP</span><span class="mob-stat">2.2 ATK</span><span class="mob-stat">350 XP</span><span class="mob-stat">30-55g</span><span class="mob-stat">50% Goblin Tooth</span></div>
               </div>
               <div class="zone-boss"><span data-boss-id="goblin">&#x1F47A;</span> <strong>Goblin Chief</strong><span class="mob-stat">21,600 HP</span><span class="mob-stat">3 ATK</span><span class="mob-stat">Req: 9 ATK &middot; 3 HP Regen</span><span class="mob-stat">400 Warrior XP</span></div>
-              <div class="zone-drops">Boss drops: Goblin Tooth &times;4 &middot; Reward: <span class="rarity rare">Rare Bag</span></div>
+              <div class="zone-drops">Boss drops: Goblin Tooth &times;4 &middot; Reward: <span data-chest-id="rare_chest" class="zone-drop-chest">&#x1F381;</span> <a href="item.html?id=rare_chest" class="rarity rare">Rare Bag</a></div>
             </div>
           </div>
 
@@ -146,12 +150,12 @@
             </div>
             <div class="zone-body">
               <div class="zone-mobs">
-                <div class="mob-row"><span>&#x1F43A; Young Wolf</span><span class="mob-stat">8,000 HP</span><span class="mob-stat">2.0 ATK</span><span class="mob-stat">500 XP</span><span class="mob-stat">40-80g</span><span class="mob-stat">30% Wolf Fang</span></div>
-                <div class="mob-row"><span>&#x1F43A; Pack Wolf</span><span class="mob-stat">14,000 HP</span><span class="mob-stat">3.0 ATK</span><span class="mob-stat">900 XP</span><span class="mob-stat">65-100g</span><span class="mob-stat">40% Wolf Fang</span></div>
-                <div class="mob-row"><span>&#x1F43A; Alpha Wolf</span><span class="mob-stat">20,000 HP</span><span class="mob-stat">3.5 ATK</span><span class="mob-stat">1,400 XP</span><span class="mob-stat">80-130g</span><span class="mob-stat">50% Wolf Fang</span></div>
+                <div class="mob-row"><span data-mob-id="wolf_young">&#x1F43A;</span> Young Wolf<span class="mob-stat">8,000 HP</span><span class="mob-stat">2.0 ATK</span><span class="mob-stat">500 XP</span><span class="mob-stat">40-80g</span><span class="mob-stat">30% Wolf Fang</span></div>
+                <div class="mob-row"><span data-mob-id="wolf_pack">&#x1F43A;</span> Pack Wolf<span class="mob-stat">14,000 HP</span><span class="mob-stat">3.0 ATK</span><span class="mob-stat">900 XP</span><span class="mob-stat">65-100g</span><span class="mob-stat">40% Wolf Fang</span></div>
+                <div class="mob-row"><span data-mob-id="wolf_alpha">&#x1F43A;</span> Alpha Wolf<span class="mob-stat">20,000 HP</span><span class="mob-stat">3.5 ATK</span><span class="mob-stat">1,400 XP</span><span class="mob-stat">80-130g</span><span class="mob-stat">50% Wolf Fang</span></div>
               </div>
               <div class="zone-boss"><span data-boss-id="wolf">&#x1F43A;</span> <strong>Forest Wolf</strong><span class="mob-stat">52,800 HP</span><span class="mob-stat">5 ATK</span><span class="mob-stat">Req: 11 ATK &middot; 200 HP &middot; 5 HP Regen</span><span class="mob-stat">900 Warrior XP</span></div>
-              <div class="zone-drops">Boss drops: Wolf Fang &times;3 &middot; Reward: <span class="rarity rare">Rare Bag</span></div>
+              <div class="zone-drops">Boss drops: Wolf Fang &times;3 &middot; Reward: <span data-chest-id="rare_chest" class="zone-drop-chest">&#x1F381;</span> <a href="item.html?id=rare_chest" class="rarity rare">Rare Bag</a></div>
             </div>
           </div>
 
@@ -166,12 +170,12 @@
             </div>
             <div class="zone-body">
               <div class="zone-mobs">
-                <div class="mob-row"><span>&#x1F479; Orc Grunt</span><span class="mob-stat">15,000 HP</span><span class="mob-stat">3.5 ATK</span><span class="mob-stat">2,000 XP</span><span class="mob-stat">100-200g</span><span class="mob-stat">30% Orc Shard &times;2</span></div>
-                <div class="mob-row"><span>&#x1F479; Orc Brute</span><span class="mob-stat">27,000 HP</span><span class="mob-stat">5.5 ATK</span><span class="mob-stat">3,500 XP</span><span class="mob-stat">180-280g</span><span class="mob-stat">40% Orc Shard &times;2</span></div>
-                <div class="mob-row"><span>&#x1F479; Orc Shaman</span><span class="mob-stat">39,000 HP</span><span class="mob-stat">6.5 ATK</span><span class="mob-stat">5,000 XP</span><span class="mob-stat">250-380g</span><span class="mob-stat">50% Orc Shard &times;3</span></div>
+                <div class="mob-row"><span data-mob-id="orc_grunt">&#x1F479;</span> Orc Grunt<span class="mob-stat">15,000 HP</span><span class="mob-stat">3.5 ATK</span><span class="mob-stat">2,000 XP</span><span class="mob-stat">100-200g</span><span class="mob-stat">30% Orc Shard &times;2</span></div>
+                <div class="mob-row"><span data-mob-id="orc_brute">&#x1F479;</span> Orc Brute<span class="mob-stat">27,000 HP</span><span class="mob-stat">5.5 ATK</span><span class="mob-stat">3,500 XP</span><span class="mob-stat">180-280g</span><span class="mob-stat">40% Orc Shard &times;2</span></div>
+                <div class="mob-row"><span data-mob-id="orc_shaman">&#x1F479;</span> Orc Shaman<span class="mob-stat">39,000 HP</span><span class="mob-stat">6.5 ATK</span><span class="mob-stat">5,000 XP</span><span class="mob-stat">250-380g</span><span class="mob-stat">50% Orc Shard &times;3</span></div>
               </div>
               <div class="zone-boss"><span data-boss-id="orc">&#x1F479;</span> <strong>Orc Warlord</strong><span class="mob-stat">129,600 HP</span><span class="mob-stat">8 ATK</span><span class="mob-stat">Req: 18 ATK &middot; 280 HP &middot; 8 HP Regen</span><span class="mob-stat">2,500 Warrior XP</span></div>
-              <div class="zone-drops">Boss drops: Warlord Sigil &times;1 &middot; Reward: <span class="rarity epic">Epic Bag</span></div>
+              <div class="zone-drops">Boss drops: Warlord Sigil &times;1 &middot; Reward: <span data-chest-id="epic_chest" class="zone-drop-chest">&#x1FA99;</span> <a href="item.html?id=epic_chest" class="rarity epic">Epic Bag</a></div>
             </div>
           </div>
 
@@ -186,12 +190,12 @@
             </div>
             <div class="zone-body">
               <div class="zone-mobs">
-                <div class="mob-row"><span>&#x1F9CC; Bridge Troll</span><span class="mob-stat">36,000 HP</span><span class="mob-stat">6.0 ATK</span><span class="mob-stat">8,000 XP</span><span class="mob-stat">300-550g</span><span class="mob-stat">30% Troll Hide &times;2</span></div>
-                <div class="mob-row"><span>&#x1F9CC; Stone Troll</span><span class="mob-stat">66,000 HP</span><span class="mob-stat">9.0 ATK</span><span class="mob-stat">14,000 XP</span><span class="mob-stat">550-800g</span><span class="mob-stat">40% Troll Hide &times;3</span></div>
-                <div class="mob-row"><span>&#x1F9CC; Ancient Troll</span><span class="mob-stat">96,000 HP</span><span class="mob-stat">11.0 ATK</span><span class="mob-stat">20,000 XP</span><span class="mob-stat">750-1,100g</span><span class="mob-stat">50% Troll Hide &times;3</span></div>
+                <div class="mob-row"><span data-mob-id="troll_bridge">&#x1F9CC;</span> Bridge Troll<span class="mob-stat">36,000 HP</span><span class="mob-stat">6.0 ATK</span><span class="mob-stat">8,000 XP</span><span class="mob-stat">300-550g</span><span class="mob-stat">30% Troll Hide &times;2</span></div>
+                <div class="mob-row"><span data-mob-id="troll_stone">&#x1F9CC;</span> Stone Troll<span class="mob-stat">66,000 HP</span><span class="mob-stat">9.0 ATK</span><span class="mob-stat">14,000 XP</span><span class="mob-stat">550-800g</span><span class="mob-stat">40% Troll Hide &times;3</span></div>
+                <div class="mob-row"><span data-mob-id="troll_ancient">&#x1F9CC;</span> Ancient Troll<span class="mob-stat">96,000 HP</span><span class="mob-stat">11.0 ATK</span><span class="mob-stat">20,000 XP</span><span class="mob-stat">750-1,100g</span><span class="mob-stat">50% Troll Hide &times;3</span></div>
               </div>
               <div class="zone-boss"><span data-boss-id="troll">&#x1F9CC;</span> <strong>Troll Overlord</strong><span class="mob-stat">270,000 HP</span><span class="mob-stat">13 ATK</span><span class="mob-stat">Req: 25 ATK &middot; 380 HP &middot; 13 HP Regen</span><span class="mob-stat">6,000 Warrior XP</span></div>
-              <div class="zone-drops">Boss drops: Troll Heart &times;1 &middot; Reward: <span class="rarity epic">Epic Bag</span></div>
+              <div class="zone-drops">Boss drops: Troll Heart &times;1 &middot; Reward: <span data-chest-id="epic_chest" class="zone-drop-chest">&#x1FA99;</span> <a href="item.html?id=epic_chest" class="rarity epic">Epic Bag</a></div>
             </div>
           </div>
 
@@ -206,12 +210,12 @@
             </div>
             <div class="zone-body">
               <div class="zone-mobs">
-                <div class="mob-row"><span>&#x1F409; Dragon Whelp</span><span class="mob-stat">90,000 HP</span><span class="mob-stat">10.0 ATK</span><span class="mob-stat">30,000 XP</span><span class="mob-stat">800-1,500g</span><span class="mob-stat">30% Dragon Scale &times;2</span></div>
-                <div class="mob-row"><span>&#x1F409; Dragon Guard</span><span class="mob-stat">180,000 HP</span><span class="mob-stat">15.0 ATK</span><span class="mob-stat">55,000 XP</span><span class="mob-stat">1,500-2,500g</span><span class="mob-stat">40% Dragon Scale &times;3</span></div>
-                <div class="mob-row"><span>&#x1F409; Elder Dragon</span><span class="mob-stat">300,000 HP</span><span class="mob-stat">18.0 ATK</span><span class="mob-stat">90,000 XP</span><span class="mob-stat">2,200-3,500g</span><span class="mob-stat">50% Dragon Scale &times;4</span></div>
+                <div class="mob-row"><span data-mob-id="dragon_whelp">&#x1F409;</span> Dragon Whelp<span class="mob-stat">90,000 HP</span><span class="mob-stat">10.0 ATK</span><span class="mob-stat">30,000 XP</span><span class="mob-stat">800-1,500g</span><span class="mob-stat">30% Dragon Scale &times;2</span></div>
+                <div class="mob-row"><span data-mob-id="dragon_guard">&#x1F409;</span> Dragon Guard<span class="mob-stat">180,000 HP</span><span class="mob-stat">15.0 ATK</span><span class="mob-stat">55,000 XP</span><span class="mob-stat">1,500-2,500g</span><span class="mob-stat">40% Dragon Scale &times;3</span></div>
+                <div class="mob-row"><span data-mob-id="dragon_elder">&#x1F409;</span> Elder Dragon<span class="mob-stat">300,000 HP</span><span class="mob-stat">18.0 ATK</span><span class="mob-stat">90,000 XP</span><span class="mob-stat">2,200-3,500g</span><span class="mob-stat">50% Dragon Scale &times;4</span></div>
               </div>
               <div class="zone-boss"><span data-boss-id="dragon">&#x1F409;</span> <strong>Ancient Dragon</strong><span class="mob-stat">567,000 HP</span><span class="mob-stat">20 ATK</span><span class="mob-stat">Req: 35 ATK &middot; 500 HP &middot; 20 HP Regen</span><span class="mob-stat">15,000 Warrior XP</span></div>
-              <div class="zone-drops">Boss drops: Dragon Heart &times;1 &middot; Reward: <span class="rarity legendary">Legendary Bag</span></div>
+              <div class="zone-drops">Boss drops: Dragon Heart &times;1 &middot; Reward: <span data-chest-id="legendary_chest" class="zone-drop-chest">&#x1F48E;</span> <a href="item.html?id=legendary_chest" class="rarity legendary">Legendary Bag</a></div>
             </div>
           </div>
 
@@ -225,12 +229,12 @@
             <div class="zone-header"><span class="zone-icon" data-zone-id="zone1">&#x1F30A;</span><div><h3>Zone 1 — Slime Cavern</h3><span class="zone-req">No requirements</span></div></div>
             <div class="zone-body">
               <div class="zone-mobs">
-                <div class="mob-row"><span>&#x1FAE7; Slime Scout</span><span class="mob-stat">1,200 HP</span><span class="mob-stat">0.2 ATK</span><span class="mob-stat">30 XP</span><span class="mob-stat">5-12g</span><span class="mob-stat">30% Slime Gel</span></div>
-                <div class="mob-row"><span>&#x1FAE7; Slime Guard</span><span class="mob-stat">2,100 HP</span><span class="mob-stat">0.3 ATK</span><span class="mob-stat">55 XP</span><span class="mob-stat">8-15g</span><span class="mob-stat">40% Slime Gel</span></div>
-                <div class="mob-row"><span>&#x1FAE7; Slime Brute</span><span class="mob-stat">3,000 HP</span><span class="mob-stat">0.4 ATK</span><span class="mob-stat">90 XP</span><span class="mob-stat">10-20g</span><span class="mob-stat">50% Slime Gel</span></div>
+                <div class="mob-row"><span data-mob-id="slime_scout">&#x1FAE7;</span> Slime Scout<span class="mob-stat">1,200 HP</span><span class="mob-stat">0.2 ATK</span><span class="mob-stat">30 XP</span><span class="mob-stat">5-12g</span><span class="mob-stat">30% Slime Gel</span></div>
+                <div class="mob-row"><span data-mob-id="slime_guard">&#x1FAE7;</span> Slime Guard<span class="mob-stat">2,100 HP</span><span class="mob-stat">0.3 ATK</span><span class="mob-stat">55 XP</span><span class="mob-stat">8-15g</span><span class="mob-stat">40% Slime Gel</span></div>
+                <div class="mob-row"><span data-mob-id="slime_brute">&#x1FAE7;</span> Slime Brute<span class="mob-stat">3,000 HP</span><span class="mob-stat">0.4 ATK</span><span class="mob-stat">90 XP</span><span class="mob-stat">10-20g</span><span class="mob-stat">50% Slime Gel</span></div>
               </div>
               <div class="zone-boss"><span data-boss-id="slime">&#x1F4A7;</span> <strong>Slime King</strong><span class="mob-stat">14,400 HP</span><span class="mob-stat">1.5 ATK</span><span class="mob-stat">No stat req</span><span class="mob-stat">120 Warrior XP</span></div>
-              <div class="zone-drops">Boss drops: Slime Gel &times;5 &middot; Reward: <span class="rarity common">Common Bag</span></div>
+              <div class="zone-drops">Boss drops: Slime Gel &times;5 &middot; Reward: <span data-chest-id="common_chest" class="zone-drop-chest">&#x1F4E6;</span> <a href="item.html?id=common_chest" class="rarity common">Common Bag</a></div>
             </div>
           </div>
         </div>
@@ -250,12 +254,12 @@
             <div class="zone-header"><span class="zone-icon" data-zone-id="zone2">&#x1F3D5;&#xFE0F;</span><div><h3>Zone 2 — Goblin Outpost</h3><span class="zone-req">Clear Zone 1 &middot; Warrior Lvl.3</span></div></div>
             <div class="zone-body">
               <div class="zone-mobs">
-                <div class="mob-row"><span>&#x1F47A; Goblin Scout</span><span class="mob-stat">3,200 HP</span><span class="mob-stat">1.0 ATK</span><span class="mob-stat">120 XP</span><span class="mob-stat">15-30g</span><span class="mob-stat">30% Goblin Tooth</span></div>
-                <div class="mob-row"><span>&#x1F47A; Goblin Warrior</span><span class="mob-stat">5,600 HP</span><span class="mob-stat">1.8 ATK</span><span class="mob-stat">220 XP</span><span class="mob-stat">25-40g</span><span class="mob-stat">40% Goblin Tooth</span></div>
-                <div class="mob-row"><span>&#x1F47A; Goblin Shaman</span><span class="mob-stat">8,000 HP</span><span class="mob-stat">2.2 ATK</span><span class="mob-stat">350 XP</span><span class="mob-stat">30-55g</span><span class="mob-stat">50% Goblin Tooth</span></div>
+                <div class="mob-row"><span data-mob-id="goblin_scout">&#x1F47A;</span> Goblin Scout<span class="mob-stat">3,200 HP</span><span class="mob-stat">1.0 ATK</span><span class="mob-stat">120 XP</span><span class="mob-stat">15-30g</span><span class="mob-stat">30% Goblin Tooth</span></div>
+                <div class="mob-row"><span data-mob-id="goblin_warrior">&#x1F47A;</span> Goblin Warrior<span class="mob-stat">5,600 HP</span><span class="mob-stat">1.8 ATK</span><span class="mob-stat">220 XP</span><span class="mob-stat">25-40g</span><span class="mob-stat">40% Goblin Tooth</span></div>
+                <div class="mob-row"><span data-mob-id="goblin_shaman">&#x1F47A;</span> Goblin Shaman<span class="mob-stat">8,000 HP</span><span class="mob-stat">2.2 ATK</span><span class="mob-stat">350 XP</span><span class="mob-stat">30-55g</span><span class="mob-stat">50% Goblin Tooth</span></div>
               </div>
               <div class="zone-boss"><span data-boss-id="goblin">&#x1F47A;</span> <strong>Goblin Chief</strong><span class="mob-stat">21,600 HP</span><span class="mob-stat">3 ATK</span><span class="mob-stat">Req: 9 ATK &middot; 3 HP Regen</span><span class="mob-stat">400 Warrior XP</span></div>
-              <div class="zone-drops">Boss drops: Goblin Tooth &times;4 &middot; Reward: <span class="rarity rare">Rare Bag</span></div>
+              <div class="zone-drops">Boss drops: Goblin Tooth &times;4 &middot; Reward: <span data-chest-id="rare_chest" class="zone-drop-chest">&#x1F381;</span> <a href="item.html?id=rare_chest" class="rarity rare">Rare Bag</a></div>
             </div>
           </div>
         </div>
@@ -274,12 +278,12 @@
             <div class="zone-header"><span class="zone-icon" data-zone-id="zone3">&#x1F332;</span><div><h3>Zone 3 — Wild Forest</h3><span class="zone-req">Clear Zone 2 &middot; Warrior Lvl.8 &middot; Slime Shield</span></div></div>
             <div class="zone-body">
               <div class="zone-mobs">
-                <div class="mob-row"><span>&#x1F43A; Young Wolf</span><span class="mob-stat">8,000 HP</span><span class="mob-stat">2.0 ATK</span><span class="mob-stat">500 XP</span><span class="mob-stat">40-80g</span><span class="mob-stat">30% Wolf Fang</span></div>
-                <div class="mob-row"><span>&#x1F43A; Pack Wolf</span><span class="mob-stat">14,000 HP</span><span class="mob-stat">3.0 ATK</span><span class="mob-stat">900 XP</span><span class="mob-stat">65-100g</span><span class="mob-stat">40% Wolf Fang</span></div>
-                <div class="mob-row"><span>&#x1F43A; Alpha Wolf</span><span class="mob-stat">20,000 HP</span><span class="mob-stat">3.5 ATK</span><span class="mob-stat">1,400 XP</span><span class="mob-stat">80-130g</span><span class="mob-stat">50% Wolf Fang</span></div>
+                <div class="mob-row"><span data-mob-id="wolf_young">&#x1F43A;</span> Young Wolf<span class="mob-stat">8,000 HP</span><span class="mob-stat">2.0 ATK</span><span class="mob-stat">500 XP</span><span class="mob-stat">40-80g</span><span class="mob-stat">30% Wolf Fang</span></div>
+                <div class="mob-row"><span data-mob-id="wolf_pack">&#x1F43A;</span> Pack Wolf<span class="mob-stat">14,000 HP</span><span class="mob-stat">3.0 ATK</span><span class="mob-stat">900 XP</span><span class="mob-stat">65-100g</span><span class="mob-stat">40% Wolf Fang</span></div>
+                <div class="mob-row"><span data-mob-id="wolf_alpha">&#x1F43A;</span> Alpha Wolf<span class="mob-stat">20,000 HP</span><span class="mob-stat">3.5 ATK</span><span class="mob-stat">1,400 XP</span><span class="mob-stat">80-130g</span><span class="mob-stat">50% Wolf Fang</span></div>
               </div>
               <div class="zone-boss"><span data-boss-id="wolf">&#x1F43A;</span> <strong>Forest Wolf</strong><span class="mob-stat">52,800 HP</span><span class="mob-stat">5 ATK</span><span class="mob-stat">Req: 11 ATK &middot; 200 HP &middot; 5 HP Regen</span><span class="mob-stat">900 Warrior XP</span></div>
-              <div class="zone-drops">Boss drops: Wolf Fang &times;3 &middot; Reward: <span class="rarity rare">Rare Bag</span></div>
+              <div class="zone-drops">Boss drops: Wolf Fang &times;3 &middot; Reward: <span data-chest-id="rare_chest" class="zone-drop-chest">&#x1F381;</span> <a href="item.html?id=rare_chest" class="rarity rare">Rare Bag</a></div>
             </div>
           </div>
         </div>
@@ -291,12 +295,12 @@
             <div class="zone-header"><span class="zone-icon" data-zone-id="zone4">&#x1FAA8;</span><div><h3>Zone 4 — Orc Stronghold</h3><span class="zone-req">Clear Zone 3 &middot; Warrior Lvl.15 &middot; Goblin Blade</span></div></div>
             <div class="zone-body">
               <div class="zone-mobs">
-                <div class="mob-row"><span>&#x1F479; Orc Grunt</span><span class="mob-stat">15,000 HP</span><span class="mob-stat">3.5 ATK</span><span class="mob-stat">2,000 XP</span><span class="mob-stat">100-200g</span><span class="mob-stat">30% Orc Shard &times;2</span></div>
-                <div class="mob-row"><span>&#x1F479; Orc Brute</span><span class="mob-stat">27,000 HP</span><span class="mob-stat">5.5 ATK</span><span class="mob-stat">3,500 XP</span><span class="mob-stat">180-280g</span><span class="mob-stat">40% Orc Shard &times;2</span></div>
-                <div class="mob-row"><span>&#x1F479; Orc Shaman</span><span class="mob-stat">39,000 HP</span><span class="mob-stat">6.5 ATK</span><span class="mob-stat">5,000 XP</span><span class="mob-stat">250-380g</span><span class="mob-stat">50% Orc Shard &times;3</span></div>
+                <div class="mob-row"><span data-mob-id="orc_grunt">&#x1F479;</span> Orc Grunt<span class="mob-stat">15,000 HP</span><span class="mob-stat">3.5 ATK</span><span class="mob-stat">2,000 XP</span><span class="mob-stat">100-200g</span><span class="mob-stat">30% Orc Shard &times;2</span></div>
+                <div class="mob-row"><span data-mob-id="orc_brute">&#x1F479;</span> Orc Brute<span class="mob-stat">27,000 HP</span><span class="mob-stat">5.5 ATK</span><span class="mob-stat">3,500 XP</span><span class="mob-stat">180-280g</span><span class="mob-stat">40% Orc Shard &times;2</span></div>
+                <div class="mob-row"><span data-mob-id="orc_shaman">&#x1F479;</span> Orc Shaman<span class="mob-stat">39,000 HP</span><span class="mob-stat">6.5 ATK</span><span class="mob-stat">5,000 XP</span><span class="mob-stat">250-380g</span><span class="mob-stat">50% Orc Shard &times;3</span></div>
               </div>
               <div class="zone-boss"><span data-boss-id="orc">&#x1F479;</span> <strong>Orc Warlord</strong><span class="mob-stat">129,600 HP</span><span class="mob-stat">8 ATK</span><span class="mob-stat">Req: 18 ATK &middot; 280 HP &middot; 8 HP Regen</span><span class="mob-stat">2,500 Warrior XP</span></div>
-              <div class="zone-drops">Boss drops: Warlord Sigil &times;1 &middot; Reward: <span class="rarity epic">Epic Bag</span></div>
+              <div class="zone-drops">Boss drops: Warlord Sigil &times;1 &middot; Reward: <span data-chest-id="epic_chest" class="zone-drop-chest">&#x1FA99;</span> <a href="item.html?id=epic_chest" class="rarity epic">Epic Bag</a></div>
             </div>
           </div>
         </div>
@@ -308,12 +312,12 @@
             <div class="zone-header"><span class="zone-icon" data-zone-id="zone5">&#x1F309;</span><div><h3>Zone 5 — Troll Bridge</h3><span class="zone-req">Clear Zone 4 &middot; Warrior Lvl.25 &middot; Wolf Fang Pendant + Orc Plate</span></div></div>
             <div class="zone-body">
               <div class="zone-mobs">
-                <div class="mob-row"><span>&#x1F9CC; Bridge Troll</span><span class="mob-stat">36,000 HP</span><span class="mob-stat">6.0 ATK</span><span class="mob-stat">8,000 XP</span><span class="mob-stat">300-550g</span><span class="mob-stat">30% Troll Hide &times;2</span></div>
-                <div class="mob-row"><span>&#x1F9CC; Stone Troll</span><span class="mob-stat">66,000 HP</span><span class="mob-stat">9.0 ATK</span><span class="mob-stat">14,000 XP</span><span class="mob-stat">550-800g</span><span class="mob-stat">40% Troll Hide &times;3</span></div>
-                <div class="mob-row"><span>&#x1F9CC; Ancient Troll</span><span class="mob-stat">96,000 HP</span><span class="mob-stat">11.0 ATK</span><span class="mob-stat">20,000 XP</span><span class="mob-stat">750-1,100g</span><span class="mob-stat">50% Troll Hide &times;3</span></div>
+                <div class="mob-row"><span data-mob-id="troll_bridge">&#x1F9CC;</span> Bridge Troll<span class="mob-stat">36,000 HP</span><span class="mob-stat">6.0 ATK</span><span class="mob-stat">8,000 XP</span><span class="mob-stat">300-550g</span><span class="mob-stat">30% Troll Hide &times;2</span></div>
+                <div class="mob-row"><span data-mob-id="troll_stone">&#x1F9CC;</span> Stone Troll<span class="mob-stat">66,000 HP</span><span class="mob-stat">9.0 ATK</span><span class="mob-stat">14,000 XP</span><span class="mob-stat">550-800g</span><span class="mob-stat">40% Troll Hide &times;3</span></div>
+                <div class="mob-row"><span data-mob-id="troll_ancient">&#x1F9CC;</span> Ancient Troll<span class="mob-stat">96,000 HP</span><span class="mob-stat">11.0 ATK</span><span class="mob-stat">20,000 XP</span><span class="mob-stat">750-1,100g</span><span class="mob-stat">50% Troll Hide &times;3</span></div>
               </div>
               <div class="zone-boss"><span data-boss-id="troll">&#x1F9CC;</span> <strong>Troll Overlord</strong><span class="mob-stat">270,000 HP</span><span class="mob-stat">13 ATK</span><span class="mob-stat">Req: 25 ATK &middot; 380 HP &middot; 13 HP Regen</span><span class="mob-stat">6,000 Warrior XP</span></div>
-              <div class="zone-drops">Boss drops: Troll Heart &times;1 &middot; Reward: <span class="rarity epic">Epic Bag</span></div>
+              <div class="zone-drops">Boss drops: Troll Heart &times;1 &middot; Reward: <span data-chest-id="epic_chest" class="zone-drop-chest">&#x1FA99;</span> <a href="item.html?id=epic_chest" class="rarity epic">Epic Bag</a></div>
             </div>
           </div>
         </div>
@@ -325,12 +329,12 @@
             <div class="zone-header"><span class="zone-icon" data-zone-id="zone6">&#x1F525;</span><div><h3>Zone 6 — Dragon Lair</h3><span class="zone-req">Clear Zone 5 &middot; Warrior Lvl.40 &middot; Troll Cloak</span></div></div>
             <div class="zone-body">
               <div class="zone-mobs">
-                <div class="mob-row"><span>&#x1F409; Dragon Whelp</span><span class="mob-stat">90,000 HP</span><span class="mob-stat">10.0 ATK</span><span class="mob-stat">30,000 XP</span><span class="mob-stat">800-1,500g</span><span class="mob-stat">30% Dragon Scale &times;2</span></div>
-                <div class="mob-row"><span>&#x1F409; Dragon Guard</span><span class="mob-stat">180,000 HP</span><span class="mob-stat">15.0 ATK</span><span class="mob-stat">55,000 XP</span><span class="mob-stat">1,500-2,500g</span><span class="mob-stat">40% Dragon Scale &times;3</span></div>
-                <div class="mob-row"><span>&#x1F409; Elder Dragon</span><span class="mob-stat">300,000 HP</span><span class="mob-stat">18.0 ATK</span><span class="mob-stat">90,000 XP</span><span class="mob-stat">2,200-3,500g</span><span class="mob-stat">50% Dragon Scale &times;4</span></div>
+                <div class="mob-row"><span data-mob-id="dragon_whelp">&#x1F409;</span> Dragon Whelp<span class="mob-stat">90,000 HP</span><span class="mob-stat">10.0 ATK</span><span class="mob-stat">30,000 XP</span><span class="mob-stat">800-1,500g</span><span class="mob-stat">30% Dragon Scale &times;2</span></div>
+                <div class="mob-row"><span data-mob-id="dragon_guard">&#x1F409;</span> Dragon Guard<span class="mob-stat">180,000 HP</span><span class="mob-stat">15.0 ATK</span><span class="mob-stat">55,000 XP</span><span class="mob-stat">1,500-2,500g</span><span class="mob-stat">40% Dragon Scale &times;3</span></div>
+                <div class="mob-row"><span data-mob-id="dragon_elder">&#x1F409;</span> Elder Dragon<span class="mob-stat">300,000 HP</span><span class="mob-stat">18.0 ATK</span><span class="mob-stat">90,000 XP</span><span class="mob-stat">2,200-3,500g</span><span class="mob-stat">50% Dragon Scale &times;4</span></div>
               </div>
               <div class="zone-boss"><span data-boss-id="dragon">&#x1F409;</span> <strong>Ancient Dragon</strong><span class="mob-stat">567,000 HP</span><span class="mob-stat">20 ATK</span><span class="mob-stat">Req: 35 ATK &middot; 500 HP &middot; 20 HP Regen</span><span class="mob-stat">15,000 Warrior XP</span></div>
-              <div class="zone-drops">Boss drops: Dragon Heart &times;1 &middot; Reward: <span class="rarity legendary">Legendary Bag</span></div>
+              <div class="zone-drops">Boss drops: Dragon Heart &times;1 &middot; Reward: <span data-chest-id="legendary_chest" class="zone-drop-chest">&#x1F48E;</span> <a href="item.html?id=legendary_chest" class="rarity legendary">Legendary Bag</a></div>
             </div>
           </div>
         </div>

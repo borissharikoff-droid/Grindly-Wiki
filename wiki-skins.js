@@ -28,13 +28,21 @@
     var seedOv = cfg.seedOverrides || {};
     var chestOv = cfg.chestOverrides || {};
 
+    // Build flat mob override map from zoneOverrides[zoneId].mobs[mobId]
+    var mobOv = {};
+    for (var zid in zoneOv) {
+      var zm = (zoneOv[zid] || {}).mobs || {};
+      for (var mid in zm) { mobOv[mid] = zm[mid]; }
+    }
+
     // 1. Explicit data attributes
     var attrMap = [
       ['data-item-id', itemOv],
       ['data-boss-id', bossOv],
       ['data-zone-id', zoneOv],
       ['data-seed-id', seedOv],
-      ['data-chest-id', chestOv]
+      ['data-chest-id', chestOv],
+      ['data-mob-id', mobOv]
     ];
     attrMap.forEach(function(pair) {
       document.querySelectorAll('[' + pair[0] + ']').forEach(function(el) {
