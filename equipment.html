@@ -5,6 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Equipment – Grindly Wiki</title>
 <link rel="stylesheet" href="style.css">
+<style>
+/* ── Equipment page styles ──────────────────────────────────────────────────── */
+.eq-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:18px}
+.eq-tab{padding:7px 16px;border-radius:8px;border:1px solid var(--border-inner);background:transparent;color:var(--text-dim);font-size:13px;font-family:var(--font-mono);cursor:pointer;transition:all .15s}
+.eq-tab:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
+.eq-tab.active{color:var(--gold);border-color:var(--gold);background:rgba(251,191,36,.08)}
+.eq-panel{display:none}.eq-panel.active{display:block}
+
+/* Set cards */
+.set-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.set-card{background:var(--bg-card);border:1px solid var(--border-inner);border-radius:10px;overflow:hidden;transition:border-color .2s}
+.set-card:hover{border-color:var(--set-color,var(--border-inner))}
+.set-header{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;user-select:none}
+.set-header:hover{background:rgba(255,255,255,.02)}
+.set-rarity-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.set-name{font-family:var(--font-title);font-size:15px;flex:1}
+.set-badge{font-family:var(--font-mono);font-size:11px;padding:2px 8px;border-radius:4px;border:1px solid rgba(255,255,255,.08);color:var(--text-dim)}
+.set-arrow{font-size:10px;color:var(--text-dim);transition:transform .2s}
+.set-card.open .set-arrow{transform:rotate(180deg)}
+.set-body{display:none;padding:0 16px 14px;animation:fadeIn .15s ease}
+.set-card.open .set-body{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.set-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:6px;transition:background .12s}
+.set-item:hover{background:rgba(255,255,255,.04)}
+.set-item-icon{font-size:18px;width:28px;text-align:center;flex-shrink:0}
+.set-item-info{flex:1;min-width:0}
+.set-item-name{font-size:13px;color:var(--text)}
+.set-item-name a{color:var(--gold);text-decoration:none}
+.set-item-name a:hover{text-decoration:underline}
+.set-item-meta{font-size:11px;color:var(--text-dim);font-family:var(--font-mono)}
+.set-item-perk{font-size:11px;text-align:right;flex-shrink:0;white-space:nowrap}
+.set-total{display:flex;gap:12px;padding:10px 10px 2px;border-top:1px solid var(--border-inner);margin-top:6px;flex-wrap:wrap}
+.set-total-stat{font-family:var(--font-mono);font-size:11px;padding:3px 8px;border-radius:4px;background:rgba(255,255,255,.04)}
+
+/* Rarity / Slot filter */
+.filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.filter-btn{padding:5px 12px;border-radius:6px;border:1px solid var(--border-inner);background:transparent;color:var(--text-dim);font-size:12px;cursor:pointer;font-family:var(--font-mono);transition:all .12s}
+.filter-btn:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
+.filter-btn.active{color:var(--gold);border-color:var(--gold);background:rgba(251,191,36,.06)}
+
+/* All items table */
+.eq-table{width:100%;border-collapse:collapse}
+.eq-table th{text-align:left;padding:6px 10px;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-dim);border-bottom:1px solid var(--border-inner)}
+.eq-table td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px}
+.eq-table tr:hover td{background:rgba(255,255,255,.02)}
+.eq-table .icon-cell{font-size:16px;width:32px;text-align:center}
+.eq-table a{color:var(--gold);text-decoration:none}
+.eq-table a:hover{text-decoration:underline}
+.eq-source{font-size:11px;padding:2px 8px;border-radius:4px;background:rgba(255,255,255,.04);color:var(--text-dim);font-family:var(--font-mono)}
+</style>
 </head>
 <body>
 
@@ -57,99 +107,295 @@
   <!-- Main Content -->
   <main class="main">
 
-    <!-- Bag-Drop Gear -->
-    <section class="content" id="bag-drop">
+    <section class="content">
       <h2 class="section-title"><span class="section-icon">&#9876;&#65039;</span> Equipment</h2>
-      <p class="section-desc">Gear drops from chests or is crafted at the workbench. Equip items to boost ATK, HP, HP Regen, XP rates and more. Only armor slots (head, body, legs, ring, weapon) contribute to Item Power (IP).</p>
+      <p class="section-desc">Gear drops from chests or is crafted at the workbench. Equip items to boost ATK, HP, HP Regen, XP rates and more.</p>
 
-      <h3 class="sub-title">Bag-Drop Gear (Armor Sets)</h3>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th></th><th>Name</th><th>Slot</th><th>Rarity</th><th>Perks</th></tr></thead>
-          <tbody>
-            <!-- Wooden Set (Common) -->
-            <tr><td class="icon-cell">&#129686;</td><td><a href="item.html?id=wooden_helm" style="color:var(--gold)">Wooden Helm</a></td><td><span class="slot-badge">Head</span></td><td><span class="rarity common">Common</span></td><td class="perk">+2 ATK</td></tr>
-            <tr><td class="icon-cell">&#129717;</td><td><a href="item.html?id=wooden_plate" style="color:var(--gold)">Wooden Plate</a></td><td><span class="slot-badge">Body</span></td><td><span class="rarity common">Common</span></td><td class="perk">+15 HP</td></tr>
-            <tr><td class="icon-cell">&#128481;&#65039;</td><td><a href="item.html?id=wooden_sword" style="color:var(--gold)">Wooden Sword</a></td><td><span class="slot-badge">Weapon</span></td><td><span class="rarity common">Common</span></td><td class="perk">+3 ATK</td></tr>
-            <tr><td class="icon-cell">&#129471;</td><td><a href="item.html?id=wooden_legs" style="color:var(--gold)">Wooden Legs</a></td><td><span class="slot-badge">Legs</span></td><td><span class="rarity common">Common</span></td><td class="perk">+1 ATK</td></tr>
-            <tr><td class="icon-cell">&#128255;</td><td><a href="item.html?id=wooden_ring" style="color:var(--gold)">Wooden Ring</a></td><td><span class="slot-badge">Ring</span></td><td><span class="rarity common">Common</span></td><td class="perk">+0.5 HP Regen</td></tr>
-            <!-- Copper Set (Rare) -->
-            <tr><td class="icon-cell">&#9937;&#65039;</td><td><a href="item.html?id=copper_helm" style="color:var(--gold)">Copper Helm</a></td><td><span class="slot-badge">Head</span></td><td><span class="rarity rare">Rare</span></td><td class="perk">+4 ATK</td></tr>
-            <tr><td class="icon-cell">&#128737;&#65039;</td><td><a href="item.html?id=copper_plate" style="color:var(--gold)">Copper Plate</a></td><td><span class="slot-badge">Body</span></td><td><span class="rarity rare">Rare</span></td><td class="perk">+35 HP</td></tr>
-            <tr><td class="icon-cell">&#9876;&#65039;</td><td><a href="item.html?id=copper_sword" style="color:var(--gold)">Copper Sword</a></td><td><span class="slot-badge">Weapon</span></td><td><span class="rarity rare">Rare</span></td><td class="perk">+6 ATK</td></tr>
-            <tr><td class="icon-cell">&#129471;</td><td><a href="item.html?id=copper_legs" style="color:var(--gold)">Copper Legs</a></td><td><span class="slot-badge">Legs</span></td><td><span class="rarity rare">Rare</span></td><td class="perk">+2 ATK</td></tr>
-            <tr><td class="icon-cell">&#128141;</td><td><a href="item.html?id=copper_ring" style="color:var(--gold)">Copper Ring</a></td><td><span class="slot-badge">Ring</span></td><td><span class="rarity rare">Rare</span></td><td class="perk">+1.5 HP Regen</td></tr>
-            <!-- Shadow Set (Epic) -->
-            <tr><td class="icon-cell">&#129686;</td><td><a href="item.html?id=shadow_helm" style="color:var(--gold)">Shadow Helm</a></td><td><span class="slot-badge">Head</span></td><td><span class="rarity epic">Epic</span></td><td class="perk">+7 ATK &middot; +15 HP</td></tr>
-            <tr><td class="icon-cell">&#128737;&#65039;</td><td><a href="item.html?id=shadow_plate" style="color:var(--gold)">Shadow Plate</a></td><td><span class="slot-badge">Body</span></td><td><span class="rarity epic">Epic</span></td><td class="perk">+50 HP &middot; +3 ATK</td></tr>
-            <tr><td class="icon-cell">&#9876;&#65039;</td><td><a href="item.html?id=shadow_sword" style="color:var(--gold)">Shadow Sword</a></td><td><span class="slot-badge">Weapon</span></td><td><span class="rarity epic">Epic</span></td><td class="perk">+10 ATK &middot; +2 HP Regen</td></tr>
-            <tr><td class="icon-cell">&#129471;</td><td><a href="item.html?id=shadow_legs" style="color:var(--gold)">Shadow Legs</a></td><td><span class="slot-badge">Legs</span></td><td><span class="rarity epic">Epic</span></td><td class="perk">+5 ATK &middot; +20 HP</td></tr>
-            <tr><td class="icon-cell">&#128279;</td><td><a href="item.html?id=shadow_ring" style="color:var(--gold)">Shadow Ring</a></td><td><span class="slot-badge">Ring</span></td><td><span class="rarity epic">Epic</span></td><td class="perk">+5 ATK &middot; +2 HP Regen</td></tr>
-            <!-- Golden Set (Legendary) -->
-            <tr><td class="icon-cell">&#128081;</td><td><a href="item.html?id=golden_helm" style="color:var(--gold)">Golden Helm</a></td><td><span class="slot-badge">Head</span></td><td><span class="rarity legendary">Legendary</span></td><td class="perk">+8 ATK &middot; +30 HP &middot; +5% Global XP</td></tr>
-            <tr><td class="icon-cell">&#128737;&#65039;</td><td><a href="item.html?id=golden_plate" style="color:var(--gold)">Golden Plate</a></td><td><span class="slot-badge">Body</span></td><td><span class="rarity legendary">Legendary</span></td><td class="perk">+80 HP &middot; +5 ATK &middot; Streak Shield</td></tr>
-            <tr><td class="icon-cell">&#9876;&#65039;</td><td><a href="item.html?id=golden_sword" style="color:var(--gold)">Golden Sword</a></td><td><span class="slot-badge">Weapon</span></td><td><span class="rarity legendary">Legendary</span></td><td class="perk">+12 ATK &middot; +3 HP Regen</td></tr>
-            <tr><td class="icon-cell">&#129471;</td><td><a href="item.html?id=golden_legs" style="color:var(--gold)">Golden Legs</a></td><td><span class="slot-badge">Legs</span></td><td><span class="rarity legendary">Legendary</span></td><td class="perk">+7 ATK &middot; +40 HP</td></tr>
-            <tr><td class="icon-cell">&#128141;</td><td><a href="item.html?id=golden_ring" style="color:var(--gold)">Golden Ring</a></td><td><span class="slot-badge">Ring</span></td><td><span class="rarity legendary">Legendary</span></td><td class="perk">+6 ATK &middot; +15% Focus</td></tr>
-            <!-- Void Set (Mythic) -->
-            <tr><td class="icon-cell">&#127744;</td><td><a href="item.html?id=void_helm" style="color:var(--gold)">Void Helm</a></td><td><span class="slot-badge">Head</span></td><td><span class="rarity mythic">Mythic</span></td><td class="perk">+12 ATK &middot; +50 HP &middot; +8% Global XP</td></tr>
-            <tr><td class="icon-cell">&#128123;</td><td><a href="item.html?id=void_plate" style="color:var(--gold)">Void Plate</a></td><td><span class="slot-badge">Body</span></td><td><span class="rarity mythic">Mythic</span></td><td class="perk">+120 HP &middot; +8 ATK &middot; Streak Shield</td></tr>
-            <tr><td class="icon-cell">&#9876;&#65039;</td><td><a href="item.html?id=void_sword" style="color:var(--gold)">Void Sword</a></td><td><span class="slot-badge">Weapon</span></td><td><span class="rarity mythic">Mythic</span></td><td class="perk">+15 ATK &middot; +5 HP Regen</td></tr>
-            <tr><td class="icon-cell">&#129471;</td><td><a href="item.html?id=void_legs" style="color:var(--gold)">Void Legs</a></td><td><span class="slot-badge">Legs</span></td><td><span class="rarity mythic">Mythic</span></td><td class="perk">+10 ATK &middot; +60 HP</td></tr>
-            <tr><td class="icon-cell">&#127744;</td><td><a href="item.html?id=void_ring" style="color:var(--gold)">Void Ring</a></td><td><span class="slot-badge">Ring</span></td><td><span class="rarity mythic">Mythic</span></td><td class="perk">+10 ATK &middot; +4 HP Regen &middot; +8% Global XP</td></tr>
-          </tbody>
-        </table>
+      <!-- Tabs -->
+      <div class="eq-tabs">
+        <button class="eq-tab active" onclick="eqSwitchTab('sets')">Armor Sets</button>
+        <button class="eq-tab" onclick="eqSwitchTab('crafted')">Crafted Gear</button>
+        <button class="eq-tab" onclick="eqSwitchTab('consumables')">Consumables</button>
+        <button class="eq-tab" onclick="eqSwitchTab('all')">All Equipment</button>
       </div>
-    </section>
 
-    <!-- Crafted Gear -->
-    <section class="content" id="crafted">
-      <h3 class="sub-title">Crafted Gear</h3>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th></th><th>Name</th><th>Slot</th><th>Rarity</th><th>Perks</th></tr></thead>
-          <tbody>
-            <tr><td class="icon-cell">&#9937;&#65039;</td><td><a href="item.html?id=craft_iron_helm" style="color:var(--gold)">Iron Helm</a></td><td><span class="slot-badge">Head</span></td><td><span class="rarity common">Common</span></td><td class="perk">+2 ATK</td></tr>
-            <tr><td class="icon-cell">&#128481;&#65039;</td><td><a href="item.html?id=craft_fang_dagger" style="color:var(--gold)">Fang Dagger</a></td><td><span class="slot-badge">Weapon</span></td><td><span class="rarity common">Common</span></td><td class="perk">+3 ATK</td></tr>
-            <tr><td class="icon-cell">&#128737;&#65039;</td><td><a href="item.html?id=craft_slime_shield" style="color:var(--gold)">Slime Shield</a></td><td><span class="slot-badge">Body</span></td><td><span class="rarity common">Common</span></td><td class="perk">+8 HP</td></tr>
-            <tr><td class="icon-cell">&#128298;</td><td><a href="item.html?id=craft_goblin_blade" style="color:var(--gold)">Goblin Blade</a></td><td><span class="slot-badge">Weapon</span></td><td><span class="rarity common">Common</span></td><td class="perk">+4 ATK</td></tr>
-            <tr><td class="icon-cell">&#128141;</td><td><a href="item.html?id=craft_essence_ring" style="color:var(--gold)">Essence Ring</a></td><td><span class="slot-badge">Ring</span></td><td><span class="rarity rare">Rare</span></td><td class="perk">+8% XP all skills</td></tr>
-            <tr><td class="icon-cell">&#129355;</td><td><a href="item.html?id=craft_scale_robe" style="color:var(--gold)">Scale Robe</a></td><td><span class="slot-badge">Body</span></td><td><span class="rarity rare">Rare</span></td><td class="perk">+20 HP</td></tr>
-            <tr><td class="icon-cell">&#128058;</td><td><a href="item.html?id=craft_wolf_pendant" style="color:var(--gold)">Wolf Fang Pendant</a></td><td><span class="slot-badge">Ring</span></td><td><span class="rarity rare">Rare</span></td><td class="perk">+3 HP Regen/s</td></tr>
-            <tr><td class="icon-cell">&#129704;</td><td><a href="item.html?id=craft_orc_plate" style="color:var(--gold)">Orc Plate</a></td><td><span class="slot-badge">Body</span></td><td><span class="rarity rare">Rare</span></td><td class="perk">+15 HP &middot; +3 ATK</td></tr>
-            <tr><td class="icon-cell">&#9876;&#65039;</td><td><a href="item.html?id=craft_void_blade" style="color:var(--gold)">Void Blade</a></td><td><span class="slot-badge">Weapon</span></td><td><span class="rarity epic">Epic</span></td><td class="perk">+12 ATK</td></tr>
-            <tr><td class="icon-cell">&#129500;</td><td><a href="item.html?id=craft_troll_cloak" style="color:var(--gold)">Troll Cloak</a></td><td><span class="slot-badge">Body</span></td><td><span class="rarity epic">Epic</span></td><td class="perk">+25 HP &middot; +5 HP Regen/s</td></tr>
-            <tr><td class="icon-cell">&#128305;</td><td><a href="item.html?id=craft_warlord_gauntlets" style="color:var(--gold)">Warlord Gauntlets</a></td><td><span class="slot-badge">Ring</span></td><td><span class="rarity epic">Epic</span></td><td class="perk">+6 ATK &middot; +10 HP</td></tr>
-            <tr><td class="icon-cell">&#128081;</td><td><a href="item.html?id=craft_dragon_crown" style="color:var(--gold)">Dragon Crown</a></td><td><span class="slot-badge">Head</span></td><td><span class="rarity legendary">Legendary</span></td><td class="perk">+8 ATK &middot; +30 HP</td></tr>
-            <tr><td class="icon-cell">&#128156;</td><td><a href="item.html?id=craft_troll_aegis" style="color:var(--gold)">Troll Aegis</a></td><td><span class="slot-badge">Body</span></td><td><span class="rarity legendary">Legendary</span></td><td class="perk">+40 HP &middot; +8 HP Regen/s</td></tr>
-            <tr><td class="icon-cell">&#128293;</td><td><a href="item.html?id=craft_dragonfire_blade" style="color:var(--gold)">Dragonfire Blade</a></td><td><span class="slot-badge">Weapon</span></td><td><span class="rarity mythic">Mythic</span></td><td class="perk">+20 ATK &middot; +15 HP &middot; +5 HP Regen/s</td></tr>
-          </tbody>
-        </table>
+      <!-- ═══ Sets Panel ═══ -->
+      <div id="panel-sets" class="eq-panel active">
+        <p style="font-size:12px;color:var(--text-dim);margin-bottom:14px">Bag-drop armor sets from chests. Each set has 5 slots: Head, Body, Weapon, Legs, Ring. Click a set to expand.</p>
+        <div class="set-grid" id="setGrid"></div>
       </div>
-    </section>
 
-    <!-- Consumables -->
-    <section class="content" id="consumables">
-      <h3 class="sub-title">Consumables</h3>
-      <div class="table-wrap">
-        <table>
+      <!-- ═══ Crafted Panel ═══ -->
+      <div id="panel-crafted" class="eq-panel">
+        <p style="font-size:12px;color:var(--text-dim);margin-bottom:14px">Gear forged at the workbench from arena materials and refined components. See <a href="crafting.html" style="color:var(--gold)">Crafting</a> for recipes.</p>
+        <div class="filter-row" id="craftRarityFilter"></div>
+        <div class="table-wrap"><table class="eq-table" id="craftTable">
+          <thead><tr><th></th><th>Name</th><th>Slot</th><th>Rarity</th><th>Perks</th></tr></thead>
+          <tbody id="craftBody"></tbody>
+        </table></div>
+      </div>
+
+      <!-- ═══ Consumables Panel ═══ -->
+      <div id="panel-consumables" class="eq-panel">
+        <p style="font-size:12px;color:var(--text-dim);margin-bottom:14px">Rare permanent-boost potions dropped from Epic and Legendary chests.</p>
+        <div class="table-wrap"><table class="eq-table">
           <thead><tr><th></th><th>Name</th><th>Rarity</th><th>Effect</th></tr></thead>
-          <tbody>
-            <tr><td class="icon-cell">&#9879;&#65039;</td><td><a href="item.html?id=atk_potion" style="color:var(--gold)">Attack Potion</a></td><td><span class="rarity mythic">Mythic</span></td><td class="perk">+1 permanent ATK (max 50)</td></tr>
-            <tr><td class="icon-cell">&#128138;</td><td><a href="item.html?id=hp_potion" style="color:var(--gold)">Vitality Potion</a></td><td><span class="rarity mythic">Mythic</span></td><td class="perk">+1 permanent HP (max 50)</td></tr>
-            <tr><td class="icon-cell">&#128137;</td><td><a href="item.html?id=regen_potion" style="color:var(--gold)">Regen Potion</a></td><td><span class="rarity mythic">Mythic</span></td><td class="perk">+1 permanent HP Regen/s (max 50)</td></tr>
-          </tbody>
-        </table>
+          <tbody id="consumBody"></tbody>
+        </table></div>
       </div>
-    </section>
 
+      <!-- ═══ All Equipment Panel ═══ -->
+      <div id="panel-all" class="eq-panel">
+        <div class="filter-row">
+          <span style="font-size:11px;color:var(--text-dim);line-height:28px;margin-right:4px">Rarity:</span>
+          <div id="allRarityFilter"></div>
+          <span style="font-size:11px;color:var(--text-dim);line-height:28px;margin:0 8px 0 16px">Slot:</span>
+          <div id="allSlotFilter"></div>
+        </div>
+        <div class="table-wrap"><table class="eq-table">
+          <thead><tr><th></th><th>Name</th><th>Slot</th><th>Rarity</th><th>Perks</th><th>Source</th></tr></thead>
+          <tbody id="allBody"></tbody>
+        </table></div>
+      </div>
+
+    </section>
   </main>
 </div>
 
-<!-- Collapsible nav JS -->
 <script>
 (function() {
-  // Collapsible nav groups
+  // ── Data ────────────────────────────────────────────────────────────────────
+  var RARITY_COLORS = {common:'#9ca3af',rare:'#38bdf8',epic:'#c084fc',legendary:'#fbbf24',mythic:'#f472b6'};
+  var RARITY_ORDER = ['common','rare','epic','legendary','mythic'];
+  var SLOT_ORDER = ['head','body','weapon','legs','ring'];
+  var SLOT_LABELS = {head:'Head',body:'Body',weapon:'Weapon',legs:'Legs',ring:'Ring',consumable:'Consumable'};
+
+  var SETS = [
+    { name:'Wooden Set', rarity:'common', ids:['wooden_helm','wooden_plate','wooden_sword','wooden_legs','wooden_ring'],
+      items:[
+        {id:'wooden_helm',  icon:'\u{1FA96}',name:'Wooden Helm',  slot:'head',  perk:'+2 ATK',      stats:{atk:2}},
+        {id:'wooden_plate', icon:'\u{1FAB5}',name:'Wooden Plate', slot:'body',  perk:'+15 HP',      stats:{hp:15}},
+        {id:'wooden_sword', icon:'\u{1F5E1}\uFE0F',name:'Wooden Sword',slot:'weapon',perk:'+3 ATK', stats:{atk:3}},
+        {id:'wooden_legs',  icon:'\u{1F9BF}',name:'Wooden Legs',  slot:'legs',  perk:'+1 ATK',      stats:{atk:1}},
+        {id:'wooden_ring',  icon:'\u{1F4FF}',name:'Wooden Ring',  slot:'ring',  perk:'+0.5 Regen',  stats:{regen:0.5}},
+      ]},
+    { name:'Copper Set', rarity:'rare', ids:['copper_helm','copper_plate','copper_sword','copper_legs','copper_ring'],
+      items:[
+        {id:'copper_helm',  icon:'\u26D1\uFE0F',name:'Copper Helm',  slot:'head',  perk:'+4 ATK',      stats:{atk:4}},
+        {id:'copper_plate', icon:'\u{1F6E1}\uFE0F',name:'Copper Plate',slot:'body', perk:'+35 HP',      stats:{hp:35}},
+        {id:'copper_sword', icon:'\u2694\uFE0F',name:'Copper Sword',slot:'weapon',perk:'+6 ATK',       stats:{atk:6}},
+        {id:'copper_legs',  icon:'\u{1F9BF}',name:'Copper Legs',  slot:'legs',  perk:'+2 ATK',      stats:{atk:2}},
+        {id:'copper_ring',  icon:'\u{1F48D}',name:'Copper Ring',  slot:'ring',  perk:'+1.5 Regen',  stats:{regen:1.5}},
+      ]},
+    { name:'Shadow Set', rarity:'epic', ids:['shadow_helm','shadow_plate','shadow_sword','shadow_legs','shadow_ring'],
+      items:[
+        {id:'shadow_helm',  icon:'\u{1FA96}',name:'Shadow Helm',  slot:'head',  perk:'+7 ATK \u00B7 +15 HP',         stats:{atk:7,hp:15}},
+        {id:'shadow_plate', icon:'\u{1F6E1}\uFE0F',name:'Shadow Plate',slot:'body', perk:'+50 HP \u00B7 +3 ATK',     stats:{hp:50,atk:3}},
+        {id:'shadow_sword', icon:'\u2694\uFE0F',name:'Shadow Sword',slot:'weapon',perk:'+10 ATK \u00B7 +2 Regen',    stats:{atk:10,regen:2}},
+        {id:'shadow_legs',  icon:'\u{1F9BF}',name:'Shadow Legs',  slot:'legs',  perk:'+5 ATK \u00B7 +20 HP',         stats:{atk:5,hp:20}},
+        {id:'shadow_ring',  icon:'\u{1F517}',name:'Shadow Ring',  slot:'ring',  perk:'+5 ATK \u00B7 +2 Regen',       stats:{atk:5,regen:2}},
+      ]},
+    { name:'Golden Set', rarity:'legendary', ids:['golden_helm','golden_plate','golden_sword','golden_legs','golden_ring'],
+      items:[
+        {id:'golden_helm',  icon:'\u{1F451}',name:'Golden Helm',  slot:'head',  perk:'+8 ATK \u00B7 +30 HP \u00B7 +5% XP',    stats:{atk:8,hp:30,xp:5}},
+        {id:'golden_plate', icon:'\u{1F6E1}\uFE0F',name:'Golden Plate',slot:'body', perk:'+80 HP \u00B7 +5 ATK \u00B7 Streak Shield',stats:{hp:80,atk:5,special:'Streak Shield'}},
+        {id:'golden_sword', icon:'\u2694\uFE0F',name:'Golden Sword',slot:'weapon',perk:'+12 ATK \u00B7 +3 Regen',              stats:{atk:12,regen:3}},
+        {id:'golden_legs',  icon:'\u{1F9BF}',name:'Golden Legs',  slot:'legs',  perk:'+7 ATK \u00B7 +40 HP',                   stats:{atk:7,hp:40}},
+        {id:'golden_ring',  icon:'\u{1F48D}',name:'Golden Ring',  slot:'ring',  perk:'+6 ATK \u00B7 +15% Focus',               stats:{atk:6,special:'+15% Focus'}},
+      ]},
+    { name:'Void Set', rarity:'mythic', ids:['void_helm','void_plate','void_sword','void_legs','void_ring'],
+      items:[
+        {id:'void_helm',  icon:'\u{1F300}',name:'Void Helm',  slot:'head',  perk:'+12 ATK \u00B7 +50 HP \u00B7 +8% XP',     stats:{atk:12,hp:50,xp:8}},
+        {id:'void_plate', icon:'\u{1F47B}',name:'Void Plate', slot:'body',  perk:'+120 HP \u00B7 +8 ATK \u00B7 Streak Shield',stats:{hp:120,atk:8,special:'Streak Shield'}},
+        {id:'void_sword', icon:'\u2694\uFE0F',name:'Void Sword',slot:'weapon',perk:'+15 ATK \u00B7 +5 Regen',                stats:{atk:15,regen:5}},
+        {id:'void_legs',  icon:'\u{1F9BF}',name:'Void Legs',  slot:'legs',  perk:'+10 ATK \u00B7 +60 HP',                    stats:{atk:10,hp:60}},
+        {id:'void_ring',  icon:'\u{1F300}',name:'Void Ring',  slot:'ring',  perk:'+10 ATK \u00B7 +4 Regen \u00B7 +8% XP',    stats:{atk:10,regen:4,xp:8}},
+      ]},
+  ];
+
+  var CRAFTED = [
+    {id:'craft_iron_helm',       icon:'\u26D1\uFE0F',name:'Iron Helm',        slot:'head',  rarity:'common',   perk:'+2 ATK'},
+    {id:'craft_fang_dagger',     icon:'\u{1F5E1}\uFE0F',name:'Fang Dagger',   slot:'weapon',rarity:'common',   perk:'+3 ATK'},
+    {id:'craft_slime_shield',    icon:'\u{1F6E1}\uFE0F',name:'Slime Shield',  slot:'body',  rarity:'common',   perk:'+8 HP'},
+    {id:'craft_goblin_blade',    icon:'\u{1F52A}',name:'Goblin Blade',       slot:'weapon',rarity:'common',   perk:'+4 ATK'},
+    {id:'craft_essence_ring',    icon:'\u{1F48D}',name:'Essence Ring',       slot:'ring',  rarity:'rare',     perk:'+8% XP all skills'},
+    {id:'craft_scale_robe',      icon:'\u{1F94B}',name:'Scale Robe',         slot:'body',  rarity:'rare',     perk:'+20 HP'},
+    {id:'craft_wolf_pendant',    icon:'\u{1F43A}',name:'Wolf Fang Pendant',  slot:'ring',  rarity:'rare',     perk:'+3 HP Regen/s'},
+    {id:'craft_orc_plate',       icon:'\u{1FAA8}',name:'Orc Plate',          slot:'body',  rarity:'rare',     perk:'+15 HP \u00B7 +3 ATK'},
+    {id:'craft_void_blade',      icon:'\u2694\uFE0F',name:'Void Blade',      slot:'weapon',rarity:'epic',     perk:'+12 ATK'},
+    {id:'craft_troll_cloak',     icon:'\u{1F9CC}',name:'Troll Cloak',        slot:'body',  rarity:'epic',     perk:'+25 HP \u00B7 +5 Regen'},
+    {id:'craft_warlord_gauntlets',icon:'\u{1F531}',name:'Warlord Gauntlets', slot:'ring',  rarity:'epic',     perk:'+6 ATK \u00B7 +10 HP'},
+    {id:'craft_dragon_crown',    icon:'\u{1F451}',name:'Dragon Crown',       slot:'head',  rarity:'legendary',perk:'+8 ATK \u00B7 +30 HP'},
+    {id:'craft_troll_aegis',     icon:'\u{1F49C}',name:'Troll Aegis',        slot:'body',  rarity:'legendary',perk:'+40 HP \u00B7 +8 Regen'},
+    {id:'craft_dragonfire_blade', icon:'\u{1F525}',name:'Dragonfire Blade',  slot:'weapon',rarity:'mythic',   perk:'+20 ATK \u00B7 +15 HP \u00B7 +5 Regen'},
+  ];
+
+  var CONSUMABLES = [
+    {id:'atk_potion',  icon:'\u2697\uFE0F',name:'Attack Potion',  rarity:'mythic',perk:'+1 permanent ATK (max 50)'},
+    {id:'hp_potion',   icon:'\u{1F48A}',name:'Vitality Potion',   rarity:'mythic',perk:'+1 permanent HP (max 50)'},
+    {id:'regen_potion',icon:'\u{1F489}',name:'Regen Potion',      rarity:'mythic',perk:'+1 permanent HP Regen/s (max 50)'},
+  ];
+
+  // ── Helpers ──────────────────────────────────────────────────────────────────
+  function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+  function raritySpan(r){return '<span class="rarity '+r+'" style="color:'+RARITY_COLORS[r]+'">'+r.charAt(0).toUpperCase()+r.slice(1)+'</span>'}
+  function slotBadge(s){return '<span class="slot-badge">'+(SLOT_LABELS[s]||s)+'</span>'}
+
+  // ── Sets ─────────────────────────────────────────────────────────────────────
+  var grid = document.getElementById('setGrid');
+  SETS.forEach(function(set) {
+    var c = RARITY_COLORS[set.rarity];
+    var totals = {atk:0,hp:0,regen:0};
+    var specials = [];
+    set.items.forEach(function(it){
+      if(it.stats.atk) totals.atk += it.stats.atk;
+      if(it.stats.hp) totals.hp += it.stats.hp;
+      if(it.stats.regen) totals.regen += it.stats.regen;
+      if(it.stats.special && specials.indexOf(String(it.stats.special))===-1) specials.push(String(it.stats.special));
+    });
+
+    var itemsHtml = set.items.map(function(it){
+      return '<div class="set-item">'+
+        '<span class="set-item-icon">'+it.icon+'</span>'+
+        '<div class="set-item-info">'+
+          '<div class="set-item-name"><a href="item.html?id='+it.id+'">'+esc(it.name)+'</a></div>'+
+          '<div class="set-item-meta">'+slotBadge(it.slot)+'</div>'+
+        '</div>'+
+        '<div class="set-item-perk" style="color:'+c+'">'+esc(it.perk)+'</div>'+
+      '</div>';
+    }).join('');
+
+    var totalParts = [];
+    if(totals.atk) totalParts.push('<span class="set-total-stat" style="color:#f87171">ATK +'+totals.atk+'</span>');
+    if(totals.hp)  totalParts.push('<span class="set-total-stat" style="color:#4ade80">HP +'+totals.hp+'</span>');
+    if(totals.regen) totalParts.push('<span class="set-total-stat" style="color:#34d399">Regen +'+totals.regen+'/s</span>');
+    specials.forEach(function(s){ totalParts.push('<span class="set-total-stat" style="color:'+c+'">'+esc(s)+'</span>'); });
+    var xpTotal = set.items.reduce(function(a,i){return a+(i.stats.xp||0)},0);
+    if(xpTotal) totalParts.push('<span class="set-total-stat" style="color:#fbbf24">XP +'+xpTotal+'%</span>');
+
+    var card = document.createElement('div');
+    card.className = 'set-card';
+    card.style.setProperty('--set-color', c);
+    card.innerHTML =
+      '<div class="set-header" onclick="this.parentElement.classList.toggle(\'open\')">'+
+        '<span class="set-rarity-dot" style="background:'+c+'"></span>'+
+        '<span class="set-name" style="color:'+c+'">'+esc(set.name)+'</span>'+
+        '<span class="set-badge">'+raritySpan(set.rarity)+' \u00B7 5 pieces</span>'+
+        '<span class="set-arrow">\u25BC</span>'+
+      '</div>'+
+      '<div class="set-body">'+
+        itemsHtml+
+        '<div class="set-total"><span style="font-size:10px;color:var(--text-dim);line-height:24px;font-family:var(--font-mono)">Full set:</span>'+totalParts.join('')+'</div>'+
+      '</div>';
+    grid.appendChild(card);
+  });
+
+  // ── Crafted Gear ──────────────────────────────────────────────────────────────
+  var craftFilter = {rarity:''};
+  var craftFilterEl = document.getElementById('craftRarityFilter');
+  var craftRarities = [];
+  CRAFTED.forEach(function(c){if(craftRarities.indexOf(c.rarity)===-1)craftRarities.push(c.rarity)});
+  craftRarities.sort(function(a,b){return RARITY_ORDER.indexOf(a)-RARITY_ORDER.indexOf(b)});
+
+  function renderCraftFilter(){
+    var h = '<button class="filter-btn '+(craftFilter.rarity===''?'active':'')+'" data-r="">All</button>';
+    craftRarities.forEach(function(r){
+      var act = craftFilter.rarity===r;
+      h += '<button class="filter-btn '+(act?'active':'')+'" style="'+(act?'color:'+RARITY_COLORS[r]+';border-color:'+RARITY_COLORS[r]:'')+'" data-r="'+r+'">'+r.charAt(0).toUpperCase()+r.slice(1)+'</button>';
+    });
+    craftFilterEl.innerHTML = h;
+    craftFilterEl.querySelectorAll('.filter-btn').forEach(function(b){
+      b.onclick = function(){craftFilter.rarity=this.getAttribute('data-r');renderCraftFilter();renderCrafted()};
+    });
+  }
+  // setCraftRarity handled via data-r attributes above
+
+  function renderCrafted(){
+    var body = document.getElementById('craftBody');
+    var items = CRAFTED.filter(function(c){return !craftFilter.rarity || c.rarity===craftFilter.rarity});
+    body.innerHTML = items.map(function(c){
+      return '<tr><td class="icon-cell">'+c.icon+'</td><td><a href="item.html?id='+c.id+'">'+esc(c.name)+'</a></td><td>'+slotBadge(c.slot)+'</td><td>'+raritySpan(c.rarity)+'</td><td class="perk" style="color:'+RARITY_COLORS[c.rarity]+'">'+esc(c.perk)+'</td></tr>';
+    }).join('');
+  }
+  renderCraftFilter();
+  renderCrafted();
+
+  // ── Consumables ────────────────────────────────────────────────────────────────
+  var consumBody = document.getElementById('consumBody');
+  consumBody.innerHTML = CONSUMABLES.map(function(c){
+    return '<tr><td class="icon-cell">'+c.icon+'</td><td><a href="item.html?id='+c.id+'">'+esc(c.name)+'</a></td><td>'+raritySpan(c.rarity)+'</td><td class="perk" style="color:'+RARITY_COLORS[c.rarity]+'">'+esc(c.perk)+'</td></tr>';
+  }).join('');
+
+  // ── All Equipment ──────────────────────────────────────────────────────────────
+  var ALL_ITEMS = [];
+  SETS.forEach(function(set){
+    set.items.forEach(function(it){
+      ALL_ITEMS.push({id:it.id,icon:it.icon,name:it.name,slot:it.slot,rarity:set.rarity,perk:it.perk,source:'Bag Drop'});
+    });
+  });
+  CRAFTED.forEach(function(c){
+    ALL_ITEMS.push({id:c.id,icon:c.icon,name:c.name,slot:c.slot,rarity:c.rarity,perk:c.perk,source:'Crafted'});
+  });
+  CONSUMABLES.forEach(function(c){
+    ALL_ITEMS.push({id:c.id,icon:c.icon,name:c.name,slot:'consumable',rarity:c.rarity,perk:c.perk,source:'Bag Drop'});
+  });
+
+  var allFilter = {rarity:'',slot:''};
+  var allRarities = [];
+  var allSlots = [];
+  ALL_ITEMS.forEach(function(i){
+    if(allRarities.indexOf(i.rarity)===-1) allRarities.push(i.rarity);
+    if(allSlots.indexOf(i.slot)===-1) allSlots.push(i.slot);
+  });
+  allRarities.sort(function(a,b){return RARITY_ORDER.indexOf(a)-RARITY_ORDER.indexOf(b)});
+  allSlots.sort(function(a,b){var ao=SLOT_ORDER.indexOf(a),bo=SLOT_ORDER.indexOf(b);return (ao===-1?99:ao)-(bo===-1?99:bo)});
+
+  function renderAllFilters(){
+    var rEl = document.getElementById('allRarityFilter');
+    var h = '<button class="filter-btn '+(allFilter.rarity===''?'active':'')+'" data-r="">All</button>';
+    allRarities.forEach(function(r){
+      var act = allFilter.rarity===r;
+      h += '<button class="filter-btn '+(act?'active':'')+'" style="'+(act?'color:'+RARITY_COLORS[r]+';border-color:'+RARITY_COLORS[r]:'')+'" data-r="'+r+'">'+r.charAt(0).toUpperCase()+r.slice(1)+'</button>';
+    });
+    rEl.innerHTML = h;
+    rEl.querySelectorAll('.filter-btn').forEach(function(b){
+      b.onclick = function(){allFilter.rarity=this.getAttribute('data-r');renderAllFilters();renderAll()};
+    });
+
+    var sEl = document.getElementById('allSlotFilter');
+    var sh = '<button class="filter-btn '+(allFilter.slot===''?'active':'')+'" data-s="">All</button>';
+    allSlots.forEach(function(s){
+      sh += '<button class="filter-btn '+(allFilter.slot===s?'active':'')+'" data-s="'+s+'">'+(SLOT_LABELS[s]||s)+'</button>';
+    });
+    sEl.innerHTML = sh;
+    sEl.querySelectorAll('.filter-btn').forEach(function(b){
+      b.onclick = function(){allFilter.slot=this.getAttribute('data-s');renderAllFilters();renderAll()};
+    });
+  }
+
+  function renderAll(){
+    var body = document.getElementById('allBody');
+    var items = ALL_ITEMS.filter(function(i){
+      if(allFilter.rarity && i.rarity!==allFilter.rarity) return false;
+      if(allFilter.slot && i.slot!==allFilter.slot) return false;
+      return true;
+    });
+    body.innerHTML = items.map(function(i){
+      return '<tr><td class="icon-cell">'+i.icon+'</td><td><a href="item.html?id='+i.id+'">'+esc(i.name)+'</a></td><td>'+slotBadge(i.slot)+'</td><td>'+raritySpan(i.rarity)+'</td><td class="perk" style="color:'+RARITY_COLORS[i.rarity]+'">'+esc(i.perk)+'</td><td><span class="eq-source">'+i.source+'</span></td></tr>';
+    }).join('');
+  }
+  renderAllFilters();
+  renderAll();
+
+  // ── Tab switching ──────────────────────────────────────────────────────────────
+  window.eqSwitchTab = function(id) {
+    document.querySelectorAll('.eq-tab').forEach(function(t){t.classList.remove('active')});
+    document.querySelectorAll('.eq-panel').forEach(function(p){p.classList.remove('active')});
+    event.target.classList.add('active');
+    document.getElementById('panel-'+id).classList.add('active');
+  };
+
+  // ── Collapsible nav ──────────────────────────────────────────────────────────
   document.querySelectorAll('.nav-group-title').forEach(function(title) {
     title.addEventListener('click', function() {
       this.parentElement.classList.toggle('collapsed');
