@@ -6,23 +6,55 @@
 <title>Grindly &mdash; Turn Screen Time Into an RPG</title>
 <link rel="stylesheet" href="style.css">
 <style>
-/* ══════ Hero ══════ */
+/* ══════ LANDING v4 ══════ */
+
+/* Keyframes */
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes floatSlow {
+  0%,100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-14px) rotate(2deg); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes orbit {
+  0% { transform: rotate(0deg) translateX(30px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(30px) rotate(-360deg); }
+}
+@keyframes glow-pulse {
+  0%,100% { filter: drop-shadow(0 0 6px var(--glow-color)); }
+  50% { filter: drop-shadow(0 0 16px var(--glow-color)); }
+}
+
+/* Hero */
 .hero-landing {
   position: relative;
   text-align: center;
-  padding: 80px 24px 60px;
+  padding: 64px 24px 48px;
   overflow: hidden;
-  background: radial-gradient(ellipse at 50% -20%, rgba(212,168,67,0.18) 0%, transparent 50%),
-              var(--bg-dark);
+  background:
+    radial-gradient(ellipse at 30% 0%, rgba(192,132,252,0.08) 0%, transparent 40%),
+    radial-gradient(ellipse at 70% 0%, rgba(56,189,248,0.08) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% -10%, rgba(212,168,67,0.15) 0%, transparent 45%),
+    var(--bg-dark);
   border-bottom: 2px solid var(--border-ornate);
 }
 .hero-landing::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='0.6' fill='rgba(212,168,67,0.06)'/%3E%3C/svg%3E");
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='0.6' fill='rgba(212,168,67,0.05)'/%3E%3C/svg%3E");
   pointer-events: none;
 }
+
 .hero-badge {
   display: inline-flex;
   align-items: center;
@@ -38,209 +70,331 @@
   margin-bottom: 20px;
   position: relative;
   letter-spacing: 0.5px;
+  animation: fadeUp 0.6s ease both;
 }
 .hero-badge .pulse-dot { width: 5px; height: 5px; }
+
 .hero-title {
   font-family: var(--font-title);
-  font-size: 52px;
+  font-size: 48px;
   font-weight: 800;
   color: var(--gold-bright);
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   text-shadow: 0 0 80px rgba(212,168,67,0.3), 0 2px 0 rgba(0,0,0,0.5);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   position: relative;
   line-height: 1.1;
+  animation: fadeUp 0.6s ease 0.1s both;
 }
-.hero-subtitle {
-  font-size: 18px;
+.hero-sub {
+  font-size: 16px;
   color: var(--text);
-  max-width: 480px;
-  margin: 0 auto 36px;
-  line-height: 1.7;
+  max-width: 420px;
+  margin: 0 auto 28px;
+  line-height: 1.6;
   position: relative;
-  font-weight: 400;
+  animation: fadeUp 0.6s ease 0.2s both;
 }
-.hero-subtitle strong { color: var(--text-bright); font-weight: 600; }
+.hero-sub strong { color: var(--text-bright); font-weight: 600; }
+
 .hero-cta-row {
-  display: flex; align-items: center; justify-content: center; gap: 14px;
-  flex-wrap: wrap; position: relative; margin-bottom: 48px;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  flex-wrap: wrap; position: relative; margin-bottom: 40px;
+  animation: fadeUp 0.6s ease 0.3s both;
 }
 .btn-primary {
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 15px 44px; border-radius: 12px;
-  font-family: var(--font-title); font-size: 15px; font-weight: 700;
+  padding: 14px 40px; border-radius: 12px;
+  font-family: var(--font-title); font-size: 14px; font-weight: 700;
   color: #0d0a04; background: linear-gradient(135deg, var(--gold-bright), var(--gold));
-  text-decoration: none; border: none; cursor: pointer; transition: all 0.2s;
+  text-decoration: none; border: none; cursor: pointer; transition: all 0.25s;
   box-shadow: 0 4px 28px rgba(212,168,67,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
 }
-.btn-primary:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 40px rgba(212,168,67,0.55); color: #0d0a04; }
+.btn-primary:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 8px 40px rgba(212,168,67,0.55); color: #0d0a04; }
 .btn-ghost {
   display: inline-flex; align-items: center; gap: 6px;
-  padding: 13px 28px; border-radius: 12px;
-  font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+  padding: 12px 24px; border-radius: 12px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 600;
   color: var(--text); background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.1); text-decoration: none; cursor: pointer; transition: all 0.2s;
 }
-.btn-ghost:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); color: var(--gold); }
+.btn-ghost:hover { background: rgba(255,255,255,0.08); border-color: var(--gold-dim); color: var(--gold); }
 
-/* Hero screenshot montage */
-.hero-screenshots {
-  display: grid;
-  grid-template-columns: 1fr 1.3fr 1fr;
-  gap: 12px;
-  max-width: 720px;
-  margin: 0 auto;
-  position: relative;
+/* ══════ Floating items around hero ══════ */
+.hero-floaters {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
 }
-.hero-screenshots .hero-ss {
+.hero-floater {
+  position: absolute;
+  image-rendering: pixelated;
+  opacity: 0.35;
+}
+.hero-floater:nth-child(1) { top: 15%; left: 5%; width: 40px; animation: floatSlow 5s ease-in-out infinite; }
+.hero-floater:nth-child(2) { top: 25%; right: 6%; width: 36px; animation: floatSlow 6s ease-in-out 1s infinite; }
+.hero-floater:nth-child(3) { bottom: 20%; left: 8%; width: 32px; animation: floatSlow 7s ease-in-out 0.5s infinite; }
+.hero-floater:nth-child(4) { bottom: 30%; right: 10%; width: 38px; animation: floatSlow 5.5s ease-in-out 1.5s infinite; }
+
+/* ══════ Bento Grid ══════ */
+.bento {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  max-width: 640px;
+  margin: 0 auto;
+  animation: fadeUp 0.6s ease 0.4s both;
+}
+.bento-card {
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.6);
-  transition: transform 0.4s ease;
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  position: relative;
 }
-.hero-screenshots .hero-ss:hover { transform: translateY(-6px); }
-.hero-screenshots .hero-ss img { display: block; width: 100%; height: auto; }
-.hero-screenshots .hero-ss:nth-child(1),
-.hero-screenshots .hero-ss:nth-child(3) { margin-top: 24px; }
-
-.hero-stats-strip {
-  display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
-  margin-top: 40px; position: relative;
-}
-.hs-item { text-align: center; }
-.hs-num { display: block; font-family: var(--font-title); font-size: 26px; font-weight: 700; color: var(--gold-bright); }
-.hs-label { font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dim); }
-
-/* ══════ Screenshot Sections ══════ */
-.sc-section {
-  padding: 48px 24px;
-  border-bottom: 1px solid var(--border-inner);
-}
-.sc-header {
-  text-align: center;
-  max-width: 500px;
-  margin: 0 auto 28px;
-}
-.sc-label {
-  display: inline-block;
-  font-size: 10px;
+.bento-card:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 16px 48px rgba(0,0,0,0.55); z-index: 2; }
+.bento-card img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.bento-card.tall { grid-row: span 2; }
+.bento-card .bento-tag {
+  position: absolute;
+  bottom: 6px; left: 6px;
+  font-size: 8px;
   font-family: var(--font-mono);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  padding: 4px 12px;
+  letter-spacing: 1px;
+  padding: 3px 8px;
   border-radius: 4px;
-  margin-bottom: 10px;
-}
-.sc-header h2 {
-  font-family: var(--font-title);
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--text-bright);
-  margin-bottom: 8px;
-  line-height: 1.25;
-}
-.sc-header p {
-  font-size: 13px;
-  color: var(--text-dim);
-  line-height: 1.6;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  color: var(--text);
 }
 
-/* Big single screenshot */
-.sc-img-single {
-  max-width: 420px;
-  margin: 0 auto;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.07);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-  transition: transform 0.3s, box-shadow 0.3s;
+/* Stats bar */
+.hero-stats {
+  display: flex; justify-content: center; gap: 28px; flex-wrap: wrap;
+  margin-top: 32px; position: relative;
+  animation: fadeUp 0.6s ease 0.5s both;
 }
-.sc-img-single:hover { transform: translateY(-4px); box-shadow: 0 28px 72px rgba(0,0,0,0.6); }
-.sc-img-single img { display: block; width: 100%; height: auto; }
+.hs-item { text-align: center; }
+.hs-num {
+  display: block; font-family: var(--font-title); font-size: 22px; font-weight: 700;
+  background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hs-label { font-size: 8px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dim); }
 
-/* Duo screenshots */
-.sc-img-duo {
+/* ══════ Feature Row — alternating text+image ══════ */
+.feat-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  max-width: 680px;
-  margin: 0 auto;
-}
-.sc-img-duo .sc-img-single { max-width: none; }
-
-/* ══════ Item Showcase Strip ══════ */
-.item-strip {
-  padding: 36px 24px;
+  gap: 0;
   border-bottom: 1px solid var(--border-inner);
-  text-align: center;
-  background: linear-gradient(180deg, rgba(212,168,67,0.03) 0%, transparent 100%);
+  min-height: 220px;
 }
-.item-strip h2 {
+.feat-row.reverse .feat-text { order: 2; }
+.feat-row.reverse .feat-img { order: 1; }
+
+.feat-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 32px 28px;
+  gap: 8px;
+}
+.feat-tag {
+  display: inline-block;
+  font-size: 9px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 3px 10px;
+  border-radius: 4px;
+  width: fit-content;
+}
+.feat-text h3 {
+  font-family: var(--font-title);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-bright);
+  line-height: 1.25;
+  margin: 0;
+}
+.feat-text p {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.55;
+  margin: 0;
+}
+.feat-link {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.feat-link:hover { color: var(--gold-bright); }
+
+.feat-img {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow: hidden;
+}
+.feat-img::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(212,168,67,0.04) 0%, transparent 70%);
+}
+.feat-img img {
+  width: 100%;
+  max-width: 280px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease;
+  position: relative;
+}
+.feat-img:hover img { transform: scale(1.03); }
+
+/* ══════ Item Showcase — real PNGs + styled emoji cards ══════ */
+.items-showcase {
+  padding: 40px 24px;
+  text-align: center;
+  border-bottom: 1px solid var(--border-inner);
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(244,114,182,0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 50%, rgba(192,132,252,0.04) 0%, transparent 50%);
+  overflow: hidden;
+}
+.items-showcase h2 {
   font-family: var(--font-title);
   font-size: 18px;
   color: var(--gold);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
-.item-strip-sub {
+.items-showcase .sub {
   font-size: 11px;
   color: var(--text-dim);
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
-.item-scroll {
+
+.item-belt {
   display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  padding: 4px 0 12px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--border-ornate) transparent;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 700px;
+  margin: 0 auto;
 }
-.item-scroll::-webkit-scrollbar { height: 5px; }
-.item-scroll::-webkit-scrollbar-thumb { background: var(--border-ornate); border-radius: 3px; }
-.item-card {
-  flex-shrink: 0;
-  width: 100px;
-  padding: 12px 8px 10px;
+
+/* Card with real PNG image */
+.icard {
+  width: 88px;
+  padding: 10px 6px 8px;
   border-radius: 10px;
   text-align: center;
   text-decoration: none;
-  transition: all 0.2s;
-  border: 1px solid;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
+  border: 1px solid;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
-.item-card:hover { transform: translateY(-3px); }
-.item-card-icon { font-size: 26px; line-height: 1; }
-.item-card-name { font-size: 10px; font-weight: 600; line-height: 1.2; }
-.item-card-rarity { font-size: 8px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; }
+.icard:hover { transform: translateY(-6px) scale(1.05); }
+.icard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, var(--glow-color) 0%, transparent 70%);
+  opacity: 0.08;
+}
+.icard-img {
+  width: 40px;
+  height: 40px;
+  image-rendering: pixelated;
+  position: relative;
+  animation: float 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px var(--glow-color));
+}
+.icard-img.no-pixel { image-rendering: auto; }
+.icard-emoji {
+  font-size: 28px;
+  line-height: 40px;
+  height: 40px;
+  position: relative;
+}
+.icard-name {
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.2;
+  position: relative;
+}
+.icard-rarity {
+  font-size: 7px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.7;
+  position: relative;
+}
 
-/* ══════ Feature strip (compact) ══════ */
-.feat-strip {
+/* Rarity themes */
+.icard.r-common   { --glow-color: #9ca3af; background: rgba(156,163,175,0.06); border-color: rgba(156,163,175,0.2); color: #9ca3af; }
+.icard.r-rare     { --glow-color: #38bdf8; background: rgba(56,189,248,0.06); border-color: rgba(56,189,248,0.2); color: #38bdf8; }
+.icard.r-epic     { --glow-color: #c084fc; background: rgba(192,132,252,0.06); border-color: rgba(192,132,252,0.2); color: #c084fc; }
+.icard.r-legendary{ --glow-color: #facc15; background: rgba(250,204,21,0.06); border-color: rgba(250,204,21,0.25); color: #facc15; }
+.icard.r-mythic   { --glow-color: #f472b6; background: rgba(244,114,182,0.06); border-color: rgba(244,114,182,0.25); color: #f472b6; }
+
+.icard.r-legendary:hover, .icard.r-mythic:hover {
+  box-shadow: 0 0 20px rgba(var(--glow-rgb, 0,0,0), 0.2);
+}
+.icard.r-legendary { --glow-rgb: 250,204,21; }
+.icard.r-mythic { --glow-rgb: 244,114,182; }
+
+/* Stagger float animations */
+.icard:nth-child(2) .icard-img { animation-delay: 0.3s; }
+.icard:nth-child(3) .icard-img { animation-delay: 0.6s; }
+.icard:nth-child(4) .icard-img { animation-delay: 0.9s; }
+.icard:nth-child(5) .icard-img { animation-delay: 0.4s; }
+.icard:nth-child(6) .icard-img { animation-delay: 0.7s; }
+.icard:nth-child(7) .icard-img { animation-delay: 1.0s; }
+
+/* ══════ Feature chips (compact grid) ══════ */
+.feat-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 8px;
 }
-.feat-chip {
+.fchip {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 6px;
-  padding: 18px 10px;
+  gap: 5px;
+  padding: 16px 8px;
   border-radius: 10px;
   background: var(--bg-card);
   border: 1px solid var(--border-inner);
   text-decoration: none;
   color: inherit;
-  transition: all 0.2s;
+  transition: all 0.25s;
 }
-.feat-chip:hover { border-color: var(--gold-dim); transform: translateY(-2px); }
-.feat-chip-icon { font-size: 24px; }
-.feat-chip-label { font-family: var(--font-title); font-size: 11px; color: var(--gold); font-weight: 700; }
-.feat-chip-sub { font-size: 9px; color: var(--text-dim); line-height: 1.4; }
+.fchip:hover { border-color: var(--gold-dim); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+.fchip-icon { font-size: 22px; }
+.fchip-label { font-family: var(--font-title); font-size: 10px; color: var(--gold); font-weight: 700; }
+.fchip-sub { font-size: 8px; color: var(--text-dim); line-height: 1.3; }
 
 /* ══════ Final CTA ══════ */
 .final-cta {
@@ -248,37 +402,96 @@
   padding: 48px 24px;
   background: radial-gradient(ellipse at 50% 100%, rgba(212,168,67,0.1) 0%, transparent 60%);
   border-bottom: 1px solid var(--border-inner);
+  position: relative;
 }
 .final-cta h2 {
   font-family: var(--font-title);
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 700;
   color: var(--gold-bright);
   margin-bottom: 8px;
 }
 .final-cta p {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-dim);
   margin-bottom: 24px;
-  max-width: 400px;
+  max-width: 360px;
   margin-left: auto; margin-right: auto;
 }
 
-/* ══════ Responsive ══════ */
+/* ══════ Responsive — Tablet ══════ */
+@media (max-width: 900px) {
+  .feat-row { grid-template-columns: 1fr; min-height: auto; }
+  .feat-row.reverse .feat-text { order: 1; }
+  .feat-row.reverse .feat-img { order: 2; }
+  .feat-img img { max-width: 260px; }
+  .feat-text { padding: 24px 20px; }
+}
+
+/* ══════ Responsive — Mobile ══════ */
 @media (max-width: 700px) {
-  .hero-landing { padding: 48px 16px 40px; }
-  .hero-title { font-size: 34px; }
-  .hero-subtitle { font-size: 15px; }
-  .hero-screenshots { grid-template-columns: 1fr; max-width: 280px; gap: 10px; }
-  .hero-screenshots .hero-ss:nth-child(1),
-  .hero-screenshots .hero-ss:nth-child(3) { margin-top: 0; }
-  .sc-section { padding: 32px 16px; }
-  .sc-img-duo { grid-template-columns: 1fr; max-width: 320px; }
-  .sc-img-single { max-width: 300px; }
-  .feat-strip { grid-template-columns: 1fr 1fr; }
-  .item-card { width: 85px; }
-  .hero-stats-strip { gap: 20px; }
-  .btn-primary { padding: 12px 28px; font-size: 14px; }
+  .hero-landing { padding: 36px 14px 28px; }
+  .hero-title { font-size: 28px; letter-spacing: 1px; }
+  .hero-sub { font-size: 13px; max-width: 320px; margin-bottom: 20px; }
+  .hero-cta-row { gap: 10px; margin-bottom: 28px; }
+  .btn-primary { padding: 12px 24px; font-size: 13px; }
+  .btn-ghost { padding: 10px 18px; font-size: 10px; }
+
+  .bento {
+    grid-template-columns: 1fr 1fr;
+    max-width: 320px;
+    gap: 8px;
+  }
+  .bento-card.tall { grid-row: span 1; }
+  .bento-tag { font-size: 7px; padding: 2px 6px; bottom: 4px; left: 4px; }
+
+  .hero-stats { gap: 14px; margin-top: 20px; }
+  .hs-num { font-size: 18px; }
+  .hs-label { font-size: 7px; letter-spacing: 1.5px; }
+
+  .hero-floaters { display: none; }
+
+  .feat-row { grid-template-columns: 1fr; min-height: auto; }
+  .feat-row.reverse .feat-text { order: 1; }
+  .feat-row.reverse .feat-img { order: 2; }
+  .feat-text { padding: 20px 14px; gap: 6px; }
+  .feat-text h3 { font-size: 17px; }
+  .feat-text p { font-size: 11px; }
+  .feat-img { padding: 10px 14px; }
+  .feat-img img { max-width: 220px; border-radius: 8px; }
+
+  .items-showcase { padding: 28px 14px; }
+  .items-showcase h2 { font-size: 16px; }
+  .item-belt { gap: 8px; }
+  .icard { width: 72px; padding: 8px 4px 6px; border-radius: 8px; }
+  .icard-img { width: 32px; height: 32px; }
+  .icard-emoji { font-size: 24px; line-height: 32px; height: 32px; }
+  .icard-name { font-size: 8px; }
+  .icard-rarity { font-size: 6px; }
+
+  .feat-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .fchip { padding: 12px 6px; }
+  .fchip-icon { font-size: 18px; }
+  .fchip-label { font-size: 9px; }
+  .fchip-sub { font-size: 7px; }
+
+  .final-cta { padding: 32px 14px; }
+  .final-cta h2 { font-size: 22px; }
+}
+
+/* ══════ Responsive — Small phone ══════ */
+@media (max-width: 400px) {
+  .hero-title { font-size: 24px; }
+  .hero-sub { font-size: 12px; }
+  .hero-cta-row { flex-direction: column; gap: 8px; }
+  .btn-primary { width: 100%; justify-content: center; }
+  .btn-ghost { width: 100%; justify-content: center; }
+  .bento { grid-template-columns: 1fr 1fr; max-width: 280px; gap: 6px; }
+  .feat-grid { grid-template-columns: 1fr 1fr; }
+  .icard { width: 64px; }
+  .icard-img { width: 28px; height: 28px; }
+  .hero-stats { gap: 10px; }
+  .hs-num { font-size: 16px; }
 }
 </style>
 </head>
@@ -325,168 +538,178 @@
 
     <!-- ══════ HERO ══════ -->
     <section class="hero-landing">
+      <!-- Floating item sprites for atmosphere -->
+      <div class="hero-floaters">
+        <img class="hero-floater" src="img/chest_legendary.png" alt="">
+        <img class="hero-floater" src="img/grind_hoodie.png" alt="">
+        <img class="hero-floater" src="img/pulse_aura.png" alt="">
+        <img class="hero-floater" src="img/focus_cap.png" alt="">
+      </div>
+
       <div class="hero-badge"><span class="pulse-dot"></span> Free &amp; Open Source</div>
       <h1 class="hero-title">Your Screen Time<br>Is Now an RPG</h1>
-      <p class="hero-subtitle">
-        Grindly lives in your system tray and turns <strong>everything you do</strong> into
-        XP, loot drops, boss fights and leaderboards.
+      <p class="hero-sub">
+        Grindly lives in your tray and turns <strong>everything you do</strong> into
+        XP, loot, boss fights &amp; leaderboards.
       </p>
       <div class="hero-cta-row">
         <a href="https://github.com/borissharikoff-droid/Idly/releases/latest" class="btn-primary" target="_blank" rel="noopener">Download for Windows</a>
-        <a href="#sc-skills" class="btn-ghost">See how it works &#8595;</a>
+        <a href="#sc-skills" class="btn-ghost">See features &#8595;</a>
       </div>
 
-      <div class="hero-screenshots">
-        <div class="hero-ss"><img src="img/skills.png" alt="Skills" loading="lazy"></div>
-        <div class="hero-ss"><img src="img/arena.png" alt="Arena" loading="lazy"></div>
-        <div class="hero-ss"><img src="img/loot.png" alt="Loot" loading="lazy"></div>
+      <!-- Bento screenshot mosaic -->
+      <div class="bento">
+        <div class="bento-card tall">
+          <img src="img/skills.png" alt="Skills">
+          <span class="bento-tag">Skills</span>
+        </div>
+        <div class="bento-card">
+          <img src="img/loot.png" alt="Loot">
+          <span class="bento-tag">Loot</span>
+        </div>
+        <div class="bento-card">
+          <img src="img/arena.png" alt="Arena">
+          <span class="bento-tag">Arena</span>
+        </div>
+        <div class="bento-card">
+          <img src="img/inventory.png" alt="Inventory">
+          <span class="bento-tag">Gear</span>
+        </div>
+        <div class="bento-card">
+          <img src="img/farm.png" alt="Farm">
+          <span class="bento-tag">Farm</span>
+        </div>
       </div>
 
-      <div class="hero-stats-strip">
+      <div class="hero-stats">
         <div class="hs-item"><span class="hs-num">11</span><span class="hs-label">Skills</span></div>
         <div class="hs-item"><span class="hs-num">69+</span><span class="hs-label">Items</span></div>
-        <div class="hs-item"><span class="hs-num">6</span><span class="hs-label">Arena Zones</span></div>
+        <div class="hs-item"><span class="hs-num">6</span><span class="hs-label">Zones</span></div>
         <div class="hs-item"><span class="hs-num">22</span><span class="hs-label">Recipes</span></div>
-        <div class="hs-item"><span class="hs-num">99</span><span class="hs-label">Max Level</span></div>
+        <div class="hs-item"><span class="hs-num">99</span><span class="hs-label">Max Lvl</span></div>
       </div>
     </section>
 
-    <!-- ══════ Skills ══════ -->
-    <section class="sc-section" id="sc-skills">
-      <div class="sc-header">
-        <span class="sc-label" style="background:rgba(56,189,248,0.1);color:#38bdf8;border:1px solid rgba(56,189,248,0.15)">Passive Leveling</span>
-        <h2>11 skills that level while you work</h2>
-        <p>Code, design, browse, game &mdash; every minute earns XP. No input needed.</p>
+    <!-- ══════ Feature rows — alternating layout ══════ -->
+    <div class="feat-row" id="sc-skills">
+      <div class="feat-text">
+        <span class="feat-tag" style="background:rgba(56,189,248,0.1);color:#38bdf8;border:1px solid rgba(56,189,248,0.15)">Passive Leveling</span>
+        <h3>11 skills that level while you work</h3>
+        <p>Code, design, browse, game &mdash; every minute earns XP automatically. No manual input.</p>
+        <a href="skills.html" class="feat-link">Browse skills &#8594;</a>
       </div>
-      <div class="sc-img-single">
-        <img src="img/skills.png" alt="Skills page showing Developer, Designer, Gamer, Communicator with XP bars and levels" loading="lazy">
+      <div class="feat-img">
+        <img src="img/skills.png" alt="Skills page">
       </div>
-    </section>
+    </div>
 
-    <!-- ══════ Analytics ══════ -->
-    <section class="sc-section">
-      <div class="sc-header">
-        <span class="sc-label" style="background:rgba(245,158,11,0.1);color:#f59e0b;border:1px solid rgba(245,158,11,0.15)">AI Insights</span>
-        <h2>Know exactly where your time goes</h2>
-        <p>Focus quality, distraction %, context switches, habits &amp; risks. All tracked.</p>
+    <div class="feat-row reverse">
+      <div class="feat-text">
+        <span class="feat-tag" style="background:rgba(245,158,11,0.1);color:#f59e0b;border:1px solid rgba(245,158,11,0.15)">AI Insights</span>
+        <h3>Know where your time goes</h3>
+        <p>Focus quality, distraction %, context switches, habits. All tracked and analyzed.</p>
+        <a href="skills.html" class="feat-link">Learn more &#8594;</a>
       </div>
-      <div class="sc-img-single">
-        <img src="img/analytics.png" alt="Activity Insights showing 54h tracked, 32% focus quality, habits analysis" loading="lazy">
+      <div class="feat-img">
+        <img src="img/analytics.png" alt="Analytics">
       </div>
-    </section>
+    </div>
 
-    <!-- ══════ Inventory + Loot ══════ -->
-    <section class="sc-section">
-      <div class="sc-header">
-        <span class="sc-label" style="background:rgba(192,132,252,0.1);color:#c084fc;border:1px solid rgba(192,132,252,0.15)">5 Rarity Tiers</span>
-        <h2>Open loot bags. Equip mythic gear.</h2>
-        <p>Focus sessions drop chests. Crack them open for gear from Common to Mythic.</p>
+    <div class="feat-row">
+      <div class="feat-text">
+        <span class="feat-tag" style="background:rgba(192,132,252,0.1);color:#c084fc;border:1px solid rgba(192,132,252,0.15)">5 Rarity Tiers</span>
+        <h3>Open loot bags. Equip mythic gear.</h3>
+        <p>Focus sessions drop chests. Crack them for gear from Common to Mythic.</p>
+        <a href="loot.html" class="feat-link">View loot tables &#8594;</a>
       </div>
-      <div class="sc-img-duo">
-        <div class="sc-img-single">
-          <img src="img/inventory.png" alt="Inventory with Shadow Sword, Iron Helm, Shadow Plate equipped and seed collection" loading="lazy">
-        </div>
-        <div class="sc-img-single">
-          <img src="img/loot.png" alt="Opening a Legendary Bag, Mythic Vitality Potion revealed with confetti" loading="lazy">
-        </div>
+      <div class="feat-img">
+        <img src="img/loot.png" alt="Loot">
       </div>
-    </section>
+    </div>
 
-    <!-- ══════ Arena ══════ -->
-    <section class="sc-section">
-      <div class="sc-header">
-        <span class="sc-label" style="background:rgba(239,68,68,0.1);color:#ef4444;border:1px solid rgba(239,68,68,0.15)">PvE Combat</span>
-        <h2>Fight mobs. Kill bosses. Get rich.</h2>
-        <p>6 dungeon zones. Turn-based combat. Gold, materials &amp; warrior XP on every kill.</p>
+    <div class="feat-row reverse">
+      <div class="feat-text">
+        <span class="feat-tag" style="background:rgba(239,68,68,0.1);color:#ef4444;border:1px solid rgba(239,68,68,0.15)">PvE Combat</span>
+        <h3>Fight mobs. Kill bosses. Get rich.</h3>
+        <p>6 dungeon zones with turn-based combat. Gold, materials &amp; warrior XP on every kill.</p>
+        <a href="arena.html" class="feat-link">Arena guide &#8594;</a>
       </div>
-      <div class="sc-img-single">
-        <img src="img/arena.png" alt="Arena battle — fighting Slime Scout with 76 ATK, 191 HP character stats" loading="lazy">
+      <div class="feat-img">
+        <img src="img/arena.png" alt="Arena">
       </div>
-    </section>
+    </div>
 
-    <!-- ══════ Craft + Farm ══════ -->
-    <section class="sc-section">
-      <div class="sc-header">
-        <span class="sc-label" style="background:rgba(34,211,238,0.1);color:#22d3ee;border:1px solid rgba(34,211,238,0.15)">22 Recipes</span>
-        <h2>Craft endgame weapons. Grow your farm.</h2>
-        <p>Smelt, refine, forge. Plant seeds, harvest crops, sell on the marketplace.</p>
+    <div class="feat-row">
+      <div class="feat-text">
+        <span class="feat-tag" style="background:rgba(34,211,238,0.1);color:#22d3ee;border:1px solid rgba(34,211,238,0.15)">22 Recipes</span>
+        <h3>Craft endgame weapons. Grow a farm.</h3>
+        <p>Smelt ores, refine materials, forge gear. Plant seeds, harvest crops, sell on the marketplace.</p>
+        <a href="crafting.html" class="feat-link">View recipes &#8594;</a>
       </div>
-      <div class="sc-img-duo">
-        <div class="sc-img-single">
-          <img src="img/craft.png" alt="Crafting page — Compost recipe with Wheat and Herbs ingredients" loading="lazy">
-        </div>
-        <div class="sc-img-single">
-          <img src="img/farm.png" alt="Farm with 6 plots — Wheat ready, Crystal Root growing, Void Spores planted" loading="lazy">
-        </div>
+      <div class="feat-img">
+        <img src="img/craft.png" alt="Crafting">
       </div>
-    </section>
+    </div>
 
-    <!-- ══════ Marketplace ══════ -->
-    <section class="sc-section">
-      <div class="sc-header">
-        <span class="sc-label" style="background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.15)">Player Economy</span>
-        <h2>Trade with real players</h2>
-        <p>List drops, buy upgrades, compete on leaderboards. Real-time chat with friends.</p>
+    <div class="feat-row reverse">
+      <div class="feat-text">
+        <span class="feat-tag" style="background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.15)">Player Economy</span>
+        <h3>Trade with real players</h3>
+        <p>List drops, buy upgrades, climb leaderboards. Real-time chat with friends.</p>
+        <a href="equipment.html" class="feat-link">Browse equipment &#8594;</a>
       </div>
-      <div class="sc-img-single">
-        <img src="img/marketplace.png" alt="Marketplace with seed zips and materials listed for gold" loading="lazy">
+      <div class="feat-img">
+        <img src="img/marketplace.png" alt="Marketplace">
       </div>
-    </section>
+    </div>
 
-    <!-- ══════ Item Showcase ══════ -->
-    <section class="item-strip">
-      <h2>Browse Items in the Wiki</h2>
-      <p class="item-strip-sub">Click any item to see full stats, drop rates &amp; recipes</p>
-      <div class="item-scroll">
-        <a href="item.html?id=void_helm" class="item-card" style="background:rgba(244,114,182,0.06);border-color:rgba(244,114,182,0.2);color:#f472b6">
-          <span class="item-card-icon">&#128081;</span>
-          <span class="item-card-name">Void Helm</span>
-          <span class="item-card-rarity">Mythic</span>
+    <!-- ══════ Item Showcase — real skins ══════ -->
+    <section class="items-showcase">
+      <h2>Loot &amp; Gear</h2>
+      <p class="sub">Click any item &mdash; full stats, drop sources &amp; recipes on every page</p>
+
+      <div class="item-belt">
+        <!-- Real PNG items -->
+        <a href="item.html?id=legendary_chest" class="icard r-legendary">
+          <img class="icard-img" src="img/chest_legendary.png" alt="Legendary Bag">
+          <span class="icard-name">Legendary Bag</span>
+          <span class="icard-rarity">Legendary</span>
         </a>
-        <a href="item.html?id=golden_plate" class="item-card" style="background:rgba(250,204,21,0.06);border-color:rgba(250,204,21,0.2);color:#facc15">
-          <span class="item-card-icon">&#129466;</span>
-          <span class="item-card-name">Golden Plate</span>
-          <span class="item-card-rarity">Legendary</span>
+        <a href="item.html?id=epic_chest" class="icard r-epic">
+          <img class="icard-img" src="img/chest_epic.png" alt="Epic Bag">
+          <span class="icard-name">Epic Bag</span>
+          <span class="icard-rarity">Epic</span>
         </a>
-        <a href="item.html?id=shadow_ring" class="item-card" style="background:rgba(192,132,252,0.06);border-color:rgba(192,132,252,0.2);color:#c084fc">
-          <span class="item-card-icon">&#128141;</span>
-          <span class="item-card-name">Shadow Ring</span>
-          <span class="item-card-rarity">Epic</span>
+        <a href="item.html?id=rare_chest" class="icard r-rare">
+          <img class="icard-img" src="img/chest_rare.png" alt="Rare Bag">
+          <span class="icard-name">Rare Bag</span>
+          <span class="icard-rarity">Rare</span>
         </a>
-        <a href="item.html?id=craft_dragon_crown" class="item-card" style="background:rgba(250,204,21,0.06);border-color:rgba(250,204,21,0.2);color:#facc15">
-          <span class="item-card-icon">&#128302;</span>
-          <span class="item-card-name">Dragon Crown</span>
-          <span class="item-card-rarity">Legendary</span>
+        <a href="item.html?id=common_chest" class="icard r-common">
+          <img class="icard-img" src="img/chest_common.png" alt="Common Bag">
+          <span class="icard-name">Common Bag</span>
+          <span class="icard-rarity">Common</span>
         </a>
-        <a href="item.html?id=craft_void_blade" class="item-card" style="background:rgba(244,114,182,0.06);border-color:rgba(244,114,182,0.2);color:#f472b6">
-          <span class="item-card-icon">&#9876;&#65039;</span>
-          <span class="item-card-name">Void Blade</span>
-          <span class="item-card-rarity">Mythic</span>
+        <!-- Cosmetic PNGs -->
+        <a href="item.html?id=grind_hoodie" class="icard r-mythic">
+          <img class="icard-img" src="img/grind_hoodie.png" alt="Grind Hoodie">
+          <span class="icard-name">Grind Hoodie</span>
+          <span class="icard-rarity">Mythic</span>
         </a>
-        <a href="item.html?id=copper_helm" class="item-card" style="background:rgba(56,189,248,0.06);border-color:rgba(56,189,248,0.2);color:#38bdf8">
-          <span class="item-card-icon">&#9935;&#65039;</span>
-          <span class="item-card-name">Copper Helm</span>
-          <span class="item-card-rarity">Rare</span>
+        <a href="item.html?id=geek_glasses" class="icard r-mythic">
+          <img class="icard-img" src="img/geek_glasses.png" alt="Geek Glasses">
+          <span class="icard-name">Geek Glasses</span>
+          <span class="icard-rarity">Mythic</span>
         </a>
-        <a href="item.html?id=dragon_scale" class="item-card" style="background:rgba(250,204,21,0.06);border-color:rgba(250,204,21,0.2);color:#facc15">
-          <span class="item-card-icon">&#128142;</span>
-          <span class="item-card-name">Dragon Scale</span>
-          <span class="item-card-rarity">Legendary</span>
+        <a href="item.html?id=pulse_aura" class="icard r-mythic">
+          <img class="icard-img no-pixel" src="img/pulse_aura.png" alt="Pulse Aura">
+          <span class="icard-name">Pulse Aura</span>
+          <span class="icard-rarity">Mythic</span>
         </a>
-        <a href="item.html?id=void_crystal" class="item-card" style="background:rgba(192,132,252,0.06);border-color:rgba(192,132,252,0.2);color:#c084fc">
-          <span class="item-card-icon">&#128302;</span>
-          <span class="item-card-name">Void Crystal</span>
-          <span class="item-card-rarity">Epic</span>
-        </a>
-        <a href="item.html?id=craft_troll_maul" class="item-card" style="background:rgba(250,204,21,0.06);border-color:rgba(250,204,21,0.2);color:#facc15">
-          <span class="item-card-icon">&#128296;</span>
-          <span class="item-card-name">Troll Maul</span>
-          <span class="item-card-rarity">Legendary</span>
-        </a>
-        <a href="item.html?id=hp_potion" class="item-card" style="background:rgba(244,114,182,0.06);border-color:rgba(244,114,182,0.2);color:#f472b6">
-          <span class="item-card-icon">&#129388;</span>
-          <span class="item-card-name">Vitality Potion</span>
-          <span class="item-card-rarity">Mythic</span>
+        <a href="item.html?id=focus_cap" class="icard r-legendary">
+          <img class="icard-img" src="img/focus_cap.png" alt="Focus Cap">
+          <span class="icard-name">Focus Cap</span>
+          <span class="icard-rarity">Legendary</span>
         </a>
       </div>
     </section>
@@ -494,46 +717,46 @@
     <!-- ══════ Feature chips ══════ -->
     <section class="content">
       <h2 class="section-title"><span class="section-icon">&#9889;</span> Everything Inside</h2>
-      <div class="feat-strip">
-        <a href="skills.html" class="feat-chip">
-          <span class="feat-chip-icon">&#128200;</span>
-          <span class="feat-chip-label">11 Skills</span>
-          <span class="feat-chip-sub">99 levels, passive XP</span>
+      <div class="feat-grid">
+        <a href="skills.html" class="fchip">
+          <span class="fchip-icon">&#128200;</span>
+          <span class="fchip-label">11 Skills</span>
+          <span class="fchip-sub">99 levels, passive XP</span>
         </a>
-        <a href="equipment.html" class="feat-chip">
-          <span class="feat-chip-icon">&#9876;&#65039;</span>
-          <span class="feat-chip-label">Equipment</span>
-          <span class="feat-chip-sub">5 sets, 5 rarities</span>
+        <a href="equipment.html" class="fchip">
+          <span class="fchip-icon">&#9876;&#65039;</span>
+          <span class="fchip-label">Equipment</span>
+          <span class="fchip-sub">5 sets, 5 rarities</span>
         </a>
-        <a href="arena.html" class="feat-chip">
-          <span class="feat-chip-icon">&#128293;</span>
-          <span class="feat-chip-label">Arena</span>
-          <span class="feat-chip-sub">6 zones, bosses</span>
+        <a href="arena.html" class="fchip">
+          <span class="fchip-icon">&#128293;</span>
+          <span class="fchip-label">Arena</span>
+          <span class="fchip-sub">6 zones, bosses</span>
         </a>
-        <a href="crafting.html" class="feat-chip">
-          <span class="feat-chip-icon">&#9874;&#65039;</span>
-          <span class="feat-chip-label">Crafting</span>
-          <span class="feat-chip-sub">22 recipes</span>
+        <a href="crafting.html" class="fchip">
+          <span class="fchip-icon">&#9874;&#65039;</span>
+          <span class="fchip-label">Crafting</span>
+          <span class="fchip-sub">22 recipes</span>
         </a>
-        <a href="farming.html" class="feat-chip">
-          <span class="feat-chip-icon">&#127793;</span>
-          <span class="feat-chip-label">Farming</span>
-          <span class="feat-chip-sub">9 seeds, 8 plots</span>
+        <a href="farming.html" class="fchip">
+          <span class="fchip-icon">&#127793;</span>
+          <span class="fchip-label">Farming</span>
+          <span class="fchip-sub">9 seeds, 8 plots</span>
         </a>
-        <a href="loot.html" class="feat-chip">
-          <span class="feat-chip-icon">&#127873;</span>
-          <span class="feat-chip-label">Loot Bags</span>
-          <span class="feat-chip-sub">4 tiers, pity system</span>
+        <a href="loot.html" class="fchip">
+          <span class="fchip-icon">&#127873;</span>
+          <span class="fchip-label">Loot Bags</span>
+          <span class="fchip-sub">4 tiers, pity</span>
         </a>
-        <a href="materials.html" class="feat-chip">
-          <span class="feat-chip-icon">&#128142;</span>
-          <span class="feat-chip-label">Materials</span>
-          <span class="feat-chip-sub">Drops &amp; intermediates</span>
+        <a href="materials.html" class="fchip">
+          <span class="fchip-icon">&#128142;</span>
+          <span class="fchip-label">Materials</span>
+          <span class="fchip-sub">Drops &amp; crafting</span>
         </a>
-        <div class="feat-chip" style="cursor:default">
-          <span class="feat-chip-icon">&#128172;</span>
-          <span class="feat-chip-label">Social</span>
-          <span class="feat-chip-sub">Friends, chat, boards</span>
+        <div class="fchip" style="cursor:default">
+          <span class="fchip-icon">&#128172;</span>
+          <span class="fchip-label">Social</span>
+          <span class="fchip-sub">Friends, chat, boards</span>
         </div>
       </div>
     </section>
@@ -568,7 +791,7 @@
           <code style="display:block; background: rgba(0,0,0,0.3); padding: 10px 14px; border-radius: 6px; color: #fbbf24; font-size: 13px;">
             xpForLevel(L) = floor(pow(L/99, 2.2) * 3,600,000)
           </code>
-          <p style="color: var(--text-dim); margin-top: 8px; font-size: 12px;">Max XP (level 99) = 3,600,000. See <a href="skills.html#xp-formula" style="color: var(--gold);">Skills &rarr; XP Formula</a> for full table.</p>
+          <p style="color: var(--text-dim); margin-top: 8px; font-size: 12px;">Max XP (level 99) = 3,600,000. See <a href="skills.html#xp-formula" style="color: var(--gold);">Skills &#8594; XP Formula</a> for full table.</p>
         </div>
       </div>
     </section>
