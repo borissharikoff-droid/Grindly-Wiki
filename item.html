@@ -656,16 +656,17 @@ function fetchMarketData(itemId, callback) {
       finish();
     }).catch(function() { finish(); });
 
-  // 2) Sold listings for history (requires updated RLS policy)
-  fetch(url + '/rest/v1/marketplace_listings?item_id=eq.' + encodeURIComponent(itemId) + '&status=eq.sold&select=price_gold,quantity,created_at&order=created_at.asc', { headers: headers })
+  // 2) Trade history (from trade_history table — open RLS)
+  fetch(url + '/rest/v1/trade_history?item_id=eq.' + encodeURIComponent(itemId) + '&select=unit_price,quantity,traded_at&order=traded_at.asc', { headers: headers })
     .then(function(r) { return r.ok ? r.json() : []; })
     .then(function(rows) {
       if (rows && rows.length > 0) {
         var byDay = {};
         rows.forEach(function(r) {
-          var day = r.created_at.substring(0, 10);
+          var day = (r.traded_at || '').substring(0, 10);
+          if (!day) return;
           if (!byDay[day]) byDay[day] = { prices: [], volumes: 0 };
-          byDay[day].prices.push(Math.round(r.price_gold / (r.quantity || 1)));
+          byDay[day].prices.push(r.unit_price || Math.round((r.price_gold || 0) / (r.quantity || 1)));
           byDay[day].volumes += (r.quantity || 1);
         });
         var days = Object.keys(byDay).sort();
