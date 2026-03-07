@@ -756,7 +756,10 @@ function renderItem(itemId) {
   // Find sources
   var chestSources = [];
   for (var cid in CHESTS) {
-    if (CHESTS[cid].items.indexOf(itemId) !== -1) chestSources.push(CHESTS[cid]);
+    if (CHESTS[cid].items.indexOf(itemId) !== -1) {
+      var cs = CHESTS[cid]; cs.id = cid;
+      chestSources.push(cs);
+    }
   }
 
   // Find recipe that produces this item
@@ -898,18 +901,23 @@ function renderItem(itemId) {
     html += '<div class="source-section"><h3>How to Obtain</h3><ul class="source-list">';
     chestSources.forEach(function(c) {
       var crc = RARITY_COLORS[c.rarity];
-      html += '<li class="source-item"><span class="source-icon">\uD83C\uDF81</span><div class="source-detail"><strong style="color:'+crc.color+'">'+c.name+'</strong><small>Drops from chest opening</small></div></li>';
+      var chestIconHtml = c.image ? '<img src="'+c.image+'" style="width:100%;height:100%;object-fit:contain">' : (c.icon || '\uD83C\uDF81');
+      html += '<li class="source-item"><span class="source-icon" data-chest-id="'+(c.id||'')+'">'+chestIconHtml+'</span><div class="source-detail"><strong style="color:'+crc.color+'">'+c.name+'</strong><small>Drops from chest opening</small></div></li>';
     });
     if (item.source) {
-      html += '<li class="source-item"><span class="source-icon">\u2694\uFE0F</span><div class="source-detail"><strong>'+item.source+'</strong><small>Combat / World drop</small></div></li>';
+      var srcIconHtml = item.image ? '<img src="'+item.image+'" style="width:100%;height:100%;object-fit:contain">' : (item.icon || '\u2694\uFE0F');
+      html += '<li class="source-item"><span class="source-icon" data-item-id="'+itemId+'">'+srcIconHtml+'</span><div class="source-detail"><strong>'+item.source+'</strong><small>Combat / World drop</small></div></li>';
     }
     if (craftRecipe) {
-      html += '<li class="source-item"><span class="source-icon">\u2692\uFE0F</span><div class="source-detail"><strong>Crafting</strong> <small>Crafter Lvl.'+craftRecipe.lvl+' \u2022 '+formatTime(craftRecipe.sec)+' \u2022 '+craftRecipe.xp+' XP</small>';
+      var craftOutItem = ITEM_MAP[craftRecipe.out] || item;
+      var craftIconHtml = craftOutItem.image ? '<img src="'+craftOutItem.image+'" style="width:100%;height:100%;object-fit:contain">' : (craftOutItem.icon || '\u2692\uFE0F');
+      html += '<li class="source-item"><span class="source-icon" data-item-id="'+(craftRecipe.out||itemId)+'">'+craftIconHtml+'</span><div class="source-detail"><strong>Crafting</strong> <small>Crafter Lvl.'+craftRecipe.lvl+' \u2022 '+formatTime(craftRecipe.sec)+' \u2022 '+craftRecipe.xp+' XP</small>';
       html += '<div class="recipe-ingredients">';
       craftRecipe.ing.forEach(function(i) {
         var ingItem = ITEM_MAP[i.id];
         var ingName = ingItem ? ingItem.name : i.id;
-        html += '<span class="recipe-ing"><a href="item.html?id='+i.id+'">'+ingName+'</a> \u00D7'+i.qty+'</span>';
+        var ingIconHtml = ingItem && ingItem.image ? '<img src="'+ingItem.image+'" style="width:14px;height:14px;object-fit:contain;vertical-align:middle;margin-right:2px">' : '';
+        html += '<span class="recipe-ing">'+ingIconHtml+'<a href="item.html?id='+i.id+'">'+ingName+'</a> \u00D7'+i.qty+'</span>';
       });
       html += '</div></div></li>';
     }
@@ -1028,7 +1036,8 @@ function renderItem(itemId) {
     matches.forEach(function(m) {
       var div = document.createElement('div');
       div.className = 'search-result-item';
-      div.innerHTML = '<span class="search-result-icon">'+m.icon+'</span><span class="search-result-name">'+m.name+'</span><span class="search-result-tag">'+(SLOT_LABELS[m.slot]||m.slot)+'</span>';
+      var searchIconHtml = m.image ? '<img src="'+m.image+'" style="width:16px;height:16px;object-fit:contain">' : m.icon;
+      div.innerHTML = '<span class="search-result-icon">'+searchIconHtml+'</span><span class="search-result-name">'+m.name+'</span><span class="search-result-tag">'+(SLOT_LABELS[m.slot]||m.slot)+'</span>';
       div.addEventListener('click', function() {
         window.location.href = 'item.html?id='+m.id;
       });

@@ -85,6 +85,34 @@
       <h2 class="section-title"><span class="section-icon">&#9876;&#65039;</span> Combat Zones</h2>
       <p class="section-desc">Each zone contains three mob tiers and a boss encounter. Defeat the boss to unlock the next zone.</p>
 
+      <!-- Boss Loot Mechanics -->
+      <div class="info-box" style="margin-bottom:18px">
+        <h4>Boss Chest Drop Mechanics</h4>
+        <p>Boss chest drops are <strong>not guaranteed</strong>. When you defeat a boss, the following roll determines your chest reward:</p>
+        <div class="table-wrap" style="margin-top:10px">
+          <table>
+            <thead><tr><th>Roll</th><th>Chance</th><th>Result</th></tr></thead>
+            <tbody>
+              <tr><td>Listed chest tier</td><td><strong>55%</strong></td><td>You receive the chest shown in the boss reward (e.g. Rare Bag)</td></tr>
+              <tr><td>One tier lower</td><td><strong>30%</strong></td><td>You receive a chest one rarity below (e.g. Rare &rarr; Common). Common stays Common.</td></tr>
+              <tr><td>No chest</td><td><strong>15%</strong></td><td>No chest at all &mdash; you only keep gold and materials earned from mob kills</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:10px">Even when a chest drops, <strong>equipment is not guaranteed</strong>. Each chest tier has a separate equipment chance:</p>
+        <div class="table-wrap" style="margin-top:10px">
+          <table>
+            <thead><tr><th>Chest</th><th>Equipment Chance</th><th>On Fail</th></tr></thead>
+            <tbody>
+              <tr><td><span class="rarity common">Common Bag</span></td><td>50%</td><td>Gold + bonus materials only</td></tr>
+              <tr><td><span class="rarity rare">Rare Bag</span></td><td>60%</td><td>Gold + bonus materials only</td></tr>
+              <tr><td><span class="rarity epic">Epic Bag</span></td><td>70%</td><td>Gold + bonus materials only</td></tr>
+              <tr><td><span class="rarity legendary">Legendary Bag</span></td><td>80%</td><td>Gold + bonus materials only</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <!-- Zone Tabs -->
       <div class="ar-tabs">
         <button class="ar-tab active" onclick="arSwitch('all',this)">All Zones</button>
