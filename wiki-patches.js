@@ -254,7 +254,7 @@
         return;
       }
       container.innerHTML = '';
-      container.appendChild(buildPatchCard(releases[0], true, true));
+      container.appendChild(buildPatchCard(releases[0], true, false));
       // "View all patches" link
       var link = document.createElement('a');
       link.href = 'patches.html';

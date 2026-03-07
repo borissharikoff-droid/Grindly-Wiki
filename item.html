@@ -908,10 +908,22 @@ function renderItem(itemId) {
     }
     chestSources.forEach(function(c) {
       var crc = RARITY_COLORS[c.rarity];
-      html += '<li class="source-item">'+skinIcon(c, '', ' data-chest-id="'+(c.id||'')+'"')+'<div class="source-detail"><strong style="color:'+crc.color+'">'+c.name+'</strong><small>Drops from chest opening</small></div></li>';
+      html += '<li class="source-item">'+skinIcon(c, '', ' data-chest-id="'+(c.id||'')+'"')+'<div class="source-detail"><strong><a href="item.html?id='+(c.id||'')+'" style="color:'+crc.color+'">'+c.name+'</a></strong><small>Drops from chest opening</small></div></li>';
     });
     if (item.source) {
-      html += '<li class="source-item">'+skinIcon(item, '', ' data-item-id="'+itemId+'"')+'<div class="source-detail"><strong>'+item.source+'</strong><small>Combat / World drop</small></div></li>';
+      var sourceLink = item.source;
+      // Make arena zone references clickable
+      if (item.source.indexOf('Cavern') !== -1 || item.source.indexOf('Outpost') !== -1 ||
+          item.source.indexOf('Forest') !== -1 || item.source.indexOf('Stronghold') !== -1 ||
+          item.source.indexOf('Bridge') !== -1 || item.source.indexOf('Lair') !== -1 ||
+          item.source.indexOf('Boss') !== -1) {
+        sourceLink = '<a href="arena.html" style="color:var(--gold)">'+item.source+'</a>';
+      } else if (item.source.indexOf('Chest') !== -1) {
+        sourceLink = '<a href="loot.html" style="color:var(--gold)">'+item.source+'</a>';
+      } else {
+        sourceLink = item.source;
+      }
+      html += '<li class="source-item">'+skinIcon(item, '', ' data-item-id="'+itemId+'"')+'<div class="source-detail"><strong>'+sourceLink+'</strong><small>Combat / World drop</small></div></li>';
     }
     if (craftRecipe) {
       var craftOutItem = ITEM_MAP[craftRecipe.out] || item;
