@@ -778,7 +778,6 @@ function renderItem(itemId) {
   var rc = RARITY_COLORS[item.rarity];
   var isArmor = ARMOR_SLOTS.indexOf(item.slot) !== -1;
   var ip = isArmor ? calcIP(item) : null;
-  var basePrice = BASE_PRICES[item.rarity] || 50;
 
   // Find sources
   var chestSources = [];
@@ -1118,8 +1117,9 @@ function renderItem(itemId) {
 (function() {
   var list = document.getElementById('marketMovers');
   if (!list) return;
+  var RARITY_RANK = {common:0,rare:1,epic:2,legendary:3,mythic:4};
   var movers = ITEMS.filter(function(i){return ARMOR_SLOTS.indexOf(i.slot)!==-1}).sort(function(a,b){
-    return (BASE_PRICES[b.rarity]||0)-(BASE_PRICES[a.rarity]||0);
+    return (RARITY_RANK[b.rarity]||0)-(RARITY_RANK[a.rarity]||0);
   }).slice(0,6);
   movers.forEach(function(m) {
     var li = document.createElement('li');
@@ -1242,51 +1242,11 @@ function loadSupabaseConfig() {
         // Re-render current item if images changed
         if (didChange && currentItemId) {
           renderItem(currentItemId);
-          loadMarketplacePrice(currentItemId);
         }
       }
     }).catch(function() { /* offline or no access */ });
 }
 
-// ── Fetch live marketplace price from Supabase ──
-function loadMarketplacePrice(itemId) {
-  if (!SUPABASE_CONFIG.url || !SUPABASE_CONFIG.anonKey) return;
-  var base = SUPABASE_CONFIG.url + '/rest/v1/marketplace_listings';
-  var headers = {
-    'apikey': SUPABASE_CONFIG.anonKey,
-    'Authorization': 'Bearer ' + SUPABASE_CONFIG.anonKey
-  };
-
-  // Fetch all active listings for this item
-  var url = base + '?item_id=eq.' + encodeURIComponent(itemId) + '&status=eq.active&select=price_gold,quantity,created_at&order=price_gold.asc';
-  fetch(url, { headers: headers })
-    .then(function(r) { return r.json(); })
-    .then(function(rows) {
-      if (!rows || !rows.length) return;
-
-      var lowest = rows[0].price_gold;
-      var totalQty = 0;
-      rows.forEach(function(r) { totalQty += (r.quantity || 1); });
-
-      // Update price box
-      var priceEl = document.querySelector('.price-current');
-      if (priceEl) {
-        priceEl.style.color = '';
-        priceEl.style.fontSize = '';
-        priceEl.innerHTML = lowest + ' <span>gold</span>';
-      }
-
-      // Update change rows to show listing count + price range
-      var priceRows = document.querySelectorAll('.price-box .price-row');
-      if (priceRows.length >= 4) {
-        var highest = rows[rows.length - 1].price_gold;
-        priceRows[0].innerHTML = '<span class="price-label">Lowest Listing</span><span class="price-value" style="color:#4ade80">' + lowest + 'g</span>';
-        priceRows[1].innerHTML = '<span class="price-label">Highest Listing</span><span class="price-value" style="color:#f87171">' + highest + 'g</span>';
-        priceRows[2].innerHTML = '<span class="price-label">Active Listings</span><span class="price-value">' + rows.length + '</span>';
-        priceRows[3].innerHTML = '<span class="price-label">Total Quantity</span><span class="price-value">' + totalQty + '</span>';
-      }
-    }).catch(function() { /* offline */ });
-}
 
 // ── Init ──
 // Apply cached admin config BEFORE first render (no emoji flash)
@@ -1299,7 +1259,6 @@ var params = new URLSearchParams(window.location.search);
 var currentItemId = params.get('id');
 if (currentItemId) {
   renderItem(currentItemId);
-  loadMarketplacePrice(currentItemId);
 } else {
   document.getElementById('mainContent').innerHTML = '<div class="item-not-found"><h2>Item Database</h2><p>Use the search bar or select an item from the <a href="index.html">wiki homepage</a>.</p></div>';
 }
