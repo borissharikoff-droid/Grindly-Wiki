@@ -6,312 +6,284 @@
 <title>Grindly &mdash; Turn Screen Time Into an RPG</title>
 <link rel="stylesheet" href="style.css">
 <style>
-/* ── Landing Hero ──────────────────────────────────────────────────────────── */
-.landing-hero {
+/* ══════ Hero ══════ */
+.hero-landing {
   position: relative;
   text-align: center;
-  padding: 72px 28px 64px;
+  padding: 80px 24px 60px;
   overflow: hidden;
-  background: radial-gradient(ellipse at 50% -10%, rgba(212,168,67,0.14) 0%, transparent 55%),
-              linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-page) 100%);
+  background: radial-gradient(ellipse at 50% -20%, rgba(212,168,67,0.18) 0%, transparent 50%),
+              var(--bg-dark);
   border-bottom: 2px solid var(--border-ornate);
 }
-.landing-hero::before {
+.hero-landing::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='1' height='1' x='20' y='20' fill='rgba(212,168,67,0.04)'/%3E%3C/svg%3E");
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='0.6' fill='rgba(212,168,67,0.06)'/%3E%3C/svg%3E");
   pointer-events: none;
 }
-.landing-logo {
-  font-family: var(--font-title);
-  font-size: 60px;
-  font-weight: 800;
-  color: var(--gold-bright);
-  letter-spacing: 4px;
-  text-shadow: 0 0 60px rgba(212,168,67,0.35), 0 2px 0 rgba(0,0,0,0.5);
-  margin-bottom: 12px;
-  position: relative;
-}
-.landing-tagline {
-  font-size: 21px;
-  color: var(--text-bright);
-  margin-bottom: 10px;
-  font-weight: 600;
-  position: relative;
-}
-.landing-sub {
-  font-size: 14px;
-  color: var(--text-dim);
-  max-width: 540px;
-  margin: 0 auto 36px;
-  line-height: 1.7;
-  position: relative;
-}
-.landing-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  position: relative;
-}
-.landing-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 40px;
-  border-radius: 10px;
-  font-family: var(--font-title);
-  font-size: 15px;
-  font-weight: 700;
-  color: #0d0a04;
-  background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 100%);
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 4px 24px rgba(212,168,67,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
-}
-.landing-cta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 36px rgba(212,168,67,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
-  color: #0d0a04;
-}
-.landing-cta-secondary {
+.hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 12px 28px;
-  border-radius: 10px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(0,255,136,0.2);
+  background: rgba(0,255,136,0.06);
+  color: #4ade80;
+  font-size: 11px;
   font-family: var(--font-mono);
-  font-size: 13px;
-  color: var(--gold);
-  background: transparent;
-  border: 1px solid var(--border-ornate);
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.2s;
+  font-weight: 600;
+  margin-bottom: 20px;
+  position: relative;
+  letter-spacing: 0.5px;
 }
-.landing-cta-secondary:hover {
-  background: rgba(212,168,67,0.08);
-  border-color: var(--gold-dim);
+.hero-badge .pulse-dot { width: 5px; height: 5px; }
+.hero-title {
+  font-family: var(--font-title);
+  font-size: 52px;
+  font-weight: 800;
   color: var(--gold-bright);
+  letter-spacing: 3px;
+  text-shadow: 0 0 80px rgba(212,168,67,0.3), 0 2px 0 rgba(0,0,0,0.5);
+  margin-bottom: 16px;
+  position: relative;
+  line-height: 1.1;
 }
-.landing-stats {
-  display: flex;
-  justify-content: center;
-  gap: 36px;
-  margin-top: 40px;
-  flex-wrap: wrap;
+.hero-subtitle {
+  font-size: 18px;
+  color: var(--text);
+  max-width: 480px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+  position: relative;
+  font-weight: 400;
+}
+.hero-subtitle strong { color: var(--text-bright); font-weight: 600; }
+.hero-cta-row {
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  flex-wrap: wrap; position: relative; margin-bottom: 48px;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 15px 44px; border-radius: 12px;
+  font-family: var(--font-title); font-size: 15px; font-weight: 700;
+  color: #0d0a04; background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+  text-decoration: none; border: none; cursor: pointer; transition: all 0.2s;
+  box-shadow: 0 4px 28px rgba(212,168,67,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+.btn-primary:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 40px rgba(212,168,67,0.55); color: #0d0a04; }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 13px 28px; border-radius: 12px;
+  font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+  color: var(--text); background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1); text-decoration: none; cursor: pointer; transition: all 0.2s;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); color: var(--gold); }
+
+/* Hero screenshot montage */
+.hero-screenshots {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr 1fr;
+  gap: 12px;
+  max-width: 720px;
+  margin: 0 auto;
   position: relative;
 }
-.landing-stat { text-align: center; }
-.landing-stat-num {
-  display: block;
-  font-family: var(--font-title);
-  font-size: 30px;
-  font-weight: 700;
-  color: var(--gold-bright);
-}
-.landing-stat-label {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: var(--text-dim);
-}
-
-/* ── Floating items in hero ── */
-.hero-floaters {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-.hero-float-item {
-  position: absolute;
-  font-size: 22px;
-  opacity: 0.1;
-  animation: heroFloat 8s ease-in-out infinite;
-}
-@keyframes heroFloat {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-18px) rotate(6deg); }
-}
-
-/* ── Screenshot Showcase ──────────────────────────────────────────────────── */
-.showcase-section {
-  padding: 48px 28px;
-  border-bottom: 1px solid var(--border-inner);
-}
-.showcase-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
-}
-.showcase-row.reverse { direction: rtl; }
-.showcase-row.reverse > * { direction: ltr; }
-
-.showcase-text h2 {
-  font-family: var(--font-title);
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--gold);
-  margin-bottom: 10px;
-  line-height: 1.3;
-}
-.showcase-text p {
-  font-size: 13px;
-  color: var(--text-dim);
-  line-height: 1.8;
-  margin-bottom: 16px;
-}
-.showcase-highlights {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.showcase-highlights li {
-  font-size: 12px;
-  color: var(--text);
-  padding: 5px 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.showcase-highlights li::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.hl-green li::before  { background: #4ade80; box-shadow: 0 0 6px rgba(74,222,128,0.4); }
-.hl-blue li::before   { background: #38bdf8; box-shadow: 0 0 6px rgba(56,189,248,0.4); }
-.hl-purple li::before { background: #c084fc; box-shadow: 0 0 6px rgba(192,132,252,0.4); }
-.hl-red li::before    { background: #ef4444; box-shadow: 0 0 6px rgba(239,68,68,0.4); }
-.hl-gold li::before   { background: #fbbf24; box-shadow: 0 0 6px rgba(251,191,36,0.4); }
-.hl-cyan li::before   { background: #22d3ee; box-shadow: 0 0 6px rgba(34,211,238,0.4); }
-.hl-pink li::before   { background: #f472b6; box-shadow: 0 0 6px rgba(244,114,182,0.4); }
-.hl-amber li::before  { background: #f59e0b; box-shadow: 0 0 6px rgba(245,158,11,0.4); }
-
-/* ── Screenshot frame ── */
-.screenshot-frame {
-  border-radius: 14px;
+.hero-screenshots .hero-ss {
+  border-radius: 12px;
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 12px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.03);
-  position: relative;
-  background: #16161e;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.6);
+  transition: transform 0.4s ease;
 }
-.screenshot-frame:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(212,168,67,0.06);
-}
-.screenshot-frame img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.screenshot-glow {
-  position: absolute;
-  inset: 0;
-  border-radius: 14px;
-  pointer-events: none;
-}
-.screenshot-glow.glow-green  { box-shadow: inset 0 0 40px rgba(74,222,128,0.06); }
-.screenshot-glow.glow-blue   { box-shadow: inset 0 0 40px rgba(56,189,248,0.06); }
-.screenshot-glow.glow-purple { box-shadow: inset 0 0 40px rgba(192,132,252,0.06); }
-.screenshot-glow.glow-red    { box-shadow: inset 0 0 40px rgba(239,68,68,0.06); }
-.screenshot-glow.glow-gold   { box-shadow: inset 0 0 40px rgba(251,191,36,0.06); }
-.screenshot-glow.glow-cyan   { box-shadow: inset 0 0 40px rgba(34,211,238,0.06); }
-.screenshot-glow.glow-pink   { box-shadow: inset 0 0 40px rgba(244,114,182,0.06); }
-.screenshot-glow.glow-amber  { box-shadow: inset 0 0 40px rgba(245,158,11,0.06); }
+.hero-screenshots .hero-ss:hover { transform: translateY(-6px); }
+.hero-screenshots .hero-ss img { display: block; width: 100%; height: auto; }
+.hero-screenshots .hero-ss:nth-child(1),
+.hero-screenshots .hero-ss:nth-child(3) { margin-top: 24px; }
 
-/* ── Dual screenshots side-by-side ── */
-.screenshot-duo {
+.hero-stats-strip {
+  display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+  margin-top: 40px; position: relative;
+}
+.hs-item { text-align: center; }
+.hs-num { display: block; font-family: var(--font-title); font-size: 26px; font-weight: 700; color: var(--gold-bright); }
+.hs-label { font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dim); }
+
+/* ══════ Screenshot Sections ══════ */
+.sc-section {
+  padding: 48px 24px;
+  border-bottom: 1px solid var(--border-inner);
+}
+.sc-header {
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto 28px;
+}
+.sc-label {
+  display: inline-block;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+.sc-header h2 {
+  font-family: var(--font-title);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-bright);
+  margin-bottom: 8px;
+  line-height: 1.25;
+}
+.sc-header p {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* Big single screenshot */
+.sc-img-single {
+  max-width: 420px;
+  margin: 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.sc-img-single:hover { transform: translateY(-4px); box-shadow: 0 28px 72px rgba(0,0,0,0.6); }
+.sc-img-single img { display: block; width: 100%; height: auto; }
+
+/* Duo screenshots */
+.sc-img-duo {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 16px;
+  max-width: 680px;
+  margin: 0 auto;
 }
+.sc-img-duo .sc-img-single { max-width: none; }
 
-/* ── Feature Pillars ───────────────────────────────────────────────────────── */
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 12px;
+/* ══════ Item Showcase Strip ══════ */
+.item-strip {
+  padding: 36px 24px;
+  border-bottom: 1px solid var(--border-inner);
+  text-align: center;
+  background: linear-gradient(180deg, rgba(212,168,67,0.03) 0%, transparent 100%);
 }
-.feature-card {
+.item-strip h2 {
+  font-family: var(--font-title);
+  font-size: 18px;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.item-strip-sub {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+}
+.item-scroll {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 4px 0 12px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-ornate) transparent;
+}
+.item-scroll::-webkit-scrollbar { height: 5px; }
+.item-scroll::-webkit-scrollbar-thumb { background: var(--border-ornate); border-radius: 3px; }
+.item-card {
+  flex-shrink: 0;
+  width: 100px;
+  padding: 12px 8px 10px;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: 1px solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.item-card:hover { transform: translateY(-3px); }
+.item-card-icon { font-size: 26px; line-height: 1; }
+.item-card-name { font-size: 10px; font-weight: 600; line-height: 1.2; }
+.item-card-rarity { font-size: 8px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; }
+
+/* ══════ Feature strip (compact) ══════ */
+.feat-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.feat-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  padding: 18px 10px;
+  border-radius: 10px;
   background: var(--bg-card);
   border: 1px solid var(--border-inner);
-  border-radius: 10px;
-  padding: 20px 18px;
-  transition: all 0.2s;
   text-decoration: none;
   color: inherit;
-  display: block;
+  transition: all 0.2s;
 }
-.feature-card:hover {
-  border-color: var(--gold-dim);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-}
-.feature-card-icon { font-size: 28px; margin-bottom: 10px; filter: saturate(0.8); }
-.feature-card h3 { font-family: var(--font-title); font-size: 14px; color: var(--gold); margin-bottom: 6px; }
-.feature-card p { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
-.feature-card .feature-tag {
-  display: inline-block; font-size: 9px; font-family: var(--font-mono);
-  text-transform: uppercase; letter-spacing: .5px; padding: 2px 7px; border-radius: 3px; margin-top: 8px;
-}
+.feat-chip:hover { border-color: var(--gold-dim); transform: translateY(-2px); }
+.feat-chip-icon { font-size: 24px; }
+.feat-chip-label { font-family: var(--font-title); font-size: 11px; color: var(--gold); font-weight: 700; }
+.feat-chip-sub { font-size: 9px; color: var(--text-dim); line-height: 1.4; }
 
-/* ── How It Works ──────────────────────────────────────────────────────────── */
-.steps-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 16px;
-  counter-reset: step;
-}
-.step-card {
-  position: relative;
-  background: var(--bg-card);
-  border: 1px solid var(--border-inner);
-  border-radius: 10px;
-  padding: 20px 16px 16px;
+/* ══════ Final CTA ══════ */
+.final-cta {
   text-align: center;
+  padding: 48px 24px;
+  background: radial-gradient(ellipse at 50% 100%, rgba(212,168,67,0.1) 0%, transparent 60%);
+  border-bottom: 1px solid var(--border-inner);
 }
-.step-card::before {
-  counter-increment: step; content: counter(step);
-  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-  width: 24px; height: 24px; border-radius: 50%;
-  background: var(--gold); color: var(--bg-dark);
-  font-family: var(--font-title); font-size: 13px; font-weight: 700; line-height: 24px; text-align: center;
+.final-cta h2 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gold-bright);
+  margin-bottom: 8px;
 }
-.step-card-icon { font-size: 24px; margin-bottom: 8px; }
-.step-card h4 { font-family: var(--font-title); font-size: 13px; color: var(--text-bright); margin-bottom: 4px; }
-.step-card p { font-size: 11px; color: var(--text-dim); line-height: 1.5; }
+.final-cta p {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-bottom: 24px;
+  max-width: 400px;
+  margin-left: auto; margin-right: auto;
+}
 
-/* ── Responsive ────────────────────────────────────────────────────────────── */
+/* ══════ Responsive ══════ */
 @media (max-width: 700px) {
-  .landing-hero { padding: 40px 16px 36px; }
-  .landing-logo { font-size: 38px; }
-  .landing-tagline { font-size: 16px; }
-  .landing-cta { padding: 10px 24px; font-size: 14px; }
-  .landing-cta-secondary { display: none; }
-  .landing-stats { gap: 16px; }
-  .landing-stat-num { font-size: 22px; }
-  .feature-grid { grid-template-columns: 1fr 1fr; }
-  .steps-grid { grid-template-columns: 1fr 1fr; }
-  .showcase-row, .showcase-row.reverse { grid-template-columns: 1fr; gap: 20px; direction: ltr; }
-  .showcase-section { padding: 28px 16px; }
-  .screenshot-duo { grid-template-columns: 1fr; }
+  .hero-landing { padding: 48px 16px 40px; }
+  .hero-title { font-size: 34px; }
+  .hero-subtitle { font-size: 15px; }
+  .hero-screenshots { grid-template-columns: 1fr; max-width: 280px; gap: 10px; }
+  .hero-screenshots .hero-ss:nth-child(1),
+  .hero-screenshots .hero-ss:nth-child(3) { margin-top: 0; }
+  .sc-section { padding: 32px 16px; }
+  .sc-img-duo { grid-template-columns: 1fr; max-width: 320px; }
+  .sc-img-single { max-width: 300px; }
+  .feat-strip { grid-template-columns: 1fr 1fr; }
+  .item-card { width: 85px; }
+  .hero-stats-strip { gap: 20px; }
+  .btn-primary { padding: 12px 28px; font-size: 14px; }
 }
 </style>
 </head>
 <body>
 
-<!-- Top Bar -->
 <header class="top-bar">
   <div class="top-bar-inner">
     <a href="index.html" class="logo">
@@ -319,24 +291,16 @@
       <span class="logo-text">Grindly<small>Wiki</small></span>
     </a>
     <div class="top-right">
-      <div class="player-count">
-        <span class="pulse-dot"></span>
-        <span>Productivity RPG</span>
-      </div>
+      <div class="player-count"><span class="pulse-dot"></span><span>Productivity RPG</span></div>
     </div>
   </div>
 </header>
 
-<!-- Page Layout -->
 <div class="page-wrap">
-
-  <!-- Sidebar -->
   <aside class="sidebar">
     <div class="search-box">
       <div class="search-wrap">
-        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
-        </svg>
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
         <input type="text" class="search-input" id="searchInput" placeholder="Search wiki..." autocomplete="off">
         <div class="search-results" id="searchResults"></div>
       </div>
@@ -357,328 +321,228 @@
     </div>
   </aside>
 
-  <!-- Main Content -->
   <main class="main">
 
-    <!-- ══════ Landing Hero ══════ -->
-    <section class="landing-hero">
-      <div class="hero-floaters">
-        <span class="hero-float-item" style="left:6%;top:18%;animation-delay:0s">&#9876;&#65039;</span>
-        <span class="hero-float-item" style="left:88%;top:12%;animation-delay:1.2s">&#128142;</span>
-        <span class="hero-float-item" style="left:12%;top:72%;animation-delay:2.4s">&#127793;</span>
-        <span class="hero-float-item" style="left:92%;top:68%;animation-delay:0.8s">&#128293;</span>
-        <span class="hero-float-item" style="left:50%;top:6%;animation-delay:3s;font-size:18px">&#9889;</span>
-        <span class="hero-float-item" style="left:78%;top:82%;animation-delay:1.8s">&#127873;</span>
-        <span class="hero-float-item" style="left:22%;top:88%;animation-delay:4s">&#9874;&#65039;</span>
-      </div>
-
-      <div class="landing-logo">GRINDLY</div>
-      <div class="landing-tagline">Turn Your Screen Time Into an RPG Adventure</div>
-      <p class="landing-sub">
-        Grindly runs silently in your system tray, tracking what you do on your PC and turning it into XP,
-        levels, loot, boss fights, crafting and farming &mdash; a full RPG layered on top of your daily workflow.
+    <!-- ══════ HERO ══════ -->
+    <section class="hero-landing">
+      <div class="hero-badge"><span class="pulse-dot"></span> Free &amp; Open Source</div>
+      <h1 class="hero-title">Your Screen Time<br>Is Now an RPG</h1>
+      <p class="hero-subtitle">
+        Grindly lives in your system tray and turns <strong>everything you do</strong> into
+        XP, loot drops, boss fights and leaderboards.
       </p>
-      <div class="landing-buttons">
-        <a href="https://github.com/borissharikoff-droid/Idly/releases/latest" class="landing-cta" target="_blank" rel="noopener">
-          Download for Windows
+      <div class="hero-cta-row">
+        <a href="https://github.com/borissharikoff-droid/Idly/releases/latest" class="btn-primary" target="_blank" rel="noopener">Download for Windows</a>
+        <a href="#sc-skills" class="btn-ghost">See how it works &#8595;</a>
+      </div>
+
+      <div class="hero-screenshots">
+        <div class="hero-ss"><img src="img/skills.png" alt="Skills" loading="lazy"></div>
+        <div class="hero-ss"><img src="img/arena.png" alt="Arena" loading="lazy"></div>
+        <div class="hero-ss"><img src="img/loot.png" alt="Loot" loading="lazy"></div>
+      </div>
+
+      <div class="hero-stats-strip">
+        <div class="hs-item"><span class="hs-num">11</span><span class="hs-label">Skills</span></div>
+        <div class="hs-item"><span class="hs-num">69+</span><span class="hs-label">Items</span></div>
+        <div class="hs-item"><span class="hs-num">6</span><span class="hs-label">Arena Zones</span></div>
+        <div class="hs-item"><span class="hs-num">22</span><span class="hs-label">Recipes</span></div>
+        <div class="hs-item"><span class="hs-num">99</span><span class="hs-label">Max Level</span></div>
+      </div>
+    </section>
+
+    <!-- ══════ Skills ══════ -->
+    <section class="sc-section" id="sc-skills">
+      <div class="sc-header">
+        <span class="sc-label" style="background:rgba(56,189,248,0.1);color:#38bdf8;border:1px solid rgba(56,189,248,0.15)">Passive Leveling</span>
+        <h2>11 skills that level while you work</h2>
+        <p>Code, design, browse, game &mdash; every minute earns XP. No input needed.</p>
+      </div>
+      <div class="sc-img-single">
+        <img src="img/skills.png" alt="Skills page showing Developer, Designer, Gamer, Communicator with XP bars and levels" loading="lazy">
+      </div>
+    </section>
+
+    <!-- ══════ Analytics ══════ -->
+    <section class="sc-section">
+      <div class="sc-header">
+        <span class="sc-label" style="background:rgba(245,158,11,0.1);color:#f59e0b;border:1px solid rgba(245,158,11,0.15)">AI Insights</span>
+        <h2>Know exactly where your time goes</h2>
+        <p>Focus quality, distraction %, context switches, habits &amp; risks. All tracked.</p>
+      </div>
+      <div class="sc-img-single">
+        <img src="img/analytics.png" alt="Activity Insights showing 54h tracked, 32% focus quality, habits analysis" loading="lazy">
+      </div>
+    </section>
+
+    <!-- ══════ Inventory + Loot ══════ -->
+    <section class="sc-section">
+      <div class="sc-header">
+        <span class="sc-label" style="background:rgba(192,132,252,0.1);color:#c084fc;border:1px solid rgba(192,132,252,0.15)">5 Rarity Tiers</span>
+        <h2>Open loot bags. Equip mythic gear.</h2>
+        <p>Focus sessions drop chests. Crack them open for gear from Common to Mythic.</p>
+      </div>
+      <div class="sc-img-duo">
+        <div class="sc-img-single">
+          <img src="img/inventory.png" alt="Inventory with Shadow Sword, Iron Helm, Shadow Plate equipped and seed collection" loading="lazy">
+        </div>
+        <div class="sc-img-single">
+          <img src="img/loot.png" alt="Opening a Legendary Bag, Mythic Vitality Potion revealed with confetti" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════ Arena ══════ -->
+    <section class="sc-section">
+      <div class="sc-header">
+        <span class="sc-label" style="background:rgba(239,68,68,0.1);color:#ef4444;border:1px solid rgba(239,68,68,0.15)">PvE Combat</span>
+        <h2>Fight mobs. Kill bosses. Get rich.</h2>
+        <p>6 dungeon zones. Turn-based combat. Gold, materials &amp; warrior XP on every kill.</p>
+      </div>
+      <div class="sc-img-single">
+        <img src="img/arena.png" alt="Arena battle — fighting Slime Scout with 76 ATK, 191 HP character stats" loading="lazy">
+      </div>
+    </section>
+
+    <!-- ══════ Craft + Farm ══════ -->
+    <section class="sc-section">
+      <div class="sc-header">
+        <span class="sc-label" style="background:rgba(34,211,238,0.1);color:#22d3ee;border:1px solid rgba(34,211,238,0.15)">22 Recipes</span>
+        <h2>Craft endgame weapons. Grow your farm.</h2>
+        <p>Smelt, refine, forge. Plant seeds, harvest crops, sell on the marketplace.</p>
+      </div>
+      <div class="sc-img-duo">
+        <div class="sc-img-single">
+          <img src="img/craft.png" alt="Crafting page — Compost recipe with Wheat and Herbs ingredients" loading="lazy">
+        </div>
+        <div class="sc-img-single">
+          <img src="img/farm.png" alt="Farm with 6 plots — Wheat ready, Crystal Root growing, Void Spores planted" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════ Marketplace ══════ -->
+    <section class="sc-section">
+      <div class="sc-header">
+        <span class="sc-label" style="background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.15)">Player Economy</span>
+        <h2>Trade with real players</h2>
+        <p>List drops, buy upgrades, compete on leaderboards. Real-time chat with friends.</p>
+      </div>
+      <div class="sc-img-single">
+        <img src="img/marketplace.png" alt="Marketplace with seed zips and materials listed for gold" loading="lazy">
+      </div>
+    </section>
+
+    <!-- ══════ Item Showcase ══════ -->
+    <section class="item-strip">
+      <h2>Browse Items in the Wiki</h2>
+      <p class="item-strip-sub">Click any item to see full stats, drop rates &amp; recipes</p>
+      <div class="item-scroll">
+        <a href="item.html?id=void_helm" class="item-card" style="background:rgba(244,114,182,0.06);border-color:rgba(244,114,182,0.2);color:#f472b6">
+          <span class="item-card-icon">&#128081;</span>
+          <span class="item-card-name">Void Helm</span>
+          <span class="item-card-rarity">Mythic</span>
         </a>
-        <a href="#showcase-skills" class="landing-cta-secondary">
-          See it in action &#8595;
+        <a href="item.html?id=golden_plate" class="item-card" style="background:rgba(250,204,21,0.06);border-color:rgba(250,204,21,0.2);color:#facc15">
+          <span class="item-card-icon">&#129466;</span>
+          <span class="item-card-name">Golden Plate</span>
+          <span class="item-card-rarity">Legendary</span>
+        </a>
+        <a href="item.html?id=shadow_ring" class="item-card" style="background:rgba(192,132,252,0.06);border-color:rgba(192,132,252,0.2);color:#c084fc">
+          <span class="item-card-icon">&#128141;</span>
+          <span class="item-card-name">Shadow Ring</span>
+          <span class="item-card-rarity">Epic</span>
+        </a>
+        <a href="item.html?id=craft_dragon_crown" class="item-card" style="background:rgba(250,204,21,0.06);border-color:rgba(250,204,21,0.2);color:#facc15">
+          <span class="item-card-icon">&#128302;</span>
+          <span class="item-card-name">Dragon Crown</span>
+          <span class="item-card-rarity">Legendary</span>
+        </a>
+        <a href="item.html?id=craft_void_blade" class="item-card" style="background:rgba(244,114,182,0.06);border-color:rgba(244,114,182,0.2);color:#f472b6">
+          <span class="item-card-icon">&#9876;&#65039;</span>
+          <span class="item-card-name">Void Blade</span>
+          <span class="item-card-rarity">Mythic</span>
+        </a>
+        <a href="item.html?id=copper_helm" class="item-card" style="background:rgba(56,189,248,0.06);border-color:rgba(56,189,248,0.2);color:#38bdf8">
+          <span class="item-card-icon">&#9935;&#65039;</span>
+          <span class="item-card-name">Copper Helm</span>
+          <span class="item-card-rarity">Rare</span>
+        </a>
+        <a href="item.html?id=dragon_scale" class="item-card" style="background:rgba(250,204,21,0.06);border-color:rgba(250,204,21,0.2);color:#facc15">
+          <span class="item-card-icon">&#128142;</span>
+          <span class="item-card-name">Dragon Scale</span>
+          <span class="item-card-rarity">Legendary</span>
+        </a>
+        <a href="item.html?id=void_crystal" class="item-card" style="background:rgba(192,132,252,0.06);border-color:rgba(192,132,252,0.2);color:#c084fc">
+          <span class="item-card-icon">&#128302;</span>
+          <span class="item-card-name">Void Crystal</span>
+          <span class="item-card-rarity">Epic</span>
+        </a>
+        <a href="item.html?id=craft_troll_maul" class="item-card" style="background:rgba(250,204,21,0.06);border-color:rgba(250,204,21,0.2);color:#facc15">
+          <span class="item-card-icon">&#128296;</span>
+          <span class="item-card-name">Troll Maul</span>
+          <span class="item-card-rarity">Legendary</span>
+        </a>
+        <a href="item.html?id=hp_potion" class="item-card" style="background:rgba(244,114,182,0.06);border-color:rgba(244,114,182,0.2);color:#f472b6">
+          <span class="item-card-icon">&#129388;</span>
+          <span class="item-card-name">Vitality Potion</span>
+          <span class="item-card-rarity">Mythic</span>
         </a>
       </div>
-      <div class="landing-stats">
-        <div class="landing-stat"><span class="landing-stat-num">11</span><span class="landing-stat-label">Skills</span></div>
-        <div class="landing-stat"><span class="landing-stat-num">69+</span><span class="landing-stat-label">Items</span></div>
-        <div class="landing-stat"><span class="landing-stat-num">6</span><span class="landing-stat-label">Zones</span></div>
-        <div class="landing-stat"><span class="landing-stat-num">22</span><span class="landing-stat-label">Recipes</span></div>
-        <div class="landing-stat"><span class="landing-stat-num">99</span><span class="landing-stat-label">Max Level</span></div>
-      </div>
     </section>
 
-    <!-- ══════ Showcase 1: Skills & Analytics ══════ -->
-    <section class="showcase-section" id="showcase-skills">
-      <div class="showcase-row">
-        <div class="showcase-text">
-          <h2>Level Up 11 Skills Just By Using Your PC</h2>
-          <p>
-            Grindly tracks your active window and turns every minute into XP. Coding in VS Code?
-            Developer XP. Browsing Figma? Designer XP. Playing games? Gamer XP.
-            No manual input &mdash; it all happens automatically.
-          </p>
-          <ul class="showcase-highlights hl-blue">
-            <li>8 passive skills that level from your daily PC usage</li>
-            <li>Warrior, Crafter &amp; Farmer level from in-game activities</li>
-            <li>99 levels per skill with exponential XP curve</li>
-            <li>XP multipliers from daily streaks (up to +30%)</li>
-            <li>Total level shown across all skills</li>
-          </ul>
-        </div>
-        <div class="screenshot-frame">
-          <img src="img/skills.png" alt="Grindly Skills — Developer, Designer, Gamer, Researcher and more with XP bars and levels" loading="lazy">
-          <div class="screenshot-glow glow-blue"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════ Showcase 2: Activity Insights ══════ -->
-    <section class="showcase-section">
-      <div class="showcase-row reverse">
-        <div class="showcase-text">
-          <h2>Deep Analytics on Your Screen Time</h2>
-          <p>
-            AI-powered activity insights show exactly how you spend your time.
-            Track focus quality, distraction share, context switches, and habits.
-            See daily, weekly, monthly or all-time breakdowns with actionable recommendations.
-          </p>
-          <ul class="showcase-highlights hl-amber">
-            <li>Health Snapshot: tracked time, focus quality, distraction %</li>
-            <li>Context switch counter &mdash; fewer means deeper focus</li>
-            <li>Session stats: keystrokes, avg session length, streaks</li>
-            <li>Habits &amp; Risks panel with personalised warnings</li>
-            <li>Today / 7d / 30d / All / Custom time ranges</li>
-          </ul>
-        </div>
-        <div class="screenshot-frame">
-          <img src="img/analytics.png" alt="Grindly Activity Insights — tracked time, focus quality, habits and risks analysis" loading="lazy">
-          <div class="screenshot-glow glow-amber"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════ Showcase 3: Inventory & Loot ══════ -->
-    <section class="showcase-section">
-      <div class="showcase-row">
-        <div class="showcase-text">
-          <h2>Collect Loot, Equip Gear, Get Stronger</h2>
-          <p>
-            Focus sessions reward loot bags. Open them for equipment across 5 rarity tiers &mdash;
-            Common to Mythic. Equip gear in 5 slots (Weapon, Head, Body, Legs, Ring) to boost ATK, HP,
-            and IP. Open legendary bags for a chance at mythic drops with confetti and all.
-          </p>
-          <ul class="showcase-highlights hl-purple">
-            <li>5 armor sets: Wooden, Copper, Shadow, Golden, Void</li>
-            <li>5 equipment slots with visible stat boosts</li>
-            <li>Pity system guarantees rare+ drops after bad luck</li>
-            <li>Seeds, potions, materials &amp; resources in inventory</li>
-            <li>Search &amp; filter by category, rarity, type</li>
-          </ul>
-        </div>
-        <div class="screenshot-duo">
-          <div class="screenshot-frame">
-            <img src="img/inventory.png" alt="Grindly Inventory — equipped Shadow gear, seeds, potions and character stats" loading="lazy">
-            <div class="screenshot-glow glow-purple"></div>
-          </div>
-          <div class="screenshot-frame">
-            <img src="img/loot.png" alt="Grindly Loot Bag — opening a Legendary Bag revealing a Mythic Vitality Potion" loading="lazy">
-            <div class="screenshot-glow glow-pink"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════ Showcase 4: Arena Combat ══════ -->
-    <section class="showcase-section">
-      <div class="showcase-row reverse">
-        <div class="showcase-text">
-          <h2>Battle Bosses in the Arena</h2>
-          <p>
-            Enter 6 dungeon zones, each with unique mobs and a powerful boss. Fights are turn-based &mdash;
-            your ATK and HP scale with equipped gear. Earn gold, rare materials, and Warrior XP.
-            Craft boss-exclusive weapons from their drops.
-          </p>
-          <ul class="showcase-highlights hl-red">
-            <li>6 zones: Slime Cavern through Dragon Lair</li>
-            <li>Turn-based combat with ATK/s, HP regen, real stats</li>
-            <li>Character panel shows equipped gear &amp; combat stats</li>
-            <li>Boss drops unlock exclusive crafting recipes</li>
-            <li>Gold rewards for buying on the marketplace</li>
-          </ul>
-        </div>
-        <div class="screenshot-frame">
-          <img src="img/arena.png" alt="Grindly Arena — battling a Slime Scout with equipped Shadow gear and combat stats" loading="lazy">
-          <div class="screenshot-glow glow-red"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════ Showcase 5: Crafting & Farming ══════ -->
-    <section class="showcase-section">
-      <div class="showcase-row">
-        <div class="showcase-text">
-          <h2>Craft Powerful Gear &amp; Grow Your Farm</h2>
-          <p>
-            Smelt ores into bars, refine monster drops, and forge endgame weapons and armor.
-            Plant seeds across 8 farm plots, harvest crops on timers, and use compost for
-            bonus yields. Sell everything on the marketplace for gold.
-          </p>
-          <ul class="showcase-highlights hl-cyan">
-            <li>22 recipes from Compost to mythic-tier Void Blade</li>
-            <li>Multi-step crafting: raw drops &rarr; intermediates &rarr; gear</li>
-            <li>9 seed types from Wheat (5 min) to Void Spore (8 hours)</li>
-            <li>Plant buffs that boost ATK, HP and XP in combat</li>
-            <li>Crafter &amp; Farmer skills level as you work</li>
-          </ul>
-        </div>
-        <div class="screenshot-duo">
-          <div class="screenshot-frame">
-            <img src="img/craft.png" alt="Grindly Crafting — Compost recipe with ingredients, quantity selector and XP reward" loading="lazy">
-            <div class="screenshot-glow glow-cyan"></div>
-          </div>
-          <div class="screenshot-frame">
-            <img src="img/farm.png" alt="Grindly Farm — 6 plots with growing Void Spores, Crystal Root and ready Wheat harvests" loading="lazy">
-            <div class="screenshot-glow glow-green"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════ Showcase 6: Marketplace ══════ -->
-    <section class="showcase-section">
-      <div class="showcase-row reverse">
-        <div class="showcase-text">
-          <h2>Trade on the Player Marketplace</h2>
-          <p>
-            List your drops, buy upgrades from other players, and build the ultimate loadout.
-            Per-unit pricing, category filters, and your own listings panel make trading fast.
-            Add friends, chat in real-time, and compete on skill leaderboards.
-          </p>
-          <ul class="showcase-highlights hl-gold">
-            <li>Player-to-player trading with gold currency</li>
-            <li>Filter by Combat, XP, Drops, Cosmetic, Seeds</li>
-            <li>Partial buy &mdash; buy 1 or all from a stack listing</li>
-            <li>Friends list, real-time chat &amp; online status</li>
-            <li>Per-skill leaderboards &mdash; compete with friends</li>
-          </ul>
-        </div>
-        <div class="screenshot-frame">
-          <img src="img/marketplace.png" alt="Grindly Marketplace — seed zips and materials listed for sale with gold prices" loading="lazy">
-          <div class="screenshot-glow glow-gold"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════ How It Works ══════ -->
-    <section class="content" id="how">
-      <h2 class="section-title"><span class="section-icon">&#9889;</span> How It Works</h2>
-      <div class="steps-grid">
-        <div class="step-card">
-          <div class="step-card-icon">&#128187;</div>
-          <h4>Use Your PC</h4>
-          <p>Code, design, browse, game &mdash; Grindly silently tracks your active window in the background.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-card-icon">&#128200;</div>
-          <h4>Earn XP</h4>
-          <p>Every minute is categorized into one of 11 skills. XP flows automatically &mdash; no input needed.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-card-icon">&#127873;</div>
-          <h4>Get Loot</h4>
-          <p>Focus sessions reward chests. Open them for gear across 5 rarity tiers, from Common to Mythic.</p>
-        </div>
-        <div class="step-card">
-          <div class="step-card-icon">&#9876;&#65039;</div>
-          <h4>Fight &amp; Craft</h4>
-          <p>Battle bosses in the arena, farm materials, craft powerful weapons, and trade on the marketplace.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════ Features ══════ -->
-    <section class="content" id="features">
-      <h2 class="section-title"><span class="section-icon">&#128142;</span> Features</h2>
-      <div class="feature-grid">
-        <a href="skills.html" class="feature-card">
-          <div class="feature-card-icon">&#128202;</div>
-          <h3>11 Skills</h3>
-          <p>Developer, Designer, Gamer, Researcher, Creator, Communicator, Learner, Listener, Farmer, Warrior, Crafter. 99 levels each.</p>
-          <span class="feature-tag" style="background:rgba(56,189,248,0.1);color:#38bdf8;border:1px solid rgba(56,189,248,0.2)">PASSIVE XP</span>
-        </a>
-        <a href="equipment.html" class="feature-card">
-          <div class="feature-card-icon">&#9876;&#65039;</div>
-          <h3>Equipment &amp; Sets</h3>
-          <p>5 armor sets from Wooden to Void, plus craftable weapons, armor and rings. Each boosts ATK, HP or XP.</p>
-          <span class="feature-tag" style="background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.2)">5 RARITIES</span>
-        </a>
-        <a href="arena.html" class="feature-card">
-          <div class="feature-card-icon">&#128293;</div>
-          <h3>Arena Combat</h3>
-          <p>6 dungeon zones with unique mobs and bosses. Earn gold, materials, and warrior XP from every fight.</p>
-          <span class="feature-tag" style="background:rgba(248,113,113,0.1);color:#f87171;border:1px solid rgba(248,113,113,0.2)">PVE BATTLES</span>
-        </a>
-        <a href="crafting.html" class="feature-card">
-          <div class="feature-card-icon">&#9874;&#65039;</div>
-          <h3>Crafting System</h3>
-          <p>Smelt ores, refine monster drops, and forge endgame gear. 22 recipes from basic to mythic-tier weapons.</p>
-          <span class="feature-tag" style="background:rgba(34,211,238,0.1);color:#22d3ee;border:1px solid rgba(34,211,238,0.2)">22 RECIPES</span>
-        </a>
-        <a href="farming.html" class="feature-card">
-          <div class="feature-card-icon">&#127793;</div>
-          <h3>Farming</h3>
-          <p>Plant 9 seed types, harvest crops over time, unlock combat buffs from plants, and sell on the marketplace.</p>
-          <span class="feature-tag" style="background:rgba(74,222,128,0.1);color:#4ade80;border:1px solid rgba(74,222,128,0.2)">PASSIVE INCOME</span>
-        </a>
-        <a href="loot.html" class="feature-card">
-          <div class="feature-card-icon">&#127873;</div>
-          <h3>Loot &amp; Chests</h3>
-          <p>4 chest tiers with increasing drop rates. Pity system guarantees rare+ drops. Bonus material drops too.</p>
-          <span class="feature-tag" style="background:rgba(244,114,182,0.1);color:#f472b6;border:1px solid rgba(244,114,182,0.2)">PITY SYSTEM</span>
-        </a>
-        <div class="feature-card" style="cursor:default">
-          <div class="feature-card-icon">&#128172;</div>
-          <h3>Social &amp; Leaderboards</h3>
-          <p>Add friends, chat in real-time, compete on skill leaderboards, and trade gear on the player marketplace.</p>
-          <span class="feature-tag" style="background:rgba(192,132,252,0.1);color:#c084fc;border:1px solid rgba(192,132,252,0.2)">MULTIPLAYER</span>
-        </div>
-        <div class="feature-card" style="cursor:default">
-          <div class="feature-card-icon">&#127942;</div>
-          <h3>Streaks &amp; Achievements</h3>
-          <p>Daily login streaks with XP multipliers. Dozens of achievements to unlock. Streak shields protect your progress.</p>
-          <span class="feature-tag" style="background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.2)">DAILY REWARDS</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════ Wiki Browse ══════ -->
+    <!-- ══════ Feature chips ══════ -->
     <section class="content">
-      <h2 class="section-title"><span class="section-icon">&#128218;</span> Browse the Wiki</h2>
-      <div class="card-grid">
-        <a href="equipment.html" class="nav-card">
-          <div class="nav-card-icon">&#9876;&#65039;</div>
-          <h3>Equipment</h3>
-          <p>Armor, weapons, rings. Bag drops and crafted gear.</p>
+      <h2 class="section-title"><span class="section-icon">&#9889;</span> Everything Inside</h2>
+      <div class="feat-strip">
+        <a href="skills.html" class="feat-chip">
+          <span class="feat-chip-icon">&#128200;</span>
+          <span class="feat-chip-label">11 Skills</span>
+          <span class="feat-chip-sub">99 levels, passive XP</span>
         </a>
-        <a href="arena.html" class="nav-card">
-          <div class="nav-card-icon">&#128293;</div>
-          <h3>Arena &amp; Bosses</h3>
-          <p>6 zones with mobs, bosses, gold &amp; material drops.</p>
+        <a href="equipment.html" class="feat-chip">
+          <span class="feat-chip-icon">&#9876;&#65039;</span>
+          <span class="feat-chip-label">Equipment</span>
+          <span class="feat-chip-sub">5 sets, 5 rarities</span>
         </a>
-        <a href="crafting.html" class="nav-card">
-          <div class="nav-card-icon">&#9874;&#65039;</div>
-          <h3>Crafting</h3>
-          <p>22 recipes from basic to mythic-tier gear.</p>
+        <a href="arena.html" class="feat-chip">
+          <span class="feat-chip-icon">&#128293;</span>
+          <span class="feat-chip-label">Arena</span>
+          <span class="feat-chip-sub">6 zones, bosses</span>
         </a>
-        <a href="farming.html" class="nav-card">
-          <div class="nav-card-icon">&#127793;</div>
-          <h3>Farming</h3>
-          <p>Seeds, crops, combat buffs &amp; marketplace sales.</p>
+        <a href="crafting.html" class="feat-chip">
+          <span class="feat-chip-icon">&#9874;&#65039;</span>
+          <span class="feat-chip-label">Crafting</span>
+          <span class="feat-chip-sub">22 recipes</span>
         </a>
-        <a href="skills.html" class="nav-card">
-          <div class="nav-card-icon">&#9889;</div>
-          <h3>Skills</h3>
-          <p>11 skills, 99 levels each. XP formula &amp; guide.</p>
+        <a href="farming.html" class="feat-chip">
+          <span class="feat-chip-icon">&#127793;</span>
+          <span class="feat-chip-label">Farming</span>
+          <span class="feat-chip-sub">9 seeds, 8 plots</span>
         </a>
-        <a href="loot.html" class="nav-card">
-          <div class="nav-card-icon">&#127873;</div>
-          <h3>Loot Bags</h3>
-          <p>4 tiers, drop pools, pity &amp; exact rates.</p>
+        <a href="loot.html" class="feat-chip">
+          <span class="feat-chip-icon">&#127873;</span>
+          <span class="feat-chip-label">Loot Bags</span>
+          <span class="feat-chip-sub">4 tiers, pity system</span>
         </a>
-        <a href="materials.html" class="nav-card">
-          <div class="nav-card-icon">&#128142;</div>
-          <h3>Materials</h3>
-          <p>Raw drops, intermediates &amp; crafting components.</p>
+        <a href="materials.html" class="feat-chip">
+          <span class="feat-chip-icon">&#128142;</span>
+          <span class="feat-chip-label">Materials</span>
+          <span class="feat-chip-sub">Drops &amp; intermediates</span>
         </a>
+        <div class="feat-chip" style="cursor:default">
+          <span class="feat-chip-icon">&#128172;</span>
+          <span class="feat-chip-label">Social</span>
+          <span class="feat-chip-sub">Friends, chat, boards</span>
+        </div>
       </div>
+    </section>
+
+    <!-- ══════ Final CTA ══════ -->
+    <section class="final-cta">
+      <h2>Ready to grind?</h2>
+      <p>Free, open source, no account required. Your data stays on your machine.</p>
+      <a href="https://github.com/borissharikoff-droid/Idly/releases/latest" class="btn-primary" target="_blank" rel="noopener">Download Grindly</a>
     </section>
 
     <!-- ══════ Quick Reference ══════ -->
@@ -709,7 +573,7 @@
       </div>
     </section>
 
-    <!-- ══════ Latest Patch Notes ══════ -->
+    <!-- ══════ Patch Notes ══════ -->
     <section class="content">
       <h2 class="section-title"><span class="section-icon">&#128227;</span> Latest Update</h2>
       <div id="latestPatch"></div>
@@ -723,10 +587,7 @@
 <script src="wiki-skins.js"></script>
 <script src="wiki-online.js"></script>
 <script src="wiki-patches.js"></script>
-
-<script>
-  renderLatestPatch(document.getElementById('latestPatch'));
-</script>
+<script>renderLatestPatch(document.getElementById('latestPatch'));</script>
 
 </body>
 </html>
