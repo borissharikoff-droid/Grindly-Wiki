@@ -10,9 +10,9 @@
 .landing-hero {
   position: relative;
   text-align: center;
-  padding: 64px 28px 56px;
+  padding: 72px 28px 64px;
   overflow: hidden;
-  background: radial-gradient(ellipse at 50% 0%, rgba(212,168,67,0.12) 0%, transparent 55%),
+  background: radial-gradient(ellipse at 50% -10%, rgba(212,168,67,0.14) 0%, transparent 55%),
               linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-page) 100%);
   border-bottom: 2px solid var(--border-ornate);
 }
@@ -25,34 +25,42 @@
 }
 .landing-logo {
   font-family: var(--font-title);
-  font-size: 56px;
+  font-size: 60px;
   font-weight: 800;
   color: var(--gold-bright);
-  letter-spacing: 3px;
-  text-shadow: 0 0 60px rgba(212,168,67,0.3), 0 2px 0 rgba(0,0,0,0.5);
-  margin-bottom: 10px;
+  letter-spacing: 4px;
+  text-shadow: 0 0 60px rgba(212,168,67,0.35), 0 2px 0 rgba(0,0,0,0.5);
+  margin-bottom: 12px;
   position: relative;
 }
 .landing-tagline {
-  font-size: 20px;
+  font-size: 21px;
   color: var(--text-bright);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   font-weight: 600;
   position: relative;
 }
 .landing-sub {
   font-size: 14px;
   color: var(--text-dim);
-  max-width: 520px;
-  margin: 0 auto 32px;
+  max-width: 540px;
+  margin: 0 auto 36px;
   line-height: 1.7;
+  position: relative;
+}
+.landing-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
   position: relative;
 }
 .landing-cta {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 14px 36px;
+  padding: 14px 40px;
   border-radius: 10px;
   font-family: var(--font-title);
   font-size: 15px;
@@ -64,11 +72,10 @@
   cursor: pointer;
   transition: all 0.2s;
   box-shadow: 0 4px 24px rgba(212,168,67,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
-  position: relative;
 }
 .landing-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(212,168,67,0.45), inset 0 1px 0 rgba(255,255,255,0.2);
+  box-shadow: 0 8px 36px rgba(212,168,67,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
   color: #0d0a04;
 }
 .landing-cta-secondary {
@@ -85,8 +92,6 @@
   text-decoration: none;
   cursor: pointer;
   transition: all 0.2s;
-  margin-left: 12px;
-  position: relative;
 }
 .landing-cta-secondary:hover {
   background: rgba(212,168,67,0.08);
@@ -96,8 +101,8 @@
 .landing-stats {
   display: flex;
   justify-content: center;
-  gap: 32px;
-  margin-top: 36px;
+  gap: 36px;
+  margin-top: 40px;
   flex-wrap: wrap;
   position: relative;
 }
@@ -105,7 +110,7 @@
 .landing-stat-num {
   display: block;
   font-family: var(--font-title);
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 700;
   color: var(--gold-bright);
 }
@@ -125,26 +130,24 @@
 }
 .hero-float-item {
   position: absolute;
-  font-size: 24px;
-  opacity: 0.12;
+  font-size: 22px;
+  opacity: 0.1;
   animation: heroFloat 8s ease-in-out infinite;
 }
 @keyframes heroFloat {
   0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(8deg); }
+  50% { transform: translateY(-18px) rotate(6deg); }
 }
 
-/* ── App Showcase ──────────────────────────────────────────────────────────── */
+/* ── Screenshot Showcase ──────────────────────────────────────────────────── */
 .showcase-section {
-  padding: 40px 28px;
+  padding: 48px 28px;
   border-bottom: 1px solid var(--border-inner);
 }
-.showcase-section:last-of-type { border-bottom: none; }
-
 .showcase-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 32px;
+  gap: 40px;
   align-items: center;
 }
 .showcase-row.reverse { direction: rtl; }
@@ -152,396 +155,86 @@
 
 .showcase-text h2 {
   font-family: var(--font-title);
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
   color: var(--gold);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  line-height: 1.3;
 }
 .showcase-text p {
   font-size: 13px;
   color: var(--text-dim);
-  line-height: 1.7;
-  margin-bottom: 14px;
+  line-height: 1.8;
+  margin-bottom: 16px;
 }
-.showcase-text .showcase-highlights {
+.showcase-highlights {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
-.showcase-text .showcase-highlights li {
+.showcase-highlights li {
   font-size: 12px;
   color: var(--text);
-  padding: 4px 0;
+  padding: 5px 0;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
-.showcase-text .showcase-highlights li::before {
+.showcase-highlights li::before {
   content: '';
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.highlight-gold li::before { background: var(--gold); }
-.highlight-green li::before { background: #4ade80; }
-.highlight-blue li::before { background: #38bdf8; }
-.highlight-red li::before { background: #ef4444; }
-.highlight-purple li::before { background: #c084fc; }
-.highlight-cyan li::before { background: #22d3ee; }
-
-/* ── App Mockup Window ── */
-.app-window {
-  background: #16161e;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 60px rgba(212,168,67,0.04);
-}
-.app-titlebar {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
-  background: #0d0d15;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-.app-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-.app-dot.r { background: #ef4444; }
-.app-dot.y { background: #fbbf24; }
-.app-dot.g { background: #4ade80; }
-.app-titlebar-text {
-  flex: 1;
-  text-align: center;
-  font-size: 10px;
-  font-family: var(--font-mono);
-  color: rgba(255,255,255,0.25);
-  letter-spacing: 0.5px;
-}
-.app-body {
-  padding: 16px;
-}
-
-/* ── Activity Chart Mockup ── */
-.mock-chart {
-  display: flex;
-  align-items: flex-end;
-  gap: 6px;
-  height: 100px;
-  padding: 0 4px;
-}
-.mock-bar {
-  flex: 1;
-  border-radius: 4px 4px 0 0;
-  position: relative;
-  animation: barGrow 1.2s ease-out both;
-  min-width: 0;
-}
-.mock-bar-label {
-  position: absolute;
-  bottom: -18px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 8px;
-  color: rgba(255,255,255,0.3);
-  font-family: var(--font-mono);
-  white-space: nowrap;
-}
-@keyframes barGrow {
-  from { height: 0 !important; }
-}
-.mock-chart-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 14px;
-}
-.mock-chart-title {
-  font-size: 12px;
-  font-weight: 600;
-  color: #e2e8f0;
-}
-.mock-chart-period {
-  font-size: 9px;
-  color: rgba(255,255,255,0.3);
-  font-family: var(--font-mono);
-  padding: 3px 8px;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 4px;
-}
-.mock-total-row {
-  display: flex;
-  gap: 16px;
-  margin-top: 28px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(255,255,255,0.06);
-}
-.mock-total-item {
-  text-align: center;
-  flex: 1;
-}
-.mock-total-num {
-  display: block;
-  font-size: 16px;
-  font-weight: 700;
-  font-family: var(--font-mono);
-}
-.mock-total-label {
-  font-size: 8px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: rgba(255,255,255,0.3);
-}
-
-/* ── Skill Bars Mockup ── */
-.mock-skill-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.mock-skill-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.mock-skill-icon {
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  flex-shrink: 0;
-}
-.mock-skill-info { flex: 1; min-width: 0; }
-.mock-skill-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 3px;
-}
-.mock-skill-name {
-  font-size: 11px;
-  font-weight: 600;
-  color: #e2e8f0;
-}
-.mock-skill-lvl {
-  font-size: 9px;
-  font-family: var(--font-mono);
-  color: rgba(255,255,255,0.4);
-}
-.mock-skill-track {
+  width: 6px;
   height: 6px;
-  background: rgba(255,255,255,0.06);
-  border-radius: 3px;
-  overflow: hidden;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
-.mock-skill-fill {
-  height: 100%;
-  border-radius: 3px;
-  animation: skillFill 1.5s ease-out both;
-}
-@keyframes skillFill { from { width: 0 !important; } }
+.hl-green li::before  { background: #4ade80; box-shadow: 0 0 6px rgba(74,222,128,0.4); }
+.hl-blue li::before   { background: #38bdf8; box-shadow: 0 0 6px rgba(56,189,248,0.4); }
+.hl-purple li::before { background: #c084fc; box-shadow: 0 0 6px rgba(192,132,252,0.4); }
+.hl-red li::before    { background: #ef4444; box-shadow: 0 0 6px rgba(239,68,68,0.4); }
+.hl-gold li::before   { background: #fbbf24; box-shadow: 0 0 6px rgba(251,191,36,0.4); }
+.hl-cyan li::before   { background: #22d3ee; box-shadow: 0 0 6px rgba(34,211,238,0.4); }
+.hl-pink li::before   { background: #f472b6; box-shadow: 0 0 6px rgba(244,114,182,0.4); }
+.hl-amber li::before  { background: #f59e0b; box-shadow: 0 0 6px rgba(245,158,11,0.4); }
 
-/* ── Loot Grid Mockup ── */
-.mock-loot-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
-}
-.mock-loot-slot {
-  aspect-ratio: 1;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
+/* ── Screenshot frame ── */
+.screenshot-frame {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 12px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.03);
   position: relative;
-  border-width: 1px;
-  border-style: solid;
-  transition: transform 0.15s;
+  background: #16161e;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.mock-loot-slot:hover { transform: scale(1.08); }
-.mock-loot-rarity {
-  position: absolute;
-  bottom: 2px;
-  right: 3px;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
+.screenshot-frame:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(212,168,67,0.06);
 }
-.mock-equipped-label {
-  position: absolute;
-  top: -1px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 6px;
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding: 1px 4px;
-  border-radius: 0 0 3px 3px;
-  white-space: nowrap;
-}
-.mock-loot-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-.mock-loot-title {
-  font-size: 12px;
-  font-weight: 600;
-  color: #e2e8f0;
-}
-.mock-ip-badge {
-  font-size: 9px;
-  font-family: var(--font-mono);
-  padding: 3px 8px;
-  border-radius: 4px;
-  border: 1px solid;
-}
-
-/* ── Arena Mockup ── */
-.mock-arena {
-  text-align: center;
-}
-.mock-arena-zone {
-  font-size: 10px;
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: rgba(255,255,255,0.3);
-  margin-bottom: 10px;
-}
-.mock-battle-scene {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  margin: 12px 0;
-}
-.mock-fighter {
-  text-align: center;
-}
-.mock-fighter-icon {
-  font-size: 36px;
+.screenshot-frame img {
   display: block;
-  margin-bottom: 4px;
+  width: 100%;
+  height: auto;
 }
-.mock-fighter-name {
-  font-size: 10px;
-  font-weight: 600;
-  color: #e2e8f0;
+.screenshot-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  pointer-events: none;
 }
-.mock-fighter-hp {
-  font-size: 9px;
-  font-family: var(--font-mono);
-  margin-top: 2px;
-}
-.mock-hp-bar {
-  width: 80px;
-  height: 5px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 3px;
-  margin: 4px auto 0;
-  overflow: hidden;
-}
-.mock-hp-fill {
-  height: 100%;
-  border-radius: 3px;
-}
-.mock-vs {
-  font-family: var(--font-title);
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--gold);
-  text-shadow: 0 0 20px rgba(212,168,67,0.3);
-}
-.mock-arena-rewards {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 12px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(255,255,255,0.06);
-}
-.mock-reward {
-  font-size: 10px;
-  font-family: var(--font-mono);
-  padding: 3px 10px;
-  border-radius: 4px;
-  border: 1px solid rgba(255,255,255,0.06);
-  background: rgba(255,255,255,0.03);
-}
+.screenshot-glow.glow-green  { box-shadow: inset 0 0 40px rgba(74,222,128,0.06); }
+.screenshot-glow.glow-blue   { box-shadow: inset 0 0 40px rgba(56,189,248,0.06); }
+.screenshot-glow.glow-purple { box-shadow: inset 0 0 40px rgba(192,132,252,0.06); }
+.screenshot-glow.glow-red    { box-shadow: inset 0 0 40px rgba(239,68,68,0.06); }
+.screenshot-glow.glow-gold   { box-shadow: inset 0 0 40px rgba(251,191,36,0.06); }
+.screenshot-glow.glow-cyan   { box-shadow: inset 0 0 40px rgba(34,211,238,0.06); }
+.screenshot-glow.glow-pink   { box-shadow: inset 0 0 40px rgba(244,114,182,0.06); }
+.screenshot-glow.glow-amber  { box-shadow: inset 0 0 40px rgba(245,158,11,0.06); }
 
-/* ── Leaderboard Mockup ── */
-.mock-leaderboard {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.mock-lb-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 10px;
-  border-radius: 6px;
-  font-size: 11px;
-}
-.mock-lb-row.me { background: rgba(0,255,136,0.06); border: 1px solid rgba(0,255,136,0.12); }
-.mock-lb-rank {
-  width: 18px;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 12px;
-  flex-shrink: 0;
-}
-.mock-lb-avatar {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  flex-shrink: 0;
-}
-.mock-lb-name {
-  flex: 1;
-  font-weight: 600;
-  color: #e2e8f0;
-}
-.mock-lb-xp {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: rgba(255,255,255,0.4);
-}
-.mock-lb-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-.mock-lb-tabs {
-  display: flex;
-  gap: 4px;
-}
-.mock-lb-tab {
-  font-size: 9px;
-  font-family: var(--font-mono);
-  padding: 3px 8px;
-  border-radius: 4px;
-  color: rgba(255,255,255,0.3);
-}
-.mock-lb-tab.active {
-  background: rgba(0,255,136,0.1);
-  color: #00ff88;
-  border: 1px solid rgba(0,255,136,0.15);
+/* ── Dual screenshots side-by-side ── */
+.screenshot-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
 
 /* ── Feature Pillars ───────────────────────────────────────────────────────── */
@@ -565,31 +258,12 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 16px rgba(0,0,0,0.3);
 }
-.feature-card-icon {
-  font-size: 28px;
-  margin-bottom: 10px;
-  filter: saturate(0.8);
-}
-.feature-card h3 {
-  font-family: var(--font-title);
-  font-size: 14px;
-  color: var(--gold);
-  margin-bottom: 6px;
-}
-.feature-card p {
-  font-size: 12px;
-  color: var(--text-dim);
-  line-height: 1.5;
-}
+.feature-card-icon { font-size: 28px; margin-bottom: 10px; filter: saturate(0.8); }
+.feature-card h3 { font-family: var(--font-title); font-size: 14px; color: var(--gold); margin-bottom: 6px; }
+.feature-card p { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
 .feature-card .feature-tag {
-  display: inline-block;
-  font-size: 9px;
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: .5px;
-  padding: 2px 7px;
-  border-radius: 3px;
-  margin-top: 8px;
+  display: inline-block; font-size: 9px; font-family: var(--font-mono);
+  text-transform: uppercase; letter-spacing: .5px; padding: 2px 7px; border-radius: 3px; margin-top: 8px;
 }
 
 /* ── How It Works ──────────────────────────────────────────────────────────── */
@@ -608,40 +282,20 @@
   text-align: center;
 }
 .step-card::before {
-  counter-increment: step;
-  content: counter(step);
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: var(--gold);
-  color: var(--bg-dark);
-  font-family: var(--font-title);
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 24px;
-  text-align: center;
+  counter-increment: step; content: counter(step);
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--gold); color: var(--bg-dark);
+  font-family: var(--font-title); font-size: 13px; font-weight: 700; line-height: 24px; text-align: center;
 }
 .step-card-icon { font-size: 24px; margin-bottom: 8px; }
-.step-card h4 {
-  font-family: var(--font-title);
-  font-size: 13px;
-  color: var(--text-bright);
-  margin-bottom: 4px;
-}
-.step-card p {
-  font-size: 11px;
-  color: var(--text-dim);
-  line-height: 1.5;
-}
+.step-card h4 { font-family: var(--font-title); font-size: 13px; color: var(--text-bright); margin-bottom: 4px; }
+.step-card p { font-size: 11px; color: var(--text-dim); line-height: 1.5; }
 
 /* ── Responsive ────────────────────────────────────────────────────────────── */
 @media (max-width: 700px) {
-  .landing-hero { padding: 36px 16px 32px; }
-  .landing-logo { font-size: 36px; }
+  .landing-hero { padding: 40px 16px 36px; }
+  .landing-logo { font-size: 38px; }
   .landing-tagline { font-size: 16px; }
   .landing-cta { padding: 10px 24px; font-size: 14px; }
   .landing-cta-secondary { display: none; }
@@ -649,10 +303,9 @@
   .landing-stat-num { font-size: 22px; }
   .feature-grid { grid-template-columns: 1fr 1fr; }
   .steps-grid { grid-template-columns: 1fr 1fr; }
-  .showcase-row { grid-template-columns: 1fr; gap: 20px; }
-  .showcase-row.reverse { direction: ltr; }
+  .showcase-row, .showcase-row.reverse { grid-template-columns: 1fr; gap: 20px; direction: ltr; }
   .showcase-section { padding: 28px 16px; }
-  .mock-loot-grid { grid-template-columns: repeat(4, 1fr); }
+  .screenshot-duo { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -688,7 +341,6 @@
         <div class="search-results" id="searchResults"></div>
       </div>
     </div>
-
     <div class="nav-group">
       <div class="nav-group-title"><span class="arrow">&#9660;</span> Pages</div>
       <ul class="nav-links">
@@ -711,24 +363,26 @@
     <!-- ══════ Landing Hero ══════ -->
     <section class="landing-hero">
       <div class="hero-floaters">
-        <span class="hero-float-item" style="left:8%;top:20%;animation-delay:0s;font-size:20px">&#9876;&#65039;</span>
-        <span class="hero-float-item" style="left:85%;top:15%;animation-delay:1.2s;font-size:18px">&#128142;</span>
-        <span class="hero-float-item" style="left:15%;top:70%;animation-delay:2.4s;font-size:16px">&#127793;</span>
-        <span class="hero-float-item" style="left:90%;top:65%;animation-delay:0.8s;font-size:22px">&#128293;</span>
-        <span class="hero-float-item" style="left:50%;top:8%;animation-delay:3s;font-size:14px">&#9889;</span>
-        <span class="hero-float-item" style="left:75%;top:80%;animation-delay:1.8s;font-size:16px">&#127873;</span>
-        <span class="hero-float-item" style="left:25%;top:85%;animation-delay:4s;font-size:18px">&#9874;&#65039;</span>
+        <span class="hero-float-item" style="left:6%;top:18%;animation-delay:0s">&#9876;&#65039;</span>
+        <span class="hero-float-item" style="left:88%;top:12%;animation-delay:1.2s">&#128142;</span>
+        <span class="hero-float-item" style="left:12%;top:72%;animation-delay:2.4s">&#127793;</span>
+        <span class="hero-float-item" style="left:92%;top:68%;animation-delay:0.8s">&#128293;</span>
+        <span class="hero-float-item" style="left:50%;top:6%;animation-delay:3s;font-size:18px">&#9889;</span>
+        <span class="hero-float-item" style="left:78%;top:82%;animation-delay:1.8s">&#127873;</span>
+        <span class="hero-float-item" style="left:22%;top:88%;animation-delay:4s">&#9874;&#65039;</span>
       </div>
+
       <div class="landing-logo">GRINDLY</div>
       <div class="landing-tagline">Turn Your Screen Time Into an RPG Adventure</div>
       <p class="landing-sub">
-        Grindly runs silently in your system tray, tracking what you do on your PC and turning it into XP, levels, loot, boss fights, crafting and farming &mdash; a full RPG layered on top of your daily workflow.
+        Grindly runs silently in your system tray, tracking what you do on your PC and turning it into XP,
+        levels, loot, boss fights, crafting and farming &mdash; a full RPG layered on top of your daily workflow.
       </p>
-      <div>
+      <div class="landing-buttons">
         <a href="https://github.com/borissharikoff-droid/Idly/releases/latest" class="landing-cta" target="_blank" rel="noopener">
           Download for Windows
         </a>
-        <a href="#showcase-tracking" class="landing-cta-secondary">
+        <a href="#showcase-skills" class="landing-cta-secondary">
           See it in action &#8595;
         </a>
       </div>
@@ -741,400 +395,164 @@
       </div>
     </section>
 
-    <!-- ══════ Showcase: Activity Tracking ══════ -->
-    <section class="showcase-section" id="showcase-tracking">
+    <!-- ══════ Showcase 1: Skills & Analytics ══════ -->
+    <section class="showcase-section" id="showcase-skills">
       <div class="showcase-row">
         <div class="showcase-text">
-          <h2>&#128202; Real-Time Activity Tracking</h2>
+          <h2>Level Up 11 Skills Just By Using Your PC</h2>
           <p>
-            Grindly monitors your active window and categorizes every minute you spend on your PC.
-            Coding in VS Code? That's Developer XP. Browsing Figma? Designer XP. Playing games? Gamer XP.
-            Everything is tracked automatically &mdash; no manual input required.
+            Grindly tracks your active window and turns every minute into XP. Coding in VS Code?
+            Developer XP. Browsing Figma? Designer XP. Playing games? Gamer XP.
+            No manual input &mdash; it all happens automatically.
           </p>
-          <ul class="showcase-highlights highlight-green">
-            <li>Automatic window detection via Win32 APIs</li>
-            <li>Per-app and per-category time breakdowns</li>
-            <li>Daily, weekly and all-time analytics</li>
-            <li>Idle detection &mdash; AFK time doesn't count</li>
-            <li>100% local &mdash; your data stays on your machine</li>
-          </ul>
-        </div>
-        <div class="app-window">
-          <div class="app-titlebar">
-            <span class="app-dot r"></span><span class="app-dot y"></span><span class="app-dot g"></span>
-            <span class="app-titlebar-text">Grindly &mdash; Today's Activity</span>
-          </div>
-          <div class="app-body">
-            <div class="mock-chart-header">
-              <span class="mock-chart-title">Time by Category</span>
-              <span class="mock-chart-period">Today</span>
-            </div>
-            <div class="mock-chart">
-              <div class="mock-bar" style="height:85%;background:linear-gradient(to top,#3b82f6,#60a5fa)"><span class="mock-bar-label">Code</span></div>
-              <div class="mock-bar" style="height:55%;background:linear-gradient(to top,#8b5cf6,#a78bfa);animation-delay:.1s"><span class="mock-bar-label">Design</span></div>
-              <div class="mock-bar" style="height:40%;background:linear-gradient(to top,#10b981,#34d399);animation-delay:.2s"><span class="mock-bar-label">Browse</span></div>
-              <div class="mock-bar" style="height:70%;background:linear-gradient(to top,#f59e0b,#fbbf24);animation-delay:.3s"><span class="mock-bar-label">Games</span></div>
-              <div class="mock-bar" style="height:25%;background:linear-gradient(to top,#ef4444,#f87171);animation-delay:.4s"><span class="mock-bar-label">Chat</span></div>
-              <div class="mock-bar" style="height:35%;background:linear-gradient(to top,#ec4899,#f472b6);animation-delay:.5s"><span class="mock-bar-label">Music</span></div>
-              <div class="mock-bar" style="height:50%;background:linear-gradient(to top,#06b6d4,#22d3ee);animation-delay:.6s"><span class="mock-bar-label">Learn</span></div>
-            </div>
-            <div class="mock-total-row">
-              <div class="mock-total-item">
-                <span class="mock-total-num" style="color:#4ade80">6h 42m</span>
-                <span class="mock-total-label">Active Time</span>
-              </div>
-              <div class="mock-total-item">
-                <span class="mock-total-num" style="color:#fbbf24">4,218</span>
-                <span class="mock-total-label">XP Earned</span>
-              </div>
-              <div class="mock-total-item">
-                <span class="mock-total-num" style="color:#38bdf8">3</span>
-                <span class="mock-total-label">Chests</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════ Showcase: Skill Leveling ══════ -->
-    <section class="showcase-section">
-      <div class="showcase-row reverse">
-        <div class="showcase-text">
-          <h2>&#9889; Level Up 11 Skills</h2>
-          <p>
-            Every activity feeds into one of 11 skills. Watch your Developer level climb as you code,
-            your Gamer rank soar while gaming, or your Researcher level grow as you browse documentation.
-            Each skill has 99 levels with an exponential XP curve.
-          </p>
-          <ul class="showcase-highlights highlight-blue">
-            <li>8 passive skills that level from your PC usage</li>
-            <li>Warrior &amp; Crafter &mdash; level from arena &amp; crafting</li>
-            <li>Farmer &mdash; level from growing and harvesting crops</li>
+          <ul class="showcase-highlights hl-blue">
+            <li>8 passive skills that level from your daily PC usage</li>
+            <li>Warrior, Crafter &amp; Farmer level from in-game activities</li>
+            <li>99 levels per skill with exponential XP curve</li>
             <li>XP multipliers from daily streaks (up to +30%)</li>
-            <li>Compete on skill leaderboards with friends</li>
+            <li>Total level shown across all skills</li>
           </ul>
         </div>
-        <div class="app-window">
-          <div class="app-titlebar">
-            <span class="app-dot r"></span><span class="app-dot y"></span><span class="app-dot g"></span>
-            <span class="app-titlebar-text">Grindly &mdash; Skills</span>
-          </div>
-          <div class="app-body">
-            <div class="mock-skill-list">
-              <div class="mock-skill-row">
-                <div class="mock-skill-icon" style="background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.25)">&#128187;</div>
-                <div class="mock-skill-info">
-                  <div class="mock-skill-top"><span class="mock-skill-name" style="color:#60a5fa">Developer</span><span class="mock-skill-lvl">Lv 47 &middot; 68%</span></div>
-                  <div class="mock-skill-track"><div class="mock-skill-fill" style="width:68%;background:linear-gradient(90deg,#3b82f6,#60a5fa)"></div></div>
-                </div>
-              </div>
-              <div class="mock-skill-row">
-                <div class="mock-skill-icon" style="background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.25)">&#127912;</div>
-                <div class="mock-skill-info">
-                  <div class="mock-skill-top"><span class="mock-skill-name" style="color:#a78bfa">Designer</span><span class="mock-skill-lvl">Lv 31 &middot; 42%</span></div>
-                  <div class="mock-skill-track"><div class="mock-skill-fill" style="width:42%;background:linear-gradient(90deg,#8b5cf6,#a78bfa);animation-delay:.2s"></div></div>
-                </div>
-              </div>
-              <div class="mock-skill-row">
-                <div class="mock-skill-icon" style="background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.25)">&#127918;</div>
-                <div class="mock-skill-info">
-                  <div class="mock-skill-top"><span class="mock-skill-name" style="color:#fbbf24">Gamer</span><span class="mock-skill-lvl">Lv 55 &middot; 81%</span></div>
-                  <div class="mock-skill-track"><div class="mock-skill-fill" style="width:81%;background:linear-gradient(90deg,#f59e0b,#fbbf24);animation-delay:.4s"></div></div>
-                </div>
-              </div>
-              <div class="mock-skill-row">
-                <div class="mock-skill-icon" style="background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.25)">&#9876;&#65039;</div>
-                <div class="mock-skill-info">
-                  <div class="mock-skill-top"><span class="mock-skill-name" style="color:#f87171">Warrior</span><span class="mock-skill-lvl">Lv 22 &middot; 35%</span></div>
-                  <div class="mock-skill-track"><div class="mock-skill-fill" style="width:35%;background:linear-gradient(90deg,#ef4444,#f87171);animation-delay:.6s"></div></div>
-                </div>
-              </div>
-              <div class="mock-skill-row">
-                <div class="mock-skill-icon" style="background:rgba(34,211,238,0.15);border:1px solid rgba(34,211,238,0.25)">&#9874;&#65039;</div>
-                <div class="mock-skill-info">
-                  <div class="mock-skill-top"><span class="mock-skill-name" style="color:#22d3ee">Crafter</span><span class="mock-skill-lvl">Lv 18 &middot; 56%</span></div>
-                  <div class="mock-skill-track"><div class="mock-skill-fill" style="width:56%;background:linear-gradient(90deg,#06b6d4,#22d3ee);animation-delay:.8s"></div></div>
-                </div>
-              </div>
-              <div class="mock-skill-row">
-                <div class="mock-skill-icon" style="background:rgba(74,222,128,0.15);border:1px solid rgba(74,222,128,0.25)">&#127793;</div>
-                <div class="mock-skill-info">
-                  <div class="mock-skill-top"><span class="mock-skill-name" style="color:#4ade80">Farmer</span><span class="mock-skill-lvl">Lv 12 &middot; 23%</span></div>
-                  <div class="mock-skill-track"><div class="mock-skill-fill" style="width:23%;background:linear-gradient(90deg,#22c55e,#4ade80);animation-delay:1s"></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="screenshot-frame">
+          <img src="img/skills.png" alt="Grindly Skills — Developer, Designer, Gamer, Researcher and more with XP bars and levels" loading="lazy">
+          <div class="screenshot-glow glow-blue"></div>
         </div>
       </div>
     </section>
 
-    <!-- ══════ Showcase: Loot & Equipment ══════ -->
-    <section class="showcase-section">
-      <div class="showcase-row">
-        <div class="showcase-text">
-          <h2>&#127873; Collect Loot &amp; Equip Gear</h2>
-          <p>
-            Focus sessions reward you with loot bags. Open them for equipment across 5 rarity tiers &mdash;
-            from Common to Mythic. Equip gear in 4 slots (Head, Top, Accessory, Aura) to boost your
-            combat stats. Higher Item Power means harder hits and tougher battles.
-          </p>
-          <ul class="showcase-highlights highlight-purple">
-            <li>5 armor sets: Wooden, Copper, Shadow, Golden, Void</li>
-            <li>4 equipment slots with visible stat boosts</li>
-            <li>Pity system guarantees rare+ drops</li>
-            <li>Trade items with other players on the marketplace</li>
-            <li>Craft endgame weapons and armor</li>
-          </ul>
-        </div>
-        <div class="app-window">
-          <div class="app-titlebar">
-            <span class="app-dot r"></span><span class="app-dot y"></span><span class="app-dot g"></span>
-            <span class="app-titlebar-text">Grindly &mdash; Inventory</span>
-          </div>
-          <div class="app-body">
-            <div class="mock-loot-header">
-              <span class="mock-loot-title">Equipment</span>
-              <span class="mock-ip-badge" style="color:#fbbf24;border-color:rgba(251,191,36,0.3);background:rgba(251,191,36,0.08)">IP 742</span>
-            </div>
-            <div class="mock-loot-grid">
-              <!-- Row 1: equipped -->
-              <div class="mock-loot-slot" style="background:rgba(251,191,36,0.08);border-color:rgba(251,191,36,0.25)">
-                &#129685;
-                <span class="mock-equipped-label" style="background:#fbbf24;color:#0a0804">HEAD</span>
-                <span class="mock-loot-rarity" style="background:#fbbf24"></span>
-              </div>
-              <div class="mock-loot-slot" style="background:rgba(192,132,252,0.08);border-color:rgba(192,132,252,0.25)">
-                &#129466;
-                <span class="mock-equipped-label" style="background:#c084fc;color:#0a0804">TOP</span>
-                <span class="mock-loot-rarity" style="background:#c084fc"></span>
-              </div>
-              <div class="mock-loot-slot" style="background:rgba(244,114,182,0.08);border-color:rgba(244,114,182,0.25)">
-                &#128141;
-                <span class="mock-equipped-label" style="background:#f472b6;color:#0a0804">ACC</span>
-                <span class="mock-loot-rarity" style="background:#f472b6"></span>
-              </div>
-              <div class="mock-loot-slot" style="background:rgba(96,165,250,0.08);border-color:rgba(96,165,250,0.25)">
-                &#10024;
-                <span class="mock-equipped-label" style="background:#60a5fa;color:#0a0804">AURA</span>
-                <span class="mock-loot-rarity" style="background:#60a5fa"></span>
-              </div>
-              <!-- Row 2: backpack -->
-              <div class="mock-loot-slot" style="background:rgba(156,163,175,0.06);border-color:rgba(156,163,175,0.15)">&#9876;&#65039;<span class="mock-loot-rarity" style="background:#9ca3af"></span></div>
-              <div class="mock-loot-slot" style="background:rgba(96,165,250,0.06);border-color:rgba(96,165,250,0.15)">&#128737;&#65039;<span class="mock-loot-rarity" style="background:#60a5fa"></span></div>
-              <div class="mock-loot-slot" style="background:rgba(251,191,36,0.06);border-color:rgba(251,191,36,0.15)">&#127775;<span class="mock-loot-rarity" style="background:#fbbf24"></span></div>
-              <div class="mock-loot-slot" style="background:rgba(156,163,175,0.06);border-color:rgba(156,163,175,0.15)">&#129506;<span class="mock-loot-rarity" style="background:#9ca3af"></span></div>
-              <!-- Row 3 -->
-              <div class="mock-loot-slot" style="background:rgba(192,132,252,0.06);border-color:rgba(192,132,252,0.15)">&#128302;<span class="mock-loot-rarity" style="background:#c084fc"></span></div>
-              <div class="mock-loot-slot" style="background:rgba(244,114,182,0.06);border-color:rgba(244,114,182,0.15)">&#128081;<span class="mock-loot-rarity" style="background:#f472b6"></span></div>
-              <div class="mock-loot-slot" style="background:rgba(156,163,175,0.06);border-color:rgba(156,163,175,0.15)">&#129667;<span class="mock-loot-rarity" style="background:#9ca3af"></span></div>
-              <div class="mock-loot-slot" style="background:rgba(96,165,250,0.06);border-color:rgba(96,165,250,0.15)">&#129682;<span class="mock-loot-rarity" style="background:#60a5fa"></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════ Showcase: Arena Combat ══════ -->
+    <!-- ══════ Showcase 2: Activity Insights ══════ -->
     <section class="showcase-section">
       <div class="showcase-row reverse">
         <div class="showcase-text">
-          <h2>&#128293; Battle Bosses in the Arena</h2>
+          <h2>Deep Analytics on Your Screen Time</h2>
+          <p>
+            AI-powered activity insights show exactly how you spend your time.
+            Track focus quality, distraction share, context switches, and habits.
+            See daily, weekly, monthly or all-time breakdowns with actionable recommendations.
+          </p>
+          <ul class="showcase-highlights hl-amber">
+            <li>Health Snapshot: tracked time, focus quality, distraction %</li>
+            <li>Context switch counter &mdash; fewer means deeper focus</li>
+            <li>Session stats: keystrokes, avg session length, streaks</li>
+            <li>Habits &amp; Risks panel with personalised warnings</li>
+            <li>Today / 7d / 30d / All / Custom time ranges</li>
+          </ul>
+        </div>
+        <div class="screenshot-frame">
+          <img src="img/analytics.png" alt="Grindly Activity Insights — tracked time, focus quality, habits and risks analysis" loading="lazy">
+          <div class="screenshot-glow glow-amber"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════ Showcase 3: Inventory & Loot ══════ -->
+    <section class="showcase-section">
+      <div class="showcase-row">
+        <div class="showcase-text">
+          <h2>Collect Loot, Equip Gear, Get Stronger</h2>
+          <p>
+            Focus sessions reward loot bags. Open them for equipment across 5 rarity tiers &mdash;
+            Common to Mythic. Equip gear in 5 slots (Weapon, Head, Body, Legs, Ring) to boost ATK, HP,
+            and IP. Open legendary bags for a chance at mythic drops with confetti and all.
+          </p>
+          <ul class="showcase-highlights hl-purple">
+            <li>5 armor sets: Wooden, Copper, Shadow, Golden, Void</li>
+            <li>5 equipment slots with visible stat boosts</li>
+            <li>Pity system guarantees rare+ drops after bad luck</li>
+            <li>Seeds, potions, materials &amp; resources in inventory</li>
+            <li>Search &amp; filter by category, rarity, type</li>
+          </ul>
+        </div>
+        <div class="screenshot-duo">
+          <div class="screenshot-frame">
+            <img src="img/inventory.png" alt="Grindly Inventory — equipped Shadow gear, seeds, potions and character stats" loading="lazy">
+            <div class="screenshot-glow glow-purple"></div>
+          </div>
+          <div class="screenshot-frame">
+            <img src="img/loot.png" alt="Grindly Loot Bag — opening a Legendary Bag revealing a Mythic Vitality Potion" loading="lazy">
+            <div class="screenshot-glow glow-pink"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════ Showcase 4: Arena Combat ══════ -->
+    <section class="showcase-section">
+      <div class="showcase-row reverse">
+        <div class="showcase-text">
+          <h2>Battle Bosses in the Arena</h2>
           <p>
             Enter 6 dungeon zones, each with unique mobs and a powerful boss. Fights are turn-based &mdash;
-            your damage and HP scale with your equipped gear. Earn gold, rare materials, and Warrior XP
-            from every encounter. Craft boss-exclusive weapons from their drops.
+            your ATK and HP scale with equipped gear. Earn gold, rare materials, and Warrior XP.
+            Craft boss-exclusive weapons from their drops.
           </p>
-          <ul class="showcase-highlights highlight-red">
-            <li>6 zones: Slime Cavern to Dragon Lair</li>
-            <li>Turn-based combat with auto-attack &amp; HP regen</li>
+          <ul class="showcase-highlights hl-red">
+            <li>6 zones: Slime Cavern through Dragon Lair</li>
+            <li>Turn-based combat with ATK/s, HP regen, real stats</li>
+            <li>Character panel shows equipped gear &amp; combat stats</li>
             <li>Boss drops unlock exclusive crafting recipes</li>
-            <li>Warrior XP gates access to harder zones</li>
-            <li>Gold rewards for buying &amp; trading on marketplace</li>
+            <li>Gold rewards for buying on the marketplace</li>
           </ul>
         </div>
-        <div class="app-window">
-          <div class="app-titlebar">
-            <span class="app-dot r"></span><span class="app-dot y"></span><span class="app-dot g"></span>
-            <span class="app-titlebar-text">Grindly &mdash; Arena</span>
-          </div>
-          <div class="app-body">
-            <div class="mock-arena">
-              <div class="mock-arena-zone">&#128293; Dragon Lair &mdash; Zone 6</div>
-              <div class="mock-battle-scene">
-                <div class="mock-fighter">
-                  <span class="mock-fighter-icon">&#129399;</span>
-                  <span class="mock-fighter-name" style="color:#4ade80">You</span>
-                  <div class="mock-hp-bar"><div class="mock-hp-fill" style="width:72%;background:linear-gradient(90deg,#22c55e,#4ade80)"></div></div>
-                  <span class="mock-fighter-hp" style="color:#4ade80">324 / 450 HP</span>
-                </div>
-                <span class="mock-vs">VS</span>
-                <div class="mock-fighter">
-                  <span class="mock-fighter-icon">&#128009;</span>
-                  <span class="mock-fighter-name" style="color:#ef4444">Elder Dragon</span>
-                  <div class="mock-hp-bar"><div class="mock-hp-fill" style="width:38%;background:linear-gradient(90deg,#ef4444,#f87171)"></div></div>
-                  <span class="mock-fighter-hp" style="color:#ef4444">1,140 / 3,000 HP</span>
-                </div>
-              </div>
-              <div class="mock-arena-rewards">
-                <span class="mock-reward" style="color:#fbbf24">&#129689; +85 Gold</span>
-                <span class="mock-reward" style="color:#f472b6">&#128142; Dragon Scale</span>
-                <span class="mock-reward" style="color:#c084fc">&#9889; +120 Warrior XP</span>
-              </div>
-            </div>
-          </div>
+        <div class="screenshot-frame">
+          <img src="img/arena.png" alt="Grindly Arena — battling a Slime Scout with equipped Shadow gear and combat stats" loading="lazy">
+          <div class="screenshot-glow glow-red"></div>
         </div>
       </div>
     </section>
 
-    <!-- ══════ Showcase: Friends & Leaderboard ══════ -->
+    <!-- ══════ Showcase 5: Crafting & Farming ══════ -->
     <section class="showcase-section">
       <div class="showcase-row">
         <div class="showcase-text">
-          <h2>&#127942; Compete With Friends</h2>
+          <h2>Craft Powerful Gear &amp; Grow Your Farm</h2>
           <p>
-            Add friends, chat in real-time, and compete on per-skill leaderboards. See who's grinding the hardest
-            this week. Trade gear on the player-to-player marketplace &mdash; list your drops, buy upgrades,
-            and build the ultimate loadout.
+            Smelt ores into bars, refine monster drops, and forge endgame weapons and armor.
+            Plant seeds across 8 farm plots, harvest crops on timers, and use compost for
+            bonus yields. Sell everything on the marketplace for gold.
           </p>
-          <ul class="showcase-highlights highlight-gold">
-            <li>Global &amp; friends-only leaderboards</li>
-            <li>Real-time chat with online status</li>
-            <li>Per-skill rankings (Developer, Gamer, etc.)</li>
-            <li>Player marketplace for trading items</li>
-            <li>Profile pages with equipped gear &amp; stats</li>
-          </ul>
-        </div>
-        <div class="app-window">
-          <div class="app-titlebar">
-            <span class="app-dot r"></span><span class="app-dot y"></span><span class="app-dot g"></span>
-            <span class="app-titlebar-text">Grindly &mdash; Leaderboard</span>
-          </div>
-          <div class="app-body">
-            <div class="mock-lb-header">
-              <span class="mock-loot-title">Friends Ranking</span>
-              <div class="mock-lb-tabs">
-                <span class="mock-lb-tab active">Developer</span>
-                <span class="mock-lb-tab">Gamer</span>
-                <span class="mock-lb-tab">All</span>
-              </div>
-            </div>
-            <div class="mock-leaderboard">
-              <div class="mock-lb-row" style="background:rgba(251,191,36,0.06)">
-                <span class="mock-lb-rank" style="color:#fbbf24">1</span>
-                <span class="mock-lb-avatar" style="background:rgba(251,191,36,0.15)">&#128081;</span>
-                <span class="mock-lb-name">xDarkCoder</span>
-                <span class="mock-lb-xp">Lv 67 &middot; 2.1M xp</span>
-              </div>
-              <div class="mock-lb-row" style="background:rgba(192,132,252,0.04)">
-                <span class="mock-lb-rank" style="color:#c084fc">2</span>
-                <span class="mock-lb-avatar" style="background:rgba(192,132,252,0.15)">&#129399;</span>
-                <span class="mock-lb-name">NightOwl99</span>
-                <span class="mock-lb-xp">Lv 58 &middot; 1.4M xp</span>
-              </div>
-              <div class="mock-lb-row me">
-                <span class="mock-lb-rank" style="color:#4ade80">3</span>
-                <span class="mock-lb-avatar" style="background:rgba(74,222,128,0.15)">&#128526;</span>
-                <span class="mock-lb-name" style="color:#4ade80">You</span>
-                <span class="mock-lb-xp" style="color:#4ade80">Lv 47 &middot; 890K xp</span>
-              </div>
-              <div class="mock-lb-row" style="background:rgba(255,255,255,0.02)">
-                <span class="mock-lb-rank" style="color:rgba(255,255,255,0.3)">4</span>
-                <span class="mock-lb-avatar" style="background:rgba(255,255,255,0.05)">&#128640;</span>
-                <span class="mock-lb-name">ByteHunter</span>
-                <span class="mock-lb-xp">Lv 41 &middot; 620K xp</span>
-              </div>
-              <div class="mock-lb-row" style="background:rgba(255,255,255,0.02)">
-                <span class="mock-lb-rank" style="color:rgba(255,255,255,0.3)">5</span>
-                <span class="mock-lb-avatar" style="background:rgba(255,255,255,0.05)">&#127775;</span>
-                <span class="mock-lb-name">PixelWitch</span>
-                <span class="mock-lb-xp">Lv 38 &middot; 510K xp</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════ Showcase: Crafting & Farming ══════ -->
-    <section class="showcase-section">
-      <div class="showcase-row reverse">
-        <div class="showcase-text">
-          <h2>&#9874;&#65039; Craft &amp; Farm</h2>
-          <p>
-            Smelt ores from mob drops, refine boss materials, and forge powerful endgame gear.
-            Plant 9 types of seeds, harvest crops over time, and unlock combat buffs from rare plants.
-            Sell your harvest on the marketplace for gold.
-          </p>
-          <ul class="showcase-highlights highlight-cyan">
-            <li>22 crafting recipes from basic to mythic-tier</li>
+          <ul class="showcase-highlights hl-cyan">
+            <li>22 recipes from Compost to mythic-tier Void Blade</li>
             <li>Multi-step crafting: raw drops &rarr; intermediates &rarr; gear</li>
-            <li>9 seed types with different grow times and yields</li>
-            <li>Plant buffs that boost ATK, HP and XP gain</li>
+            <li>9 seed types from Wheat (5 min) to Void Spore (8 hours)</li>
+            <li>Plant buffs that boost ATK, HP and XP in combat</li>
             <li>Crafter &amp; Farmer skills level as you work</li>
           </ul>
         </div>
-        <div class="app-window">
-          <div class="app-titlebar">
-            <span class="app-dot r"></span><span class="app-dot y"></span><span class="app-dot g"></span>
-            <span class="app-titlebar-text">Grindly &mdash; Crafting</span>
+        <div class="screenshot-duo">
+          <div class="screenshot-frame">
+            <img src="img/craft.png" alt="Grindly Crafting — Compost recipe with ingredients, quantity selector and XP reward" loading="lazy">
+            <div class="screenshot-glow glow-cyan"></div>
           </div>
-          <div class="app-body">
-            <div style="display:flex;flex-direction:column;gap:6px">
-              <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;background:rgba(244,114,182,0.06);border:1px solid rgba(244,114,182,0.15)">
-                <span style="font-size:22px">&#128302;</span>
-                <div style="flex:1">
-                  <div style="font-size:11px;font-weight:600;color:#f472b6">Void Blade</div>
-                  <div style="font-size:9px;color:rgba(255,255,255,0.3);font-family:var(--font-mono)">ATK +48 &middot; Mythic</div>
-                </div>
-                <div style="font-size:9px;color:rgba(255,255,255,0.35);font-family:var(--font-mono);text-align:right">
-                  3x Void Shard<br>2x Dragon Scale<br>1x Shadow Core
-                </div>
-              </div>
-              <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.15)">
-                <span style="font-size:22px">&#128737;&#65039;</span>
-                <div style="flex:1">
-                  <div style="font-size:11px;font-weight:600;color:#fbbf24">Golden Shield</div>
-                  <div style="font-size:9px;color:rgba(255,255,255,0.3);font-family:var(--font-mono)">HP +80 &middot; Legendary</div>
-                </div>
-                <div style="font-size:9px;color:rgba(255,255,255,0.35);font-family:var(--font-mono);text-align:right">
-                  5x Gold Bar<br>2x Troll Hide
-                </div>
-              </div>
-              <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;background:rgba(192,132,252,0.06);border:1px solid rgba(192,132,252,0.15)">
-                <span style="font-size:22px">&#128141;</span>
-                <div style="flex:1">
-                  <div style="font-size:11px;font-weight:600;color:#c084fc">Shadow Ring</div>
-                  <div style="font-size:9px;color:rgba(255,255,255,0.3);font-family:var(--font-mono)">ATK +12 &middot; Epic</div>
-                </div>
-                <div style="font-size:9px;color:rgba(255,255,255,0.35);font-family:var(--font-mono);text-align:right">
-                  3x Shadow Core<br>1x Iron Bar
-                </div>
-              </div>
-              <div style="margin-top:6px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.06)">
-                <div style="font-size:10px;font-weight:600;color:#4ade80;margin-bottom:6px">&#127793; Farm Plot</div>
-                <div style="display:flex;gap:6px">
-                  <div style="flex:1;padding:6px;border-radius:6px;background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.12);text-align:center">
-                    <span style="font-size:16px">&#127806;</span>
-                    <div style="font-size:8px;color:#4ade80;font-family:var(--font-mono);margin-top:2px">Ready!</div>
-                  </div>
-                  <div style="flex:1;padding:6px;border-radius:6px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.12);text-align:center">
-                    <span style="font-size:16px">&#127804;</span>
-                    <div style="font-size:8px;color:#fbbf24;font-family:var(--font-mono);margin-top:2px">2h 14m</div>
-                  </div>
-                  <div style="flex:1;padding:6px;border-radius:6px;background:rgba(192,132,252,0.06);border:1px solid rgba(192,132,252,0.12);text-align:center">
-                    <span style="font-size:16px">&#127808;</span>
-                    <div style="font-size:8px;color:#c084fc;font-family:var(--font-mono);margin-top:2px">5h 30m</div>
-                  </div>
-                  <div style="flex:1;padding:6px;border-radius:6px;background:rgba(255,255,255,0.02);border:1px dashed rgba(255,255,255,0.08);text-align:center">
-                    <span style="font-size:16px;opacity:0.2">+</span>
-                    <div style="font-size:8px;color:rgba(255,255,255,0.15);font-family:var(--font-mono);margin-top:2px">Empty</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="screenshot-frame">
+            <img src="img/farm.png" alt="Grindly Farm — 6 plots with growing Void Spores, Crystal Root and ready Wheat harvests" loading="lazy">
+            <div class="screenshot-glow glow-green"></div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════ Showcase 6: Marketplace ══════ -->
+    <section class="showcase-section">
+      <div class="showcase-row reverse">
+        <div class="showcase-text">
+          <h2>Trade on the Player Marketplace</h2>
+          <p>
+            List your drops, buy upgrades from other players, and build the ultimate loadout.
+            Per-unit pricing, category filters, and your own listings panel make trading fast.
+            Add friends, chat in real-time, and compete on skill leaderboards.
+          </p>
+          <ul class="showcase-highlights hl-gold">
+            <li>Player-to-player trading with gold currency</li>
+            <li>Filter by Combat, XP, Drops, Cosmetic, Seeds</li>
+            <li>Partial buy &mdash; buy 1 or all from a stack listing</li>
+            <li>Friends list, real-time chat &amp; online status</li>
+            <li>Per-skill leaderboards &mdash; compete with friends</li>
+          </ul>
+        </div>
+        <div class="screenshot-frame">
+          <img src="img/marketplace.png" alt="Grindly Marketplace — seed zips and materials listed for sale with gold prices" loading="lazy">
+          <div class="screenshot-glow glow-gold"></div>
         </div>
       </div>
     </section>
@@ -1272,11 +690,11 @@
           <table>
             <thead><tr><th>Rarity</th><th>Base IP</th><th>Color</th></tr></thead>
             <tbody>
-              <tr><td><span class="rarity common">Common</span></td><td>100</td><td style="color:#9ca3af">#9ca3af</td></tr>
+              <tr><td><span class="rarity common">Common</span></td><td>100</td><td style="color:#9ca3af">#9CA3AF</td></tr>
               <tr><td><span class="rarity rare">Rare</span></td><td>150</td><td style="color:#38BDF8">#38BDF8</td></tr>
               <tr><td><span class="rarity epic">Epic</span></td><td>220</td><td style="color:#C084FC">#C084FC</td></tr>
               <tr><td><span class="rarity legendary">Legendary</span></td><td>320</td><td style="color:#FACC15">#FACC15</td></tr>
-              <tr><td><span class="rarity mythic">Mythic</span></td><td>450</td><td style="color:#f472b6">#f472b6</td></tr>
+              <tr><td><span class="rarity mythic">Mythic</span></td><td>450</td><td style="color:#F472B6">#F472B6</td></tr>
             </tbody>
           </table>
         </div>
