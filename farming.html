@@ -73,6 +73,7 @@
       <div class="fm-tabs">
         <button class="fm-tab active" onclick="fmSwitch('seeds',this)">Seeds</button>
         <button class="fm-tab" onclick="fmSwitch('buffs',this)">Plant Buffs</button>
+        <button class="fm-tab" onclick="fmSwitch('compost',this)">Compost</button>
         <button class="fm-tab" onclick="fmSwitch('zips',this)">Seed Zips</button>
         <button class="fm-tab" onclick="fmSwitch('slots',this)">Farm Slots</button>
         <button class="fm-tab" onclick="fmSwitch('cabinet',this)">Seed Cabinet</button>
@@ -237,6 +238,65 @@
               </tr>
             </tbody>
           </table>
+        </div>
+      </div>
+
+      <!-- ═══ Compost Panel ═══ -->
+      <div id="panel-compost" class="fm-panel">
+        <div class="info-box">
+          <h4>&#x1F9EA; Compost</h4>
+          <p><strong>Compost</strong> is an organic fertiliser you apply to an <em>empty</em> farm plot before planting a seed. A composted plot boosts both the harvest yield and the Farmer XP you earn from that crop.</p>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h4>Bonuses</h4>
+          <div class="table-wrap" style="margin-top:10px">
+            <table>
+              <thead>
+                <tr><th>Bonus</th><th>Value</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Harvest Yield</td><td class="perk"><strong>+20%</strong> (rounded up)</td></tr>
+                <tr><td>Farmer XP on Harvest</td><td class="perk"><strong>+5%</strong> (rounded up)</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h4>How to Use</h4>
+          <ul>
+            <li>Each empty plot shows a <strong>Compost</strong> button if you have compost in your inventory.</li>
+            <li>Composting one plot costs <strong>3 Compost</strong>.</li>
+            <li>A composted plot glows amber and displays the &#x1F9EA; icon. The bonus applies to whichever seed you plant next in that slot.</li>
+            <li>Compost is consumed on application &mdash; it cannot be removed once applied.</li>
+          </ul>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h4>Compost All</h4>
+          <p>At <strong>Farmer level 50</strong> you unlock the <em>Compost All</em> button in the Farm header. It automatically composts every empty, un-composted plot in a single click (costs 3 Compost per plot).</p>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h4>How to Obtain Compost</h4>
+          <div class="table-wrap" style="margin-top:10px">
+            <table>
+              <thead>
+                <tr><th>Source</th><th>Details</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Crafting</td>
+                  <td><a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a> &times;5 + <a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a> &times;3 &rarr; <a href="item.html?id=compost" style="color:var(--gold)">Compost</a> &times;3 &nbsp;(Crafter Lvl 0, 30 XP, 6s)</td>
+                </tr>
+                <tr>
+                  <td>Harvest Drop</td>
+                  <td><strong>8%</strong> chance to receive 1 Compost as a bonus drop on any harvest.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 

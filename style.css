@@ -511,9 +511,9 @@ code {
 }
 
 .rarity.common    { color: #9CA3AF; }
-.rarity.rare      { color: #60A5FA; }
-.rarity.epic      { color: #A78BFA; }
-.rarity.legendary { color: #FBBF24; }
+.rarity.rare      { color: #38BDF8; }
+.rarity.epic      { color: #C084FC; }
+.rarity.legendary { color: #FACC15; }
 .rarity.mythic    { color: #F472B6; }
 
 /* ══════ Info Box ══════ */

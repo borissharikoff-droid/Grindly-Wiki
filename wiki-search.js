@@ -56,6 +56,7 @@
     { name: 'Ancient Scale', url: 'item.html?id=ancient_scale', cat: 'Material' },
     { name: 'Void Crystal', url: 'item.html?id=void_crystal', cat: 'Material' },
     // Intermediates
+    { name: 'Compost', url: 'item.html?id=compost', cat: 'Material' },
     { name: 'Iron Bar', url: 'item.html?id=iron_bar', cat: 'Material' },
     { name: 'Fang Shard', url: 'item.html?id=fang_shard', cat: 'Material' },
     { name: 'Essence Vial', url: 'item.html?id=essence_vial', cat: 'Material' },

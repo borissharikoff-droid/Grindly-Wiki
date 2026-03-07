@@ -451,7 +451,7 @@ var RARITY_COLORS = {
   common:    { color: '#9CA3AF', border: '#4a4a5a' },
   rare:      { color: '#38BDF8', border: '#2a7ab5' },
   epic:      { color: '#C084FC', border: '#8b5ebf' },
-  legendary: { color: '#FBBF24', border: '#a88a1a' },
+  legendary: { color: '#FACC15', border: '#a88a1a' },
   mythic:    { color: '#F472B6', border: '#b84a80' },
 };
 
@@ -506,6 +506,7 @@ var ITEMS = [
   { id:'ancient_scale', name:'Ancient Scale', slot:'material', rarity:'rare', icon:'\uD83D\uDC09', desc:'A scale shed by an ancient beast. Tough and magical.', perks:[], source:'Chest bonus drop (Epic+)' },
   { id:'void_crystal', name:'Void Crystal', slot:'material', rarity:'epic', icon:'\uD83D\uDD2E', desc:'A crystallised fragment of the void. Immense power.', perks:[], source:'Chest bonus drop (Epic+)' },
   // Intermediate materials
+  { id:'compost', name:'Compost', slot:'material', rarity:'common', icon:'\uD83E\uDDEA', desc:'Organic fertiliser. Apply to a farm plot for +20% yield and +5% farmer XP.', perks:[{type:'cosmetic',val:0,desc:'Farm consumable — +20% yield, +5% XP'}] },
   { id:'iron_bar', name:'Iron Bar', slot:'material', rarity:'common', icon:'\u2B1B', desc:'Smelted iron. Used to forge equipment.', perks:[] },
   { id:'fang_shard', name:'Fang Shard', slot:'material', rarity:'common', icon:'\uD83E\uDDB4', desc:'Ground monster fangs. Used in blade crafting.', perks:[] },
   { id:'essence_vial', name:'Essence Vial', slot:'material', rarity:'rare', icon:'\uD83E\uDDEA', desc:'Concentrated magic essence. Used in enchanting.', perks:[] },
@@ -568,6 +569,7 @@ ITEMS.forEach(function(i) { ITEM_MAP[i.id] = i; });
 
 // Recipes
 var RECIPES = [
+  { id:'recipe_compost', out:'compost', outQty:3, ing:[{id:'wheat',qty:5},{id:'herbs',qty:3}], lvl:0, xp:30, sec:6, inter:true },
   { id:'recipe_iron_bar', out:'iron_bar', ing:[{id:'ore_iron',qty:5}], lvl:0, xp:45, sec:8, inter:true },
   { id:'recipe_fang_shard', out:'fang_shard', ing:[{id:'monster_fang',qty:4}], lvl:0, xp:55, sec:10, inter:true },
   { id:'recipe_essence_vial', out:'essence_vial', ing:[{id:'magic_essence',qty:3}], lvl:15, xp:20, sec:120, inter:true },
