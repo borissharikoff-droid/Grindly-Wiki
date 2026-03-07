@@ -105,6 +105,7 @@
     { name: 'Skills', url: 'skills.html', cat: 'Page' },
     { name: 'Loot Bags', url: 'loot.html', cat: 'Page' },
     { name: 'Materials', url: 'materials.html', cat: 'Page' },
+    { name: 'Patch Notes', url: 'patches.html', cat: 'Page' },
     // Skills
     { name: 'Developer', url: 'skills.html', cat: 'Skill' },
     { name: 'Designer', url: 'skills.html', cat: 'Skill' },

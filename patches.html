@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patch Notes – Grindly Wiki</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.patches-list { display: flex; flex-direction: column; gap: 12px; }
+
+.patch-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-ornate);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.patch-card:hover { border-color: var(--gold-dim); }
+
+.patch-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.12s;
+}
+.patch-header:hover { background: rgba(255,255,255,0.02); }
+
+.patch-tag {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.patch-title {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-bright);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.patch-date {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.patch-latest {
+  font-size: 9px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(0,255,136,0.1);
+  color: var(--green);
+  border: 1px solid rgba(0,255,136,0.2);
+}
+
+.patch-arrow {
+  font-size: 10px;
+  color: var(--text-dim);
+  transition: transform 0.2s;
+}
+.patch-card.open .patch-arrow { transform: rotate(180deg); }
+
+.patch-body {
+  display: none;
+  padding: 0 18px 16px;
+  animation: patchFadeIn 0.15s ease;
+}
+.patch-card.open .patch-body { display: block; }
+
+@keyframes patchFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.patch-preview {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.5;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-inner);
+}
+
+.patch-content {
+  font-size: 12px;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.patch-content h1, .patch-content h2, .patch-content h3 {
+  font-family: var(--font-title);
+  color: var(--gold);
+  margin: 14px 0 6px;
+}
+.patch-content h1 { font-size: 16px; }
+.patch-content h2 { font-size: 14px; }
+.patch-content h3 { font-size: 13px; }
+
+.patch-content ul, .patch-content ol {
+  padding-left: 20px;
+  margin: 6px 0;
+}
+
+.patch-content li { margin-bottom: 3px; }
+.patch-content code {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: rgba(212,168,67,0.1);
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: var(--gold);
+}
+
+.patch-content strong { color: var(--text-bright); }
+
+.patch-gh-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border-ornate);
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.patch-gh-link:hover {
+  color: var(--gold);
+  border-color: var(--gold-dim);
+  background: rgba(212,168,67,0.06);
+}
+
+.patches-loading {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+.patches-error {
+  text-align: center;
+  padding: 30px 0;
+  color: var(--red);
+  font-size: 13px;
+}
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">G</span>
+      <span class="logo-text">Grindly<small>Wiki</small></span>
+    </a>
+    <div class="top-right">
+      <div class="player-count">
+        <span class="pulse-dot"></span>
+        <span>Productivity RPG</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Page Layout -->
+<div class="page-wrap">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="search-box">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search wiki..." autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title"><span class="arrow">&#9660;</span> Pages</div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link"><span class="nav-dot gold"></span> Wiki Home</a></li>
+        <li><a href="equipment.html" class="nav-link"><span class="nav-dot gold"></span> Equipment</a></li>
+        <li><a href="loot.html" class="nav-link"><span class="nav-dot orange"></span> Loot Bags</a></li>
+        <li><a href="materials.html" class="nav-link"><span class="nav-dot purple"></span> Materials</a></li>
+        <li><a href="arena.html" class="nav-link"><span class="nav-dot red"></span> Arena &amp; Bosses</a></li>
+        <li><a href="crafting.html" class="nav-link"><span class="nav-dot cyan"></span> Crafting</a></li>
+        <li><a href="farming.html" class="nav-link"><span class="nav-dot green"></span> Farming</a></li>
+        <li><a href="skills.html" class="nav-link"><span class="nav-dot blue"></span> Skills</a></li>
+        <li><a href="patches.html" class="nav-link active"><span class="nav-dot green"></span> Patch Notes</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+    <section class="hero">
+      <h1>Patch Notes</h1>
+      <p class="hero-sub">Release history fetched from GitHub. Click a release to read the full changelog.</p>
+    </section>
+
+    <section class="content">
+      <div id="patchesContainer" class="patches-list">
+        <div class="patches-loading">Loading releases...</div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="wiki-search.js"></script>
+<script src="wiki-config.js"></script>
+<script src="wiki-skins.js"></script>
+<script src="wiki-online.js"></script>
+
+<script>
+(function() {
+  var REPO = 'borissharikoff-droid/Idly';
+  var API  = 'https://api.github.com/repos/' + REPO + '/releases?per_page=20';
+  var container = document.getElementById('patchesContainer');
+
+  function formatDate(iso) {
+    var d = new Date(iso);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+  }
+
+  function getPreview(body) {
+    if (!body) return 'No description provided.';
+    var lines = body.split('\n').filter(function(l) { return l.trim(); });
+    var preview = lines.slice(0, 3).join(' ').replace(/[#*`_~]/g, '').trim();
+    if (preview.length > 200) preview = preview.substring(0, 200) + '...';
+    return preview || 'No description provided.';
+  }
+
+  function renderMarkdown(md) {
+    if (!md) return '<p style="color:var(--text-dim)">No description provided.</p>';
+    return md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+      .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+      .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\* (.+)$/gm, '<li>$1</li>')
+      .replace(/^- (.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*<\/li>)/gs, function(match) {
+        return '<ul>' + match + '</ul>';
+      })
+      .replace(/<\/ul>\s*<ul>/g, '')
+      .replace(/\n{2,}/g, '<br><br>')
+      .replace(/\n/g, '<br>');
+  }
+
+  fetch(API)
+    .then(function(r) {
+      if (!r.ok) throw new Error('GitHub API error: ' + r.status);
+      return r.json();
+    })
+    .then(function(releases) {
+      if (!releases || releases.length === 0) {
+        container.innerHTML = '<div class="patches-error">No releases found.</div>';
+        return;
+      }
+
+      container.innerHTML = '';
+
+      releases.forEach(function(rel, i) {
+        var card = document.createElement('div');
+        card.className = 'patch-card';
+
+        var header = document.createElement('div');
+        header.className = 'patch-header';
+        header.innerHTML =
+          '<span class="patch-tag">' + (rel.tag_name || 'unknown') + '</span>' +
+          '<span class="patch-title">' + (rel.name || rel.tag_name || 'Release') + '</span>' +
+          (i === 0 ? '<span class="patch-latest">Latest</span>' : '') +
+          '<span class="patch-date">' + formatDate(rel.published_at || rel.created_at) + '</span>' +
+          '<span class="patch-arrow">&#9660;</span>';
+
+        var body = document.createElement('div');
+        body.className = 'patch-body';
+        body.innerHTML =
+          '<div class="patch-preview">' + getPreview(rel.body) + '</div>' +
+          '<div class="patch-content">' + renderMarkdown(rel.body) + '</div>' +
+          '<a href="' + rel.html_url + '" target="_blank" rel="noopener" class="patch-gh-link">' +
+          'View on GitHub &rarr;</a>';
+
+        header.addEventListener('click', function() {
+          card.classList.toggle('open');
+        });
+
+        card.appendChild(header);
+        card.appendChild(body);
+        container.appendChild(card);
+      });
+    })
+    .catch(function(err) {
+      container.innerHTML = '<div class="patches-error">Failed to load releases. ' + err.message + '</div>';
+    });
+})();
+</script>
+
+</body>
+</html>
