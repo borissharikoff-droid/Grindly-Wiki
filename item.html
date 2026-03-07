@@ -597,9 +597,7 @@ var CHESTS = {
   legendary_chest: { name:'Legendary Bag', rarity:'legendary', items:['shadow_helm','shadow_plate','shadow_sword','shadow_legs','shadow_ring','golden_helm','golden_plate','golden_sword','golden_legs','golden_ring','void_helm','void_plate','void_sword','void_legs','void_ring','atk_potion','hp_potion','regen_potion'] },
 };
 
-// Base marketplace prices — no real data yet
-var BASE_PRICES = { common:0, rare:0, epic:0, legendary:0, mythic:0 };
-var HAS_MARKET_DATA = false;
+// Marketplace data — loaded async from Supabase
 
 // IP calc
 var IP_BY_RARITY = { common:100, rare:150, epic:220, legendary:320, mythic:450 };
@@ -634,27 +632,56 @@ function formatTime(sec) {
   return rm > 0 ? h+'h '+rm+'m' : h+'h';
 }
 
-// Seeded random for consistent "price history" per item
-function seededRandom(seed) {
-  var x = Math.sin(seed) * 10000;
-  return x - Math.floor(x);
-}
+// Fetch real marketplace data from Supabase
+function fetchMarketHistory(itemId, callback) {
+  var url = window.WIKI_SUPABASE_URL;
+  var key = window.WIKI_SUPABASE_KEY;
+  if (!url || !key) { callback(null); return; }
 
-function generatePriceHistory(itemId, days) {
-  var base = BASE_PRICES[ITEM_MAP[itemId]?.rarity] || 50;
-  var seed = 0;
-  for (var i = 0; i < itemId.length; i++) seed += itemId.charCodeAt(i) * (i+1);
-  var prices = [];
-  var volumes = [];
-  var price = base;
-  for (var d = 0; d < days; d++) {
-    var r = seededRandom(seed + d * 7.3);
-    var change = (r - 0.48) * base * 0.08;
-    price = Math.max(1, Math.round(price + change));
-    prices.push(price);
-    volumes.push(Math.round(seededRandom(seed + d * 13.7) * 120 + 10));
-  }
-  return { prices: prices, volumes: volumes };
+  // Fetch sold listings for this item, ordered by date
+  fetch(url + '/rest/v1/marketplace_listings?item_id=eq.' + encodeURIComponent(itemId) + '&status=eq.sold&select=price_gold,quantity,created_at&order=created_at.asc', {
+    headers: { 'apikey': key, 'Authorization': 'Bearer ' + key }
+  }).then(function(r) {
+    if (!r.ok) throw new Error('API ' + r.status);
+    return r.json();
+  }).then(function(rows) {
+    if (!rows || rows.length === 0) { callback(null); return; }
+
+    // Aggregate by day
+    var byDay = {};
+    rows.forEach(function(r) {
+      var day = r.created_at.substring(0, 10);
+      if (!byDay[day]) byDay[day] = { prices: [], volumes: 0 };
+      var unitPrice = Math.round(r.price_gold / (r.quantity || 1));
+      byDay[day].prices.push(unitPrice);
+      byDay[day].volumes += (r.quantity || 1);
+    });
+
+    var days = Object.keys(byDay).sort();
+    var prices = [];
+    var volumes = [];
+    days.forEach(function(d) {
+      var arr = byDay[d].prices;
+      var avg = Math.round(arr.reduce(function(a,b){return a+b},0) / arr.length);
+      prices.push(avg);
+      volumes.push(byDay[d].volumes);
+    });
+
+    callback({ prices: prices, volumes: volumes, days: days, totalTrades: rows.length });
+  }).catch(function() {
+    callback(null);
+  });
+
+  // Also fetch current active listings for "current price"
+  fetch(url + '/rest/v1/marketplace_listings?item_id=eq.' + encodeURIComponent(itemId) + '&status=eq.active&select=price_gold,quantity&order=price_gold.asc&limit=5', {
+    headers: { 'apikey': key, 'Authorization': 'Bearer ' + key }
+  }).then(function(r) { return r.ok ? r.json() : []; })
+  .then(function(active) {
+    if (active && active.length > 0) {
+      window._activeListings = window._activeListings || {};
+      window._activeListings[itemId] = active;
+    }
+  }).catch(function(){});
 }
 
 function drawChart(canvas, data, color, fillColor) {
@@ -772,14 +799,6 @@ function renderItem(itemId) {
     r.ing.forEach(function(i) { if (i.id === itemId) usedIn.push(r); });
   });
 
-  // Price data
-  var history = generatePriceHistory(itemId, 180);
-  var currentPrice = history.prices[history.prices.length - 1];
-  var day1 = history.prices[history.prices.length - 2] || currentPrice;
-  var mo1 = history.prices[history.prices.length - 30] || currentPrice;
-  var mo3 = history.prices[history.prices.length - 90] || currentPrice;
-  var mo6 = history.prices[0];
-
   function changeStr(from, to) {
     var diff = to - from;
     var pct = from > 0 ? Math.round((diff/from)*100) : 0;
@@ -873,28 +892,13 @@ function renderItem(itemId) {
     html += '</div></div>';
   }
 
-  // Price chart — only show if real marketplace data exists
-  if (HAS_MARKET_DATA) {
-    html += '<div class="chart-section"><h3>Price History</h3>';
-    html += '<div class="chart-tabs" id="priceTabs">';
-    html += '<button class="chart-tab active" data-days="30">1 Month</button>';
-    html += '<button class="chart-tab" data-days="90">3 Months</button>';
-    html += '<button class="chart-tab" data-days="180">6 Months</button>';
-    html += '</div>';
-    html += '<div class="chart-canvas-wrap"><canvas class="price-chart" id="priceChart"></canvas></div>';
-    html += '<div class="chart-legend"><div class="chart-legend-item"><div class="chart-legend-dot" style="background:#d4a843"></div> Daily Average</div><div class="chart-legend-item"><div class="chart-legend-dot" style="background:#60a5fa"></div> Trend</div></div>';
-    html += '</div>';
-    html += '<div class="chart-section"><h3>Amount Traded</h3>';
-    html += '<div class="chart-canvas-wrap"><canvas class="price-chart" id="volumeChart"></canvas></div>';
-    html += '</div>';
-  } else {
-    html += '<div class="chart-section"><h3>Price History</h3>';
-    html += '<div class="chart-canvas-wrap" style="text-align:center;padding:28px 12px;color:var(--text-dim);font-size:12px">No marketplace data available yet.<br><span style="font-size:10px;opacity:0.6">Price tracking will appear once the marketplace is active.</span></div>';
-    html += '</div>';
-    html += '<div class="chart-section"><h3>Amount Traded</h3>';
-    html += '<div class="chart-canvas-wrap" style="text-align:center;padding:28px 12px;color:var(--text-dim);font-size:12px">N/A</div>';
-    html += '</div>';
-  }
+  // Price chart — placeholder, filled async with real Supabase data
+  html += '<div class="chart-section" id="priceHistorySection"><h3>Price History</h3>';
+  html += '<div id="priceHistoryContent" class="chart-canvas-wrap" style="text-align:center;padding:28px 12px;color:var(--text-dim);font-size:12px"><span style="opacity:0.6">Loading trade data...</span></div>';
+  html += '</div>';
+  html += '<div class="chart-section" id="volumeSection"><h3>Amount Traded</h3>';
+  html += '<div id="volumeContent" class="chart-canvas-wrap" style="text-align:center;padding:28px 12px;color:var(--text-dim);font-size:12px"><span style="opacity:0.6">Loading...</span></div>';
+  html += '</div>';
 
   // Drop Sources
   if (chestSources.length > 0 || item.source || craftRecipe) {
@@ -943,22 +947,11 @@ function renderItem(itemId) {
   // ── Right sidebar ──
   html += '<div class="item-sidebar-right">';
 
-  // Price box
-  html += '<div class="price-box"><h3>Marketplace Price</h3>';
-  if (HAS_MARKET_DATA) {
-    html += '<div class="price-current">'+currentPrice+' <span>gold</span></div>';
-    html += '<div class="price-row"><span class="price-label">Today\'s Change</span>'+changeStr(day1, currentPrice)+'</div>';
-    html += '<div class="price-row"><span class="price-label">1 Month Change</span>'+changeStr(mo1, currentPrice)+'</div>';
-    html += '<div class="price-row"><span class="price-label">3 Month Change</span>'+changeStr(mo3, currentPrice)+'</div>';
-    html += '<div class="price-row"><span class="price-label">6 Month Change</span>'+changeStr(mo6, currentPrice)+'</div>';
-  } else {
-    html += '<div class="price-current" style="color:var(--text-dim);font-size:18px">N/A</div>';
-    html += '<div class="price-row"><span class="price-label">Today\'s Change</span><span class="price-change neutral">N/A</span></div>';
-    html += '<div class="price-row"><span class="price-label">1 Month Change</span><span class="price-change neutral">N/A</span></div>';
-    html += '<div class="price-row"><span class="price-label">3 Month Change</span><span class="price-change neutral">N/A</span></div>';
-    html += '<div class="price-row"><span class="price-label">6 Month Change</span><span class="price-change neutral">N/A</span></div>';
-  }
-  html += '</div>';
+  // Price box — filled async
+  html += '<div class="price-box" id="priceBox"><h3>Marketplace Price</h3>';
+  html += '<div id="priceBoxContent">';
+  html += '<div class="price-current" style="color:var(--text-dim);font-size:14px">Loading...</div>';
+  html += '</div></div>';
 
   // Item details box
   html += '<div class="price-box"><h3>Item Details</h3>';
@@ -989,31 +982,97 @@ function renderItem(itemId) {
 
   main.innerHTML = html;
 
-  // Draw charts (only if real market data exists)
-  if (HAS_MARKET_DATA) {
-    var days = 30;
-    function redrawCharts() {
-      var priceCanvas = document.getElementById('priceChart');
-      var volumeCanvas = document.getElementById('volumeChart');
-      if (priceCanvas) {
-        var slice = history.prices.slice(-days);
-        drawChart(priceCanvas, slice, '#d4a843', 'rgba(212,168,67,0.1)');
+  // ── Fetch real marketplace data async ──
+  var isTradeable = item.id.indexOf('potion') === -1 && item.slot !== 'chest';
+  if (isTradeable) {
+    fetchMarketHistory(itemId, function(data) {
+      var priceHistEl = document.getElementById('priceHistoryContent');
+      var volumeEl = document.getElementById('volumeContent');
+      var priceBoxEl = document.getElementById('priceBoxContent');
+
+      if (!data || data.prices.length < 2) {
+        // No trade history
+        if (priceHistEl) priceHistEl.innerHTML = '<div style="text-align:center;padding:28px 12px;color:var(--text-dim);font-size:12px">No trades recorded yet.<br><span style="font-size:10px;opacity:0.6">Price history will appear after items are traded on the marketplace.</span></div>';
+        if (volumeEl) volumeEl.innerHTML = '<div style="text-align:center;padding:28px 12px;color:var(--text-dim);font-size:12px">N/A</div>';
+        if (priceBoxEl) {
+          priceBoxEl.innerHTML =
+            '<div class="price-current" style="color:var(--text-dim);font-size:18px">No trades yet</div>' +
+            '<div class="price-row"><span class="price-label">Total Trades</span><span class="price-value">0</span></div>';
+        }
+        return;
       }
-      if (volumeCanvas) {
-        var vslice = history.volumes.slice(-days);
-        drawBarChart(volumeCanvas, vslice, 'rgba(96,165,250,0.4)');
+
+      var prices = data.prices;
+      var volumes = data.volumes;
+      var curPrice = prices[prices.length - 1];
+      var prevPrice = prices.length > 1 ? prices[prices.length - 2] : curPrice;
+      var totalVol = volumes.reduce(function(a,b){return a+b}, 0);
+
+      // Get price N days ago
+      function priceAgo(n) { return prices.length > n ? prices[prices.length - 1 - n] : prices[0]; }
+
+      // Sidebar price box
+      if (priceBoxEl) {
+        priceBoxEl.innerHTML =
+          '<div class="price-current">' + curPrice + ' <span>gold</span></div>' +
+          '<div class="price-row"><span class="price-label">Prev Day</span>' + changeStr(prevPrice, curPrice) + '</div>' +
+          (prices.length > 7 ? '<div class="price-row"><span class="price-label">7 Day</span>' + changeStr(priceAgo(7), curPrice) + '</div>' : '') +
+          (prices.length > 30 ? '<div class="price-row"><span class="price-label">30 Day</span>' + changeStr(priceAgo(30), curPrice) + '</div>' : '') +
+          '<div class="price-row"><span class="price-label">All Time</span>' + changeStr(prices[0], curPrice) + '</div>' +
+          '<div class="price-row"><span class="price-label">Total Trades</span><span class="price-value">' + data.totalTrades + '</span></div>' +
+          '<div class="price-row"><span class="price-label">Volume</span><span class="price-value">' + totalVol + ' items</span></div>';
       }
-    }
-    redrawCharts();
-    document.querySelectorAll('#priceTabs .chart-tab').forEach(function(tab) {
-      tab.addEventListener('click', function() {
-        document.querySelectorAll('#priceTabs .chart-tab').forEach(function(t){t.classList.remove('active')});
-        this.classList.add('active');
-        days = parseInt(this.getAttribute('data-days'));
-        redrawCharts();
-      });
+
+      // Price chart
+      if (priceHistEl) {
+        var chartDays = Math.min(30, prices.length);
+        priceHistEl.innerHTML =
+          '<div class="chart-tabs" id="priceTabs">' +
+          '<button class="chart-tab active" data-days="30">30d</button>' +
+          (prices.length > 30 ? '<button class="chart-tab" data-days="90">90d</button>' : '') +
+          (prices.length > 90 ? '<button class="chart-tab" data-days="0">All</button>' : '') +
+          '</div>' +
+          '<canvas class="price-chart" id="priceChart"></canvas>' +
+          '<div class="chart-legend"><div class="chart-legend-item"><div class="chart-legend-dot" style="background:#d4a843"></div> Avg Price (gold)</div></div>';
+
+        function redrawPrice() {
+          var canvas = document.getElementById('priceChart');
+          if (!canvas) return;
+          var slice = chartDays > 0 ? prices.slice(-chartDays) : prices;
+          drawChart(canvas, slice, '#d4a843', 'rgba(212,168,67,0.1)');
+        }
+        redrawPrice();
+
+        document.querySelectorAll('#priceTabs .chart-tab').forEach(function(tab) {
+          tab.addEventListener('click', function() {
+            document.querySelectorAll('#priceTabs .chart-tab').forEach(function(t){t.classList.remove('active')});
+            this.classList.add('active');
+            chartDays = parseInt(this.getAttribute('data-days'));
+            redrawPrice();
+          });
+        });
+        window.addEventListener('resize', redrawPrice);
+      }
+
+      // Volume chart
+      if (volumeEl) {
+        volumeEl.innerHTML = '<canvas class="price-chart" id="volumeChart"></canvas>';
+        function redrawVol() {
+          var canvas = document.getElementById('volumeChart');
+          if (canvas) drawBarChart(canvas, volumes.slice(-30), 'rgba(96,165,250,0.4)');
+        }
+        redrawVol();
+        window.addEventListener('resize', redrawVol);
+      }
     });
-    window.addEventListener('resize', redrawCharts);
+  } else {
+    // Non-tradeable items
+    var phEl = document.getElementById('priceHistoryContent');
+    var vEl = document.getElementById('volumeContent');
+    var pbEl = document.getElementById('priceBoxContent');
+    if (phEl) phEl.innerHTML = '<div style="text-align:center;padding:20px 12px;color:var(--text-dim);font-size:12px">This item is not tradeable.</div>';
+    if (vEl) vEl.innerHTML = '<div style="text-align:center;padding:20px 12px;color:var(--text-dim);font-size:12px">N/A</div>';
+    if (pbEl) pbEl.innerHTML = '<div class="price-current" style="color:var(--text-dim);font-size:14px">Not Tradeable</div>';
   }
 }
 
