@@ -118,6 +118,12 @@
         <button class="eq-tab" onclick="eqSwitchTab('crafted',this)">Crafted Gear</button>
         <button class="eq-tab" onclick="eqSwitchTab('consumables',this)">Consumables</button>
         <button class="eq-tab" onclick="eqSwitchTab('all',this)">All Equipment</button>
+        <span style="display:inline-block;width:1px;height:20px;background:var(--border-inner);margin:0 6px;vertical-align:middle"></span>
+        <button class="eq-tab" onclick="eqSwitchTab('slot-head',this)">Head</button>
+        <button class="eq-tab" onclick="eqSwitchTab('slot-body',this)">Body</button>
+        <button class="eq-tab" onclick="eqSwitchTab('slot-weapon',this)">Weapon</button>
+        <button class="eq-tab" onclick="eqSwitchTab('slot-legs',this)">Legs</button>
+        <button class="eq-tab" onclick="eqSwitchTab('slot-ring',this)">Ring</button>
       </div>
 
       <!-- ═══ Sets Panel ═══ -->
@@ -156,6 +162,48 @@
         <div class="table-wrap"><table class="eq-table">
           <thead><tr><th></th><th>Name</th><th>Slot</th><th>Rarity</th><th>Perks</th><th>Source</th></tr></thead>
           <tbody id="allBody"></tbody>
+        </table></div>
+      </div>
+
+      <!-- ═══ Slot Panels (Head / Body / Weapon / Legs / Ring) ═══ -->
+      <div id="panel-slot-head" class="eq-panel">
+        <p style="font-size:12px;color:var(--text-dim);margin-bottom:14px">All head-slot equipment across armor sets and crafted gear.</p>
+        <div class="filter-row" id="slotHeadRarityFilter"></div>
+        <div class="table-wrap"><table class="eq-table">
+          <thead><tr><th></th><th>Name</th><th>Rarity</th><th>Perks</th><th>Source</th></tr></thead>
+          <tbody id="slotHeadBody"></tbody>
+        </table></div>
+      </div>
+      <div id="panel-slot-body" class="eq-panel">
+        <p style="font-size:12px;color:var(--text-dim);margin-bottom:14px">All body-slot equipment across armor sets and crafted gear.</p>
+        <div class="filter-row" id="slotBodyRarityFilter"></div>
+        <div class="table-wrap"><table class="eq-table">
+          <thead><tr><th></th><th>Name</th><th>Rarity</th><th>Perks</th><th>Source</th></tr></thead>
+          <tbody id="slotBodyBody"></tbody>
+        </table></div>
+      </div>
+      <div id="panel-slot-weapon" class="eq-panel">
+        <p style="font-size:12px;color:var(--text-dim);margin-bottom:14px">All weapons across armor sets and crafted gear.</p>
+        <div class="filter-row" id="slotWeaponRarityFilter"></div>
+        <div class="table-wrap"><table class="eq-table">
+          <thead><tr><th></th><th>Name</th><th>Rarity</th><th>Perks</th><th>Source</th></tr></thead>
+          <tbody id="slotWeaponBody"></tbody>
+        </table></div>
+      </div>
+      <div id="panel-slot-legs" class="eq-panel">
+        <p style="font-size:12px;color:var(--text-dim);margin-bottom:14px">All leg-slot equipment across armor sets and crafted gear.</p>
+        <div class="filter-row" id="slotLegsRarityFilter"></div>
+        <div class="table-wrap"><table class="eq-table">
+          <thead><tr><th></th><th>Name</th><th>Rarity</th><th>Perks</th><th>Source</th></tr></thead>
+          <tbody id="slotLegsBody"></tbody>
+        </table></div>
+      </div>
+      <div id="panel-slot-ring" class="eq-panel">
+        <p style="font-size:12px;color:var(--text-dim);margin-bottom:14px">All ring-slot equipment across armor sets and crafted gear.</p>
+        <div class="filter-row" id="slotRingRarityFilter"></div>
+        <div class="table-wrap"><table class="eq-table">
+          <thead><tr><th></th><th>Name</th><th>Rarity</th><th>Perks</th><th>Source</th></tr></thead>
+          <tbody id="slotRingBody"></tbody>
         </table></div>
       </div>
 
@@ -244,7 +292,11 @@
   // ── Helpers ──────────────────────────────────────────────────────────────────
   function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
   function raritySpan(r){return '<span class="rarity '+r+'" style="color:'+RARITY_COLORS[r]+'">'+r.charAt(0).toUpperCase()+r.slice(1)+'</span>'}
-  function slotBadge(s){return '<span class="slot-badge">'+(SLOT_LABELS[s]||s)+'</span>'}
+  function slotBadge(s){
+    var label = SLOT_LABELS[s]||s;
+    if (SLOT_ORDER.indexOf(s) !== -1) return '<a href="#slot='+s+'" class="slot-badge" style="color:var(--gold);text-decoration:none">'+label+'</a>';
+    return '<span class="slot-badge">'+label+'</span>';
+  }
   function iconHtml(it,size){
     size=size||18;
     if(it.image) return '<img src="'+it.image+'" style="width:'+size+'px;height:'+size+'px;object-fit:contain">';
@@ -467,12 +519,75 @@
     }
   }
 
+  // ── Slot-based panels ────────────────────────────────────────────────────────
+  var SLOT_PANELS = ['head','body','weapon','legs','ring'];
+  var slotFilters = {};
+  SLOT_PANELS.forEach(function(slot) {
+    slotFilters[slot] = {rarity:''};
+    var capSlot = slot.charAt(0).toUpperCase() + slot.slice(1);
+    var items = ALL_ITEMS.filter(function(i){ return i.slot === slot; });
+    var rarities = [];
+    items.forEach(function(i){ if(rarities.indexOf(i.rarity)===-1) rarities.push(i.rarity); });
+    rarities.sort(function(a,b){return RARITY_ORDER.indexOf(a)-RARITY_ORDER.indexOf(b)});
+
+    function renderSlotPanel() {
+      var filterEl = document.getElementById('slot'+capSlot+'RarityFilter');
+      var bodyEl = document.getElementById('slot'+capSlot+'Body');
+      if (!filterEl || !bodyEl) return;
+      var f = slotFilters[slot];
+      var h = '<button class="filter-btn '+(f.rarity===''?'active':'')+'" data-r="">All</button>';
+      rarities.forEach(function(r){
+        var act = f.rarity===r;
+        h += '<button class="filter-btn '+(act?'active':'')+'" style="'+(act?'color:'+RARITY_COLORS[r]+';border-color:'+RARITY_COLORS[r]:'')+'" data-r="'+r+'">'+r.charAt(0).toUpperCase()+r.slice(1)+'</button>';
+      });
+      filterEl.innerHTML = h;
+      filterEl.querySelectorAll('.filter-btn').forEach(function(b){
+        b.onclick = function(){ slotFilters[slot].rarity=this.getAttribute('data-r'); renderSlotPanel(); };
+      });
+      var filtered = items.filter(function(i){ return !f.rarity || i.rarity===f.rarity; });
+      bodyEl.innerHTML = filtered.map(function(i){
+        var setName = '';
+        SETS.forEach(function(s){ s.items.forEach(function(si){ if(si.id===i.id) setName=s.name; }); });
+        var src = setName ? '<a href="equipment.html" onclick="eqSwitchTab(\'sets\',document.querySelector(\'.eq-tab\'));return false" style="color:var(--gold)">'+esc(setName)+'</a>' : '<a href="crafting.html" style="color:var(--gold)">Crafted</a>';
+        return '<tr><td class="icon-cell">'+iconHtml(i,20)+'</td><td><a href="item.html?id='+i.id+'">'+esc(i.name)+'</a></td><td>'+raritySpan(i.rarity)+'</td><td class="perk" style="color:'+RARITY_COLORS[i.rarity]+'">'+esc(i.perk)+'</td><td>'+src+'</td></tr>';
+      }).join('');
+    }
+    renderSlotPanel();
+    // Store render function for re-rendering after skin overrides
+    window['_renderSlot_'+slot] = renderSlotPanel;
+  });
+
+  // ── URL hash navigation ─────────────────────────────────────────────────────
+  function handleHash() {
+    var hash = window.location.hash.replace('#','');
+    if (!hash) return;
+    var parts = hash.split('=');
+    if (parts[0] === 'slot' && parts[1]) {
+      var slot = parts[1].toLowerCase();
+      if (SLOT_PANELS.indexOf(slot) !== -1) {
+        var tabId = 'slot-' + slot;
+        var btn = null;
+        document.querySelectorAll('.eq-tab').forEach(function(t){
+          if (t.textContent.trim().toLowerCase() === slot || t.textContent.trim() === SLOT_LABELS[slot]) btn = t;
+        });
+        eqSwitchTab(tabId, btn);
+      }
+    }
+  }
+  handleHash();
+  window.addEventListener('hashchange', handleHash);
+
   // Listen for wiki-skins.js loaded event
   window.addEventListener('wiki-skins-loaded', function(e) {
     applyOverridesAndRerender(e.detail);
+    // Also re-render slot panels
+    SLOT_PANELS.forEach(function(s){ if(window['_renderSlot_'+s]) window['_renderSlot_'+s](); });
   });
   // Also check if already loaded (race condition)
-  if (window.WIKI_ADMIN_CONFIG) applyOverridesAndRerender(window.WIKI_ADMIN_CONFIG);
+  if (window.WIKI_ADMIN_CONFIG) {
+    applyOverridesAndRerender(window.WIKI_ADMIN_CONFIG);
+    SLOT_PANELS.forEach(function(s){ if(window['_renderSlot_'+s]) window['_renderSlot_'+s](); });
+  }
 })();
 </script>
 

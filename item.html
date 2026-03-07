@@ -962,7 +962,8 @@ function renderItem(itemId) {
 
   // Item details box
   html += '<div class="price-box"><h3>Item Details</h3>';
-  html += '<div class="price-row"><span class="price-label">Slot</span><span class="price-value">'+(SLOT_LABELS[item.slot]||item.slot)+'</span></div>';
+  var slotLink = (ARMOR_SLOTS.indexOf(item.slot) !== -1) ? '<a href="equipment.html#slot='+item.slot+'" style="color:var(--gold)">'+(SLOT_LABELS[item.slot]||item.slot)+'</a>' : (SLOT_LABELS[item.slot]||item.slot);
+  html += '<div class="price-row"><span class="price-label">Slot</span><span class="price-value">'+slotLink+'</span></div>';
   html += '<div class="price-row"><span class="price-label">Rarity</span><span class="price-value" style="color:'+rc.color+'">'+item.rarity.charAt(0).toUpperCase()+item.rarity.slice(1)+'</span></div>';
   if (ip !== null) html += '<div class="price-row"><span class="price-label">Item Power</span><span class="price-value" style="color:var(--gold)">'+ip+'</span></div>';
   html += '<div class="price-row"><span class="price-label">Tradeable</span><span class="price-value">'+(item.id.indexOf('potion')!==-1?'No':'Yes')+'</span></div>';
@@ -977,6 +978,9 @@ function renderItem(itemId) {
       var rIconHtml = r.image ? '<img src="'+r.image+'" style="width:100%;height:100%;object-fit:contain">' : r.icon;
       html += '<a href="item.html?id='+r.id+'" class="related-item"><span class="related-icon" data-item-id="'+r.id+'">'+rIconHtml+'</span><span>'+r.name+'</span><span class="related-rarity" style="color:'+rrc.color+'">'+r.rarity+'</span></a>';
     });
+    if (ARMOR_SLOTS.indexOf(item.slot) !== -1) {
+      html += '<a href="equipment.html#slot='+item.slot+'" style="display:block;text-align:center;margin-top:10px;padding:6px 0;font-size:12px;color:var(--gold);border-top:1px solid var(--border-inner)">View all '+SLOT_LABELS[item.slot]+' equipment \u2192</a>';
+    }
     html += '</div>';
   }
 
