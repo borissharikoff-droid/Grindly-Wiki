@@ -899,19 +899,20 @@ function renderItem(itemId) {
   // Drop Sources
   if (chestSources.length > 0 || item.source || craftRecipe) {
     html += '<div class="source-section"><h3>How to Obtain</h3><ul class="source-list">';
+    function skinIcon(obj, fallback, dataAttr) {
+      var inner = obj && obj.image ? '<img src="'+obj.image+'" style="width:100%;height:100%;object-fit:contain">' : (obj && obj.icon ? obj.icon : (fallback||''));
+      return '<span class="source-icon"'+(dataAttr||'')+'>'+inner+'</span>';
+    }
     chestSources.forEach(function(c) {
       var crc = RARITY_COLORS[c.rarity];
-      var chestIconHtml = c.image ? '<img src="'+c.image+'" style="width:100%;height:100%;object-fit:contain">' : (c.icon || '\uD83C\uDF81');
-      html += '<li class="source-item"><span class="source-icon" data-chest-id="'+(c.id||'')+'">'+chestIconHtml+'</span><div class="source-detail"><strong style="color:'+crc.color+'">'+c.name+'</strong><small>Drops from chest opening</small></div></li>';
+      html += '<li class="source-item">'+skinIcon(c, '', ' data-chest-id="'+(c.id||'')+'"')+'<div class="source-detail"><strong style="color:'+crc.color+'">'+c.name+'</strong><small>Drops from chest opening</small></div></li>';
     });
     if (item.source) {
-      var srcIconHtml = item.image ? '<img src="'+item.image+'" style="width:100%;height:100%;object-fit:contain">' : (item.icon || '\u2694\uFE0F');
-      html += '<li class="source-item"><span class="source-icon" data-item-id="'+itemId+'">'+srcIconHtml+'</span><div class="source-detail"><strong>'+item.source+'</strong><small>Combat / World drop</small></div></li>';
+      html += '<li class="source-item">'+skinIcon(item, '', ' data-item-id="'+itemId+'"')+'<div class="source-detail"><strong>'+item.source+'</strong><small>Combat / World drop</small></div></li>';
     }
     if (craftRecipe) {
       var craftOutItem = ITEM_MAP[craftRecipe.out] || item;
-      var craftIconHtml = craftOutItem.image ? '<img src="'+craftOutItem.image+'" style="width:100%;height:100%;object-fit:contain">' : (craftOutItem.icon || '\u2692\uFE0F');
-      html += '<li class="source-item"><span class="source-icon" data-item-id="'+(craftRecipe.out||itemId)+'">'+craftIconHtml+'</span><div class="source-detail"><strong>Crafting</strong> <small>Crafter Lvl.'+craftRecipe.lvl+' \u2022 '+formatTime(craftRecipe.sec)+' \u2022 '+craftRecipe.xp+' XP</small>';
+      html += '<li class="source-item">'+skinIcon(craftOutItem, '', ' data-item-id="'+(craftRecipe.out||itemId)+'"')+'<div class="source-detail"><strong>Crafting</strong> <small>Crafter Lvl.'+craftRecipe.lvl+' \u2022 '+formatTime(craftRecipe.sec)+' \u2022 '+craftRecipe.xp+' XP</small>';
       html += '<div class="recipe-ingredients">';
       craftRecipe.ing.forEach(function(i) {
         var ingItem = ITEM_MAP[i.id];
@@ -1122,6 +1123,7 @@ function applyAdminImages(config) {
   // Chest overrides (image/icon changes from dashboard)
   if (config.chestOverrides) {
     for (var cid in config.chestOverrides) {
+      // Patch ITEM_MAP entry if exists
       var chestItem = ITEM_MAP[cid];
       if (chestItem && config.chestOverrides[cid].image) {
         chestItem.image = config.chestOverrides[cid].image;
@@ -1130,6 +1132,11 @@ function applyAdminImages(config) {
       if (chestItem && config.chestOverrides[cid].icon) {
         chestItem.icon = config.chestOverrides[cid].icon;
         changed = true;
+      }
+      // Also patch CHESTS object
+      if (typeof CHESTS !== 'undefined' && CHESTS[cid]) {
+        if (config.chestOverrides[cid].image) { CHESTS[cid].image = config.chestOverrides[cid].image; changed = true; }
+        if (config.chestOverrides[cid].icon) { CHESTS[cid].icon = config.chestOverrides[cid].icon; changed = true; }
       }
     }
   }
@@ -1237,6 +1244,7 @@ if (currentItemId) {
 // Fetch fresh config in background (updates cache + re-renders if changed)
 loadSupabaseConfig();
 </script>
+<script src="wiki-skins.js"></script>
 <script src="wiki-online.js"></script>
 
 </body>

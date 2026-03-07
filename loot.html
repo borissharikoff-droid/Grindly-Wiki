@@ -97,7 +97,7 @@
 
     <section class="content">
       <h2 class="section-title"><span class="section-icon">&#127873;</span> Loot Bags</h2>
-      <p class="section-desc">Bags drop at the end of productive sessions. Each bag contains one piece of gear, bonus crafting materials, gold, and possibly a Seed Zip.</p>
+      <p class="section-desc">Bags drop at the end of productive sessions or from boss kills. Each bag contains gold, bonus crafting materials, possibly a Seed Zip, and a <strong>chance</strong> at equipment (not guaranteed). Equipment chance varies by bag tier: Common 50%, Rare 60%, Epic 70%, Legendary 80%. When no equipment drops, the bag still awards gold and bonus materials. Boss chest drops are also not guaranteed &mdash; see <a href="arena.html" style="color:var(--gold)">Arena &amp; Bosses</a> for details.</p>
 
       <!-- Tabs -->
       <div class="lt-tabs">
@@ -181,6 +181,23 @@
 
       <!-- ═══ Bag Contents ═══ -->
       <div id="panel-contents" class="lt-panel">
+
+        <div class="info-box" style="margin-bottom:18px">
+          <h4>Equipment Drop Chance</h4>
+          <p>Opening a bag does <strong>not</strong> guarantee equipment. Each tier has a separate roll:</p>
+          <div class="table-wrap" style="margin-top:10px">
+            <table>
+              <thead><tr><th>Bag</th><th>Equipment Chance</th><th>On Fail</th></tr></thead>
+              <tbody>
+                <tr><td><span class="rarity common">Common Bag</span></td><td>50%</td><td>Gold + bonus materials only</td></tr>
+                <tr><td><span class="rarity rare">Rare Bag</span></td><td>60%</td><td>Gold + bonus materials only</td></tr>
+                <tr><td><span class="rarity epic">Epic Bag</span></td><td>70%</td><td>Gold + bonus materials only</td></tr>
+                <tr><td><span class="rarity legendary">Legendary Bag</span></td><td>80%</td><td>Gold + bonus materials only</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:12px;color:var(--text-dim);margin-top:8px">When the equipment roll succeeds, a piece is selected from the pool below. Gold, bonus materials, and Seed Zip chances are unaffected.</p>
+        </div>
 
         <!-- Common Bag -->
         <div class="pool-section" style="--bag-color:#9CA3AF">
@@ -338,7 +355,7 @@
             <li>Each roll picks one material from the pool using weighted random selection</li>
             <li>The quantity per roll is random within the range shown</li>
             <li>Multiple rolls can pick the same material &mdash; quantities stack</li>
-            <li>These materials are <strong>in addition to</strong> the guaranteed gear piece</li>
+            <li>These materials are awarded regardless of whether equipment drops</li>
           </ul>
         </div>
       </div>
