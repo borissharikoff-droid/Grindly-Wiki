@@ -794,6 +794,63 @@ code {
   .top-bar-inner { padding: 6px 10px; }
   .logo-text { font-size: 18px; }
   .player-count { display: none; }
+  .skill-grid { grid-template-columns: 1fr; }
+  .section-title { font-size: 16px; }
+}
+
+/* ══════ Mobile polish for page-specific components ══════ */
+@media (max-width: 768px) {
+  /* Tabs — horizontal scroll on mobile instead of wrapping to many rows */
+  .eq-tabs, .ar-tabs, .sk-tabs, .lt-tabs, .mat-tabs, .fm-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+  .eq-tabs::-webkit-scrollbar, .ar-tabs::-webkit-scrollbar,
+  .sk-tabs::-webkit-scrollbar, .lt-tabs::-webkit-scrollbar,
+  .mat-tabs::-webkit-scrollbar, .fm-tabs::-webkit-scrollbar { display: none; }
+  .eq-tab, .ar-tab, .sk-tab, .lt-tab, .mat-tab, .fm-tab {
+    flex-shrink: 0;
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+
+  /* Equipment set grid */
+  .set-grid { grid-template-columns: 1fr; }
+
+  /* Loot bag cards */
+  .bag-cards { grid-template-columns: 1fr; }
+  .bag-card-stats { grid-template-columns: 1fr; }
+
+  /* Modifier grid */
+  .mod-grid { grid-template-columns: 1fr; }
+
+  /* Filter buttons */
+  .filter-row { gap: 4px; }
+  .filter-btn { font-size: 10px; padding: 4px 8px; }
+
+  /* Equipment table */
+  .eq-table td, .eq-table th { padding: 6px 6px; font-size: 11px; }
+
+  /* Skill cards */
+  .skill-card { padding: 12px; gap: 10px; }
+  .skill-card-icon { width: 36px; height: 36px; font-size: 20px; }
+  .skill-card-name { font-size: 14px; }
+  .skill-card-desc { font-size: 12px; }
+
+  /* Material cards */
+  .mat-card { padding: 8px 10px; gap: 8px; }
+  .mat-card-icon { font-size: 20px; width: 28px; }
+
+  /* Section titles */
+  .section-title { font-size: 18px; }
+  .section-icon { font-size: 16px; }
+
+  /* Info boxes */
+  .info-box { padding: 14px; }
+  .info-box code { font-size: 11px; }
 }
 
 /* ── Patch Notes Cards ─────────────────────────────────────────────────────── */
