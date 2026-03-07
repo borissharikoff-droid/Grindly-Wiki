@@ -3,8 +3,226 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Grindly Wiki</title>
+<title>Grindly &mdash; Turn Screen Time Into an RPG</title>
 <link rel="stylesheet" href="style.css">
+<style>
+/* ── Landing Hero ──────────────────────────────────────────────────────────── */
+.landing-hero {
+  position: relative;
+  text-align: center;
+  padding: 56px 28px 48px;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 20%, rgba(212,168,67,0.08) 0%, transparent 60%),
+              linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-page) 100%);
+  border-bottom: 2px solid var(--border-ornate);
+}
+.landing-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='1' height='1' x='20' y='20' fill='rgba(212,168,67,0.04)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.landing-logo {
+  font-family: var(--font-title);
+  font-size: 52px;
+  font-weight: 800;
+  color: var(--gold-bright);
+  letter-spacing: 2px;
+  text-shadow: 0 0 40px rgba(212,168,67,0.25), 0 2px 0 rgba(0,0,0,0.5);
+  margin-bottom: 8px;
+  position: relative;
+}
+.landing-tagline {
+  font-size: 18px;
+  color: var(--text);
+  margin-bottom: 6px;
+  font-weight: 500;
+  position: relative;
+}
+.landing-sub {
+  font-size: 13px;
+  color: var(--text-dim);
+  max-width: 480px;
+  margin: 0 auto 28px;
+  line-height: 1.6;
+  position: relative;
+}
+.landing-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  border-radius: 10px;
+  font-family: var(--font-title);
+  font-size: 15px;
+  font-weight: 700;
+  color: #0d0a04;
+  background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 100%);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 20px rgba(212,168,67,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+  position: relative;
+}
+.landing-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 28px rgba(212,168,67,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+.landing-cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--gold);
+  background: transparent;
+  border: 1px solid var(--border-ornate);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-left: 12px;
+  position: relative;
+}
+.landing-cta-secondary:hover {
+  background: rgba(212,168,67,0.06);
+  border-color: var(--gold-dim);
+}
+.landing-stats {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+  position: relative;
+}
+.landing-stat {
+  text-align: center;
+}
+.landing-stat-num {
+  display: block;
+  font-family: var(--font-title);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--gold-bright);
+}
+.landing-stat-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-dim);
+}
+
+/* ── Feature Pillars ───────────────────────────────────────────────────────── */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+.feature-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-inner);
+  border-radius: 10px;
+  padding: 20px 18px;
+  transition: all 0.2s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.feature-card:hover {
+  border-color: var(--gold-dim);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+}
+.feature-card-icon {
+  font-size: 28px;
+  margin-bottom: 10px;
+  filter: saturate(0.8);
+}
+.feature-card h3 {
+  font-family: var(--font-title);
+  font-size: 14px;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.feature-card p {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+.feature-card .feature-tag {
+  display: inline-block;
+  font-size: 9px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  padding: 2px 7px;
+  border-radius: 3px;
+  margin-top: 8px;
+}
+
+/* ── How It Works ──────────────────────────────────────────────────────────── */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  counter-reset: step;
+}
+.step-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-inner);
+  border-radius: 10px;
+  padding: 20px 16px 16px;
+  text-align: center;
+}
+.step-card::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--bg-dark);
+  font-family: var(--font-title);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+}
+.step-card-icon { font-size: 24px; margin-bottom: 8px; }
+.step-card h4 {
+  font-family: var(--font-title);
+  font-size: 13px;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+.step-card p {
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .landing-hero { padding: 36px 16px 32px; }
+  .landing-logo { font-size: 36px; }
+  .landing-tagline { font-size: 15px; }
+  .landing-cta { padding: 10px 24px; font-size: 14px; }
+  .landing-cta-secondary { display: none; }
+  .landing-stats { gap: 16px; }
+  .landing-stat-num { font-size: 20px; }
+  .feature-grid { grid-template-columns: 1fr 1fr; }
+  .steps-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
 </head>
 <body>
 
@@ -58,81 +276,155 @@
   <!-- Main Content -->
   <main class="main">
 
-    <!-- Hero -->
-    <section class="hero">
-      <h1>Welcome to the Grindly Wiki</h1>
-      <p class="hero-sub">The complete guide to skills, loot, arena, crafting &amp; farming.</p>
-      <div class="hero-stats">
-        <div class="hero-stat"><span class="hero-stat-num">67</span><span class="hero-stat-label">Items</span></div>
-        <div class="hero-stat"><span class="hero-stat-num">6</span><span class="hero-stat-label">Zones</span></div>
-        <div class="hero-stat"><span class="hero-stat-num">19</span><span class="hero-stat-label">Recipes</span></div>
-        <div class="hero-stat"><span class="hero-stat-num">9</span><span class="hero-stat-label">Seeds</span></div>
-        <div class="hero-stat"><span class="hero-stat-num">11</span><span class="hero-stat-label">Skills</span></div>
+    <!-- ══════ Landing Hero ══════ -->
+    <section class="landing-hero">
+      <div class="landing-logo">GRINDLY</div>
+      <div class="landing-tagline">Turn Your Screen Time Into an RPG Adventure</div>
+      <p class="landing-sub">
+        Grindly tracks what you do on your PC and turns it into XP, levels, loot drops, arena fights, crafting and farming &mdash; all while you work. A full RPG that runs in your system tray.
+      </p>
+      <div>
+        <a href="https://github.com/borissharikoff-droid/Idly/releases/latest" class="landing-cta" target="_blank" rel="noopener">
+          Download for Windows
+        </a>
+        <a href="#features" class="landing-cta-secondary">
+          Learn more &#8595;
+        </a>
+      </div>
+      <div class="landing-stats">
+        <div class="landing-stat"><span class="landing-stat-num">11</span><span class="landing-stat-label">Skills</span></div>
+        <div class="landing-stat"><span class="landing-stat-num">67+</span><span class="landing-stat-label">Items</span></div>
+        <div class="landing-stat"><span class="landing-stat-num">6</span><span class="landing-stat-label">Zones</span></div>
+        <div class="landing-stat"><span class="landing-stat-num">19</span><span class="landing-stat-label">Recipes</span></div>
+        <div class="landing-stat"><span class="landing-stat-num">99</span><span class="landing-stat-label">Max Level</span></div>
       </div>
     </section>
 
-    <!-- Category Cards -->
+    <!-- ══════ How It Works ══════ -->
+    <section class="content" id="how">
+      <h2 class="section-title"><span class="section-icon">&#9889;</span> How It Works</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-card-icon">&#128187;</div>
+          <h4>Use Your PC</h4>
+          <p>Code, design, browse, game &mdash; Grindly silently tracks your active window in the background.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-card-icon">&#128200;</div>
+          <h4>Earn XP</h4>
+          <p>Every minute is categorized into one of 11 skills. XP flows automatically &mdash; no input needed.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-card-icon">&#127873;</div>
+          <h4>Get Loot</h4>
+          <p>Focus sessions reward chests. Open them for gear across 5 rarity tiers, from Common to Mythic.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-card-icon">&#9876;&#65039;</div>
+          <h4>Fight &amp; Craft</h4>
+          <p>Battle bosses in the arena, farm materials, craft powerful weapons, and trade on the marketplace.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════ Features ══════ -->
+    <section class="content" id="features">
+      <h2 class="section-title"><span class="section-icon">&#128142;</span> Features</h2>
+      <div class="feature-grid">
+        <a href="skills.html" class="feature-card">
+          <div class="feature-card-icon">&#128202;</div>
+          <h3>11 Skills</h3>
+          <p>Developer, Designer, Gamer, Researcher, Creator, Communicator, Learner, Listener, Farmer, Warrior, Crafter. 99 levels each.</p>
+          <span class="feature-tag" style="background:rgba(56,189,248,0.1);color:#38bdf8;border:1px solid rgba(56,189,248,0.2)">PASSIVE XP</span>
+        </a>
+        <a href="equipment.html" class="feature-card">
+          <div class="feature-card-icon">&#9876;&#65039;</div>
+          <h3>Equipment &amp; Sets</h3>
+          <p>5 armor sets from Wooden to Void, plus 14 craftable weapons, armor and rings. Each boosts ATK, HP or XP.</p>
+          <span class="feature-tag" style="background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.2)">5 RARITIES</span>
+        </a>
+        <a href="arena.html" class="feature-card">
+          <div class="feature-card-icon">&#128293;</div>
+          <h3>Arena Combat</h3>
+          <p>6 dungeon zones with unique mobs and bosses. Earn gold, materials, and warrior XP from every fight.</p>
+          <span class="feature-tag" style="background:rgba(248,113,113,0.1);color:#f87171;border:1px solid rgba(248,113,113,0.2)">PVE BATTLES</span>
+        </a>
+        <a href="crafting.html" class="feature-card">
+          <div class="feature-card-icon">&#9874;&#65039;</div>
+          <h3>Crafting System</h3>
+          <p>Smelt ores, refine monster drops, and forge endgame gear. 19 recipes from basic to mythic-tier weapons.</p>
+          <span class="feature-tag" style="background:rgba(34,211,238,0.1);color:#22d3ee;border:1px solid rgba(34,211,238,0.2)">19 RECIPES</span>
+        </a>
+        <a href="farming.html" class="feature-card">
+          <div class="feature-card-icon">&#127793;</div>
+          <h3>Farming</h3>
+          <p>Plant 9 seed types, harvest crops over time, unlock combat buffs from plants, and sell on the marketplace.</p>
+          <span class="feature-tag" style="background:rgba(74,222,128,0.1);color:#4ade80;border:1px solid rgba(74,222,128,0.2)">PASSIVE INCOME</span>
+        </a>
+        <a href="loot.html" class="feature-card">
+          <div class="feature-card-icon">&#127873;</div>
+          <h3>Loot &amp; Chests</h3>
+          <p>4 chest tiers with increasing drop rates. Pity system guarantees rare+ drops. Bonus material drops too.</p>
+          <span class="feature-tag" style="background:rgba(244,114,182,0.1);color:#f472b6;border:1px solid rgba(244,114,182,0.2)">PITY SYSTEM</span>
+        </a>
+        <div class="feature-card" style="cursor:default">
+          <div class="feature-card-icon">&#128172;</div>
+          <h3>Social &amp; Leaderboards</h3>
+          <p>Add friends, chat in real-time, compete on skill leaderboards, and trade gear on the player marketplace.</p>
+          <span class="feature-tag" style="background:rgba(192,132,252,0.1);color:#c084fc;border:1px solid rgba(192,132,252,0.2)">MULTIPLAYER</span>
+        </div>
+        <div class="feature-card" style="cursor:default">
+          <div class="feature-card-icon">&#127942;</div>
+          <h3>Streaks &amp; Achievements</h3>
+          <p>Daily login streaks with XP multipliers. Dozens of achievements to unlock. Streak shields protect your progress.</p>
+          <span class="feature-tag" style="background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.2)">DAILY REWARDS</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════ Wiki Browse ══════ -->
     <section class="content">
       <h2 class="section-title"><span class="section-icon">&#128218;</span> Browse the Wiki</h2>
       <div class="card-grid">
         <a href="equipment.html" class="nav-card">
           <div class="nav-card-icon">&#9876;&#65039;</div>
           <h3>Equipment</h3>
-          <p>Armor, weapons, rings &amp; cosmetics. Bag drops and crafted gear.</p>
+          <p>Armor, weapons, rings. Bag drops and crafted gear.</p>
         </a>
         <a href="arena.html" class="nav-card">
           <div class="nav-card-icon">&#128293;</div>
           <h3>Arena &amp; Bosses</h3>
-          <p>6 dungeon zones with mobs, bosses, gold &amp; material drops.</p>
+          <p>6 zones with mobs, bosses, gold &amp; material drops.</p>
         </a>
         <a href="crafting.html" class="nav-card">
           <div class="nav-card-icon">&#9874;&#65039;</div>
           <h3>Crafting</h3>
-          <p>Smelt, refine &amp; forge powerful gear. 19 recipes, Crafter perks.</p>
+          <p>19 recipes from basic to mythic-tier gear.</p>
         </a>
         <a href="farming.html" class="nav-card">
           <div class="nav-card-icon">&#127793;</div>
           <h3>Farming</h3>
-          <p>Plant seeds, harvest crops, seed zips &amp; plant combat buffs.</p>
+          <p>Seeds, crops, combat buffs &amp; marketplace sales.</p>
         </a>
         <a href="skills.html" class="nav-card">
           <div class="nav-card-icon">&#9889;</div>
           <h3>Skills</h3>
-          <p>11 skills with 99 levels each. XP formula &amp; leveling guide.</p>
+          <p>11 skills, 99 levels each. XP formula &amp; guide.</p>
         </a>
         <a href="loot.html" class="nav-card">
           <div class="nav-card-icon">&#127873;</div>
           <h3>Loot Bags</h3>
-          <p>4 bag tiers, drop pools, bonus materials, pity system &amp; exact rates.</p>
+          <p>4 tiers, drop pools, pity &amp; exact rates.</p>
         </a>
         <a href="materials.html" class="nav-card">
           <div class="nav-card-icon">&#128142;</div>
           <h3>Materials</h3>
-          <p>Raw materials, intermediates &amp; arena mob drops for crafting.</p>
+          <p>Raw drops, intermediates &amp; crafting components.</p>
         </a>
       </div>
     </section>
 
-    <!-- About Section -->
-    <section class="content" id="about">
-      <h2 class="section-title"><span class="section-icon">&#128196;</span> What is Grindly?</h2>
-      <div class="info-box">
-        <p><strong>Grindly</strong> is a Windows desktop productivity tracker that turns your daily computer usage into an RPG adventure. It monitors your active window usage, categorizes activities into skills, and rewards you with XP, levels, loot, and achievements.</p>
-        <br>
-        <p><strong>Key Features:</strong></p>
-        <ul style="margin: 8px 0 0 20px; color: var(--text-dim); line-height: 1.8;">
-          <li><strong>11 Skills</strong> &mdash; Developer, Designer, Gamer, Communicator, Researcher, Creator, Learner, Listener, Farmer, Warrior, Crafter</li>
-          <li><strong>Loot System</strong> &mdash; Earn chests from focus sessions and boss kills, with a chance at gear (not guaranteed per chest)</li>
-          <li><strong>Arena Combat</strong> &mdash; Fight mobs and bosses across 6 dungeon zones for gold &amp; materials</li>
-          <li><strong>Crafting</strong> &mdash; Smelt ores, refine materials, and forge powerful equipment</li>
-          <li><strong>Farming</strong> &mdash; Plant seeds, grow crops, and sell harvests on the marketplace</li>
-          <li><strong>Social</strong> &mdash; Friends, chat, leaderboards via Supabase</li>
-          <li><strong>Streaks &amp; Achievements</strong> &mdash; Daily streaks, missions, and unlock badges</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Quick Reference -->
+    <!-- ══════ Quick Reference ══════ -->
     <section class="content">
       <h2 class="section-title"><span class="section-icon">&#128161;</span> Quick Reference</h2>
       <div class="card-grid">
@@ -160,7 +452,7 @@
       </div>
     </section>
 
-    <!-- Latest Patch Notes -->
+    <!-- ══════ Latest Patch Notes ══════ -->
     <section class="content">
       <h2 class="section-title"><span class="section-icon">&#128227;</span> Latest Update</h2>
       <div id="latestPatch"></div>
