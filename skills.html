@@ -161,13 +161,14 @@
 
     <section class="content">
       <h2 class="section-title"><span class="section-icon">&#9876;&#65039;</span> Skills</h2>
-      <p class="section-desc">Grindly tracks 11 skills across productivity, creativity, and in-game activities. Each skill has 99 levels.</p>
+      <p class="section-desc">Grindly tracks 12 skills across productivity, creativity, and in-game activities. Each skill has 99 levels.</p>
 
       <!-- Tabs -->
       <div class="sk-tabs">
         <button class="sk-tab active" onclick="skSwitch('skills',this)">All Skills</button>
         <button class="sk-tab" onclick="skSwitch('xp',this)" id="tab-xp">XP Formula</button>
         <button class="sk-tab" onclick="skSwitch('warrior',this)">Warrior Bonuses</button>
+        <button class="sk-tab" onclick="skSwitch('grindly',this)" id="tab-grindly">Grindly Bonuses</button>
       </div>
 
       <!-- ═══ All Skills Panel ═══ -->
@@ -273,6 +274,15 @@
             </div>
           </div>
 
+          <div class="skill-card" style="--skill-color: #c084fc">
+            <div class="skill-card-icon">&#127968;</div>
+            <div class="skill-card-body">
+              <div class="skill-card-name">Grindly</div>
+              <div class="skill-card-category">grindly</div>
+              <div class="skill-card-desc">Tracks time spent in the Grindly app</div>
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -286,7 +296,7 @@
             <li><strong>Early levels (1&ndash;10):</strong> Triangular ramp &mdash; <code>120 &times; L(L+1) / 2</code></li>
             <li><strong>Levels 11&ndash;25:</strong> Smooth interpolation between the L10 and L25 breakpoints.</li>
             <li><strong>Levels 26+:</strong> Full exponential curve kicks in.</li>
-            <li>Maximum total skill level across all 11 skills: <strong style="color:var(--gold)">11 &times; 99 = 1,089</strong></li>
+            <li>Maximum total skill level across all 12 skills: <strong style="color:var(--gold)">12 &times; 99 = 1,188</strong></li>
           </ul>
         </div>
 
@@ -358,6 +368,105 @@
         </div>
       </div>
 
+      <!-- ═══ Grindly Bonuses Panel ═══ -->
+      <div id="panel-grindly" class="sk-panel">
+        <div class="info-box">
+          <p style="font-size:13px;color:var(--text-dim);margin-bottom:14px;">
+            Levelling the Grindly skill grants XP bonuses, craft speed bonuses, and combat stat bonuses at specific milestones. Max bonuses: <strong style="color:#57F287">+35% XP</strong>, <strong style="color:#57F287">-30% Craft Time</strong>, <strong style="color:#57F287">+10 ATK</strong>, <strong style="color:#57F287">+50 HP</strong>, <strong style="color:#57F287">+4 HP Regen</strong>.
+          </p>
+          <div class="table-wrap"><table class="bonus-table">
+            <thead>
+              <tr>
+                <th>Level</th>
+                <th>Bonus</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="bonus-level">5</td>
+                <td class="bonus-value">+3% All Skill XP</td>
+              </tr>
+              <tr>
+                <td class="bonus-level">10</td>
+                <td class="bonus-value">-5% Craft Time</td>
+              </tr>
+              <tr>
+                <td class="bonus-level">15</td>
+                <td class="bonus-value">+3% All Skill XP</td>
+              </tr>
+              <tr>
+                <td class="bonus-level">20</td>
+                <td class="bonus-value">+1 ATK, +5 HP</td>
+              </tr>
+              <tr>
+                <td class="bonus-level">25</td>
+                <td class="bonus-value">+4% All Skill XP</td>
+              </tr>
+              <tr>
+                <td class="bonus-level">30</td>
+                <td class="bonus-value">-5% Craft Time</td>
+              </tr>
+              <tr>
+                <td class="bonus-level">35</td>
+                <td class="bonus-value">+5 HP, +1 HP Regen</td>
+              </tr>
+              <tr>
+                <td class="bonus-level">40</td>
+                <td class="bonus-value">+5% All Skill XP</td>
+              </tr>
+              <tr>
+                <td class="bonus-level">45</td>
+                <td class="bonus-value">+1 ATK</td>
+              </tr>
+              <tr>
+                <td class="bonus-level">50</td>
+                <td class="bonus-value">-5% Craft Time</td>
+              </tr>
+              <tr>
+                <td class="bonus-level">55</td>
+                <td class="bonus-value">+5% All Skill XP</td>
+              </tr>
+              <tr>
+                <td class="bonus-level">60</td>
+                <td class="bonus-value">+2 ATK, +10 HP</td>
+              </tr>
+              <tr>
+                <td class="bonus-level">65</td>
+                <td class="bonus-value">-5% Craft Time</td>
+              </tr>
+              <tr>
+                <td class="bonus-level">70</td>
+                <td class="bonus-value">+5% All Skill XP</td>
+              </tr>
+              <tr>
+                <td class="bonus-level">75</td>
+                <td class="bonus-value">+2 ATK, +10 HP, +1 HP Regen</td>
+              </tr>
+              <tr>
+                <td class="bonus-level">80</td>
+                <td class="bonus-value">-5% Craft Time</td>
+              </tr>
+              <tr>
+                <td class="bonus-level">85</td>
+                <td class="bonus-value">+5% All Skill XP</td>
+              </tr>
+              <tr>
+                <td class="bonus-level">90</td>
+                <td class="bonus-value">+2 ATK, +10 HP, +1 HP Regen</td>
+              </tr>
+              <tr>
+                <td class="bonus-level">95</td>
+                <td class="bonus-value">-5% Craft Time</td>
+              </tr>
+              <tr>
+                <td class="bonus-level">99</td>
+                <td class="bonus-value">+5% XP, +2 ATK, +10 HP, +1 HP Regen</td>
+              </tr>
+            </tbody>
+          </table></div>
+        </div>
+      </div>
+
     </section>
   </main>
 </div>
@@ -383,6 +492,8 @@
       skSwitch('xp', document.getElementById('tab-xp'));
     } else if (hash === '#warrior-bonuses') {
       skSwitch('warrior', document.querySelector('.sk-tab:nth-child(3)'));
+    } else if (hash === '#grindly-bonuses') {
+      skSwitch('grindly', document.getElementById('tab-grindly'));
     }
   }
   handleHash();

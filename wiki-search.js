@@ -125,6 +125,7 @@
     { name: 'Farmer', url: 'skills.html', cat: 'Skill' },
     { name: 'Warrior', url: 'skills.html#warrior-bonuses', cat: 'Skill' },
     { name: 'Crafter', url: 'skills.html', cat: 'Skill' },
+    { name: 'Grindly', url: 'skills.html#grindly-bonuses', cat: 'Skill' },
     // Arena zones
     { name: 'Slime Cavern', url: 'arena.html', cat: 'Arena' },
     { name: 'Goblin Outpost', url: 'arena.html', cat: 'Arena' },
