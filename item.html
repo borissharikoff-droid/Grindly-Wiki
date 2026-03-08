@@ -512,6 +512,12 @@ var ITEMS = [
   { id:'essence_vial', name:'Essence Vial', slot:'material', rarity:'rare', icon:'\uD83E\uDDEA', desc:'Concentrated magic essence. Used in enchanting.', perks:[] },
   { id:'ancient_dust', name:'Ancient Dust', slot:'material', rarity:'rare', icon:'\uD83D\uDCA8', desc:'Ground ancient scales. Used in robe weaving.', perks:[] },
   { id:'void_fragment', name:'Void Fragment', slot:'material', rarity:'epic', icon:'\uD83D\uDCA0', desc:'Refined void crystal shard. Used in void-forged weapons.', perks:[] },
+  { id:'dungeon_pass', name:'Dungeon Pass', slot:'material', rarity:'rare', icon:'\uD83C\uDFAB', desc:'Instantly completes one dungeon run. Consume on auto-farm.', perks:[{type:'cosmetic',value:0,desc:'Consumable \u2014 auto-runs one dungeon'}] },
+  // Seed Zips
+  { id:'seed_zip_common', name:'Common Seed Zip', slot:'material', rarity:'common', icon:'\uD83C\uDF92', desc:'A small pouch of common seeds. Open to get a random common-tier seed.', perks:[] },
+  { id:'seed_zip_rare', name:'Rare Seed Zip', slot:'material', rarity:'rare', icon:'\uD83C\uDF92', desc:'A quality pouch of seeds. Open to get a random rare-tier seed.', perks:[] },
+  { id:'seed_zip_epic', name:'Epic Seed Zip', slot:'material', rarity:'epic', icon:'\uD83C\uDF92', desc:'A superior pouch of seeds. Open to get a random epic-tier seed.', perks:[] },
+  { id:'seed_zip_legendary', name:'Legendary Seed Zip', slot:'material', rarity:'legendary', icon:'\uD83C\uDF92', desc:'An extraordinary pouch of seeds. Open to get a random legendary/mythic seed.', perks:[] },
   // Bag-drop gear — Wooden Set (Common)
   { id:'wooden_helm', name:'Wooden Helm', slot:'head', rarity:'common', icon:'\uD83E\uDE96', desc:'A crude helm carved from hardwood.', perks:[{type:'atk_boost',value:2,desc:'+2 ATK'}] },
   { id:'wooden_plate', name:'Wooden Plate', slot:'body', rarity:'common', icon:'\uD83E\uDEB5', desc:'Wooden planks strapped together as armor.', perks:[{type:'hp_boost',value:15,desc:'+15 HP'}] },
@@ -570,6 +576,7 @@ ITEMS.forEach(function(i) { ITEM_MAP[i.id] = i; });
 // Recipes
 var RECIPES = [
   { id:'recipe_compost', out:'compost', outQty:3, ing:[{id:'wheat',qty:5},{id:'herbs',qty:3}], lvl:0, xp:30, sec:6, inter:true },
+  { id:'recipe_dungeon_pass', out:'dungeon_pass', outQty:1, ing:[{id:'wheat',qty:5},{id:'herbs',qty:3}], lvl:5, xp:40, sec:15, inter:true },
   { id:'recipe_iron_bar', out:'iron_bar', ing:[{id:'ore_iron',qty:5}], lvl:0, xp:45, sec:8, inter:true },
   { id:'recipe_fang_shard', out:'fang_shard', ing:[{id:'monster_fang',qty:4}], lvl:0, xp:55, sec:10, inter:true },
   { id:'recipe_essence_vial', out:'essence_vial', ing:[{id:'magic_essence',qty:3}], lvl:15, xp:20, sec:120, inter:true },
