@@ -184,6 +184,10 @@
   margin-top: 20px; position: relative;
   animation: fadeUp 0.6s ease 0.5s both;
 }
+#heroStatsLive {
+  margin-top: 0; margin-bottom: 16px;
+  opacity: 0; transition: opacity 0.4s ease;
+}
 .hs-item { text-align: center; }
 .hs-num {
   display: block; font-family: var(--font-title); font-size: 18px; font-weight: 700;
@@ -192,52 +196,6 @@
   background-clip: text;
 }
 .hs-label { font-size: 8px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dim); }
-
-/* ══════ Live Server Stats Bar ══════ */
-.live-stats-bar {
-  padding: 16px 24px;
-  background: linear-gradient(135deg, rgba(56,189,248,0.04) 0%, rgba(192,132,252,0.04) 50%, rgba(212,168,67,0.04) 100%);
-  border-bottom: 1px solid var(--border-inner);
-  animation: fadeUp 0.6s ease both;
-}
-.live-stats-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  justify-content: center;
-  margin-bottom: 12px;
-}
-.live-stats-title {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--gold);
-}
-.live-stats-grid {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-.ls-item { text-align: center; min-width: 70px; }
-.ls-num {
-  display: block;
-  font-family: var(--font-title);
-  font-size: 16px;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--gold-bright), #38bdf8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.ls-label {
-  font-size: 8px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: var(--text-dim);
-}
 
 /* ══════ Feature Row — alternating text+image ══════ */
 .feat-row {
@@ -507,13 +465,6 @@
   .hs-num { font-size: 16px; }
   .hs-label { font-size: 7px; letter-spacing: 1px; }
 
-  /* Live stats */
-  .live-stats-bar { padding: 12px 12px; }
-  .live-stats-grid { gap: 10px; }
-  .ls-num { font-size: 13px; }
-  .ls-item { min-width: 60px; }
-  .ls-label { font-size: 7px; letter-spacing: 1px; }
-
   /* Floaters hidden on mobile */
   .hero-floaters { display: none; }
 
@@ -691,47 +642,7 @@
       </div>
     </section>
 
-    <!-- ══════ LIVE SERVER STATS ══════ -->
-    <section class="live-stats-bar" id="liveStatsBar" style="display:none">
-      <div class="live-stats-header">
-        <span class="pulse-dot"></span>
-        <span class="live-stats-title">Live Server Stats</span>
-      </div>
-      <div class="live-stats-grid">
-        <div class="ls-item">
-          <span class="ls-num" id="ls-players">--</span>
-          <span class="ls-label">Players</span>
-        </div>
-        <div class="ls-item">
-          <span class="ls-num" id="ls-xp">--</span>
-          <span class="ls-label">Total XP Earned</span>
-        </div>
-        <div class="ls-item">
-          <span class="ls-num" id="ls-hours">--</span>
-          <span class="ls-label">Hours Tracked</span>
-        </div>
-        <div class="ls-item">
-          <span class="ls-num" id="ls-gold">--</span>
-          <span class="ls-label">Gold in Economy</span>
-        </div>
-        <div class="ls-item">
-          <span class="ls-num" id="ls-market">--</span>
-          <span class="ls-label">Market Listings</span>
-        </div>
-        <div class="ls-item">
-          <span class="ls-num" id="ls-items">--</span>
-          <span class="ls-label">Items Owned</span>
-        </div>
-        <div class="ls-item">
-          <span class="ls-num" id="ls-traded">--</span>
-          <span class="ls-label">Gold Traded</span>
-        </div>
-        <div class="ls-item">
-          <span class="ls-num" id="ls-sessions">--</span>
-          <span class="ls-label">Sessions</span>
-        </div>
-      </div>
-    </section>
+    <!-- live-stats-bar replaced by inline hero stats above -->
 
     <!-- ══════ Feature rows — alternating layout ══════ -->
     <div class="feat-row" id="sc-skills">
@@ -1026,16 +937,13 @@
     var totalItems = inventory.length;
     var totalSessions = sessions.length;
 
-    document.getElementById('ls-players').textContent = totalPlayers;
-    document.getElementById('ls-xp').textContent = fmt(totalXp);
-    document.getElementById('ls-hours').textContent = fmt(totalHours);
-    document.getElementById('ls-gold').textContent = fmt(totalGold);
-    document.getElementById('ls-market').textContent = activeListings;
-    document.getElementById('ls-items').textContent = fmt(totalItems);
-    document.getElementById('ls-traded').textContent = fmt(goldTraded);
-    document.getElementById('ls-sessions').textContent = fmt(totalSessions);
+    document.getElementById('hs-players').textContent = totalPlayers;
+    document.getElementById('hs-xp').textContent = fmt(totalXp);
+    document.getElementById('hs-hours').textContent = fmt(totalHours);
+    document.getElementById('hs-gold').textContent = fmt(totalGold);
+    document.getElementById('hs-market').textContent = activeListings;
 
-    document.getElementById('liveStatsBar').style.display = '';
+    document.getElementById('heroStatsLive').style.opacity = '1';
   }).catch(function() {
     // silently ignore — stats bar stays hidden if Supabase is unreachable
   });
