@@ -62,6 +62,12 @@
     { name: 'Essence Vial', url: 'item.html?id=essence_vial', cat: 'Material' },
     { name: 'Ancient Dust', url: 'item.html?id=ancient_dust', cat: 'Material' },
     { name: 'Void Fragment', url: 'item.html?id=void_fragment', cat: 'Material' },
+    { name: 'Dungeon Pass', url: 'item.html?id=dungeon_pass', cat: 'Material' },
+    // Seed Zips
+    { name: 'Common Seed Zip', url: 'item.html?id=seed_zip_common', cat: 'Material' },
+    { name: 'Rare Seed Zip', url: 'item.html?id=seed_zip_rare', cat: 'Material' },
+    { name: 'Epic Seed Zip', url: 'item.html?id=seed_zip_epic', cat: 'Material' },
+    { name: 'Legendary Seed Zip', url: 'item.html?id=seed_zip_legendary', cat: 'Material' },
     // Arena Mob Materials
     { name: 'Slime Gel', url: 'item.html?id=slime_gel', cat: 'Material' },
     { name: 'Goblin Tooth', url: 'item.html?id=goblin_tooth', cat: 'Material' },
