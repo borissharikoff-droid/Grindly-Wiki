@@ -30,6 +30,7 @@
   align-items: flex-start;
   gap: 14px;
   transition: border-color 0.2s, box-shadow 0.2s;
+  cursor: pointer;
 }
 .skill-card:hover {
   border-color: var(--skill-color);
@@ -63,6 +64,19 @@
   margin-bottom: 6px;
 }
 .skill-card-desc { font-size: 13px; color: var(--text-dim); line-height: 1.4; }
+.skill-card-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-top: 6px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.03);
+  color: var(--text-dim);
+}
+.skill-card-tag.passive { color: #84cc16; border-color: rgba(132,204,22,.2); background: rgba(132,204,22,.05); }
+.skill-card-tag.ingame { color: #f97316; border-color: rgba(249,115,22,.2); background: rgba(249,115,22,.05); }
 
 /* ══════ Info Boxes ══════ */
 .info-box h3 {
@@ -89,7 +103,7 @@
   color: #00d4ff;
 }
 
-/* ══════ Warrior Bonuses Table ══════ */
+/* ══════ Bonus Tables ══════ */
 .bonus-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 .bonus-table th {
   font-family: var(--font-title);
@@ -105,6 +119,120 @@
 .bonus-table tr:hover td { background: rgba(212,168,67,0.04); }
 .bonus-table .bonus-level { font-family: var(--font-mono); color: var(--gold); font-weight: 600; }
 .bonus-table .bonus-value { color: #57F287; }
+
+/* ══════ Skill Detail Panel ══════ */
+.skill-detail {
+  background: var(--bg-card);
+  border: 1px solid var(--border-inner);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 18px;
+}
+.skill-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.skill-detail-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+.skill-detail-title { font-family: var(--font-title); font-size: 22px; }
+.skill-detail-subtitle { font-size: 13px; color: var(--text-dim); margin-top: 2px; }
+.skill-detail-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--text-dim);
+  cursor: pointer;
+  margin-bottom: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-inner);
+  background: transparent;
+  transition: all .15s;
+}
+.skill-detail-back:hover { color: var(--gold); border-color: var(--gold); }
+
+/* ══════ How it Works Cards ══════ */
+.how-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+.how-card {
+  background: rgba(255,255,255,.02);
+  border: 1px solid var(--border-inner);
+  border-radius: 8px;
+  padding: 14px;
+}
+.how-card-title { font-family: var(--font-title); font-size: 13px; color: var(--text-bright); margin-bottom: 6px; }
+.how-card-value { font-family: var(--font-mono); font-size: 22px; margin-bottom: 4px; }
+.how-card-desc { font-size: 12px; color: var(--text-dim); line-height: 1.4; }
+
+/* ══════ Section dividers ══════ */
+.skill-section-title {
+  font-family: var(--font-title);
+  font-size: 14px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-inner);
+  margin: 20px 0 12px;
+}
+
+/* ══════ Achievement cards ══════ */
+.ach-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+.ach-card {
+  background: rgba(255,255,255,.02);
+  border: 1px solid var(--border-inner);
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.ach-card-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+.ach-card-body { flex: 1; }
+.ach-card-name { font-family: var(--font-title); font-size: 13px; color: var(--text-bright); }
+.ach-card-desc { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+.ach-card-reward {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--gold);
+  margin-top: 4px;
+}
+
+/* ══════ Type badges ══════ */
+.type-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+.type-passive { color: #84cc16; border: 1px solid rgba(132,204,22,.25); background: rgba(132,204,22,.06); }
+.type-ingame  { color: #f97316; border: 1px solid rgba(249,115,22,.25); background: rgba(249,115,22,.06); }
+.type-meta    { color: #c084fc; border: 1px solid rgba(192,132,252,.25); background: rgba(192,132,252,.06); }
+
+/* ══════ Multiplier stacking ══════ */
+.mult-list { list-style: none; padding: 0; margin: 0; }
+.mult-list li { font-size: 13px; padding: 6px 0; border-bottom: 1px solid var(--border-inner); display: flex; justify-content: space-between; }
+.mult-list li:last-child { border-bottom: none; }
+.mult-source { color: var(--text-dim); }
+.mult-value { font-family: var(--font-mono); color: #57F287; font-weight: 600; }
 </style>
 </head>
 <body>
@@ -161,125 +289,148 @@
 
     <section class="content">
       <h2 class="section-title"><span class="section-icon">&#9876;&#65039;</span> Skills</h2>
-      <p class="section-desc">Grindly tracks 12 skills across productivity, creativity, and in-game activities. Each skill has 99 levels.</p>
+      <p class="section-desc">Grindly tracks <strong>12 skills</strong> across productivity, creativity, and in-game activities. Each skill has <strong>99 levels</strong>. Max total skill level: <strong>1,188</strong>.</p>
 
       <!-- Tabs -->
       <div class="sk-tabs">
         <button class="sk-tab active" onclick="skSwitch('skills',this)">All Skills</button>
         <button class="sk-tab" onclick="skSwitch('xp',this)" id="tab-xp">XP Formula</button>
-        <button class="sk-tab" onclick="skSwitch('warrior',this)">Warrior Bonuses</button>
+        <button class="sk-tab" onclick="skSwitch('how',this)" id="tab-how">How XP Works</button>
+        <button class="sk-tab" onclick="skSwitch('warrior',this)" id="tab-warrior">Warrior Bonuses</button>
+        <button class="sk-tab" onclick="skSwitch('crafter',this)" id="tab-crafter">Crafter Perks</button>
         <button class="sk-tab" onclick="skSwitch('grindly',this)" id="tab-grindly">Grindly Bonuses</button>
+        <button class="sk-tab" onclick="skSwitch('achievements',this)" id="tab-achievements">Skill Achievements</button>
+        <button class="sk-tab" onclick="skSwitch('multipliers',this)" id="tab-multipliers">XP Multipliers</button>
       </div>
 
       <!-- ═══ All Skills Panel ═══ -->
       <div id="panel-skills" class="sk-panel active">
+
+        <p class="skill-section-title" style="margin-top:0">Passive Skills &mdash; tracked from your desktop apps</p>
         <div class="skill-grid">
 
-          <div class="skill-card" style="--skill-color: #00ff88">
+          <div class="skill-card" style="--skill-color: #00ff88" onclick="showSkillDetail('developer')">
             <div class="skill-card-icon">&#128187;</div>
             <div class="skill-card-body">
               <div class="skill-card-name">Developer</div>
               <div class="skill-card-category">coding</div>
-              <div class="skill-card-desc">Coding, IDEs, terminals</div>
+              <div class="skill-card-desc">IDEs, terminals, code editors. VS Code, IntelliJ, Sublime, Vim, etc.</div>
+              <span class="skill-card-tag passive">Passive</span>
             </div>
           </div>
 
-          <div class="skill-card" style="--skill-color: #ff6b9d">
+          <div class="skill-card" style="--skill-color: #ff6b9d" onclick="showSkillDetail('designer')">
             <div class="skill-card-icon">&#127912;</div>
             <div class="skill-card-body">
               <div class="skill-card-name">Designer</div>
               <div class="skill-card-category">design</div>
-              <div class="skill-card-desc">Design tools, creative apps</div>
+              <div class="skill-card-desc">Figma, Photoshop, Illustrator, Canva, Sketch, and other design tools.</div>
+              <span class="skill-card-tag passive">Passive</span>
             </div>
           </div>
 
-          <div class="skill-card" style="--skill-color: #5865F2">
+          <div class="skill-card" style="--skill-color: #5865F2" onclick="showSkillDetail('gamer')">
             <div class="skill-card-icon">&#127918;</div>
             <div class="skill-card-body">
               <div class="skill-card-name">Gamer</div>
               <div class="skill-card-category">games</div>
-              <div class="skill-card-desc">Games, game launchers</div>
+              <div class="skill-card-desc">Games and game launchers. Steam, Epic, Valorant, Minecraft, etc.</div>
+              <span class="skill-card-tag passive">Passive</span>
             </div>
           </div>
 
-          <div class="skill-card" style="--skill-color: #57F287">
+          <div class="skill-card" style="--skill-color: #57F287" onclick="showSkillDetail('communicator')">
             <div class="skill-card-icon">&#128172;</div>
             <div class="skill-card-body">
               <div class="skill-card-name">Communicator</div>
               <div class="skill-card-category">social</div>
-              <div class="skill-card-desc">Chat, email, social</div>
+              <div class="skill-card-desc">Discord, Slack, Telegram, WhatsApp, email clients, social media.</div>
+              <span class="skill-card-tag passive">Passive</span>
             </div>
           </div>
 
-          <div class="skill-card" style="--skill-color: #faa61a">
+          <div class="skill-card" style="--skill-color: #faa61a" onclick="showSkillDetail('researcher')">
             <div class="skill-card-icon">&#128300;</div>
             <div class="skill-card-body">
               <div class="skill-card-name">Researcher</div>
               <div class="skill-card-category">browsing</div>
-              <div class="skill-card-desc">Browsers, documentation, research</div>
+              <div class="skill-card-desc">Browsers, documentation, wikis, StackOverflow. Fallback for uncategorized apps.</div>
+              <span class="skill-card-tag passive">Passive</span>
             </div>
           </div>
 
-          <div class="skill-card" style="--skill-color: #eb459e">
+          <div class="skill-card" style="--skill-color: #eb459e" onclick="showSkillDetail('creator')">
             <div class="skill-card-icon">&#127916;</div>
             <div class="skill-card-body">
               <div class="skill-card-name">Creator</div>
               <div class="skill-card-category">creative</div>
-              <div class="skill-card-desc">Video, audio, streaming</div>
+              <div class="skill-card-desc">Video editing, streaming, audio production. OBS, Premiere, DaVinci, Audacity.</div>
+              <span class="skill-card-tag passive">Passive</span>
             </div>
           </div>
 
-          <div class="skill-card" style="--skill-color: #00d4ff">
+          <div class="skill-card" style="--skill-color: #00d4ff" onclick="showSkillDetail('learner')">
             <div class="skill-card-icon">&#128218;</div>
             <div class="skill-card-body">
               <div class="skill-card-name">Learner</div>
               <div class="skill-card-category">learning</div>
-              <div class="skill-card-desc">Education, courses</div>
+              <div class="skill-card-desc">Education platforms, courses, tutorials. Udemy, Coursera, Khan Academy.</div>
+              <span class="skill-card-tag passive">Passive</span>
             </div>
           </div>
 
-          <div class="skill-card" style="--skill-color: #1db954">
+          <div class="skill-card" style="--skill-color: #1db954" onclick="showSkillDetail('listener')">
             <div class="skill-card-icon">&#127925;</div>
             <div class="skill-card-body">
               <div class="skill-card-name">Listener</div>
               <div class="skill-card-category">music</div>
-              <div class="skill-card-desc">Music players, podcasts</div>
+              <div class="skill-card-desc">Music players, podcasts. Spotify, Apple Music, YouTube Music, Audible.</div>
+              <span class="skill-card-tag passive">Passive</span>
             </div>
           </div>
 
-          <div class="skill-card" style="--skill-color: #84cc16">
+        </div>
+
+        <p class="skill-section-title">In-Game Skills &mdash; leveled by playing Grindly</p>
+        <div class="skill-grid">
+
+          <div class="skill-card" style="--skill-color: #84cc16" onclick="showSkillDetail('farmer')">
             <div class="skill-card-icon">&#127806;</div>
             <div class="skill-card-body">
               <div class="skill-card-name">Farmer</div>
               <div class="skill-card-category">farming</div>
-              <div class="skill-card-desc">Farm plots, planting, harvesting</div>
+              <div class="skill-card-desc">Plant seeds and harvest crops. XP from planting (10&ndash;160) and harvesting (50&ndash;800).</div>
+              <span class="skill-card-tag ingame">In-Game</span>
             </div>
           </div>
 
-          <div class="skill-card" style="--skill-color: #EF4444">
+          <div class="skill-card" style="--skill-color: #EF4444" onclick="showSkillDetail('warrior')">
             <div class="skill-card-icon">&#9876;&#65039;</div>
             <div class="skill-card-body">
               <div class="skill-card-name">Warrior</div>
               <div class="skill-card-category">warrior</div>
-              <div class="skill-card-desc">Arena combat, boss kills</div>
+              <div class="skill-card-desc">Defeat bosses in the Arena. XP from kills (100&ndash;12,000). Grants combat bonuses.</div>
+              <span class="skill-card-tag ingame">In-Game</span>
             </div>
           </div>
 
-          <div class="skill-card" style="--skill-color: #f97316">
+          <div class="skill-card" style="--skill-color: #f97316" onclick="showSkillDetail('crafter')">
             <div class="skill-card-icon">&#9874;&#65039;</div>
             <div class="skill-card-body">
               <div class="skill-card-name">Crafter</div>
               <div class="skill-card-category">crafting</div>
-              <div class="skill-card-desc">Smelting, forging, recipes</div>
+              <div class="skill-card-desc">Craft items at the forge. Higher level = faster crafting &amp; double output chance.</div>
+              <span class="skill-card-tag ingame">In-Game</span>
             </div>
           </div>
 
-          <div class="skill-card" style="--skill-color: #c084fc">
+          <div class="skill-card" style="--skill-color: #c084fc" onclick="showSkillDetail('grindly')">
             <div class="skill-card-icon">&#127968;</div>
             <div class="skill-card-body">
               <div class="skill-card-name">Grindly</div>
               <div class="skill-card-category">grindly</div>
-              <div class="skill-card-desc">Tracks time spent in the Grindly app</div>
+              <div class="skill-card-desc">Meta-skill. Levels by using the Grindly app. Grants XP boosts, craft speed, and combat stats.</div>
+              <span class="skill-card-tag" style="color:#c084fc;border-color:rgba(192,132,252,.25);background:rgba(192,132,252,.06)">Meta</span>
             </div>
           </div>
 
@@ -292,29 +443,143 @@
           <h3>Levelling Curve</h3>
           <ul>
             <li>Each skill has <strong style="color:var(--gold)">99 levels</strong>, designed to take roughly <strong style="color:var(--gold)">~1,000 hours</strong> to max.</li>
-            <li>Core formula: <code>xpForLevel(L) = floor(pow(L/99, 2.2) &times; 3,600,000)</code></li>
-            <li><strong>Early levels (1&ndash;10):</strong> Triangular ramp &mdash; <code>120 &times; L(L+1) / 2</code></li>
-            <li><strong>Levels 11&ndash;25:</strong> Smooth interpolation between the L10 and L25 breakpoints.</li>
-            <li><strong>Levels 26+:</strong> Full exponential curve kicks in.</li>
-            <li>Maximum total skill level across all 12 skills: <strong style="color:var(--gold)">12 &times; 99 = 1,188</strong></li>
+            <li><strong>1 XP = 1 second</strong> of tracked activity in the mapped category.</li>
+            <li>The curve has 3 segments for smooth early-game progression:</li>
+          </ul>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h3>Three-Segment Curve</h3>
+          <ul>
+            <li><strong style="color:#57F287">Levels 1&ndash;10 (Fast Start):</strong> Triangular ramp &mdash; <code>XP = 120 &times; L &times; (L+1) / 2</code><br>
+              <span style="color:var(--text-dim);font-size:12px">L1 costs only 2 min, L10 costs ~1.8h total. Designed for quick early dopamine.</span></li>
+            <li><strong style="color:#faa61a">Levels 11&ndash;25 (Transition):</strong> Smooth cubic interpolation between L10 (6,600 XP) and L25 (126,230 XP).<br>
+              <span style="color:var(--text-dim);font-size:12px">Uses exponent 1.3 for a gradual difficulty ramp.</span></li>
+            <li><strong style="color:#EF4444">Levels 26&ndash;99 (Exponential):</strong> <code>XP = floor((L/99)^2.2 &times; 3,600,000)</code><br>
+              <span style="color:var(--text-dim);font-size:12px">Full power-law curve. Each level costs progressively more time.</span></li>
           </ul>
         </div>
 
         <div class="info-box" style="margin-top:14px">
           <h3>XP Milestones</h3>
           <div class="table-wrap">
-            <table>
+            <table class="bonus-table">
               <thead>
-                <tr><th>Level</th><th>Total XP</th><th>XP to Next</th></tr>
+                <tr><th>Level</th><th>Total XP</th><th>Real Time</th><th>XP to Next Level</th></tr>
               </thead>
               <tbody>
-                <tr><td>1</td><td class="perk">120</td><td>240</td></tr>
-                <tr><td>5</td><td class="perk">1,800</td><td>600</td></tr>
-                <tr><td>10</td><td class="perk">6,600</td><td>~1,000</td></tr>
-                <tr><td>25</td><td class="perk">~27,000</td><td>~3,500</td></tr>
-                <tr><td>50</td><td class="perk">~265,000</td><td>~18,000</td></tr>
-                <tr><td>75</td><td class="perk">~1,200,000</td><td>~55,000</td></tr>
-                <tr><td>99</td><td class="perk">3,600,000</td><td>Max</td></tr>
+                <tr><td class="bonus-level">1</td><td>120</td><td>2 min</td><td>240</td></tr>
+                <tr><td class="bonus-level">5</td><td>1,800</td><td>30 min</td><td>720</td></tr>
+                <tr><td class="bonus-level">10</td><td>6,600</td><td>1.8h</td><td>~1,500</td></tr>
+                <tr><td class="bonus-level">15</td><td>~13,000</td><td>3.6h</td><td>~3,000</td></tr>
+                <tr><td class="bonus-level">25</td><td>~126,000</td><td>35h</td><td>~8,000</td></tr>
+                <tr><td class="bonus-level">40</td><td>~265,000</td><td>73h</td><td>~12,000</td></tr>
+                <tr><td class="bonus-level">50</td><td>~550,000</td><td>153h</td><td>~18,000</td></tr>
+                <tr><td class="bonus-level">60</td><td>~930,000</td><td>258h</td><td>~27,000</td></tr>
+                <tr><td class="bonus-level">75</td><td>~1,700,000</td><td>472h</td><td>~42,000</td></tr>
+                <tr><td class="bonus-level">90</td><td>~2,800,000</td><td>778h</td><td>~60,000</td></tr>
+                <tr><td class="bonus-level">99</td><td>3,600,000</td><td>1,000h</td><td style="color:var(--gold)">MAX</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h3>Useful Numbers</h3>
+          <ul>
+            <li>Max XP per skill: <strong style="color:var(--gold)">3,600,000</strong> (1,000 hours in seconds)</li>
+            <li>Total skills: <strong style="color:var(--gold)">12</strong> &mdash; max total level: <strong style="color:var(--gold)">1,188</strong></li>
+            <li>XP per second: <code>1</code> (before multipliers)</li>
+            <li>Time to reach level 10: <strong>~1.8 hours</strong> (fast early progression)</li>
+            <li>Time to reach level 50: <strong>~153 hours</strong> (mid-game)</li>
+            <li>Time to max (level 99): <strong>~1,000 hours</strong> (end-game grind)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═══ How XP Works Panel ═══ -->
+      <div id="panel-how" class="sk-panel">
+        <div class="info-box">
+          <h3>How Skill XP Is Earned</h3>
+          <ul>
+            <li><strong>Passive skills</strong> (Developer, Designer, etc.) gain XP automatically while the tracked app is in focus.</li>
+            <li><strong>1 real second = 1 XP</strong> in the mapped skill. No manual input needed.</li>
+            <li>If you switch between apps, each skill gets XP proportional to time spent.</li>
+            <li><strong>Idle time</strong> (no input for extended period) does not grant XP.</li>
+            <li>Uncategorized apps fall back to <strong>Researcher</strong> skill.</li>
+          </ul>
+        </div>
+
+        <div class="how-cards">
+          <div class="how-card">
+            <div class="how-card-title">Category Mapping</div>
+            <div class="how-card-desc">
+              Each app process is classified into a category by the tracker:<br><br>
+              <code>coding</code> &rarr; Developer<br>
+              <code>design</code> &rarr; Designer<br>
+              <code>games</code> &rarr; Gamer<br>
+              <code>social</code> &rarr; Communicator<br>
+              <code>browsing</code> &rarr; Researcher<br>
+              <code>creative</code> &rarr; Creator<br>
+              <code>learning</code> &rarr; Learner<br>
+              <code>music</code> &rarr; Listener<br>
+              <code>other</code> &rarr; Researcher<br>
+              <code>idle</code> &rarr; 0 XP
+            </div>
+          </div>
+          <div class="how-card">
+            <div class="how-card-title">In-Game Skills</div>
+            <div class="how-card-desc">
+              These don't track apps &mdash; they use in-game actions:<br><br>
+              <strong style="color:#84cc16">Farmer</strong> &mdash; XP from planting seeds and harvesting crops<br><br>
+              <strong style="color:#EF4444">Warrior</strong> &mdash; XP from defeating arena bosses<br><br>
+              <strong style="color:#f97316">Crafter</strong> &mdash; XP from completing crafts<br><br>
+              <strong style="color:#c084fc">Grindly</strong> &mdash; XP from time spent in the Grindly app itself
+            </div>
+          </div>
+          <div class="how-card">
+            <div class="how-card-title">XP Multipliers Stack</div>
+            <div class="how-card-desc">
+              Base XP can be boosted by:<br><br>
+              1. <strong>Equipped loot perks</strong> (skill-specific or global XP boosts)<br><br>
+              2. <strong>Grindly skill bonuses</strong> (up to +43% all skill XP at LVL 99)<br><br>
+              All multipliers stack multiplicatively.
+            </div>
+          </div>
+        </div>
+
+        <div class="info-box" style="margin-top:18px">
+          <h3>Warrior XP per Boss Kill</h3>
+          <div class="table-wrap">
+            <table class="bonus-table">
+              <thead><tr><th>Boss</th><th>Warrior XP</th></tr></thead>
+              <tbody>
+                <tr><td>Slime King</td><td class="bonus-value">100</td></tr>
+                <tr><td>Goblin Chief</td><td class="bonus-value">300</td></tr>
+                <tr><td>Forest Wolf</td><td class="bonus-value">700</td></tr>
+                <tr><td>Orc Warlord</td><td class="bonus-value">2,000</td></tr>
+                <tr><td>Troll Overlord</td><td class="bonus-value">5,000</td></tr>
+                <tr><td>Ancient Dragon</td><td class="bonus-value">12,000</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h3>Farmer XP per Seed Type</h3>
+          <div class="table-wrap">
+            <table class="bonus-table">
+              <thead><tr><th>Seed</th><th>Rarity</th><th>XP on Plant</th><th>XP on Harvest</th><th>Grow Time</th></tr></thead>
+              <tbody>
+                <tr><td>Wheat Seed</td><td>Common</td><td class="bonus-value">10</td><td class="bonus-value">50</td><td>5 min</td></tr>
+                <tr><td>Herb Seed</td><td>Common</td><td class="bonus-value">10</td><td class="bonus-value">50</td><td>8 min</td></tr>
+                <tr><td>Apple Seed</td><td style="color:#5865F2">Rare</td><td class="bonus-value">20</td><td class="bonus-value">100</td><td>20 min</td></tr>
+                <tr><td>Blossom Seed</td><td style="color:#5865F2">Rare</td><td class="bonus-value">20</td><td class="bonus-value">100</td><td>25 min</td></tr>
+                <tr><td>Clover Seed</td><td style="color:#a855f7">Epic</td><td class="bonus-value">40</td><td class="bonus-value">200</td><td>1h</td></tr>
+                <tr><td>Orchid Seed</td><td style="color:#a855f7">Epic</td><td class="bonus-value">40</td><td class="bonus-value">200</td><td>1.5h</td></tr>
+                <tr><td>Star Bloom Seed</td><td style="color:#fbbf24">Legendary</td><td class="bonus-value">80</td><td class="bonus-value">400</td><td>3h</td></tr>
+                <tr><td>Crystal Root Seed</td><td style="color:#fbbf24">Legendary</td><td class="bonus-value">80</td><td class="bonus-value">400</td><td>4h</td></tr>
+                <tr><td>Void Spore</td><td style="color:#f43f5e">Mythic</td><td class="bonus-value">160</td><td class="bonus-value">800</td><td>8h</td></tr>
               </tbody>
             </table>
           </div>
@@ -325,46 +590,139 @@
       <div id="panel-warrior" class="sk-panel">
         <div class="info-box">
           <p style="font-size:13px;color:var(--text-dim);margin-bottom:14px;">
-            Levelling the Warrior skill grants permanent combat stat bonuses at specific milestones.
+            Levelling the <strong style="color:#EF4444">Warrior</strong> skill grants permanent combat stat bonuses at specific milestones. These bonuses apply to all arena battles.
           </p>
           <div class="table-wrap"><table class="bonus-table">
             <thead>
               <tr>
                 <th>Level</th>
                 <th>Bonus</th>
+                <th>Cumulative Totals</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td class="bonus-level">5</td>
                 <td class="bonus-value">+1 ATK</td>
+                <td style="color:var(--text-dim);font-size:12px">ATK +1</td>
               </tr>
               <tr>
                 <td class="bonus-level">15</td>
                 <td class="bonus-value">+5 HP</td>
+                <td style="color:var(--text-dim);font-size:12px">ATK +1, HP +5</td>
               </tr>
               <tr>
                 <td class="bonus-level">20</td>
                 <td class="bonus-value">+1 ATK</td>
+                <td style="color:var(--text-dim);font-size:12px">ATK +2, HP +5</td>
               </tr>
               <tr>
                 <td class="bonus-level">30</td>
                 <td class="bonus-value">+1 HP Regen</td>
+                <td style="color:var(--text-dim);font-size:12px">ATK +2, HP +5, Regen +1</td>
               </tr>
               <tr>
                 <td class="bonus-level">40</td>
                 <td class="bonus-value">+2 ATK</td>
+                <td style="color:var(--text-dim);font-size:12px">ATK +4, HP +5, Regen +1</td>
               </tr>
               <tr>
                 <td class="bonus-level">60</td>
                 <td class="bonus-value">+10 HP</td>
+                <td style="color:var(--text-dim);font-size:12px">ATK +4, HP +15, Regen +1</td>
               </tr>
               <tr>
                 <td class="bonus-level">75</td>
                 <td class="bonus-value">+3 ATK, +2 HP Regen</td>
+                <td style="color:var(--text-dim);font-size:12px;font-weight:600;color:var(--gold)">ATK +7, HP +15, Regen +3</td>
               </tr>
             </tbody>
           </table></div>
+
+          <div style="margin-top:14px;padding:12px;border-radius:8px;border:1px solid rgba(239,68,68,.2);background:rgba(239,68,68,.04)">
+            <p style="font-size:12px;color:var(--text-dim);margin:0">
+              <strong style="color:#EF4444">Max Warrior bonuses (LVL 75+):</strong>
+              <span style="color:#57F287;font-family:var(--font-mono)">+7 ATK</span> &bull;
+              <span style="color:#57F287;font-family:var(--font-mono)">+15 HP</span> &bull;
+              <span style="color:#57F287;font-family:var(--font-mono)">+3 HP Regen</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Crafter Perks Panel ═══ -->
+      <div id="panel-crafter" class="sk-panel">
+        <div class="info-box">
+          <p style="font-size:13px;color:var(--text-dim);margin-bottom:14px;">
+            Levelling the <strong style="color:#f97316">Crafter</strong> skill makes crafting faster and gives a chance to produce double output. Higher level also unlocks advanced recipes.
+          </p>
+
+          <h3>Craft Speed Bonuses</h3>
+          <div class="table-wrap"><table class="bonus-table">
+            <thead>
+              <tr><th>Crafter Level</th><th>Speed Bonus</th><th>Craft Time</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="bonus-level">1&ndash;9</td><td>None</td><td>100% (base)</td></tr>
+              <tr><td class="bonus-level">10</td><td class="bonus-value">&minus;10% time</td><td>90%</td></tr>
+              <tr><td class="bonus-level">25</td><td class="bonus-value">&minus;20% time</td><td>80%</td></tr>
+              <tr><td class="bonus-level">40</td><td class="bonus-value">&minus;30% time</td><td>70%</td></tr>
+              <tr><td class="bonus-level">60</td><td class="bonus-value">&minus;45% time</td><td>55%</td></tr>
+              <tr><td class="bonus-level">80</td><td class="bonus-value">&minus;60% time</td><td>40%</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h3>Double Output Chance</h3>
+          <p style="font-size:13px;color:var(--text-dim);margin-bottom:10px">
+            Each crafted item has a chance to produce a bonus duplicate:
+          </p>
+          <div class="table-wrap"><table class="bonus-table">
+            <thead>
+              <tr><th>Crafter Level</th><th>Double Chance</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="bonus-level">1&ndash;24</td><td>0%</td></tr>
+              <tr><td class="bonus-level">25</td><td class="bonus-value">15%</td></tr>
+              <tr><td class="bonus-level">60</td><td class="bonus-value">45%</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h3>Recipe Level Requirements</h3>
+          <p style="font-size:13px;color:var(--text-dim);margin-bottom:10px">
+            Many recipes require a minimum Crafter level to unlock:
+          </p>
+          <div class="table-wrap"><table class="bonus-table">
+            <thead>
+              <tr><th>Crafter Level</th><th>Recipes Unlocked</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="bonus-level">0</td><td>Bronze Bar, Iron Bar, Thread Spool, Potion of Swiftness</td></tr>
+              <tr><td class="bonus-level">3</td><td>Bronze Helm</td></tr>
+              <tr><td class="bonus-level">5</td><td>Gold Bar, Studded Cap</td></tr>
+              <tr><td class="bonus-level">15</td><td>Darksteel Bar, Iron Helm, Iron Blade Ring</td></tr>
+              <tr><td class="bonus-level">20</td><td>Arcane Circlet</td></tr>
+              <tr><td class="bonus-level">30</td><td>Voidstone Bar, Gold Helm, Gold Signet</td></tr>
+              <tr><td class="bonus-level">35</td><td>Enchanted Mantle</td></tr>
+              <tr><td class="bonus-level">40</td><td>Inferno Aura</td></tr>
+              <tr><td class="bonus-level">45</td><td>Darksteel Helm</td></tr>
+              <tr><td class="bonus-level">50</td><td>Phantom Band</td></tr>
+              <tr><td class="bonus-level">55</td><td>Celestial Ingot</td></tr>
+              <tr><td class="bonus-level">60</td><td>Frost Aura</td></tr>
+              <tr><td class="bonus-level">65</td><td>Voidstone Helm</td></tr>
+              <tr><td class="bonus-level">70</td><td>Celestial Ring</td></tr>
+              <tr><td class="bonus-level">80</td><td>Void Aura</td></tr>
+            </tbody>
+          </table></div>
+
+          <div style="margin-top:14px;padding:12px;border-radius:8px;border:1px solid rgba(249,115,22,.2);background:rgba(249,115,22,.04)">
+            <p style="font-size:12px;color:var(--text-dim);margin:0">
+              <strong style="color:#f97316">Note:</strong> Crafter speed stacks with Grindly's craft speed bonus. At max (Crafter 80 + Grindly 99), total craft time is reduced to <span style="color:#57F287;font-family:var(--font-mono)">30%</span> of base (40% &times; 75%).
+            </p>
+          </div>
         </div>
       </div>
 
@@ -372,98 +730,227 @@
       <div id="panel-grindly" class="sk-panel">
         <div class="info-box">
           <p style="font-size:13px;color:var(--text-dim);margin-bottom:14px;">
-            Levelling the Grindly skill grants XP bonuses, craft speed bonuses, and combat stat bonuses at specific milestones. Max bonuses: <strong style="color:#57F287">+35% XP</strong>, <strong style="color:#57F287">-30% Craft Time</strong>, <strong style="color:#57F287">+10 ATK</strong>, <strong style="color:#57F287">+50 HP</strong>, <strong style="color:#57F287">+4 HP Regen</strong>.
+            Levelling the <strong style="color:#c084fc">Grindly</strong> meta-skill grants XP bonuses, craft speed bonuses, and combat stat bonuses at specific milestones.
           </p>
           <div class="table-wrap"><table class="bonus-table">
             <thead>
               <tr>
                 <th>Level</th>
                 <th>Bonus</th>
+                <th>Cumulative XP / Craft / Combat</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td class="bonus-level">5</td>
-                <td class="bonus-value">+3% All Skill XP</td>
-              </tr>
-              <tr>
-                <td class="bonus-level">10</td>
-                <td class="bonus-value">-5% Craft Time</td>
-              </tr>
-              <tr>
-                <td class="bonus-level">15</td>
-                <td class="bonus-value">+3% All Skill XP</td>
-              </tr>
-              <tr>
-                <td class="bonus-level">20</td>
-                <td class="bonus-value">+1 ATK, +5 HP</td>
-              </tr>
-              <tr>
-                <td class="bonus-level">25</td>
-                <td class="bonus-value">+4% All Skill XP</td>
-              </tr>
-              <tr>
-                <td class="bonus-level">30</td>
-                <td class="bonus-value">-5% Craft Time</td>
-              </tr>
-              <tr>
-                <td class="bonus-level">35</td>
-                <td class="bonus-value">+5 HP, +1 HP Regen</td>
-              </tr>
-              <tr>
-                <td class="bonus-level">40</td>
-                <td class="bonus-value">+5% All Skill XP</td>
-              </tr>
-              <tr>
-                <td class="bonus-level">45</td>
-                <td class="bonus-value">+1 ATK</td>
-              </tr>
-              <tr>
-                <td class="bonus-level">50</td>
-                <td class="bonus-value">-5% Craft Time</td>
-              </tr>
-              <tr>
-                <td class="bonus-level">55</td>
-                <td class="bonus-value">+5% All Skill XP</td>
-              </tr>
-              <tr>
-                <td class="bonus-level">60</td>
-                <td class="bonus-value">+2 ATK, +10 HP</td>
-              </tr>
-              <tr>
-                <td class="bonus-level">65</td>
-                <td class="bonus-value">-5% Craft Time</td>
-              </tr>
-              <tr>
-                <td class="bonus-level">70</td>
-                <td class="bonus-value">+5% All Skill XP</td>
-              </tr>
-              <tr>
-                <td class="bonus-level">75</td>
-                <td class="bonus-value">+2 ATK, +10 HP, +1 HP Regen</td>
-              </tr>
-              <tr>
-                <td class="bonus-level">80</td>
-                <td class="bonus-value">-5% Craft Time</td>
-              </tr>
-              <tr>
-                <td class="bonus-level">85</td>
-                <td class="bonus-value">+5% All Skill XP</td>
-              </tr>
-              <tr>
-                <td class="bonus-level">90</td>
-                <td class="bonus-value">+2 ATK, +10 HP, +1 HP Regen</td>
-              </tr>
-              <tr>
-                <td class="bonus-level">95</td>
-                <td class="bonus-value">-5% Craft Time</td>
-              </tr>
-              <tr>
-                <td class="bonus-level">99</td>
-                <td class="bonus-value">+5% XP, +2 ATK, +10 HP, +1 HP Regen</td>
+              <tr><td class="bonus-level">5</td><td class="bonus-value">+3% All Skill XP</td><td style="color:var(--text-dim);font-size:11px">XP &times;1.03</td></tr>
+              <tr><td class="bonus-level">10</td><td class="bonus-value">&minus;5% Craft Time</td><td style="color:var(--text-dim);font-size:11px">XP &times;1.03, Craft &times;0.95</td></tr>
+              <tr><td class="bonus-level">15</td><td class="bonus-value">+3% All Skill XP</td><td style="color:var(--text-dim);font-size:11px">XP &times;1.06, Craft &times;0.95</td></tr>
+              <tr><td class="bonus-level">20</td><td class="bonus-value">+1 ATK, +5 HP</td><td style="color:var(--text-dim);font-size:11px">XP &times;1.06, ATK +1, HP +5</td></tr>
+              <tr><td class="bonus-level">25</td><td class="bonus-value">+4% All Skill XP</td><td style="color:var(--text-dim);font-size:11px">XP &times;1.10</td></tr>
+              <tr><td class="bonus-level">30</td><td class="bonus-value">&minus;5% Craft Time</td><td style="color:var(--text-dim);font-size:11px">Craft &times;0.90</td></tr>
+              <tr><td class="bonus-level">35</td><td class="bonus-value">+5 HP, +1 HP Regen</td><td style="color:var(--text-dim);font-size:11px">HP +10, Regen +1</td></tr>
+              <tr><td class="bonus-level">40</td><td class="bonus-value">+5% All Skill XP</td><td style="color:var(--text-dim);font-size:11px">XP &times;1.15</td></tr>
+              <tr><td class="bonus-level">45</td><td class="bonus-value">+1 ATK</td><td style="color:var(--text-dim);font-size:11px">ATK +2</td></tr>
+              <tr><td class="bonus-level">50</td><td class="bonus-value">&minus;5% Craft Time</td><td style="color:var(--text-dim);font-size:11px">Craft &times;0.85</td></tr>
+              <tr><td class="bonus-level">55</td><td class="bonus-value">+5% All Skill XP</td><td style="color:var(--text-dim);font-size:11px">XP &times;1.20</td></tr>
+              <tr><td class="bonus-level">60</td><td class="bonus-value">+2 ATK, +10 HP</td><td style="color:var(--text-dim);font-size:11px">ATK +4, HP +20</td></tr>
+              <tr><td class="bonus-level">65</td><td class="bonus-value">&minus;5% Craft Time</td><td style="color:var(--text-dim);font-size:11px">Craft &times;0.80</td></tr>
+              <tr><td class="bonus-level">70</td><td class="bonus-value">+5% All Skill XP</td><td style="color:var(--text-dim);font-size:11px">XP &times;1.25</td></tr>
+              <tr><td class="bonus-level">75</td><td class="bonus-value">+2 ATK, +10 HP, +1 HP Regen</td><td style="color:var(--text-dim);font-size:11px">ATK +6, HP +30, Regen +2</td></tr>
+              <tr><td class="bonus-level">80</td><td class="bonus-value">&minus;5% Craft Time</td><td style="color:var(--text-dim);font-size:11px">Craft &times;0.75</td></tr>
+              <tr><td class="bonus-level">85</td><td class="bonus-value">+5% All Skill XP</td><td style="color:var(--text-dim);font-size:11px">XP &times;1.30</td></tr>
+              <tr><td class="bonus-level">90</td><td class="bonus-value">+2 ATK, +10 HP, +1 HP Regen</td><td style="color:var(--text-dim);font-size:11px">ATK +8, HP +40, Regen +3</td></tr>
+              <tr><td class="bonus-level">95</td><td class="bonus-value">&minus;5% Craft Time</td><td style="color:var(--text-dim);font-size:11px">Craft &times;0.70</td></tr>
+              <tr><td class="bonus-level">99</td><td class="bonus-value">+5% XP, &minus;5% Craft, +2 ATK, +10 HP, +1 Regen</td><td style="color:var(--gold);font-size:11px;font-weight:600">MAX</td></tr>
+            </tbody>
+          </table></div>
+
+          <div style="margin-top:14px;padding:12px;border-radius:8px;border:1px solid rgba(192,132,252,.2);background:rgba(192,132,252,.04)">
+            <p style="font-size:12px;color:var(--text-dim);margin:0">
+              <strong style="color:#c084fc">Max Grindly bonuses (LVL 99):</strong>
+              <span style="color:#57F287;font-family:var(--font-mono)">+43% All Skill XP</span> &bull;
+              <span style="color:#57F287;font-family:var(--font-mono)">&minus;25% Craft Time</span> &bull;
+              <span style="color:#57F287;font-family:var(--font-mono)">+10 ATK</span> &bull;
+              <span style="color:#57F287;font-family:var(--font-mono)">+50 HP</span> &bull;
+              <span style="color:#57F287;font-family:var(--font-mono)">+4 HP Regen</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Skill Achievements Panel ═══ -->
+      <div id="panel-achievements" class="sk-panel">
+        <div class="info-box">
+          <h3>Skill-Based Achievements</h3>
+          <p style="font-size:13px;color:var(--text-dim);margin-bottom:14px;">
+            Reach specific skill levels to unlock achievements with unique rewards.
+          </p>
+
+          <p class="skill-section-title" style="margin-top:0;color:#00ff88">Developer Track</p>
+          <div class="ach-grid">
+            <div class="ach-card">
+              <div class="ach-card-icon">&#128187;</div>
+              <div class="ach-card-body">
+                <div class="ach-card-name">Coding Intern</div>
+                <div class="ach-card-desc">Reach Developer <strong>LVL 10</strong></div>
+                <div class="ach-card-reward">+30 XP &bull; +30 min Developer XP boost</div>
+              </div>
+            </div>
+            <div class="ach-card">
+              <div class="ach-card-icon">&#9889;</div>
+              <div class="ach-card-body">
+                <div class="ach-card-name">Full Stack</div>
+                <div class="ach-card-desc">Reach Developer <strong>LVL 50</strong></div>
+                <div class="ach-card-reward">+100 XP &bull; Code frame unlocked</div>
+              </div>
+            </div>
+            <div class="ach-card">
+              <div class="ach-card-icon">&#128081;</div>
+              <div class="ach-card-body">
+                <div class="ach-card-name">10x Engineer</div>
+                <div class="ach-card-desc">Reach Developer <strong>LVL 99</strong></div>
+                <div class="ach-card-reward">+500 XP &bull; Architect avatar (&#129504;)</div>
+              </div>
+            </div>
+          </div>
+
+          <p class="skill-section-title" style="color:#ff6b9d">Designer Track</p>
+          <div class="ach-grid">
+            <div class="ach-card">
+              <div class="ach-card-icon">&#127912;</div>
+              <div class="ach-card-body">
+                <div class="ach-card-name">Pixel Pusher</div>
+                <div class="ach-card-desc">Reach Designer <strong>LVL 10</strong></div>
+                <div class="ach-card-reward">+30 XP &bull; +30 min Designer XP boost</div>
+              </div>
+            </div>
+            <div class="ach-card">
+              <div class="ach-card-icon">&#128396;&#65039;</div>
+              <div class="ach-card-body">
+                <div class="ach-card-name">Art Director</div>
+                <div class="ach-card-desc">Reach Designer <strong>LVL 50</strong></div>
+                <div class="ach-card-reward">+100 XP &bull; Art frame unlocked</div>
+              </div>
+            </div>
+          </div>
+
+          <p class="skill-section-title" style="color:#5865F2">Gamer Track</p>
+          <div class="ach-grid">
+            <div class="ach-card">
+              <div class="ach-card-icon">&#127918;</div>
+              <div class="ach-card-body">
+                <div class="ach-card-name">Pro Gamer</div>
+                <div class="ach-card-desc">Reach Gamer <strong>LVL 25</strong></div>
+                <div class="ach-card-reward">+50 XP &bull; +30 min Gamer XP boost</div>
+              </div>
+            </div>
+          </div>
+
+          <p class="skill-section-title" style="color:var(--gold)">Multi-Skill Achievements</p>
+          <div class="ach-grid">
+            <div class="ach-card">
+              <div class="ach-card-icon">&#127775;</div>
+              <div class="ach-card-body">
+                <div class="ach-card-name">Polymath</div>
+                <div class="ach-card-desc">Reach <strong>LVL 25+</strong> in 3 different skills</div>
+                <div class="ach-card-reward">+80 XP &bull; Star frame unlocked</div>
+              </div>
+            </div>
+            <div class="ach-card">
+              <div class="ach-card-icon">&#128302;</div>
+              <div class="ach-card-body">
+                <div class="ach-card-name">Jack of All Trades</div>
+                <div class="ach-card-desc">Reach <strong>LVL 10+</strong> in all 8 base skills</div>
+                <div class="ach-card-reward">+200 XP &bull; Crystal avatar (&#128302;)</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:14px;padding:12px;border-radius:8px;border:1px solid rgba(251,191,36,.2);background:rgba(251,191,36,.04)">
+            <p style="font-size:12px;color:var(--text-dim);margin:0">
+              <strong style="color:var(--gold)">Base 8 skills</strong> for "Jack of All Trades": Developer, Designer, Gamer, Communicator, Researcher, Creator, Learner, Listener.<br>
+              In-game skills (Farmer, Warrior, Crafter, Grindly) are <em>not</em> required.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ XP Multipliers Panel ═══ -->
+      <div id="panel-multipliers" class="sk-panel">
+        <div class="info-box">
+          <h3>XP Multiplier Stacking</h3>
+          <p style="font-size:13px;color:var(--text-dim);margin-bottom:14px;">
+            All XP multipliers stack <strong>multiplicatively</strong>. Here are all sources:
+          </p>
+
+          <ul class="mult-list">
+            <li>
+              <span class="mult-source">Grindly Skill (max LVL 99)</span>
+              <span class="mult-value">up to &times;1.43 (+43%)</span>
+            </li>
+            <li>
+              <span class="mult-source">Equipped item: Skill-specific XP boost</span>
+              <span class="mult-value">varies per item</span>
+            </li>
+            <li>
+              <span class="mult-source">Equipped item: Global XP boost</span>
+              <span class="mult-value">+5% to +8% per item</span>
+            </li>
+          </ul>
+
+          <div style="margin-top:14px">
+            <h3>Example: Maxed Grindly + Equipped Gear</h3>
+            <p style="font-size:13px;color:var(--text-dim);">
+              With Grindly LVL 99 (<code>&times;1.43</code>) + a Void Helmet (<code>&times;1.08</code>) + a Void Ring (<code>&times;1.08</code>):<br>
+              <strong style="color:#57F287;font-size:16px;font-family:var(--font-mono)">1 &times; 1.43 &times; 1.08 &times; 1.08 = 1.667&times;</strong><br>
+              <span style="font-size:12px;color:var(--text-dim)">That's 66.7% bonus XP per second, cutting the time-to-max to ~600 hours.</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h3>Craft Speed Stacking</h3>
+          <p style="font-size:13px;color:var(--text-dim);margin-bottom:10px;">
+            Crafter level speed and Grindly craft speed multiply together:
+          </p>
+          <ul class="mult-list">
+            <li>
+              <span class="mult-source">Crafter Skill (max LVL 80)</span>
+              <span class="mult-value">&times;0.40 (&minus;60%)</span>
+            </li>
+            <li>
+              <span class="mult-source">Grindly Skill (max LVL 99)</span>
+              <span class="mult-value">&times;0.75 (&minus;25%)</span>
+            </li>
+            <li style="font-weight:600">
+              <span class="mult-source" style="color:var(--text-bright)">Combined Maximum</span>
+              <span class="mult-value">&times;0.30 (&minus;70%)</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h3>Combat Stat Stacking</h3>
+          <p style="font-size:13px;color:var(--text-dim);margin-bottom:10px;">
+            Combat bonuses from Warrior and Grindly skills stack additively with equipment stats:
+          </p>
+          <div class="table-wrap"><table class="bonus-table">
+            <thead>
+              <tr><th>Source</th><th>Max ATK</th><th>Max HP</th><th>Max HP Regen</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Warrior Skill</td><td class="bonus-value">+7</td><td class="bonus-value">+15</td><td class="bonus-value">+3</td></tr>
+              <tr><td>Grindly Skill</td><td class="bonus-value">+10</td><td class="bonus-value">+50</td><td class="bonus-value">+4</td></tr>
+              <tr style="font-weight:600;border-top:2px solid var(--border-ornate)">
+                <td style="color:var(--gold)">Combined</td>
+                <td class="bonus-value">+17</td>
+                <td class="bonus-value">+65</td>
+                <td class="bonus-value">+7</td>
               </tr>
             </tbody>
           </table></div>
+          <p style="font-size:12px;color:var(--text-dim);margin-top:8px">
+            These stack on top of base stats (10 ATK, 100 HP, 0 Regen) and equipped item bonuses.
+          </p>
         </div>
       </div>
 
@@ -481,19 +968,40 @@
     if(btn) btn.classList.add('active');
     var panel = document.getElementById('panel-'+id);
     if(panel) panel.classList.add('active');
-    // Scroll to top of content area
     document.querySelector('.main').scrollTop = 0;
   };
 
-  // Handle hash-based navigation (e.g. skills.html#xp-formula, skills.html#warrior-bonuses)
+  // Skill detail navigation
+  window.showSkillDetail = function(skillId) {
+    var tabMap = {
+      'warrior': 'warrior',
+      'crafter': 'crafter',
+      'grindly': 'grindly'
+    };
+    if (tabMap[skillId]) {
+      skSwitch(tabMap[skillId], document.getElementById('tab-'+tabMap[skillId]));
+    } else {
+      skSwitch('how', document.getElementById('tab-how'));
+    }
+  };
+
+  // Handle hash-based navigation
   function handleHash() {
     var hash = window.location.hash;
     if (hash === '#xp-formula') {
       skSwitch('xp', document.getElementById('tab-xp'));
+    } else if (hash === '#how-xp-works') {
+      skSwitch('how', document.getElementById('tab-how'));
     } else if (hash === '#warrior-bonuses') {
-      skSwitch('warrior', document.querySelector('.sk-tab:nth-child(3)'));
+      skSwitch('warrior', document.getElementById('tab-warrior'));
+    } else if (hash === '#crafter-perks') {
+      skSwitch('crafter', document.getElementById('tab-crafter'));
     } else if (hash === '#grindly-bonuses') {
       skSwitch('grindly', document.getElementById('tab-grindly'));
+    } else if (hash === '#achievements') {
+      skSwitch('achievements', document.getElementById('tab-achievements'));
+    } else if (hash === '#multipliers') {
+      skSwitch('multipliers', document.getElementById('tab-multipliers'));
     }
   }
   handleHash();
