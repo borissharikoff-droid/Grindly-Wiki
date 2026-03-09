@@ -1,7 +1,7 @@
 /**
  * wiki-online.js — Fetches online player count from Supabase profiles table.
  * Updates the .player-count element in the top bar.
- * Only counts users whose updated_at is within the last 3 minutes (same as app).
+ * Counts users whose updated_at is within the last 5 minutes (active heartbeat).
  */
 (function() {
   var url = window.WIKI_SUPABASE_URL || '';
@@ -11,16 +11,17 @@
   var el = document.querySelector('.player-count span:last-child');
   if (!el) return;
 
-  var staleMs = 3 * 60 * 1000;
+  var staleMs = 5 * 60 * 1000;
   var cutoff = new Date(Date.now() - staleMs).toISOString();
 
-  fetch(url + '/rest/v1/profiles?is_online=eq.true&updated_at=gte.' + encodeURIComponent(cutoff) + '&select=id', {
-    headers: { 'apikey': key, 'Authorization': 'Bearer ' + key, 'Prefer': 'count=exact' }
+  // Count profiles updated in the last 5 minutes (regardless of is_online flag which can be stale)
+  fetch(url + '/rest/v1/profiles?updated_at=gte.' + encodeURIComponent(cutoff) + '&select=id', {
+    headers: { 'apikey': key, 'Authorization': 'Bearer ' + key, 'Prefer': 'count=exact', 'Range-Unit': 'items', 'Range': '0-0' }
   }).then(function(r) {
-    var count = r.headers.get('content-range');
+    var range = r.headers.get('content-range');
     var total = '0';
-    if (count) {
-      var parts = count.split('/');
+    if (range) {
+      var parts = range.split('/');
       if (parts[1] && parts[1] !== '*') total = parts[1];
     }
     el.textContent = total + ' online';
