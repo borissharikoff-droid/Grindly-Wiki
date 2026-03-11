@@ -62,17 +62,12 @@
       <h2 class="section-title"><span class="section-icon">&#127859;</span> Cooking</h2>
       <p class="section-desc">Prepare ingredients and cook dishes that grant temporary arena buffs. Level up your Chef skill to unlock better recipes and reduce burn chance.</p>
 
-      <div class="info-box warning" style="margin-bottom:18px">
-        <h4>&#128679; Work in Progress</h4>
-        <p>The Cooking system is currently in development for <strong>v3.5</strong>. All values shown below are planned and subject to change before release.</p>
-      </div>
-
       <!-- Tabs -->
       <div class="ck-tabs">
         <button class="ck-tab active" onclick="ckSwitch('overview',this)">Overview</button>
         <button class="ck-tab" onclick="ckSwitch('recipes',this)">Recipes</button>
-        <button class="ck-tab" onclick="ckSwitch('kitchen',this)">Kitchen</button>
-        <button class="ck-tab" onclick="ckSwitch('perks',this)">Chef Perks</button>
+        <button class="ck-tab" onclick="ckSwitch('instruments',this)">Instruments</button>
+        <button class="ck-tab" onclick="ckSwitch('mastery',this)">Mastery</button>
         <button class="ck-tab" onclick="ckSwitch('burn',this)">Burn Mechanic</button>
       </div>
 
@@ -81,28 +76,31 @@
         <div class="info-box">
           <h4>Cook Flow</h4>
           <div class="flow-chain">
-            <span class="flow-step">Raw Ingredients</span>
+            <span class="flow-step">Gather Ingredients</span>
             <span class="flow-arrow">&rarr;</span>
-            <span class="flow-step">Prep</span>
+            <span class="flow-step">Select Recipe</span>
             <span class="flow-arrow">&rarr;</span>
             <span class="flow-step">Cook Dish</span>
+            <span class="flow-arrow">&rarr;</span>
+            <span class="flow-step">Eat for Buff</span>
           </div>
         </div>
         <div class="info-box" style="margin-top:14px">
           <h4>How It Works</h4>
           <ul>
-            <li><strong>Two-step process:</strong> First prep raw ingredients, then cook the final dish</li>
-            <li><strong>16 recipes</strong> are planned across all rarity tiers</li>
+            <li>Combine <strong>farm crops</strong> and <strong>mob materials</strong> to cook dishes</li>
+            <li><strong>16 recipes</strong> across all rarity tiers (Common, Rare, Epic, Legendary, Mythic) plus a Mystery Stew</li>
             <li>Your <strong>Chef skill</strong> levels up as you cook &mdash; higher level unlocks better recipes</li>
-            <li>Cooked food provides <strong>temporary arena buffs</strong> (ATK, HP, HP Regen boosts lasting a set number of fights)</li>
-            <li><strong>Quality mechanic:</strong> higher Chef level and better kitchen instruments reduce burn chance, yielding better quality food</li>
+            <li>Cooked food provides <strong>temporary arena buffs</strong> (Heal HP, ATK, DEF, Regen boosts lasting a set duration)</li>
+            <li><strong>Instruments</strong> improve cook speed, quality, and reduce burn chance</li>
+            <li><strong>Mastery</strong> &mdash; cook a dish repeatedly to earn stars and bonus multipliers</li>
           </ul>
         </div>
         <div class="info-box" style="margin-top:14px">
           <h4>Buff System</h4>
           <ul>
-            <li>Each dish grants a <strong>temporary buff</strong> that lasts for a certain number of arena fights</li>
-            <li>Buffs can boost <strong>ATK</strong>, <strong>HP</strong>, or <strong>HP Regen</strong> (some dishes boost multiple stats)</li>
+            <li>Each dish grants a <strong>temporary buff</strong> that lasts for a set duration (in seconds)</li>
+            <li>Buffs can boost <strong>ATK</strong>, <strong>HP</strong>, <strong>DEF</strong>, or <strong>HP Regen</strong> (some dishes boost multiple stats)</li>
             <li>Only one food buff can be active at a time &mdash; eating a new dish replaces the current buff</li>
             <li><strong>Perfect quality</strong> dishes grant 150% of the listed buff value</li>
           </ul>
@@ -112,134 +110,354 @@
       <!-- ═══ Recipes Panel ═══ -->
       <div id="panel-recipes" class="ck-panel">
         <div class="info-box" style="margin-bottom:14px">
-          <h4>&#128220; Planned Recipes</h4>
-          <p>These recipes are planned for the v3.5 release. Values are subject to change.</p>
+          <h4>&#128220; All Recipes</h4>
+          <p>16 recipes plus a Mystery Stew for invalid combos. Higher Chef level unlocks stronger dishes.</p>
         </div>
+
+        <!-- Common Recipes -->
+        <h3 style="color:var(--text-bright);margin:18px 0 10px;font-size:14px"><span class="rarity common">Common</span> Recipes</h3>
         <div class="table-wrap">
           <table>
             <thead>
-              <tr><th>Dish</th><th>Rarity</th><th>Ingredients</th><th>Buff</th><th>Duration</th></tr>
+              <tr><th></th><th>Dish</th><th>Ingredients</th><th>Buff</th><th>Duration</th><th>Chef Lvl</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td>Grilled Wheat</td>
-                <td><span class="rarity common">Common</span></td>
+                <td>&#127838;</td>
+                <td>Bread</td>
                 <td><a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a> &times;3</td>
-                <td class="perk">+10 HP</td>
-                <td>3 fights</td>
+                <td class="perk">Heal 30 HP</td>
+                <td>&mdash;</td>
+                <td>0</td>
               </tr>
               <tr>
+                <td>&#129387;</td>
+                <td>Apple Jam</td>
+                <td><a href="item.html?id=apples" style="color:var(--gold)">Apples</a> &times;2 + <a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a> &times;1</td>
+                <td class="perk">Heal 35 HP, +1 ATK</td>
+                <td>45s</td>
+                <td>3</td>
+              </tr>
+              <tr>
+                <td>&#127858;</td>
                 <td>Herb Soup</td>
-                <td><span class="rarity common">Common</span></td>
-                <td><a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a> &times;3 + <a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a> &times;2</td>
-                <td class="perk">+3 HP Regen</td>
-                <td>3 fights</td>
+                <td><a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a> &times;2 + <a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a> &times;2</td>
+                <td class="perk">Heal 40 HP, +2 Regen</td>
+                <td>60s</td>
+                <td>5</td>
               </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Rare Recipes -->
+        <h3 style="color:var(--text-bright);margin:18px 0 10px;font-size:14px"><span class="rarity rare">Rare</span> Recipes</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th></th><th>Dish</th><th>Ingredients</th><th>Buff</th><th>Duration</th><th>Chef Lvl</th></tr>
+            </thead>
+            <tbody>
               <tr>
+                <td>&#129383;</td>
                 <td>Apple Pie</td>
-                <td><span class="rarity rare">Rare</span></td>
                 <td><a href="item.html?id=apples" style="color:var(--gold)">Apples</a> &times;3 + <a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a> &times;2</td>
-                <td class="perk">+20 HP</td>
-                <td>5 fights</td>
+                <td class="perk">Heal 60 HP, +3 ATK</td>
+                <td>90s</td>
+                <td>15</td>
               </tr>
               <tr>
-                <td>Blossom Tea</td>
-                <td><span class="rarity rare">Rare</span></td>
-                <td><a href="item.html?id=blossoms" style="color:var(--gold)">Blossoms</a> &times;2 + <a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a> &times;2</td>
-                <td class="perk">+4 ATK</td>
-                <td>3 fights</td>
+                <td>&#127836;</td>
+                <td>Blossom Stew</td>
+                <td><a href="item.html?id=blossoms" style="color:var(--gold)">Blossoms</a> &times;3 + <a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a> &times;1</td>
+                <td class="perk">Heal 50 HP, +4 DEF</td>
+                <td>90s</td>
+                <td>15</td>
               </tr>
               <tr>
-                <td>Clover Stew</td>
-                <td><span class="rarity epic">Epic</span></td>
-                <td><a href="item.html?id=clovers" style="color:var(--gold)">Clovers</a> &times;2 + <a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a> &times;3 + <a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a> &times;3</td>
-                <td class="perk">+8 ATK</td>
-                <td>5 fights</td>
+                <td>&#127854;</td>
+                <td>Slime Jelly</td>
+                <td><a href="item.html?id=slime_gel" style="color:var(--gold)">Slime Gel</a> &times;3 + <a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a> &times;2 + <a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a> &times;1</td>
+                <td class="perk">Heal 55 HP, +3 DEF, +1 Regen</td>
+                <td>75s</td>
+                <td>10</td>
               </tr>
               <tr>
-                <td>Dragon Feast</td>
-                <td><span class="rarity legendary">Legendary</span></td>
-                <td><a href="item.html?id=star_bloom" style="color:var(--gold)">Star Bloom</a> &times;2 + <a href="item.html?id=crystal_root" style="color:var(--gold)">Crystal Root</a> &times;1 + <a href="item.html?id=apples" style="color:var(--gold)">Apples</a> &times;3</td>
-                <td class="perk">+15 ATK, +30 HP</td>
-                <td>5 fights</td>
+                <td>&#127842;</td>
+                <td>Goblin Kebab</td>
+                <td><a href="item.html?id=goblin_tooth" style="color:var(--gold)">Goblin Tooth</a> &times;2 + <a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a> &times;2 + <a href="item.html?id=blossoms" style="color:var(--gold)">Blossoms</a> &times;1</td>
+                <td class="perk">Heal 45 HP, +4 ATK</td>
+                <td>60s</td>
+                <td>18</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Epic Recipes -->
+        <h3 style="color:var(--text-bright);margin:18px 0 10px;font-size:14px"><span class="rarity epic">Epic</span> Recipes</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th></th><th>Dish</th><th>Ingredients</th><th>Buff</th><th>Duration</th><th>Chef Lvl</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>&#127857;</td>
+                <td>Clover Feast</td>
+                <td><a href="item.html?id=clovers" style="color:var(--gold)">Clovers</a> &times;2 + <a href="item.html?id=apples" style="color:var(--gold)">Apples</a> &times;2 + <a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a> &times;2</td>
+                <td class="perk">Heal 100 HP, +5 ATK, +4 DEF</td>
+                <td>120s</td>
+                <td>30</td>
+              </tr>
+              <tr>
+                <td>&#129385;</td>
+                <td>Wolf Steak</td>
+                <td><a href="item.html?id=wolf_fang" style="color:var(--gold)">Wolf Fang</a> &times;2 + <a href="item.html?id=blossoms" style="color:var(--gold)">Blossoms</a> &times;2 + <a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a> &times;3</td>
+                <td class="perk">Heal 80 HP, +7 ATK</td>
+                <td>90s</td>
+                <td>25</td>
+              </tr>
+              <tr>
+                <td>&#127861;</td>
+                <td>Orchid Tea</td>
+                <td><a href="item.html?id=orchids" style="color:var(--gold)">Orchids</a> &times;3 + <a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a> &times;2</td>
+                <td class="perk">Heal 70 HP, +4 Regen, +3 DEF</td>
+                <td>120s</td>
+                <td>28</td>
+              </tr>
+              <tr>
+                <td>&#129749;</td>
+                <td>Orc Hotpot</td>
+                <td><a href="item.html?id=orc_shard" style="color:var(--gold)">Orc Shard</a> &times;2 + <a href="item.html?id=clovers" style="color:var(--gold)">Clovers</a> &times;2 + <a href="item.html?id=apples" style="color:var(--gold)">Apples</a> &times;2</td>
+                <td class="perk">Heal 90 HP, +4 ATK, +6 DEF</td>
+                <td>100s</td>
+                <td>35</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Legendary Recipes -->
+        <h3 style="color:var(--text-bright);margin:18px 0 10px;font-size:14px"><span class="rarity legendary">Legendary</span> Recipes</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th></th><th>Dish</th><th>Ingredients</th><th>Buff</th><th>Duration</th><th>Chef Lvl</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>&#129475;</td>
+                <td>Starbloom Elixir</td>
+                <td><a href="item.html?id=star_bloom" style="color:var(--gold)">Star Bloom</a> &times;1 + <a href="item.html?id=orchids" style="color:var(--gold)">Orchids</a> &times;2 + <a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a> &times;3</td>
+                <td class="perk">Heal 150 HP, +8 ATK, +6 DEF, +3 Regen</td>
+                <td>180s</td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td>&#129368;</td>
+                <td>Troll Broth</td>
+                <td><a href="item.html?id=troll_hide" style="color:var(--gold)">Troll Hide</a> &times;2 + <a href="item.html?id=orchids" style="color:var(--gold)">Orchids</a> &times;2 + <a href="item.html?id=crystal_root" style="color:var(--gold)">Crystal Root</a> &times;1</td>
+                <td class="perk">Heal 120 HP, +6 Regen, +8 DEF</td>
+                <td>150s</td>
+                <td>55</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Mythic Recipes -->
+        <h3 style="color:var(--text-bright);margin:18px 0 10px;font-size:14px"><span class="rarity mythic">Mythic</span> Recipes</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th></th><th>Dish</th><th>Ingredients</th><th>Buff</th><th>Duration</th><th>Chef Lvl</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>&#127869;&#65039;</td>
+                <td>Void Feast</td>
+                <td><a href="item.html?id=void_blossom" style="color:var(--gold)">Void Blossom</a> &times;1 + <a href="item.html?id=crystal_root" style="color:var(--gold)">Crystal Root</a> &times;1 + <a href="item.html?id=star_bloom" style="color:var(--gold)">Star Bloom</a> &times;2</td>
+                <td class="perk">Heal 250 HP, +15 ATK, +10 DEF, +5 Regen</td>
+                <td>300s</td>
+                <td>70</td>
+              </tr>
+              <tr>
+                <td>&#128293;</td>
+                <td>Dragon Roast</td>
+                <td><a href="item.html?id=dragon_scale" style="color:var(--gold)">Dragon Scale</a> &times;2 + <a href="item.html?id=star_bloom" style="color:var(--gold)">Star Bloom</a> &times;1 + <a href="item.html?id=void_blossom" style="color:var(--gold)">Void Blossom</a> &times;1</td>
+                <td class="perk">Heal 200 HP, +20 ATK, +5 DEF</td>
+                <td>240s</td>
+                <td>75</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Mystery Stew -->
+        <h3 style="color:var(--text-bright);margin:18px 0 10px;font-size:14px"><span class="rarity common">Special</span></h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th></th><th>Dish</th><th>Ingredients</th><th>Buff</th><th>Duration</th><th>Chef Lvl</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>&#129760;</td>
+                <td>Mystery Stew</td>
+                <td>Any invalid ingredient combination</td>
+                <td class="perk">Heal 10 HP, +1 ATK</td>
+                <td>30s</td>
+                <td>&mdash;</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- ═══ Kitchen Panel ═══ -->
-      <div id="panel-kitchen" class="ck-panel">
+      <!-- ═══ Instruments Panel ═══ -->
+      <div id="panel-instruments" class="ck-panel">
         <div class="info-box">
-          <h4>&#127859; Kitchen Instruments</h4>
-          <p>Your kitchen determines how fast you cook and your chance of producing higher quality food. You start with a Basic Campfire and can upgrade by spending gold once you reach the required Chef level.</p>
+          <h4>&#127859; Cooking Instruments</h4>
+          <p>You have 6 instrument slots, each with 5 upgrade tiers. Better instruments improve cook speed, dish quality, and reduce burn chance. Some instruments must be unlocked by reaching a Chef level and paying gold.</p>
         </div>
-        <div class="table-wrap" style="margin-top:14px">
-          <table>
-            <thead>
-              <tr><th>Instrument</th><th>Chef Lvl</th><th>Gold Cost</th><th>Cook Time</th><th>Quality Bonus</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Basic Campfire</td>
-                <td>Lvl 1</td>
-                <td>Free</td>
-                <td>Base</td>
-                <td>&mdash;</td>
-              </tr>
-              <tr>
-                <td>Stone Oven</td>
-                <td>Lvl 10</td>
-                <td>1,000g</td>
-                <td class="perk">-15%</td>
-                <td class="perk">+10% Perfect chance</td>
-              </tr>
-              <tr>
-                <td>Iron Stove</td>
-                <td>Lvl 25</td>
-                <td>5,000g</td>
-                <td class="perk">-30%</td>
-                <td class="perk">+20% Perfect chance</td>
-              </tr>
-              <tr>
-                <td>Master Kitchen</td>
-                <td>Lvl 50</td>
-                <td>15,000g</td>
-                <td class="perk">-50%</td>
-                <td class="perk">+35% Perfect chance</td>
-              </tr>
-            </tbody>
-          </table>
+
+        <div class="info-box" style="margin-top:14px">
+          <h4>Instrument Slots</h4>
+          <div class="table-wrap" style="margin-top:10px">
+            <table>
+              <thead>
+                <tr><th>Instrument</th><th>Unlock</th><th>Cost</th><th>Tier 1</th><th>Tier 2</th><th>Tier 3</th><th>Tier 4</th><th>Tier 5</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>&#128298; Knife</td>
+                  <td>Starts unlocked</td>
+                  <td>&mdash;</td>
+                  <td>Wooden</td>
+                  <td>Iron</td>
+                  <td>Steel</td>
+                  <td>Enchanted</td>
+                  <td>Mythril</td>
+                </tr>
+                <tr>
+                  <td>&#129379; Pot</td>
+                  <td>Starts unlocked</td>
+                  <td>&mdash;</td>
+                  <td>Clay</td>
+                  <td>Iron</td>
+                  <td>Steel</td>
+                  <td>Enchanted</td>
+                  <td>Mythril</td>
+                </tr>
+                <tr>
+                  <td>&#127859; Pan</td>
+                  <td>Chef Lv 5</td>
+                  <td>300g</td>
+                  <td>Wooden</td>
+                  <td>Iron</td>
+                  <td>Steel</td>
+                  <td>Enchanted</td>
+                  <td>Mythril</td>
+                </tr>
+                <tr>
+                  <td>&#129379; Bowl</td>
+                  <td>Chef Lv 10</td>
+                  <td>800g</td>
+                  <td>Wooden</td>
+                  <td>Iron</td>
+                  <td>Steel</td>
+                  <td>Enchanted</td>
+                  <td>Mythril</td>
+                </tr>
+                <tr>
+                  <td>&#127859; Oven</td>
+                  <td>Chef Lv 15</td>
+                  <td>2,000g</td>
+                  <td>Brick</td>
+                  <td>Iron</td>
+                  <td>Steel</td>
+                  <td>Enchanted</td>
+                  <td>Mythril</td>
+                </tr>
+                <tr>
+                  <td>&#129516; Mortar</td>
+                  <td>Chef Lv 25</td>
+                  <td>5,000g</td>
+                  <td>Stone</td>
+                  <td>Iron</td>
+                  <td>Steel</td>
+                  <td>Enchanted</td>
+                  <td>Mythril</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h4>Tier Bonuses</h4>
+          <p style="margin-bottom:8px">Each upgrade tier provides cumulative bonuses across all instruments:</p>
+          <ul>
+            <li><strong>Speed Bonus</strong> &mdash; reduces cook time</li>
+            <li><strong>Quality Bonus</strong> &mdash; increases chance of Perfect quality dishes</li>
+            <li><strong>Burn Reduction</strong> &mdash; reduces chance of burning dishes</li>
+          </ul>
+        </div>
+
         <div class="info-box" style="margin-top:14px">
           <h4>Upgrade Notes</h4>
           <ul>
-            <li>Each instrument <strong>replaces</strong> the previous one &mdash; you only have one active kitchen at a time</li>
-            <li>Better instruments reduce cook time and improve your chance of getting <strong>Perfect</strong> quality dishes</li>
-            <li>Cook time reduction stacks with Chef Perk time reductions</li>
+            <li>Each instrument upgrades <strong>independently</strong> through its 5 tiers</li>
+            <li>Higher tiers require gold and materials to unlock</li>
+            <li>Bonuses from all instruments <strong>stack</strong> together</li>
+            <li>Unlock all instruments and upgrade them to Mythril for maximum cooking efficiency</li>
           </ul>
         </div>
       </div>
 
-      <!-- ═══ Chef Perks Panel ═══ -->
-      <div id="panel-perks" class="ck-panel">
+      <!-- ═══ Mastery Panel ═══ -->
+      <div id="panel-mastery" class="ck-panel">
         <div class="info-box">
-          <h4>Level Milestones</h4>
+          <h4>&#11088; Recipe Mastery</h4>
+          <p>Each recipe has its own <strong>mastery level</strong> (1&ndash;5 stars) that increases as you cook the same dish repeatedly. Higher mastery provides permanent bonuses for that recipe.</p>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h4>Star Thresholds</h4>
+          <div class="table-wrap" style="margin-top:10px">
+            <table>
+              <thead>
+                <tr><th>Stars</th><th>Times Cooked</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>&#11088;</td><td>0 (first cook)</td></tr>
+                <tr><td>&#11088;&#11088;</td><td>5</td></tr>
+                <tr><td>&#11088;&#11088;&#11088;</td><td>15</td></tr>
+                <tr><td>&#11088;&#11088;&#11088;&#11088;</td><td>35</td></tr>
+                <tr><td>&#11088;&#11088;&#11088;&#11088;&#11088;</td><td>75</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h4>Star Bonuses</h4>
+          <p style="margin-bottom:8px">Each star earned on a recipe grants cumulative bonuses:</p>
           <ul>
-            <li><strong>Lvl 5:</strong> -10% cook time</li>
-            <li><strong>Lvl 15:</strong> -15% cook time, 10% double output chance</li>
-            <li><strong>Lvl 30:</strong> -25% cook time, 20% double output chance</li>
-            <li><strong>Lvl 50:</strong> -35% cook time, Instant Prep for common recipes</li>
-            <li><strong>Lvl 70:</strong> -50% cook time, 35% double output chance</li>
+            <li><strong>Buff Multiplier</strong> &mdash; increases the strength of the dish's buff</li>
+            <li><strong>Ingredient Save Chance</strong> &mdash; chance to not consume ingredients when cooking</li>
+            <li><strong>Double Output Chance</strong> &mdash; chance to produce two dishes from one cook</li>
+            <li><strong>XP Multiplier</strong> &mdash; increases Chef XP earned from cooking this dish</li>
           </ul>
         </div>
+
         <div class="info-box" style="margin-top:14px">
-          <h4>How Chef XP Works</h4>
+          <h4>Tips</h4>
           <ul>
-            <li>You earn <strong>Chef XP</strong> every time you successfully cook a dish (even burned dishes give some XP)</li>
-            <li>Higher rarity recipes grant more XP per cook</li>
-            <li>Perk bonuses are applied automatically once you reach the required level</li>
-            <li>Cook time reductions from perks <strong>stack</strong> with kitchen instrument bonuses</li>
+            <li>Focus on mastering <strong>common recipes</strong> first &mdash; they are cheap to cook and the ingredient save chance helps with rarer dishes later</li>
+            <li>5-star mastery on a recipe makes it significantly more efficient to produce</li>
+            <li>Mastery is tracked <strong>per recipe</strong>, not globally &mdash; each dish has its own progress</li>
           </ul>
         </div>
       </div>
@@ -248,14 +466,14 @@
       <div id="panel-burn" class="ck-panel">
         <div class="info-box">
           <h4>&#128293; Burn Chance</h4>
-          <p>Every time you cook a dish, there is a chance it will burn. Burn chance depends on the recipe difficulty, your Chef level, and your kitchen instrument.</p>
+          <p>Every time you cook a dish, there is a chance it will burn. Burn chance depends on the recipe difficulty, your Chef level, and your instrument quality.</p>
         </div>
         <div class="info-box" style="margin-top:14px">
           <h4>What Affects Burn Chance</h4>
           <ul>
             <li>Each recipe has a <strong>base burn chance</strong> (higher rarity = higher base burn chance)</li>
             <li>Higher <strong>Chef level</strong> reduces burn chance</li>
-            <li>Better <strong>kitchen instruments</strong> reduce burn chance</li>
+            <li>Better <strong>instruments</strong> reduce burn chance</li>
             <li>Burn chance can never go below <strong>0%</strong></li>
           </ul>
         </div>
@@ -290,31 +508,29 @@
           <h4>Tips</h4>
           <ul>
             <li>Start with <strong>common recipes</strong> to level your Chef skill safely</li>
-            <li>Upgrade your kitchen before attempting epic or legendary recipes</li>
+            <li>Upgrade your instruments before attempting epic or legendary recipes</li>
             <li>Even <strong>burned food</strong> gives some Chef XP, so cooking is never a total waste</li>
           </ul>
         </div>
       </div>
 
     </section>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-links">
+          <a href="index.html">Wiki Home</a>
+          <a href="patches.html">Patch Notes</a>
+          <a href="roadmap.html">Roadmap</a>
+          <a href="https://github.com/borissharikoff-droid/Idly" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <div class="footer-divider"></div>
+        <p style="font-size:11px;color:var(--text-dim)">Grindly Wiki &mdash; Community-maintained game guide</p>
+        <p class="footer-sub">Data auto-synced from game source</p>
+      </div>
+    </footer>
   </main>
 </div>
-
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-links">
-      <a href="index.html">Wiki Home</a>
-      <a href="patches.html">Patch Notes</a>
-      <a href="roadmap.html">Roadmap</a>
-      <a href="https://github.com/borissharikoff-droid/Idly" target="_blank" rel="noopener">GitHub</a>
-    </div>
-    <div class="footer-divider"></div>
-    <p style="font-size:11px;color:var(--text-dim)">Grindly Wiki &mdash; Community-maintained game guide</p>
-    <p class="footer-sub">Data auto-synced from game source</p>
-  </div>
-</footer>
-
-<button class="back-to-top" id="backToTop" title="Back to top">&#8593;</button>
 
 <script>
 (function() {
@@ -333,15 +549,6 @@
       this.parentElement.classList.toggle('collapsed');
     });
   });
-
-  // Back to top
-  var btt = document.getElementById('backToTop');
-  window.addEventListener('scroll', function() {
-    btt.classList.toggle('visible', window.scrollY > 300);
-  });
-  btt.addEventListener('click', function() {
-    window.scrollTo({top:0,behavior:'smooth'});
-  });
 })();
 </script>
 <script src="wiki-search.js"></script>
@@ -350,5 +557,7 @@
 <script src="wiki-skins.js"></script>
 <script src="wiki-online.js"></script>
 
+<button class="back-to-top" id="backToTop" title="Back to top">&#8593;</button>
+<script>var btt=document.getElementById('backToTop');window.addEventListener('scroll',function(){btt.classList.toggle('visible',window.scrollY>300)});btt.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});</script>
 </body>
 </html>

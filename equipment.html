@@ -233,7 +233,7 @@
     { name:'Wooden Set', rarity:'common', ids:['wooden_helm','wooden_plate','wooden_sword','wooden_legs','wooden_ring'],
       items:[
         {id:'wooden_helm',  icon:'\u{1FA96}',name:'Wooden Helm',  slot:'head',  perk:'+2 ATK',      stats:{atk:2}},
-        {id:'wooden_plate', icon:'\u{1FAB5}',name:'Wooden Plate', slot:'body',  perk:'+15 HP',      stats:{hp:15}},
+        {id:'wooden_plate', icon:'\u{1FAB5}',name:'Wooden Plate', slot:'body',  perk:'+15 HP \u00B7 +1 DEF',      stats:{hp:15,def:1}},
         {id:'wooden_sword', icon:'\u{1F5E1}\uFE0F',name:'Wooden Sword',slot:'weapon',perk:'+3 ATK', stats:{atk:3}},
         {id:'wooden_legs',  icon:'\u{1F9BF}',name:'Wooden Legs',  slot:'legs',  perk:'+1 ATK',      stats:{atk:1}},
         {id:'wooden_ring',  icon:'\u{1F4FF}',name:'Wooden Ring',  slot:'ring',  perk:'+1 Regen',    stats:{regen:1}},
@@ -241,7 +241,7 @@
     { name:'Copper Set', rarity:'rare', ids:['copper_helm','copper_plate','copper_sword','copper_legs','copper_ring'],
       items:[
         {id:'copper_helm',  icon:'\u26D1\uFE0F',name:'Copper Helm',  slot:'head',  perk:'+4 ATK \u00B7 +10 HP', stats:{atk:4,hp:10}},
-        {id:'copper_plate', icon:'\u{1F6E1}\uFE0F',name:'Copper Plate',slot:'body', perk:'+35 HP',      stats:{hp:35}},
+        {id:'copper_plate', icon:'\u{1F6E1}\uFE0F',name:'Copper Plate',slot:'body', perk:'+35 HP \u00B7 +2 DEF',      stats:{hp:35,def:2}},
         {id:'copper_sword', icon:'\u2694\uFE0F',name:'Copper Sword',slot:'weapon',perk:'+6 ATK',       stats:{atk:6}},
         {id:'copper_legs',  icon:'\u{1F9BF}',name:'Copper Legs',  slot:'legs',  perk:'+3 ATK \u00B7 +10 HP', stats:{atk:3,hp:10}},
         {id:'copper_ring',  icon:'\u{1F48D}',name:'Copper Ring',  slot:'ring',  perk:'+2 Regen',    stats:{regen:2}},
@@ -249,7 +249,7 @@
     { name:'Shadow Set', rarity:'epic', ids:['shadow_helm','shadow_plate','shadow_sword','shadow_legs','shadow_ring'],
       items:[
         {id:'shadow_helm',  icon:'\u{1FA96}',name:'Shadow Helm',  slot:'head',  perk:'+7 ATK \u00B7 +20 HP',         stats:{atk:7,hp:20}},
-        {id:'shadow_plate', icon:'\u{1F6E1}\uFE0F',name:'Shadow Plate',slot:'body', perk:'+60 HP \u00B7 +3 ATK',     stats:{hp:60,atk:3}},
+        {id:'shadow_plate', icon:'\u{1F6E1}\uFE0F',name:'Shadow Plate',slot:'body', perk:'+60 HP \u00B7 +3 ATK \u00B7 +4 DEF',     stats:{hp:60,atk:3,def:4}},
         {id:'shadow_sword', icon:'\u2694\uFE0F',name:'Shadow Sword',slot:'weapon',perk:'+10 ATK \u00B7 +2 Regen',    stats:{atk:10,regen:2}},
         {id:'shadow_legs',  icon:'\u{1F9BF}',name:'Shadow Legs',  slot:'legs',  perk:'+5 ATK \u00B7 +25 HP',         stats:{atk:5,hp:25}},
         {id:'shadow_ring',  icon:'\u{1F517}',name:'Shadow Ring',  slot:'ring',  perk:'+4 ATK \u00B7 +3 Regen',       stats:{atk:4,regen:3}},
@@ -257,7 +257,7 @@
     { name:'Golden Set', rarity:'legendary', ids:['golden_helm','golden_plate','golden_sword','golden_legs','golden_ring'],
       items:[
         {id:'golden_helm',  icon:'\u{1F451}',name:'Golden Helm',  slot:'head',  perk:'+10 ATK \u00B7 +30 HP \u00B7 +5% XP',   stats:{atk:10,hp:30,xp:5}},
-        {id:'golden_plate', icon:'\u{1F6E1}\uFE0F',name:'Golden Plate',slot:'body', perk:'+80 HP \u00B7 +5 ATK \u00B7 Streak Shield',stats:{hp:80,atk:5,special:'Streak Shield'}},
+        {id:'golden_plate', icon:'\u{1F6E1}\uFE0F',name:'Golden Plate',slot:'body', perk:'+80 HP \u00B7 +5 ATK \u00B7 +6 DEF \u00B7 Streak Shield',stats:{hp:80,atk:5,def:6,special:'Streak Shield'}},
         {id:'golden_sword', icon:'\u2694\uFE0F',name:'Golden Sword',slot:'weapon',perk:'+15 ATK \u00B7 +3 Regen',              stats:{atk:15,regen:3}},
         {id:'golden_legs',  icon:'\u{1F9BF}',name:'Golden Legs',  slot:'legs',  perk:'+8 ATK \u00B7 +40 HP',                   stats:{atk:8,hp:40}},
         {id:'golden_ring',  icon:'\u{1F48D}',name:'Golden Ring',  slot:'ring',  perk:'+6 ATK \u00B7 +4 Regen \u00B7 +10% Focus', stats:{atk:6,regen:4,special:'+10% Focus'}},
@@ -265,7 +265,7 @@
     { name:'Void Set', rarity:'mythic', ids:['void_helm','void_plate','void_sword','void_legs','void_ring'],
       items:[
         {id:'void_helm',  icon:'\u{1F300}',name:'Void Helm',  slot:'head',  perk:'+14 ATK \u00B7 +50 HP \u00B7 +8% XP',     stats:{atk:14,hp:50,xp:8}},
-        {id:'void_plate', icon:'\u{1F47B}',name:'Void Plate', slot:'body',  perk:'+120 HP \u00B7 +8 ATK \u00B7 Streak Shield',stats:{hp:120,atk:8,special:'Streak Shield'}},
+        {id:'void_plate', icon:'\u{1F47B}',name:'Void Plate', slot:'body',  perk:'+120 HP \u00B7 +8 ATK \u00B7 +10 DEF \u00B7 Streak Shield',stats:{hp:120,atk:8,def:10,special:'Streak Shield'}},
         {id:'void_sword', icon:'\u2694\uFE0F',name:'Void Sword',slot:'weapon',perk:'+18 ATK \u00B7 +5 Regen',                stats:{atk:18,regen:5}},
         {id:'void_legs',  icon:'\u{1F9BF}',name:'Void Legs',  slot:'legs',  perk:'+12 ATK \u00B7 +60 HP',                    stats:{atk:12,hp:60}},
         {id:'void_ring',  icon:'\u{1F300}',name:'Void Ring',  slot:'ring',  perk:'+10 ATK \u00B7 +5 Regen \u00B7 +8% XP',    stats:{atk:10,regen:5,xp:8}},
@@ -275,17 +275,17 @@
   var CRAFTED = [
     {id:'craft_iron_helm',       icon:'\u26D1\uFE0F',name:'Iron Helm',        slot:'head',  rarity:'common',   perk:'+2 ATK'},
     {id:'craft_fang_dagger',     icon:'\u{1F5E1}\uFE0F',name:'Fang Dagger',   slot:'weapon',rarity:'common',   perk:'+3 ATK'},
-    {id:'craft_slime_shield',    icon:'\u{1F6E1}\uFE0F',name:'Slime Shield',  slot:'body',  rarity:'common',   perk:'+8 HP'},
+    {id:'craft_slime_shield',    icon:'\u{1F6E1}\uFE0F',name:'Slime Shield',  slot:'body',  rarity:'common',   perk:'+8 HP \u00B7 +1 DEF'},
     {id:'craft_goblin_blade',    icon:'\u{1F52A}',name:'Goblin Blade',       slot:'weapon',rarity:'common',   perk:'+4 ATK'},
     {id:'craft_essence_ring',    icon:'\u{1F48D}',name:'Essence Ring',       slot:'ring',  rarity:'rare',     perk:'+8% XP all skills'},
-    {id:'craft_scale_robe',      icon:'\u{1F94B}',name:'Scale Robe',         slot:'body',  rarity:'rare',     perk:'+20 HP'},
+    {id:'craft_scale_robe',      icon:'\u{1F94B}',name:'Scale Robe',         slot:'body',  rarity:'rare',     perk:'+20 HP \u00B7 +2 DEF'},
     {id:'craft_wolf_pendant',    icon:'\u{1F43A}',name:'Wolf Fang Pendant',  slot:'ring',  rarity:'rare',     perk:'+3 HP Regen/s'},
-    {id:'craft_orc_plate',       icon:'\u{1FAA8}',name:'Orc Plate',          slot:'body',  rarity:'rare',     perk:'+15 HP \u00B7 +3 ATK'},
+    {id:'craft_orc_plate',       icon:'\u{1FAA8}',name:'Orc Plate',          slot:'body',  rarity:'rare',     perk:'+15 HP \u00B7 +3 ATK \u00B7 +2 DEF'},
     {id:'craft_void_blade',      icon:'\u2694\uFE0F',name:'Void Blade',      slot:'weapon',rarity:'epic',     perk:'+12 ATK'},
-    {id:'craft_troll_cloak',     icon:'\u{1F9CC}',name:'Troll Cloak',        slot:'body',  rarity:'epic',     perk:'+25 HP \u00B7 +5 Regen'},
+    {id:'craft_troll_cloak',     icon:'\u{1F9CC}',name:'Troll Cloak',        slot:'body',  rarity:'epic',     perk:'+25 HP \u00B7 +5 HP Regen/s \u00B7 +4 DEF'},
     {id:'craft_warlord_gauntlets',icon:'\u{1F531}',name:'Warlord Gauntlets', slot:'ring',  rarity:'epic',     perk:'+6 ATK \u00B7 +10 HP'},
     {id:'craft_dragon_crown',    icon:'\u{1F451}',name:'Dragon Crown',       slot:'head',  rarity:'legendary',perk:'+8 ATK \u00B7 +30 HP'},
-    {id:'craft_troll_aegis',     icon:'\u{1F49C}',name:'Troll Aegis',        slot:'body',  rarity:'legendary',perk:'+40 HP \u00B7 +8 Regen'},
+    {id:'craft_troll_aegis',     icon:'\u{1F49C}',name:'Troll Aegis',        slot:'body',  rarity:'legendary',perk:'+40 HP \u00B7 +8 HP Regen/s \u00B7 +6 DEF'},
     {id:'craft_dragonfire_blade', icon:'\u{1F525}',name:'Dragonfire Blade',  slot:'weapon',rarity:'mythic',   perk:'+20 ATK \u00B7 +15 HP \u00B7 +5 Regen'},
   ];
 
