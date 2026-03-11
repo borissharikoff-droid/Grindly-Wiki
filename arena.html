@@ -17,6 +17,7 @@
 [data-mob-id] img{width:100%;height:100%;object-fit:contain}
 .zone-entry-cost{padding:6px 10px;margin-bottom:8px;border-radius:6px;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.18);font-size:12px;color:var(--text-dim)}
 </style>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 </head>
 <body>
 
@@ -496,6 +497,30 @@
             <li>Legendary Bags can drop <span class="rarity mythic">Void Set</span> pieces and permanent stat potions (ATK/HP/Regen/DEF)</li>
           </ul>
         </div>
+      </div>
+
+      <!-- ═══ Combat Mechanics Info ═══ -->
+      <div class="info-box" style="margin-top:24px">
+        <h4>Food Buff Stacking Caps</h4>
+        <p>Food and plant buffs consumed during battle are subject to stacking caps. Even if you load many food items, the total active buff from food cannot exceed these limits:</p>
+        <div class="table-wrap" style="margin-top:10px">
+          <table>
+            <thead>
+              <tr><th>Stat</th><th>Max Food Buff</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>ATK</td><td class="perk"><strong>+25</strong></td></tr>
+              <tr><td>DEF</td><td class="perk"><strong>+15</strong></td></tr>
+              <tr><td>HP Regen</td><td class="perk"><strong>+8</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:8px;color:var(--text-dim);font-size:12px">These caps only apply to food/plant buff bonuses. Gear, warrior level, and permanent potion stats are not affected.</p>
+      </div>
+
+      <div class="info-box" style="margin-top:14px">
+        <h4>Permanent Stat Potions</h4>
+        <p>Permanent stat potions (ATK, HP, Regen, DEF) each have a cap of <strong>20</strong> per stat. Once you reach the cap, any additional potions are auto-converted into <strong>100 gold</strong> instead of being wasted.</p>
       </div>
 
     </section>

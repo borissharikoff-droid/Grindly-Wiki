@@ -12,6 +12,7 @@
 .cr-tab.active{color:var(--gold);border-color:var(--gold);background:rgba(251,191,36,.08)}
 .cr-panel{display:none}.cr-panel.active{display:block}
 </style>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 </head>
 <body>
 
@@ -104,7 +105,7 @@
             <tbody>
               <tr>
                 <td><a href="item.html?id=compost" style="color:var(--gold)">Compost</a> &times;3</td>
-                <td><a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a> &times;5 + <a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a> &times;3</td>
+                <td><a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a> &times;3 + <a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a> &times;2</td>
                 <td>Lvl 0</td>
                 <td class="perk">30 XP</td>
                 <td>6s</td>
@@ -161,7 +162,7 @@
         <div class="table-wrap">
           <table>
             <thead>
-              <tr><th>Output</th><th>Ingredients</th><th>Crafter Lvl</th><th>XP</th><th>Time</th></tr>
+              <tr><th>Output</th><th>Ingredients</th><th>Crafter Lvl</th><th>XP</th><th>Time</th><th>Gold</th></tr>
             </thead>
             <tbody>
               <tr>
@@ -170,6 +171,7 @@
                 <td>Lvl 0</td>
                 <td class="perk">25 XP</td>
                 <td>15s</td>
+                <td>&mdash;</td>
               </tr>
               <tr>
                 <td><a href="item.html?id=craft_iron_helm" style="color:var(--gold)">Iron Helm</a></td>
@@ -177,6 +179,7 @@
                 <td>Lvl 3</td>
                 <td class="perk">40 XP</td>
                 <td>20s</td>
+                <td>&mdash;</td>
               </tr>
               <tr>
                 <td><a href="item.html?id=craft_goblin_blade" style="color:var(--gold)">Goblin Blade</a></td>
@@ -184,6 +187,7 @@
                 <td>Lvl 5</td>
                 <td class="perk">50 XP</td>
                 <td>25s</td>
+                <td>&mdash;</td>
               </tr>
               <tr>
                 <td><a href="item.html?id=craft_fang_dagger" style="color:var(--gold)">Fang Dagger</a></td>
@@ -191,6 +195,7 @@
                 <td>Lvl 15</td>
                 <td class="perk">70 XP</td>
                 <td>5m</td>
+                <td>&mdash;</td>
               </tr>
               <tr>
                 <td><a href="item.html?id=craft_wolf_pendant" style="color:var(--gold)">Wolf Fang Pendant</a></td>
@@ -198,6 +203,7 @@
                 <td>Lvl 20</td>
                 <td class="perk">100 XP</td>
                 <td>8m</td>
+                <td class="perk">300g</td>
               </tr>
               <tr>
                 <td><a href="item.html?id=craft_essence_ring" style="color:var(--gold)">Essence Ring</a></td>
@@ -205,6 +211,7 @@
                 <td>Lvl 30</td>
                 <td class="perk">130 XP</td>
                 <td>10m</td>
+                <td class="perk">500g</td>
               </tr>
               <tr>
                 <td><a href="item.html?id=craft_orc_plate" style="color:var(--gold)">Orc Plate</a></td>
@@ -212,13 +219,15 @@
                 <td>Lvl 35</td>
                 <td class="perk">200 XP</td>
                 <td>15m</td>
+                <td class="perk">800g</td>
               </tr>
               <tr>
                 <td><a href="item.html?id=craft_warlord_gauntlets" style="color:var(--gold)">Warlord Gauntlets</a></td>
-                <td><a href="item.html?id=warlord_sigil" style="color:var(--gold)">Warlord Sigil</a> &times;2 + <a href="item.html?id=orc_shard" style="color:var(--gold)">Orc Shard</a> &times;5 + <a href="item.html?id=clovers" style="color:var(--gold)">Clovers</a> &times;3</td>
+                <td><a href="item.html?id=warlord_sigil" style="color:var(--gold)">Warlord Sigil</a> &times;1 + <a href="item.html?id=orc_shard" style="color:var(--gold)">Orc Shard</a> &times;5 + <a href="item.html?id=clovers" style="color:var(--gold)">Clovers</a> &times;3</td>
                 <td>Lvl 40</td>
                 <td class="perk">350 XP</td>
                 <td>25m</td>
+                <td class="perk">1,500g</td>
               </tr>
               <tr>
                 <td><a href="item.html?id=craft_scale_robe" style="color:var(--gold)">Scale Robe</a></td>
@@ -226,6 +235,7 @@
                 <td>Lvl 45</td>
                 <td class="perk">260 XP</td>
                 <td>20m</td>
+                <td class="perk">1,500g</td>
               </tr>
               <tr>
                 <td><a href="item.html?id=craft_troll_cloak" style="color:var(--gold)">Troll Cloak</a></td>
@@ -233,13 +243,15 @@
                 <td>Lvl 50</td>
                 <td class="perk">400 XP</td>
                 <td>30m</td>
+                <td class="perk">2,000g</td>
               </tr>
               <tr>
                 <td><a href="item.html?id=craft_troll_aegis" style="color:var(--gold)">Troll Aegis</a></td>
-                <td><a href="item.html?id=troll_heart" style="color:var(--gold)">Troll Heart</a> &times;2 + <a href="item.html?id=troll_hide" style="color:var(--gold)">Troll Hide</a> &times;5 + <a href="item.html?id=ancient_dust" style="color:var(--gold)">Ancient Dust</a> &times;2 + <a href="item.html?id=crystal_root" style="color:var(--gold)">Crystal Root</a> &times;1</td>
+                <td><a href="item.html?id=troll_heart" style="color:var(--gold)">Troll Heart</a> &times;1 + <a href="item.html?id=troll_hide" style="color:var(--gold)">Troll Hide</a> &times;5 + <a href="item.html?id=ancient_dust" style="color:var(--gold)">Ancient Dust</a> &times;2 + <a href="item.html?id=crystal_root" style="color:var(--gold)">Crystal Root</a> &times;1</td>
                 <td>Lvl 60</td>
                 <td class="perk">700 XP</td>
                 <td>50m</td>
+                <td class="perk">4,000g</td>
               </tr>
               <tr>
                 <td><a href="item.html?id=craft_void_blade" style="color:var(--gold)">Void Blade</a></td>
@@ -247,6 +259,7 @@
                 <td>Lvl 65</td>
                 <td class="perk">650 XP</td>
                 <td>45m</td>
+                <td class="perk">3,000g</td>
               </tr>
               <tr>
                 <td><a href="item.html?id=craft_dragon_crown" style="color:var(--gold)">Dragon Crown</a></td>
@@ -254,13 +267,15 @@
                 <td>Lvl 70</td>
                 <td class="perk">850 XP</td>
                 <td>1h</td>
+                <td class="perk">5,000g</td>
               </tr>
               <tr>
                 <td><a href="item.html?id=craft_dragonfire_blade" style="color:var(--gold)">Dragonfire Blade</a></td>
-                <td><a href="item.html?id=dragon_heart" style="color:var(--gold)">Dragon Heart</a> &times;2 + <a href="item.html?id=dragon_scale" style="color:var(--gold)">Dragon Scale</a> &times;5 + <a href="item.html?id=void_fragment" style="color:var(--gold)">Void Fragment</a> &times;2 + <a href="item.html?id=star_bloom" style="color:var(--gold)">Star Bloom</a> &times;3</td>
+                <td><a href="item.html?id=dragon_heart" style="color:var(--gold)">Dragon Heart</a> &times;1 + <a href="item.html?id=dragon_scale" style="color:var(--gold)">Dragon Scale</a> &times;5 + <a href="item.html?id=void_fragment" style="color:var(--gold)">Void Fragment</a> &times;2 + <a href="item.html?id=star_bloom" style="color:var(--gold)">Star Bloom</a> &times;3</td>
                 <td>Lvl 80</td>
                 <td class="perk">1500 XP</td>
                 <td>1h 30m</td>
+                <td class="perk">8,000g</td>
               </tr>
               <tr>
                 <td><a href="item.html?id=death_insurance" style="color:var(--gold)">Death Insurance</a></td>
@@ -268,6 +283,7 @@
                 <td>Lvl 10</td>
                 <td class="perk">25 XP</td>
                 <td>20s</td>
+                <td>&mdash;</td>
               </tr>
             </tbody>
           </table>

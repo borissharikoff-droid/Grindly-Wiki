@@ -12,6 +12,7 @@
 .fm-tab.active{color:var(--gold);border-color:var(--gold);background:rgba(251,191,36,.08)}
 .fm-panel{display:none}.fm-panel.active{display:block}
 </style>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 </head>
 <body>
 
@@ -157,18 +158,19 @@
 
       <!-- ═══ Plant Buffs Panel ═══ -->
       <div id="panel-buffs" class="fm-panel">
-        <p class="section-desc">Harvested plants provide passive combat stat bonuses when consumed before an arena fight.</p>
+        <p class="section-desc">Harvested plants provide passive combat stat bonuses when consumed before an arena fight. Food buff stacking is capped at <strong>+25 ATK</strong>, <strong>+15 DEF</strong>, and <strong>+8 Regen</strong> (see <a href="arena.html" style="color:var(--gold)">Arena</a>).</p>
         <div class="table-wrap">
           <table>
             <thead>
-              <tr><th></th><th>Plant</th><th>ATK</th><th>HP</th><th>HP Regen</th></tr>
+              <tr><th></th><th>Plant</th><th>ATK</th><th>HP</th><th>HP Regen</th><th>DEF</th></tr>
             </thead>
             <tbody>
               <tr>
                 <td class="icon-cell">&#127806;</td>
                 <td><a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a></td>
                 <td>0</td>
-                <td class="perk">+5</td>
+                <td class="perk">+2</td>
+                <td>0</td>
                 <td>0</td>
               </tr>
               <tr>
@@ -176,26 +178,30 @@
                 <td><a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a></td>
                 <td>0</td>
                 <td>0</td>
-                <td class="perk">+2</td>
+                <td class="perk">+1</td>
+                <td>0</td>
               </tr>
               <tr>
                 <td class="icon-cell">&#127822;</td>
                 <td><a href="item.html?id=apples" style="color:var(--gold)">Apples</a></td>
                 <td>0</td>
-                <td class="perk">+15</td>
+                <td class="perk">+5</td>
+                <td>0</td>
                 <td>0</td>
               </tr>
               <tr>
                 <td class="icon-cell">&#127800;</td>
                 <td><a href="item.html?id=blossoms" style="color:var(--gold)">Blossoms</a></td>
-                <td class="perk">+2</td>
+                <td class="perk">+1</td>
+                <td>0</td>
                 <td>0</td>
                 <td>0</td>
               </tr>
               <tr>
                 <td class="icon-cell">&#9752;&#65039;</td>
                 <td><a href="item.html?id=clovers" style="color:var(--gold)">Clovers</a></td>
-                <td class="perk">+5</td>
+                <td class="perk">+2</td>
+                <td>0</td>
                 <td>0</td>
                 <td>0</td>
               </tr>
@@ -204,12 +210,14 @@
                 <td><a href="item.html?id=orchids" style="color:var(--gold)">Orchids</a></td>
                 <td>0</td>
                 <td>0</td>
-                <td class="perk">+4</td>
+                <td class="perk">+1</td>
+                <td>0</td>
               </tr>
               <tr>
                 <td class="icon-cell">&#11088;</td>
                 <td><a href="item.html?id=star_bloom" style="color:var(--gold)">Star Bloom</a></td>
-                <td class="perk">+8</td>
+                <td class="perk">+3</td>
+                <td>0</td>
                 <td>0</td>
                 <td>0</td>
               </tr>
@@ -217,13 +225,15 @@
                 <td class="icon-cell">&#128142;</td>
                 <td><a href="item.html?id=crystal_root" style="color:var(--gold)">Crystal Root</a></td>
                 <td>0</td>
-                <td class="perk">+30</td>
+                <td class="perk">+10</td>
                 <td>0</td>
+                <td class="perk">+2</td>
               </tr>
               <tr>
                 <td class="icon-cell">&#127744;</td>
                 <td><a href="item.html?id=void_blossom" style="color:var(--gold)">Void Blossom</a></td>
-                <td class="perk">+15</td>
+                <td class="perk">+5</td>
+                <td>0</td>
                 <td>0</td>
                 <td>0</td>
               </tr>
@@ -247,7 +257,7 @@
                 <tr><th>Bonus</th><th>Value</th></tr>
               </thead>
               <tbody>
-                <tr><td>Harvest Yield</td><td class="perk"><strong>+20%</strong> (rounded up)</td></tr>
+                <tr><td>Harvest Yield</td><td class="perk"><strong>+35%</strong> (rounded up)</td></tr>
                 <tr><td>Farmer XP on Harvest</td><td class="perk"><strong>+5%</strong> (rounded up)</td></tr>
               </tbody>
             </table>
@@ -279,7 +289,7 @@
               <tbody>
                 <tr>
                   <td>Crafting</td>
-                  <td><a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a> &times;5 + <a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a> &times;3 &rarr; <a href="item.html?id=compost" style="color:var(--gold)">Compost</a> &times;3 &nbsp;(Crafter Lvl 0, 30 XP, 6s)</td>
+                  <td><a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a> &times;3 + <a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a> &times;2 &rarr; <a href="item.html?id=compost" style="color:var(--gold)">Compost</a> &times;3 &nbsp;(Crafter Lvl 0, 30 XP, 6s)</td>
                 </tr>
                 <tr>
                   <td>Harvest Drop</td>
