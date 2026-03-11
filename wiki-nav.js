@@ -17,6 +17,7 @@
     { href: 'cooking.html',   label: 'Cooking',           dot: 'orange', badge: 'WIP' },
     { href: 'farming.html',   label: 'Farming',           dot: 'green' },
     { href: 'skills.html',    label: 'Skills',            dot: 'blue' },
+    { href: 'prestige.html',  label: 'Prestige',           dot: 'purple' },
     { href: 'patches.html',   label: 'Patch Notes',       dot: 'green' },
     { href: 'roadmap.html',   label: 'Roadmap',           dot: 'gold' },
   ];

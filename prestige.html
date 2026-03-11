@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prestige &mdash; Grindly Wiki</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ══════ Prestige Page ══════ */
+.prestige-hero {
+  text-align: center;
+  padding: 28px 20px;
+  background:
+    radial-gradient(ellipse at 30% 0%, rgba(147,51,234,0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 0%, rgba(212,168,67,0.08) 0%, transparent 50%);
+  border-bottom: 1px solid var(--border-inner);
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+.prestige-hero h2 {
+  font-family: var(--font-title);
+  font-size: 28px;
+  color: var(--gold-bright);
+  margin-bottom: 6px;
+}
+.prestige-hero p {
+  font-size: 13px;
+  color: var(--text-dim);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Tier cards */
+.tier-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+.tier-card {
+  background: var(--bg-card);
+  border: 2px solid var(--tier-color, var(--border-inner));
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.tier-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, var(--tier-color) 0%, transparent 70%);
+  opacity: 0.06;
+  pointer-events: none;
+}
+.tier-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--tier-color) 30%, transparent);
+}
+.tier-number {
+  font-family: var(--font-title);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--tier-color);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.tier-label {
+  font-family: var(--font-title);
+  font-size: 16px;
+  color: var(--tier-color);
+  margin-bottom: 8px;
+}
+.tier-bonus {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #57F287;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.tier-reward {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+.tier-reward strong {
+  color: var(--text);
+}
+
+/* How it works steps */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+.step-card {
+  background: rgba(255,255,255,.02);
+  border: 1px solid var(--border-inner);
+  border-radius: 8px;
+  padding: 16px;
+}
+.step-num {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.step-title {
+  font-family: var(--font-title);
+  font-size: 14px;
+  color: var(--text-bright);
+  margin-bottom: 6px;
+}
+.step-desc {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+/* Formula box */
+.formula-box {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border-inner);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-top: 12px;
+}
+.formula-box code {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: #fbbf24;
+  display: block;
+  margin-bottom: 6px;
+}
+.formula-box .formula-note {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+/* Strategy tips */
+.tip-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+}
+.tip-list li {
+  font-size: 13px;
+  color: var(--text);
+  padding: 8px 0 8px 20px;
+  position: relative;
+  line-height: 1.5;
+  border-bottom: 1px solid var(--border-inner);
+}
+.tip-list li:last-child { border-bottom: none; }
+.tip-list li::before {
+  content: '\25B8';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+/* Leaderboard info */
+.lb-example {
+  background: var(--bg-card);
+  border: 1px solid var(--border-inner);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-top: 12px;
+}
+.lb-example-title {
+  font-family: var(--font-title);
+  font-size: 13px;
+  color: var(--text-bright);
+  margin-bottom: 8px;
+}
+.lb-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  font-size: 13px;
+}
+.lb-row-label { color: var(--text-dim); }
+.lb-row-value { font-family: var(--font-mono); color: #57F287; font-weight: 600; }
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+</head>
+<body>
+
+<!-- ══════ Top Bar ══════ -->
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">G</span>
+      <span class="logo-text">Grindly<small>Wiki</small></span>
+    </a>
+    <div class="top-right">
+      <div class="player-count">
+        <span class="pulse-dot"></span>
+        <span>Productivity RPG</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══════ Page Layout ══════ -->
+<div class="page-wrap">
+
+  <!-- ══════ Sidebar ══════ -->
+  <aside class="sidebar">
+    <div class="search-box">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search wiki..." autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title"><span class="arrow">&#9660;</span> Pages</div>
+      <ul class="nav-links" id="wikiNav"></ul>
+    </div>
+  </aside>
+
+  <!-- ══════ Main Content ══════ -->
+  <main class="main">
+    <div class="breadcrumbs"><a href="index.html">Home</a><span class="bc-sep">&#9656;</span><a href="skills.html">Skills</a><span class="bc-sep">&#9656;</span><span class="bc-current">Prestige</span></div>
+
+    <section class="content">
+
+      <!-- ══════ Hero ══════ -->
+      <div class="prestige-hero">
+        <h2>&#10024; Prestige System</h2>
+        <p>Reached level 99 in a skill? Prestige to reset your level, earn a permanent XP bonus, and unlock exclusive cosmetic rewards. Up to 5 tiers per skill.</p>
+      </div>
+
+      <!-- ══════ Overview ══════ -->
+      <h2 class="section-title"><span class="section-icon">&#128161;</span> Overview</h2>
+      <div class="info-box">
+        <p style="font-size:13px;color:var(--text);line-height:1.6;margin-bottom:10px;">
+          Prestige is an endgame progression system that lets you <strong>reset a maxed skill back to level 0</strong> in exchange for permanent bonuses and cosmetics. It is available for any skill once it reaches <strong>level 99</strong>.
+        </p>
+        <p style="font-size:13px;color:var(--text-dim);line-height:1.6;">
+          Each skill can be prestiged independently up to <strong>5 times</strong> (5 tiers). Every prestige tier grants a stacking <strong>+5% XP bonus</strong> for that skill, making subsequent level-ups faster. Prestige also contributes bonus levels to your total skill level on the leaderboard.
+        </p>
+      </div>
+
+      <!-- ══════ How It Works ══════ -->
+      <h2 class="section-title"><span class="section-icon">&#128260;</span> How It Works</h2>
+      <div class="steps">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div class="step-title">Reach Level 99</div>
+          <div class="step-desc">Max out any skill by earning 3,600,000 XP (approximately 1,000 hours of tracked activity). The prestige button appears once you hit level 99.</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div class="step-title">Confirm Prestige</div>
+          <div class="step-desc">Click the prestige button on the skill panel. Your skill XP resets to 0 and your level drops back to 0. This cannot be undone.</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div class="step-title">Earn Rewards</div>
+          <div class="step-desc">Gain a permanent +5% XP multiplier for that skill, a cosmetic upgrade (border, badge, frame, avatar, or title), and +99 bonus levels on the leaderboard.</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">4</div>
+          <div class="step-title">Repeat</div>
+          <div class="step-desc">Level the skill back to 99 and prestige again, up to 5 times total. Each tier stacks the XP bonus and unlocks a new cosmetic reward.</div>
+        </div>
+      </div>
+
+      <!-- ══════ XP Bonus ══════ -->
+      <h2 class="section-title"><span class="section-icon">&#128200;</span> XP Bonus per Tier</h2>
+      <div class="info-box">
+        <p style="font-size:13px;color:var(--text-dim);margin-bottom:12px;">
+          Each prestige tier adds a flat <strong>+5%</strong> XP multiplier for the prestiged skill. This stacks linearly:
+        </p>
+        <div class="formula-box">
+          <code>xpMultiplier = 1 + (prestigeCount &times; 0.05)</code>
+          <div class="formula-note">
+            Tier 1 = &times;1.05 (+5%) &middot; Tier 2 = &times;1.10 (+10%) &middot; Tier 3 = &times;1.15 (+15%) &middot; Tier 4 = &times;1.20 (+20%) &middot; Tier 5 = &times;1.25 (+25%)
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--text-dim);margin-top:10px;">
+          This multiplier stacks <strong>multiplicatively</strong> with other XP sources (Grindly skill bonus, equipped gear). For example, at Prestige Tier 5 (&times;1.25) with max Grindly (&times;1.43): <strong style="color:#57F287">1.25 &times; 1.43 = &times;1.7875</strong> &mdash; nearly 79% bonus XP.
+        </p>
+      </div>
+
+      <!-- ══════ Tier Rewards ══════ -->
+      <h2 class="section-title"><span class="section-icon">&#127942;</span> Tier Rewards</h2>
+      <div class="tier-grid">
+        <div class="tier-card" style="--tier-color: #cd7f32;">
+          <div class="tier-number">I</div>
+          <div class="tier-label">Bronze</div>
+          <div class="tier-bonus">+5% XP</div>
+          <div class="tier-reward"><strong>Bronze border</strong><br>A warm bronze outline appears around the skill icon.</div>
+        </div>
+        <div class="tier-card" style="--tier-color: #c0c0c0;">
+          <div class="tier-number">II</div>
+          <div class="tier-label">Silver</div>
+          <div class="tier-bonus">+10% XP</div>
+          <div class="tier-reward"><strong>Silver border + badge</strong><br>Silver outline with a prestige badge displayed on your profile.</div>
+        </div>
+        <div class="tier-card" style="--tier-color: #ffd700;">
+          <div class="tier-number">III</div>
+          <div class="tier-label">Gold</div>
+          <div class="tier-bonus">+15% XP</div>
+          <div class="tier-reward"><strong>Gold border + frame</strong><br>A golden profile frame visible to other players on the leaderboard.</div>
+        </div>
+        <div class="tier-card" style="--tier-color: #b9f2ff;">
+          <div class="tier-number">IV</div>
+          <div class="tier-label">Diamond</div>
+          <div class="tier-bonus">+20% XP</div>
+          <div class="tier-reward"><strong>Diamond border + avatar</strong><br>Exclusive diamond-themed avatar unlocked for your profile.</div>
+        </div>
+        <div class="tier-card" style="--tier-color: #9333ea;">
+          <div class="tier-number">V</div>
+          <div class="tier-label">Void</div>
+          <div class="tier-bonus">+25% XP</div>
+          <div class="tier-reward"><strong>Void border + title</strong><br>Unlocks the title <em>&ldquo;Transcendent [Skill]&rdquo;</em> &mdash; the ultimate prestige mark.</div>
+        </div>
+      </div>
+
+      <!-- ══════ Leaderboard Impact ══════ -->
+      <h2 class="section-title"><span class="section-icon">&#127941;</span> Leaderboard Impact</h2>
+      <div class="info-box">
+        <p style="font-size:13px;color:var(--text);line-height:1.6;margin-bottom:10px;">
+          Each prestige completion adds <strong>99 bonus levels</strong> to your total skill level for leaderboard ranking purposes. This means a prestiged player will always rank higher than a non-prestiged player with the same current levels.
+        </p>
+        <div class="formula-box">
+          <code>totalLevel = sum(currentLevels) + sum(prestigeCount &times; 99) per skill</code>
+          <div class="formula-note">The maximum possible total with all 13 skills at level 99 and prestige tier 5 each: 13 &times; 99 + 13 &times; 5 &times; 99 = 1,287 + 6,435 = <strong>7,722</strong></div>
+        </div>
+
+        <div class="lb-example">
+          <div class="lb-example-title">Example: Developer skill</div>
+          <div class="lb-row">
+            <span class="lb-row-label">Current level</span>
+            <span class="lb-row-value">50</span>
+          </div>
+          <div class="lb-row">
+            <span class="lb-row-label">Prestige count</span>
+            <span class="lb-row-value">2</span>
+          </div>
+          <div class="lb-row">
+            <span class="lb-row-label">Bonus levels</span>
+            <span class="lb-row-value">2 &times; 99 = 198</span>
+          </div>
+          <div class="lb-row" style="border-top:1px solid var(--border-inner);padding-top:6px;margin-top:4px;">
+            <span class="lb-row-label" style="color:var(--gold);font-weight:600">Effective total (this skill)</span>
+            <span class="lb-row-value">248</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════ Strategy Tips ══════ -->
+      <h2 class="section-title"><span class="section-icon">&#128218;</span> Strategy Tips</h2>
+      <div class="info-box">
+        <ul class="tip-list">
+          <li><strong>Prestige your primary skill first.</strong> The skill you use most will benefit the most from the XP bonus, since you will be earning XP for it constantly.</li>
+          <li><strong>Stack with Grindly bonuses.</strong> The prestige XP multiplier stacks multiplicatively with the Grindly skill XP bonus (up to +43% at Grindly level 99). Combined, this dramatically cuts leveling time.</li>
+          <li><strong>Consider leaderboard impact.</strong> Each prestige adds 99 effective levels. If you are competing on the leaderboard, prestiging multiple skills will push your total far beyond the base cap of 1,287.</li>
+          <li><strong>Plan for the time investment.</strong> Each prestige cycle requires leveling from 0 to 99 again (~1,000 hours base). With the XP bonus from prior prestiges, each subsequent cycle is faster: Tier 1 cuts it to ~952h, Tier 4 cuts it to ~833h.</li>
+          <li><strong>In-game skills (Warrior, Crafter, Farmer, Chef) prestige too.</strong> While these level through gameplay rather than tracking, the same prestige rules apply. Warrior prestige is particularly valuable for the leaderboard boost.</li>
+          <li><strong>Cosmetic rewards are permanent.</strong> Even while re-leveling after a prestige, your earned borders, badges, frames, and titles remain visible on your profile.</li>
+        </ul>
+      </div>
+
+      <!-- ══════ FAQ ══════ -->
+      <h2 class="section-title"><span class="section-icon">&#10067;</span> FAQ</h2>
+      <div class="info-box">
+        <h3 style="font-size:14px;color:var(--text-bright);margin-bottom:6px;">Do I lose my items or gold when I prestige?</h3>
+        <p style="font-size:13px;color:var(--text-dim);margin-bottom:14px;">No. Prestige only resets the skill's XP and level. Your inventory, gold, equipment, farm, and all other progress remain untouched.</p>
+
+        <h3 style="font-size:14px;color:var(--text-bright);margin-bottom:6px;">Can I prestige all skills?</h3>
+        <p style="font-size:13px;color:var(--text-dim);margin-bottom:14px;">Yes. Every skill in the game can be prestiged independently up to 5 times, including in-game skills like Warrior, Crafter, Farmer, and Chef.</p>
+
+        <h3 style="font-size:14px;color:var(--text-bright);margin-bottom:6px;">Does the XP bonus apply retroactively?</h3>
+        <p style="font-size:13px;color:var(--text-dim);margin-bottom:14px;">The prestige XP bonus applies to all future XP earned for that skill. It does not retroactively change existing progress on other skills.</p>
+
+        <h3 style="font-size:14px;color:var(--text-bright);margin-bottom:6px;">What happens after Tier 5?</h3>
+        <p style="font-size:13px;color:var(--text-dim);">Tier 5 (Void) is the maximum. After reaching it, the skill can still be leveled to 99 but cannot be prestiged further. You keep the full +25% XP bonus and all cosmetic rewards permanently.</p>
+      </div>
+
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-links">
+          <a href="index.html">Wiki Home</a>
+          <a href="patches.html">Patch Notes</a>
+          <a href="roadmap.html">Roadmap</a>
+          <a href="https://github.com/borissharikoff-droid/Idly" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <div class="footer-divider"></div>
+        <p style="font-size:11px;color:var(--text-dim)">Grindly Wiki &mdash; Community-maintained game guide</p>
+        <p class="footer-sub">Data auto-synced from game source</p>
+      </div>
+    </footer>
+  </main>
+</div>
+
+<!-- ══════ Scripts ══════ -->
+<script src="wiki-search.js"></script>
+<script src="wiki-nav.js"></script>
+<script src="wiki-config.js"></script>
+<script src="wiki-skins.js"></script>
+<script src="wiki-online.js"></script>
+
+<script>
+// Collapsible nav
+document.querySelectorAll('.nav-group-title').forEach(function(t) {
+  t.addEventListener('click', function() { this.parentElement.classList.toggle('collapsed'); });
+});
+</script>
+
+<button class="back-to-top" id="backToTop" title="Back to top">&#8593;</button>
+<script>var btt=document.getElementById('backToTop');window.addEventListener('scroll',function(){btt.classList.toggle('visible',window.scrollY>300)});btt.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});</script>
+</body>
+</html>

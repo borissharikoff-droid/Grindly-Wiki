@@ -69,6 +69,8 @@
         <button class="fm-tab" onclick="fmSwitch('zips',this)">Seed Zips</button>
         <button class="fm-tab" onclick="fmSwitch('slots',this)">Farm Slots</button>
         <button class="fm-tab" onclick="fmSwitch('cabinet',this)">Seed Cabinet</button>
+        <button class="fm-tab" onclick="fmSwitch('rot',this)">Crop Rot</button>
+        <button class="fm-tab" onclick="fmSwitch('farmhouse',this)">Farmhouse</button>
       </div>
 
       <!-- ═══ Seeds Panel ═══ -->
@@ -340,17 +342,46 @@
       <div id="panel-slots" class="fm-panel">
         <div class="info-box">
           <h4>Slot Expansion</h4>
-          <p>You start with <strong>1 farm slot</strong> and can unlock up to <strong>8 total</strong>. Each additional slot costs gold:</p>
-          <ul>
-            <li><strong>Slot 1:</strong> Free</li>
-            <li><strong>Slot 2:</strong> 100g</li>
-            <li><strong>Slot 3:</strong> 350g</li>
-            <li><strong>Slot 4:</strong> 800g</li>
-            <li><strong>Slot 5:</strong> 2,000g</li>
-            <li><strong>Slot 6:</strong> 5,000g</li>
-            <li><strong>Slot 7:</strong> 10,000g</li>
-            <li><strong>Slot 8:</strong> 18,000g</li>
-          </ul>
+          <p>You start with <strong>1 farm slot</strong> and can unlock up to <strong>16 total</strong>, split across two fields. Each slot requires gold and a minimum Farmer level. Some high-tier slots also require a secondary skill level.</p>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h4>&#127793; Field 1 &mdash; Slots 1&ndash;8</h4>
+          <div class="table-wrap" style="margin-top:10px">
+            <table>
+              <thead><tr><th>Slot</th><th>Gold Cost</th><th>Farmer Lvl</th><th>Other</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>Free</td><td>&mdash;</td><td>&mdash;</td></tr>
+                <tr><td>2</td><td>200g</td><td>&mdash;</td><td>&mdash;</td></tr>
+                <tr><td>3</td><td>600g</td><td>&mdash;</td><td>&mdash;</td></tr>
+                <tr><td>4</td><td>1,500g</td><td>5</td><td>&mdash;</td></tr>
+                <tr><td>5</td><td>3,500g</td><td>10</td><td>&mdash;</td></tr>
+                <tr><td>6</td><td>7,000g</td><td>15</td><td>&mdash;</td></tr>
+                <tr><td>7</td><td>12,000g</td><td>20</td><td>&mdash;</td></tr>
+                <tr><td>8</td><td>20,000g</td><td>25</td><td>&mdash;</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h4>&#127795; Field 2 &mdash; Slots 9&ndash;16</h4>
+          <p style="margin-bottom:8px">Field 2 unlocks once all 8 Field 1 slots are purchased.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Slot</th><th>Gold Cost</th><th>Farmer Lvl</th><th>Other</th></tr></thead>
+              <tbody>
+                <tr><td>9</td><td>30,000g</td><td>30</td><td>&mdash;</td></tr>
+                <tr><td>10</td><td>40,000g</td><td>35</td><td>&mdash;</td></tr>
+                <tr><td>11</td><td>55,000g</td><td>40</td><td>&mdash;</td></tr>
+                <tr><td>12</td><td>75,000g</td><td>45</td><td>Crafter Lvl 10</td></tr>
+                <tr><td>13</td><td>100,000g</td><td>50</td><td>&mdash;</td></tr>
+                <tr><td>14</td><td>130,000g</td><td>55</td><td>Warrior Lvl 15</td></tr>
+                <tr><td>15</td><td>170,000g</td><td>60</td><td>Crafter Lvl 20</td></tr>
+                <tr><td>16</td><td>220,000g</td><td>70</td><td>Warrior Lvl 25</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -386,6 +417,135 @@
             <li>The cabinet displays each seed type with its <strong>quantity</strong>, <strong>rarity</strong>, and <strong>grow time</strong>.</li>
             <li>You can plant seeds directly from the cabinet into your farm slots.</li>
             <li>Seeds can also be sold on the <strong>Marketplace</strong> to other players.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═══ Crop Rot Panel ═══ -->
+      <div id="panel-rot" class="fm-panel">
+        <div class="info-box">
+          <h4>&#129344; Crop Rot</h4>
+          <p>When you plant a seed, there is a chance the crop will <strong>rot</strong> before it finishes growing. If a crop rots it is destroyed and you receive a <a href="item.html?id=wilted_plant" style="color:var(--gold)">Wilted Plant</a> instead. Rot is rolled at plant time &mdash; the game decides whether the crop will rot and at what point during growth (between 30% and 70% of grow time).</p>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h4>Base Rot Chance by Seed Rarity</h4>
+          <p style="margin-bottom:8px">Higher rarity seeds have a higher base chance of rotting.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Seed Rarity</th><th>Base Rot Chance</th></tr></thead>
+              <tbody>
+                <tr><td><span class="rarity common">Common</span></td><td>12%</td></tr>
+                <tr><td><span class="rarity rare">Rare</span></td><td>17%</td></tr>
+                <tr><td><span class="rarity epic">Epic</span></td><td>22%</td></tr>
+                <tr><td><span class="rarity legendary">Legendary</span></td><td>27%</td></tr>
+                <tr><td><span class="rarity mythic">Mythic</span></td><td>32%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h4>Reducing Rot</h4>
+          <ul>
+            <li>Each <strong>Farmhouse level</strong> reduces rot chance by <strong>2%</strong> (flat). At max Farmhouse (LVL 10) that is &minus;20% reduction.</li>
+            <li>Example: a <span class="rarity legendary">Legendary</span> seed normally has 27% rot. With Farmhouse LVL 5 (&minus;10%) the effective chance drops to <strong>17%</strong>.</li>
+          </ul>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h4>What Happens When a Crop Rots</h4>
+          <ul>
+            <li>The planted slot is cleared.</li>
+            <li>You receive <strong>1 <a href="item.html?id=wilted_plant" style="color:var(--gold)">Wilted Plant</a></strong> in your inventory.</li>
+            <li>A &#129344; toast notification appears: &ldquo;Crop rotted!&rdquo;</li>
+            <li>Rot is checked every 5 seconds while the app is running.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═══ Farmhouse Panel ═══ -->
+      <div id="panel-farmhouse" class="fm-panel">
+        <div class="info-box">
+          <h4>&#127968; Farmhouse</h4>
+          <p>The <strong>Farmhouse</strong> is a permanent building that provides powerful passive bonuses to all your farming activities. It unlocks at <strong>Farmer Level 45</strong> and can be upgraded from Level 1 to 10. Each upgrade requires gold, materials, and a <strong>construction time</strong>.</p>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h4>Bonuses Per Level</h4>
+          <div class="table-wrap" style="margin-top:10px">
+            <table>
+              <thead><tr><th>Lvl</th><th>&#128128; Rot&nbsp;Reduction</th><th>&#9889; Grow&nbsp;Speed</th><th>&#129514; Auto-Compost</th><th>&#127806; Yield&nbsp;Bonus</th><th>&#10024; Auto-Harvest</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>&minus;2%</td><td>&minus;3%</td><td>0%</td><td>0%</td><td>&mdash;</td></tr>
+                <tr><td>2</td><td>&minus;4%</td><td>&minus;5%</td><td>5%</td><td>0%</td><td>&mdash;</td></tr>
+                <tr><td>3</td><td>&minus;6%</td><td>&minus;8%</td><td>8%</td><td>+5%</td><td>&mdash;</td></tr>
+                <tr><td>4</td><td>&minus;8%</td><td>&minus;10%</td><td>10%</td><td>+5%</td><td>&mdash;</td></tr>
+                <tr><td>5</td><td>&minus;10%</td><td>&minus;13%</td><td>13%</td><td>+10%</td><td>&mdash;</td></tr>
+                <tr><td>6</td><td>&minus;12%</td><td>&minus;15%</td><td>15%</td><td>+10%</td><td>&mdash;</td></tr>
+                <tr><td>7</td><td>&minus;14%</td><td>&minus;18%</td><td>18%</td><td>+15%</td><td>&mdash;</td></tr>
+                <tr><td>8</td><td>&minus;16%</td><td>&minus;20%</td><td>20%</td><td>+15%</td><td>&mdash;</td></tr>
+                <tr><td>9</td><td>&minus;18%</td><td>&minus;23%</td><td>23%</td><td>+20%</td><td>&mdash;</td></tr>
+                <tr><td>10</td><td>&minus;20%</td><td>&minus;25%</td><td>25%</td><td>+25%</td><td>&#10024; Yes</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h4>Bonus Descriptions</h4>
+          <ul>
+            <li><strong>&#128128; Rot Reduction</strong> &mdash; Flat reduction to crop rot chance. &minus;2% per farmhouse level.</li>
+            <li><strong>&#9889; Growth Speed</strong> &mdash; Reduces all crop grow times by this percentage.</li>
+            <li><strong>&#129514; Auto-Compost</strong> &mdash; Chance to automatically compost a plot for free when planting a seed.</li>
+            <li><strong>&#127806; Yield Bonus</strong> &mdash; Extra harvest yield on every crop.</li>
+            <li><strong>&#10024; Auto-Harvest</strong> &mdash; Ready crops are automatically collected (LVL 10 only).</li>
+          </ul>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h4>Upgrade Costs &amp; Build Times</h4>
+          <div class="table-wrap" style="margin-top:10px">
+            <table>
+              <thead><tr><th>Lvl</th><th>Gold</th><th>Materials Required</th><th>Build Time</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>8,000g</td><td>Apples &times;15, Blossoms &times;10, Iron Bar &times;5</td><td>5 min</td></tr>
+                <tr><td>2</td><td>18,000g</td><td>Apples &times;20, Blossoms &times;15, Iron Ore &times;20, Wooden Sword &times;1</td><td>20 min</td></tr>
+                <tr><td>3</td><td>35,000g</td><td>Clovers &times;10, Orchids &times;5, Copper Sword &times;1, Magic Essence &times;5</td><td>1 hour</td></tr>
+                <tr><td>4</td><td>55,000g</td><td>Clovers &times;15, Orchids &times;10, Orc Shard &times;8, Copper Plate &times;1</td><td>3 hours</td></tr>
+                <tr><td>5</td><td>85,000g</td><td>Star Bloom &times;5, Crystal Root &times;3, Troll Hide &times;5, Shadow Sword &times;1</td><td>8 hours</td></tr>
+                <tr><td>6</td><td>130,000g</td><td>Star Bloom &times;8, Crystal Root &times;5, Ancient Scale &times;5, Shadow Plate &times;1</td><td>24 hours</td></tr>
+                <tr><td>7</td><td>180,000g</td><td>Crystal Root &times;8, Void Blossom &times;2, Void Crystal &times;3, Golden Sword &times;1</td><td>3 days</td></tr>
+                <tr><td>8</td><td>250,000g</td><td>Void Blossom &times;5, Dragon Scale &times;5, Golden Plate &times;1, Troll Heart &times;1</td><td>5 days</td></tr>
+                <tr><td>9</td><td>350,000g</td><td>Void Blossom &times;8, Dragon Scale &times;8, Void Crystal &times;5, Dragon Heart &times;1</td><td>5 days</td></tr>
+                <tr><td>10</td><td>500,000g</td><td>Void Blossom &times;15, Crystal Root &times;20, Void Crystal &times;10, Void Sword &times;1</td><td>5 days</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h4>Construction</h4>
+          <ul>
+            <li>When you start a build, gold and materials are deducted <strong>immediately</strong>.</li>
+            <li>A progress bar appears showing construction progress and remaining time.</li>
+            <li>Construction continues even while you are on other pages &mdash; but the app must be running.</li>
+            <li>Once the timer completes, the upgrade is applied automatically and bonuses take effect.</li>
+            <li>You cannot start a new upgrade while one is already in progress.</li>
+          </ul>
+        </div>
+
+        <div class="info-box" style="margin-top:14px">
+          <h4>Visual Progression</h4>
+          <p>The farmhouse icon changes as you upgrade:</p>
+          <ul>
+            <li>Level 0: &#127962;&#65039; (ruins)</li>
+            <li>Level 1&ndash;2: &#127968; (house)</li>
+            <li>Level 3&ndash;4: &#127969; (house with garden)</li>
+            <li>Level 5&ndash;6: &#127963;&#65039; (estate)</li>
+            <li>Level 7&ndash;8: &#127960;&#65039; (building construction)</li>
+            <li>Level 9: &#127984; (castle)</li>
+            <li>Level 10: &#127984; (castle &mdash; MAX)</li>
           </ul>
         </div>
       </div>

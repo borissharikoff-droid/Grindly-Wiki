@@ -100,6 +100,9 @@
     { name: 'Star Bloom', url: 'item.html?id=star_bloom', cat: 'Farming', icon: '\u2B50' },
     { name: 'Crystal Root', url: 'item.html?id=crystal_root', cat: 'Farming', icon: '\u{1F48E}' },
     { name: 'Void Blossom', url: 'item.html?id=void_blossom', cat: 'Farming', icon: '\u{1F310}' },
+    { name: 'Wilted Plant', url: 'item.html?id=wilted_plant', cat: 'Farming', icon: '\u{1F940}' },
+    { name: 'Farmhouse', url: 'farming.html', cat: 'Farming', icon: '\u{1F3E0}' },
+    { name: 'Crop Rot', url: 'farming.html', cat: 'Farming', icon: '\u{1F480}' },
     // Chests
     { name: 'Common Bag', url: 'item.html?id=common_chest', cat: 'Chest', icon: '\u{1F4E6}' },
     { name: 'Rare Bag', url: 'item.html?id=rare_chest', cat: 'Chest', icon: '\u{1F381}' },
@@ -116,6 +119,14 @@
     { name: 'Materials', url: 'materials.html', cat: 'Page', icon: '\u{1F48E}' },
     { name: 'Patch Notes', url: 'patches.html', cat: 'Page', icon: '\u{1F4E3}' },
     { name: 'Roadmap', url: 'roadmap.html', cat: 'Page', icon: '\u{1F4CD}' },
+    { name: 'Prestige', url: 'prestige.html', cat: 'Page', icon: '\u2728' },
+    // Prestige tiers
+    { name: 'Prestige Bronze', url: 'prestige.html', cat: 'Prestige', icon: '\u{1F949}' },
+    { name: 'Prestige Silver', url: 'prestige.html', cat: 'Prestige', icon: '\u{1F948}' },
+    { name: 'Prestige Gold', url: 'prestige.html', cat: 'Prestige', icon: '\u{1F947}' },
+    { name: 'Prestige Diamond', url: 'prestige.html', cat: 'Prestige', icon: '\u{1F4A0}' },
+    { name: 'Prestige Void', url: 'prestige.html', cat: 'Prestige', icon: '\u{1F52E}' },
+    { name: 'Transcendent Title', url: 'prestige.html', cat: 'Prestige', icon: '\u2728' },
     // Skills
     { name: 'Developer', url: 'skills.html', cat: 'Skill', icon: '\u{1F4BB}' },
     { name: 'Designer', url: 'skills.html', cat: 'Skill', icon: '\u{1F3A8}' },
