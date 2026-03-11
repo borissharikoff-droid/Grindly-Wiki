@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cooking – Grindly Wiki</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.ck-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:18px}
+.ck-tab{padding:7px 16px;border-radius:8px;border:1px solid var(--border-inner);background:transparent;color:var(--text-dim);font-size:13px;font-family:var(--font-mono);cursor:pointer;transition:all .15s}
+.ck-tab:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
+.ck-tab.active{color:var(--gold);border-color:var(--gold);background:rgba(251,191,36,.08)}
+.ck-panel{display:none}.ck-panel.active{display:block}
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">G</span>
+      <span class="logo-text">Grindly<small>Wiki</small></span>
+    </a>
+    <div class="top-right">
+      <div class="player-count">
+        <span class="pulse-dot"></span>
+        <span>Productivity RPG</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Page Layout -->
+<div class="page-wrap">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="search-box">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search wiki..." autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title"><span class="arrow">&#9660;</span> Pages</div>
+      <ul class="nav-links" id="wikiNav"></ul>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+
+    <div class="breadcrumbs"><a href="index.html">Home</a><span class="bc-sep">&#9656;</span><span class="bc-current">Cooking</span></div>
+
+    <section class="content">
+      <h2 class="section-title"><span class="section-icon">&#127859;</span> Cooking</h2>
+      <p class="section-desc">Prepare ingredients and cook dishes that grant temporary arena buffs. Level up your Chef skill to unlock better recipes and reduce burn chance.</p>
+
+      <div class="info-box warning" style="margin-bottom:18px">
+        <h4>&#128679; Work in Progress</h4>
+        <p>The Cooking system is currently in development for <strong>v3.5</strong>. All values shown below are planned and subject to change before release.</p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="ck-tabs">
+        <button class="ck-tab active" onclick="ckSwitch('overview',this)">Overview</button>
+        <button class="ck-tab" onclick="ckSwitch('recipes',this)">Recipes</button>
+        <button class="ck-tab" onclick="ckSwitch('kitchen',this)">Kitchen</button>
+        <button class="ck-tab" onclick="ckSwitch('perks',this)">Chef Perks</button>
+        <button class="ck-tab" onclick="ckSwitch('burn',this)">Burn Mechanic</button>
+      </div>
+
+      <!-- ═══ Overview Panel ═══ -->
+      <div id="panel-overview" class="ck-panel active">
+        <div class="info-box">
+          <h4>Cook Flow</h4>
+          <div class="flow-chain">
+            <span class="flow-step">Raw Ingredients</span>
+            <span class="flow-arrow">&rarr;</span>
+            <span class="flow-step">Prep</span>
+            <span class="flow-arrow">&rarr;</span>
+            <span class="flow-step">Cook Dish</span>
+          </div>
+        </div>
+        <div class="info-box" style="margin-top:14px">
+          <h4>How It Works</h4>
+          <ul>
+            <li><strong>Two-step process:</strong> First prep raw ingredients, then cook the final dish</li>
+            <li><strong>16 recipes</strong> are planned across all rarity tiers</li>
+            <li>Your <strong>Chef skill</strong> levels up as you cook &mdash; higher level unlocks better recipes</li>
+            <li>Cooked food provides <strong>temporary arena buffs</strong> (ATK, HP, HP Regen boosts lasting a set number of fights)</li>
+            <li><strong>Quality mechanic:</strong> higher Chef level and better kitchen instruments reduce burn chance, yielding better quality food</li>
+          </ul>
+        </div>
+        <div class="info-box" style="margin-top:14px">
+          <h4>Buff System</h4>
+          <ul>
+            <li>Each dish grants a <strong>temporary buff</strong> that lasts for a certain number of arena fights</li>
+            <li>Buffs can boost <strong>ATK</strong>, <strong>HP</strong>, or <strong>HP Regen</strong> (some dishes boost multiple stats)</li>
+            <li>Only one food buff can be active at a time &mdash; eating a new dish replaces the current buff</li>
+            <li><strong>Perfect quality</strong> dishes grant 150% of the listed buff value</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═══ Recipes Panel ═══ -->
+      <div id="panel-recipes" class="ck-panel">
+        <div class="info-box" style="margin-bottom:14px">
+          <h4>&#128220; Planned Recipes</h4>
+          <p>These recipes are planned for the v3.5 release. Values are subject to change.</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Dish</th><th>Rarity</th><th>Ingredients</th><th>Buff</th><th>Duration</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Grilled Wheat</td>
+                <td><span class="rarity common">Common</span></td>
+                <td><a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a> &times;3</td>
+                <td class="perk">+10 HP</td>
+                <td>3 fights</td>
+              </tr>
+              <tr>
+                <td>Herb Soup</td>
+                <td><span class="rarity common">Common</span></td>
+                <td><a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a> &times;3 + <a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a> &times;2</td>
+                <td class="perk">+3 HP Regen</td>
+                <td>3 fights</td>
+              </tr>
+              <tr>
+                <td>Apple Pie</td>
+                <td><span class="rarity rare">Rare</span></td>
+                <td><a href="item.html?id=apples" style="color:var(--gold)">Apples</a> &times;3 + <a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a> &times;2</td>
+                <td class="perk">+20 HP</td>
+                <td>5 fights</td>
+              </tr>
+              <tr>
+                <td>Blossom Tea</td>
+                <td><span class="rarity rare">Rare</span></td>
+                <td><a href="item.html?id=blossoms" style="color:var(--gold)">Blossoms</a> &times;2 + <a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a> &times;2</td>
+                <td class="perk">+4 ATK</td>
+                <td>3 fights</td>
+              </tr>
+              <tr>
+                <td>Clover Stew</td>
+                <td><span class="rarity epic">Epic</span></td>
+                <td><a href="item.html?id=clovers" style="color:var(--gold)">Clovers</a> &times;2 + <a href="item.html?id=herbs" style="color:var(--gold)">Herbs</a> &times;3 + <a href="item.html?id=wheat" style="color:var(--gold)">Wheat</a> &times;3</td>
+                <td class="perk">+8 ATK</td>
+                <td>5 fights</td>
+              </tr>
+              <tr>
+                <td>Dragon Feast</td>
+                <td><span class="rarity legendary">Legendary</span></td>
+                <td><a href="item.html?id=star_bloom" style="color:var(--gold)">Star Bloom</a> &times;2 + <a href="item.html?id=crystal_root" style="color:var(--gold)">Crystal Root</a> &times;1 + <a href="item.html?id=apples" style="color:var(--gold)">Apples</a> &times;3</td>
+                <td class="perk">+15 ATK, +30 HP</td>
+                <td>5 fights</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ═══ Kitchen Panel ═══ -->
+      <div id="panel-kitchen" class="ck-panel">
+        <div class="info-box">
+          <h4>&#127859; Kitchen Instruments</h4>
+          <p>Your kitchen determines how fast you cook and your chance of producing higher quality food. You start with a Basic Campfire and can upgrade by spending gold once you reach the required Chef level.</p>
+        </div>
+        <div class="table-wrap" style="margin-top:14px">
+          <table>
+            <thead>
+              <tr><th>Instrument</th><th>Chef Lvl</th><th>Gold Cost</th><th>Cook Time</th><th>Quality Bonus</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Basic Campfire</td>
+                <td>Lvl 1</td>
+                <td>Free</td>
+                <td>Base</td>
+                <td>&mdash;</td>
+              </tr>
+              <tr>
+                <td>Stone Oven</td>
+                <td>Lvl 10</td>
+                <td>1,000g</td>
+                <td class="perk">-15%</td>
+                <td class="perk">+10% Perfect chance</td>
+              </tr>
+              <tr>
+                <td>Iron Stove</td>
+                <td>Lvl 25</td>
+                <td>5,000g</td>
+                <td class="perk">-30%</td>
+                <td class="perk">+20% Perfect chance</td>
+              </tr>
+              <tr>
+                <td>Master Kitchen</td>
+                <td>Lvl 50</td>
+                <td>15,000g</td>
+                <td class="perk">-50%</td>
+                <td class="perk">+35% Perfect chance</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="info-box" style="margin-top:14px">
+          <h4>Upgrade Notes</h4>
+          <ul>
+            <li>Each instrument <strong>replaces</strong> the previous one &mdash; you only have one active kitchen at a time</li>
+            <li>Better instruments reduce cook time and improve your chance of getting <strong>Perfect</strong> quality dishes</li>
+            <li>Cook time reduction stacks with Chef Perk time reductions</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═══ Chef Perks Panel ═══ -->
+      <div id="panel-perks" class="ck-panel">
+        <div class="info-box">
+          <h4>Level Milestones</h4>
+          <ul>
+            <li><strong>Lvl 5:</strong> -10% cook time</li>
+            <li><strong>Lvl 15:</strong> -15% cook time, 10% double output chance</li>
+            <li><strong>Lvl 30:</strong> -25% cook time, 20% double output chance</li>
+            <li><strong>Lvl 50:</strong> -35% cook time, Instant Prep for common recipes</li>
+            <li><strong>Lvl 70:</strong> -50% cook time, 35% double output chance</li>
+          </ul>
+        </div>
+        <div class="info-box" style="margin-top:14px">
+          <h4>How Chef XP Works</h4>
+          <ul>
+            <li>You earn <strong>Chef XP</strong> every time you successfully cook a dish (even burned dishes give some XP)</li>
+            <li>Higher rarity recipes grant more XP per cook</li>
+            <li>Perk bonuses are applied automatically once you reach the required level</li>
+            <li>Cook time reductions from perks <strong>stack</strong> with kitchen instrument bonuses</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═══ Burn Mechanic Panel ═══ -->
+      <div id="panel-burn" class="ck-panel">
+        <div class="info-box">
+          <h4>&#128293; Burn Chance</h4>
+          <p>Every time you cook a dish, there is a chance it will burn. Burn chance depends on the recipe difficulty, your Chef level, and your kitchen instrument.</p>
+        </div>
+        <div class="info-box" style="margin-top:14px">
+          <h4>What Affects Burn Chance</h4>
+          <ul>
+            <li>Each recipe has a <strong>base burn chance</strong> (higher rarity = higher base burn chance)</li>
+            <li>Higher <strong>Chef level</strong> reduces burn chance</li>
+            <li>Better <strong>kitchen instruments</strong> reduce burn chance</li>
+            <li>Burn chance can never go below <strong>0%</strong></li>
+          </ul>
+        </div>
+        <div class="info-box" style="margin-top:14px">
+          <h4>Quality Tiers</h4>
+          <div class="table-wrap" style="margin-top:10px">
+            <table>
+              <thead>
+                <tr><th>Quality</th><th>Buff Strength</th><th>Chef XP</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span style="color:#888">Burned</span></td>
+                  <td>No buff (0%)</td>
+                  <td class="perk">Reduced XP</td>
+                </tr>
+                <tr>
+                  <td><span style="color:var(--text)">Normal</span></td>
+                  <td class="perk">100% buff</td>
+                  <td class="perk">Full XP</td>
+                </tr>
+                <tr>
+                  <td><span style="color:var(--gold)">Perfect</span></td>
+                  <td class="perk">150% buff</td>
+                  <td class="perk">Full XP + bonus</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="info-box" style="margin-top:14px">
+          <h4>Tips</h4>
+          <ul>
+            <li>Start with <strong>common recipes</strong> to level your Chef skill safely</li>
+            <li>Upgrade your kitchen before attempting epic or legendary recipes</li>
+            <li>Even <strong>burned food</strong> gives some Chef XP, so cooking is never a total waste</li>
+          </ul>
+        </div>
+      </div>
+
+    </section>
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="index.html">Wiki Home</a>
+      <a href="patches.html">Patch Notes</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a href="https://github.com/borissharikoff-droid/Idly" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="footer-divider"></div>
+    <p style="font-size:11px;color:var(--text-dim)">Grindly Wiki &mdash; Community-maintained game guide</p>
+    <p class="footer-sub">Data auto-synced from game source</p>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" title="Back to top">&#8593;</button>
+
+<script>
+(function() {
+  // Tab switching
+  window.ckSwitch = function(id, btn) {
+    document.querySelectorAll('.ck-tab').forEach(function(t){t.classList.remove('active')});
+    document.querySelectorAll('.ck-panel').forEach(function(p){p.classList.remove('active')});
+    if(btn) btn.classList.add('active');
+    var panel = document.getElementById('panel-'+id);
+    if(panel) panel.classList.add('active');
+  };
+
+  // Collapsible nav
+  document.querySelectorAll('.nav-group-title').forEach(function(title) {
+    title.addEventListener('click', function() {
+      this.parentElement.classList.toggle('collapsed');
+    });
+  });
+
+  // Back to top
+  var btt = document.getElementById('backToTop');
+  window.addEventListener('scroll', function() {
+    btt.classList.toggle('visible', window.scrollY > 300);
+  });
+  btt.addEventListener('click', function() {
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+})();
+</script>
+<script src="wiki-search.js"></script>
+<script src="wiki-nav.js"></script>
+<script src="wiki-config.js"></script>
+<script src="wiki-skins.js"></script>
+<script src="wiki-online.js"></script>
+
+</body>
+</html>

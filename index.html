@@ -553,22 +553,12 @@
     </div>
     <div class="nav-group">
       <div class="nav-group-title"><span class="arrow">&#9660;</span> Pages</div>
-      <ul class="nav-links">
-        <li><a href="index.html" class="nav-link active"><span class="nav-dot gold"></span> Wiki Home</a></li>
-        <li><a href="equipment.html" class="nav-link"><span class="nav-dot gold"></span> Equipment</a></li>
-        <li><a href="loot.html" class="nav-link"><span class="nav-dot orange"></span> Loot Bags</a></li>
-        <li><a href="materials.html" class="nav-link"><span class="nav-dot purple"></span> Materials</a></li>
-        <li><a href="arena.html" class="nav-link"><span class="nav-dot red"></span> Arena &amp; Bosses</a></li>
-        <li><a href="crafting.html" class="nav-link"><span class="nav-dot cyan"></span> Crafting</a></li>
-        <li><a href="farming.html" class="nav-link"><span class="nav-dot green"></span> Farming</a></li>
-        <li><a href="skills.html" class="nav-link"><span class="nav-dot blue"></span> Skills</a></li>
-        <li><a href="patches.html" class="nav-link"><span class="nav-dot green"></span> Patch Notes</a></li>
-        <li><a href="roadmap.html" class="nav-link"><span class="nav-dot gold"></span> Roadmap</a></li>
-      </ul>
+      <ul class="nav-links" id="wikiNav"></ul>
     </div>
   </aside>
 
   <main class="main">
+    <div class="breadcrumbs"><span class="bc-current">Wiki Home</span></div>
 
     <!-- ══════ HERO ══════ -->
     <section class="hero-landing">
@@ -635,7 +625,7 @@
       </div>
 
       <div class="hero-stats">
-        <div class="hs-item"><span class="hs-num">12</span><span class="hs-label">Skills</span></div>
+        <div class="hs-item"><span class="hs-num">13</span><span class="hs-label">Skills</span></div>
         <div class="hs-item"><span class="hs-num">89</span><span class="hs-label">Items</span></div>
         <div class="hs-item"><span class="hs-num">6</span><span class="hs-label">Zones</span></div>
         <div class="hs-item"><span class="hs-num">21</span><span class="hs-label">Recipes</span></div>
@@ -800,7 +790,7 @@
       <div class="feat-grid">
         <a href="skills.html" class="fchip">
           <span class="fchip-icon">&#128200;</span>
-          <span class="fchip-label">12 Skills</span>
+          <span class="fchip-label">13 Skills</span>
           <span class="fchip-sub">99 levels, passive XP</span>
         </a>
         <a href="equipment.html" class="fchip">
@@ -822,6 +812,11 @@
           <span class="fchip-icon">&#127793;</span>
           <span class="fchip-label">Farming</span>
           <span class="fchip-sub">9 seeds, 8 plots</span>
+        </a>
+        <a href="cooking.html" class="fchip">
+          <span class="fchip-icon">&#127859;</span>
+          <span class="fchip-label">Cooking</span>
+          <span class="fchip-sub">16 recipes, food buffs</span>
         </a>
         <a href="loot.html" class="fchip">
           <span class="fchip-icon">&#127873;</span>
@@ -851,7 +846,7 @@
     <!-- ══════ Quick Reference ══════ -->
     <section class="content">
       <h2 class="section-title"><span class="section-icon">&#128161;</span> Quick Reference</h2>
-      <div class="card-grid">
+      <div class="ref-grid">
         <div class="info-box" style="flex:1; min-width: 260px;">
           <h3 style="color: var(--gold); margin-bottom: 8px;">Rarity Tiers</h3>
           <table>
@@ -882,10 +877,24 @@
       <div id="latestPatch"></div>
     </section>
 
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-links">
+          <a href="index.html">Wiki Home</a>
+          <a href="patches.html">Patch Notes</a>
+          <a href="roadmap.html">Roadmap</a>
+          <a href="https://github.com/borissharikoff-droid/Idly" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <div class="footer-divider"></div>
+        <p style="font-size:11px;color:var(--text-dim)">Grindly Wiki &mdash; Community-maintained game guide</p>
+        <p class="footer-sub">Data auto-synced from game source</p>
+      </div>
+    </footer>
   </main>
 </div>
 
 <script src="wiki-search.js"></script>
+<script src="wiki-nav.js"></script>
 <script src="wiki-config.js"></script>
 <script src="wiki-skins.js"></script>
 <script src="wiki-online.js"></script>
@@ -951,5 +960,7 @@
 })();
 </script>
 
+<button class="back-to-top" id="backToTop" title="Back to top">&#8593;</button>
+<script>var btt=document.getElementById('backToTop');window.addEventListener('scroll',function(){btt.classList.toggle('visible',window.scrollY>300)});btt.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});</script>
 </body>
 </html>

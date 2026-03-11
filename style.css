@@ -997,3 +997,237 @@ code {
   color: var(--red);
   font-size: 13px;
 }
+
+/* ══════ Back to Top Button ══════ */
+.back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--brown) 100%);
+  color: #0a0804;
+  border: 2px solid var(--gold-bright);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4), 0 0 12px var(--gold-glow);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.back-to-top:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5), 0 0 20px var(--gold-glow);
+}
+
+/* ══════ Breadcrumbs ══════ */
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 28px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-dim);
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  background: rgba(0,0,0,0.15);
+}
+.breadcrumbs a {
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.breadcrumbs a:hover { color: var(--gold); }
+.breadcrumbs .bc-sep { color: var(--border-ornate); font-size: 8px; }
+.breadcrumbs .bc-current { color: var(--text); }
+
+/* ══════ Page Entrance Animations ══════ */
+@keyframes contentFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.main > .content,
+.main > .hero,
+.main > .hero-landing,
+.main > .feat-row,
+.main > .items-showcase,
+.main > .final-cta {
+  animation: contentFadeIn 0.4s ease both;
+}
+.main > *:nth-child(1) { animation-delay: 0s; }
+.main > *:nth-child(2) { animation-delay: 0.05s; }
+.main > *:nth-child(3) { animation-delay: 0.1s; }
+.main > *:nth-child(4) { animation-delay: 0.15s; }
+.main > *:nth-child(5) { animation-delay: 0.2s; }
+.main > *:nth-child(6) { animation-delay: 0.25s; }
+.main > *:nth-child(7) { animation-delay: 0.3s; }
+.main > *:nth-child(8) { animation-delay: 0.35s; }
+
+/* ══════ Tab panel transitions ══════ */
+.eq-panel.active, .lt-panel.active, .ar-panel.active,
+.sk-panel.active, .cr-panel.active, .fm-panel.active,
+.mat-panel.active {
+  animation: tabFadeIn 0.2s ease both;
+}
+@keyframes tabFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ══════ New / Coming Soon badge ══════ */
+.nav-badge-new {
+  font-size: 7px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: rgba(0,255,136,0.12);
+  color: #4ade80;
+  border: 1px solid rgba(0,255,136,0.2);
+  margin-left: auto;
+}
+.nav-badge-soon {
+  font-size: 7px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: rgba(251,191,36,0.1);
+  color: var(--gold-dim);
+  border: 1px solid rgba(251,191,36,0.15);
+  margin-left: auto;
+}
+
+/* ══════ Improved table hover ══════ */
+tbody tr {
+  transition: background 0.1s ease;
+}
+
+/* ══════ Enhanced info-box variants ══════ */
+.info-box.tip {
+  border-left: 3px solid #4ade80;
+  background: linear-gradient(135deg, rgba(74,222,128,0.06) 0%, var(--bg-card) 50%);
+}
+.info-box.warning {
+  border-left: 3px solid #fbbf24;
+  background: linear-gradient(135deg, rgba(251,191,36,0.06) 0%, var(--bg-card) 50%);
+}
+.info-box.danger {
+  border-left: 3px solid #ef4444;
+  background: linear-gradient(135deg, rgba(239,68,68,0.06) 0%, var(--bg-card) 50%);
+}
+
+/* ══════ Search keyboard nav highlight ══════ */
+.search-result-item.kb-active {
+  background: var(--gold-glow);
+  color: var(--gold);
+}
+
+/* ══════ Improved footer ══════ */
+.site-footer {
+  border-top: 2px solid var(--border-ornate);
+  padding: 24px 28px;
+  background: linear-gradient(180deg, var(--bg-dark) 0%, #080604 100%);
+}
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.footer-links {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.footer-links a {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footer-links a:hover { color: var(--gold); }
+.footer-divider {
+  width: 60px;
+  height: 1px;
+  background: var(--border-ornate);
+  margin: 2px 0;
+}
+
+/* ══════ Quick Reference 2-col fix ══════ */
+.ref-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 768px) {
+  .ref-grid { grid-template-columns: 1fr; }
+  .breadcrumbs { padding: 8px 14px; font-size: 10px; }
+  .back-to-top { bottom: 16px; right: 16px; width: 36px; height: 36px; font-size: 16px; }
+}
+
+/* ══════ Cooking page styles ══════ */
+.ck-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:18px}
+.ck-tab{padding:7px 16px;border-radius:8px;border:1px solid var(--border-inner);background:transparent;color:var(--text-dim);font-size:13px;font-family:var(--font-mono);cursor:pointer;transition:all .15s}
+.ck-tab:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
+.ck-tab.active{color:var(--gold);border-color:var(--gold);background:rgba(251,191,36,.08)}
+.ck-panel{display:none}.ck-panel.active{display:block}
+
+/* ══════ Tooltip hover cards ══════ */
+.has-tooltip {
+  position: relative;
+}
+.has-tooltip::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: var(--bg-dark);
+  border: 1px solid var(--border-ornate);
+  color: var(--text);
+  font-size: 10px;
+  font-family: var(--font-body);
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.15s ease;
+  pointer-events: none;
+  z-index: 60;
+}
+.has-tooltip:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ══════ Sidebar version tag ══════ */
+.sidebar-version {
+  padding: 8px 14px;
+  margin-top: auto;
+  font-size: 9px;
+  font-family: var(--font-mono);
+  color: var(--text-dim);
+  opacity: 0.5;
+  letter-spacing: 0.5px;
+}
