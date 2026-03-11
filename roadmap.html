@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roadmap – Grindly Wiki</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── Roadmap Page ── */
+.rm-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin-bottom:24px}
+.rm-stat{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 8px;background:rgba(0,0,0,.25);border:1px solid var(--border-inner);border-radius:6px;text-align:center}
+.rm-stat-num{font-family:var(--font-title);font-size:20px;font-weight:700;color:var(--gold-bright)}
+.rm-stat-label{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-dim)}
+
+/* Status badges */
+.rm-badge{font-size:9px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:1px;padding:2px 8px;border-radius:4px;white-space:nowrap;font-weight:700}
+.rm-badge.done{background:rgba(0,255,136,.1);color:#00ff88;border:1px solid rgba(0,255,136,.2)}
+.rm-badge.active{background:rgba(251,191,36,.1);color:#f0c850;border:1px solid rgba(251,191,36,.25);animation:pulse 2s ease-in-out infinite}
+.rm-badge.planned{background:rgba(96,165,250,.08);color:#60a5fa;border:1px solid rgba(96,165,250,.2)}
+.rm-badge.idea{background:rgba(255,255,255,.04);color:var(--text-dim);border:1px solid rgba(255,255,255,.06)}
+
+/* Timeline */
+.rm-timeline{position:relative;padding-left:28px}
+.rm-timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--gold-dim) 0%,var(--border-ornate) 40%,var(--border-inner) 100%)}
+
+.rm-phase{position:relative;margin-bottom:24px}
+.rm-phase::before{content:'';position:absolute;left:-22px;top:6px;width:10px;height:10px;border-radius:50%;border:2px solid var(--border-ornate);background:var(--bg-dark)}
+.rm-phase.done::before{background:var(--green);border-color:var(--green);box-shadow:0 0 8px rgba(0,255,136,.4)}
+.rm-phase.active::before{background:var(--gold);border-color:var(--gold-bright);box-shadow:0 0 8px var(--gold-glow);animation:pulse 2s ease-in-out infinite}
+.rm-phase.planned::before{background:#60a5fa;border-color:#60a5fa}
+
+.rm-phase-header{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.rm-phase-title{font-family:var(--font-title);font-size:15px;font-weight:700;color:var(--text-bright)}
+.rm-phase-date{font-family:var(--font-mono);font-size:10px;color:var(--text-dim)}
+
+.rm-features{display:flex;flex-direction:column;gap:4px}
+.rm-feature{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:6px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.03);font-size:12px;color:var(--text);transition:background .12s}
+.rm-feature:hover{background:rgba(212,168,67,.05)}
+.rm-feature-icon{font-size:14px;width:22px;text-align:center;flex-shrink:0}
+.rm-feature-name{flex:1;font-weight:500}
+.rm-feature-detail{font-size:10px;color:var(--text-dim);font-family:var(--font-mono)}
+
+/* Progress bar for active phase */
+.rm-progress{margin-top:8px;height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+.rm-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold-bright));border-radius:2px;transition:width .3s}
+
+/* Legend */
+.rm-legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.rm-legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-dim)}
+.rm-legend-dot{width:8px;height:8px;border-radius:50%}
+.rm-legend-dot.done{background:var(--green)}
+.rm-legend-dot.active{background:var(--gold)}
+.rm-legend-dot.planned{background:#60a5fa}
+.rm-legend-dot.idea{background:var(--text-dim)}
+
+@media(max-width:768px){
+  .rm-stats{grid-template-columns:repeat(3,1fr);gap:6px}
+  .rm-stat{padding:8px 4px}
+  .rm-stat-num{font-size:16px}
+  .rm-timeline{padding-left:22px}
+  .rm-phase-header{flex-direction:column;align-items:flex-start;gap:4px}
+}
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">G</span>
+      <span class="logo-text">Grindly<small>Wiki</small></span>
+    </a>
+    <div class="top-right">
+      <div class="player-count">
+        <span class="pulse-dot"></span>
+        <span>Productivity RPG</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Page Layout -->
+<div class="page-wrap">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="search-box">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search wiki..." autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title"><span class="arrow">&#9660;</span> Pages</div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link"><span class="nav-dot gold"></span> Wiki Home</a></li>
+        <li><a href="equipment.html" class="nav-link"><span class="nav-dot gold"></span> Equipment</a></li>
+        <li><a href="loot.html" class="nav-link"><span class="nav-dot orange"></span> Loot Bags</a></li>
+        <li><a href="materials.html" class="nav-link"><span class="nav-dot purple"></span> Materials</a></li>
+        <li><a href="arena.html" class="nav-link"><span class="nav-dot red"></span> Arena &amp; Bosses</a></li>
+        <li><a href="crafting.html" class="nav-link"><span class="nav-dot cyan"></span> Crafting</a></li>
+        <li><a href="farming.html" class="nav-link"><span class="nav-dot green"></span> Farming</a></li>
+        <li><a href="skills.html" class="nav-link"><span class="nav-dot blue"></span> Skills</a></li>
+        <li><a href="patches.html" class="nav-link"><span class="nav-dot green"></span> Patch Notes</a></li>
+        <li><a href="roadmap.html" class="nav-link active"><span class="nav-dot gold"></span> Roadmap</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+
+    <!-- Hero -->
+    <section class="hero">
+      <h1>Roadmap</h1>
+      <p class="hero-sub">What's been built, what's in progress, and what's coming next.</p>
+
+      <!-- Live game stats -->
+      <div class="rm-stats" id="liveStats">
+        <div class="rm-stat"><span class="rm-stat-num">73</span><span class="rm-stat-label">Items</span></div>
+        <div class="rm-stat"><span class="rm-stat-num">13</span><span class="rm-stat-label">Skills</span></div>
+        <div class="rm-stat"><span class="rm-stat-num">6</span><span class="rm-stat-label">Arena Zones</span></div>
+        <div class="rm-stat"><span class="rm-stat-num">24</span><span class="rm-stat-label">Mobs &amp; Bosses</span></div>
+        <div class="rm-stat"><span class="rm-stat-num">23</span><span class="rm-stat-label">Craft Recipes</span></div>
+        <div class="rm-stat"><span class="rm-stat-num">16</span><span class="rm-stat-label">Cook Recipes</span></div>
+        <div class="rm-stat"><span class="rm-stat-num">9</span><span class="rm-stat-label">Crops</span></div>
+        <div class="rm-stat"><span class="rm-stat-num">4</span><span class="rm-stat-label">Chest Tiers</span></div>
+      </div>
+    </section>
+
+    <section class="content">
+      <h2 class="section-title"><span class="section-icon">&#128205;</span> Development Timeline</h2>
+      <p class="section-desc">Each phase represents a major milestone. Features move from Idea → Planned → In Progress → Done.</p>
+
+      <div class="rm-legend">
+        <div class="rm-legend-item"><span class="rm-legend-dot done"></span> Released</div>
+        <div class="rm-legend-item"><span class="rm-legend-dot active"></span> In Progress</div>
+        <div class="rm-legend-item"><span class="rm-legend-dot planned"></span> Planned</div>
+        <div class="rm-legend-item"><span class="rm-legend-dot idea"></span> Idea</div>
+      </div>
+
+      <div class="rm-timeline" id="timeline">
+
+        <!-- ═══ Phase: Core Systems (Done) ═══ -->
+        <div class="rm-phase done">
+          <div class="rm-phase-header">
+            <span class="rm-badge done">Released</span>
+            <span class="rm-phase-title">Core Systems</span>
+            <span class="rm-phase-date">v1.0 – v2.0 · Dec 2025</span>
+          </div>
+          <div class="rm-features">
+            <div class="rm-feature"><span class="rm-feature-icon">📊</span><span class="rm-feature-name">Activity tracking &amp; skill XP</span><span class="rm-feature-detail">13 skills</span></div>
+            <div class="rm-feature"><span class="rm-feature-icon">📦</span><span class="rm-feature-name">Loot system &amp; chests</span><span class="rm-feature-detail">73 items · 4 tiers</span></div>
+            <div class="rm-feature"><span class="rm-feature-icon">⚔️</span><span class="rm-feature-name">Arena &amp; boss battles</span><span class="rm-feature-detail">6 zones · 24 enemies</span></div>
+            <div class="rm-feature"><span class="rm-feature-icon">🏪</span><span class="rm-feature-name">Marketplace (P2P trading)</span><span class="rm-feature-detail">Supabase-backed</span></div>
+            <div class="rm-feature"><span class="rm-feature-icon">👥</span><span class="rm-feature-name">Friends, chat &amp; leaderboard</span><span class="rm-feature-detail">Social layer</span></div>
+            <div class="rm-feature"><span class="rm-feature-icon">🏆</span><span class="rm-feature-name">Achievements system</span><span class="rm-feature-detail">Milestones &amp; badges</span></div>
+          </div>
+        </div>
+
+        <!-- ═══ Phase: Production Skills (Done) ═══ -->
+        <div class="rm-phase done">
+          <div class="rm-phase-header">
+            <span class="rm-badge done">Released</span>
+            <span class="rm-phase-title">Production Skills</span>
+            <span class="rm-phase-date">v3.0 – v3.3 · Jan–Feb 2026</span>
+          </div>
+          <div class="rm-features">
+            <div class="rm-feature"><span class="rm-feature-icon">⚒️</span><span class="rm-feature-name">Crafting system</span><span class="rm-feature-detail">23 recipes</span></div>
+            <div class="rm-feature"><span class="rm-feature-icon">🌾</span><span class="rm-feature-name">Farming &amp; crops</span><span class="rm-feature-detail">9 seeds · auto-harvest</span></div>
+            <div class="rm-feature"><span class="rm-feature-icon">🏠</span><span class="rm-feature-name">Grindly companion pet</span><span class="rm-feature-detail">Level-up bonuses</span></div>
+            <div class="rm-feature"><span class="rm-feature-icon">📜</span><span class="rm-feature-name">Quest system</span><span class="rm-feature-detail">Daily &amp; weekly</span></div>
+            <div class="rm-feature"><span class="rm-feature-icon">🎨</span><span class="rm-feature-name">Cosmetic profile cards</span><span class="rm-feature-detail">FlexCard</span></div>
+          </div>
+        </div>
+
+        <!-- ═══ Phase: Cooking (Active) ═══ -->
+        <div class="rm-phase active">
+          <div class="rm-phase-header">
+            <span class="rm-badge active">In Progress</span>
+            <span class="rm-phase-title">Cooking &amp; Food Buffs</span>
+            <span class="rm-phase-date">v3.5 · Mar 2026</span>
+          </div>
+          <div class="rm-features">
+            <div class="rm-feature"><span class="rm-feature-icon">🍳</span><span class="rm-feature-name">Cooking system — two-step recipes</span><span class="rm-feature-detail">16 recipes</span></div>
+            <div class="rm-feature"><span class="rm-feature-icon">🔧</span><span class="rm-feature-name">Kitchen instruments &amp; upgrades</span><span class="rm-feature-detail">6 instruments</span></div>
+            <div class="rm-feature"><span class="rm-feature-icon">🔥</span><span class="rm-feature-name">Burn &amp; quality mechanics</span><span class="rm-feature-detail">Risk/reward rolls</span></div>
+            <div class="rm-feature"><span class="rm-feature-icon">🍖</span><span class="rm-feature-name">Food buffs for arena &amp; skills</span><span class="rm-feature-detail">Temp bonuses</span></div>
+            <div class="rm-feature"><span class="rm-feature-icon">👨‍🍳</span><span class="rm-feature-name">Chef XP &amp; leveling</span><span class="rm-feature-detail">Speed &amp; double perks</span></div>
+          </div>
+          <div class="rm-progress"><div class="rm-progress-fill" style="width:70%"></div></div>
+        </div>
+
+        <!-- ═══ Phase: Dungeons (Planned) ═══ -->
+        <div class="rm-phase planned">
+          <div class="rm-phase-header">
+            <span class="rm-badge planned">Planned</span>
+            <span class="rm-phase-title">Dungeons &amp; Endgame</span>
+            <span class="rm-phase-date">v4.0 · Q2 2026</span>
+          </div>
+          <div class="rm-features">
+            <div class="rm-feature"><span class="rm-feature-icon">🏰</span><span class="rm-feature-name">Multi-room dungeon crawls</span><span class="rm-feature-detail">Procedural layouts</span></div>
+            <div class="rm-feature"><span class="rm-feature-icon">💀</span><span class="rm-feature-name">Mythic boss encounters</span><span class="rm-feature-detail">Unique mechanics</span></div>
+            <div class="rm-feature"><span class="rm-feature-icon">✨</span><span class="rm-feature-name">Mythic-tier equipment</span><span class="rm-feature-detail">Set bonuses</span></div>
+            <div class="rm-feature"><span class="rm-feature-icon">🗝️</span><span class="rm-feature-name">Dungeon keys from arena bosses</span><span class="rm-feature-detail">Gate mechanic</span></div>
+          </div>
+        </div>
+
+        <!-- ═══ Phase: Guild System (Planned) ═══ -->
+        <div class="rm-phase planned">
+          <div class="rm-phase-header">
+            <span class="rm-badge planned">Planned</span>
+            <span class="rm-phase-title">Guilds &amp; Co-op</span>
+            <span class="rm-phase-date">v4.5 · Q3 2026</span>
+          </div>
+          <div class="rm-features">
+            <div class="rm-feature"><span class="rm-feature-icon">🛡️</span><span class="rm-feature-name">Guild creation &amp; management</span><span class="rm-feature-detail">Roles &amp; perms</span></div>
+            <div class="rm-feature"><span class="rm-feature-icon">⚔️</span><span class="rm-feature-name">Guild boss raids</span><span class="rm-feature-detail">Shared HP pool</span></div>
+            <div class="rm-feature"><span class="rm-feature-icon">🏆</span><span class="rm-feature-name">Guild leaderboard</span><span class="rm-feature-detail">Weekly rankings</span></div>
+            <div class="rm-feature"><span class="rm-feature-icon">📦</span><span class="rm-feature-name">Guild bank &amp; shared storage</span><span class="rm-feature-detail">Donate items</span></div>
+          </div>
+        </div>
+
+        <!-- ═══ Phase: Prestige (Idea) ═══ -->
+        <div class="rm-phase">
+          <div class="rm-phase-header">
+            <span class="rm-badge idea">Idea</span>
+            <span class="rm-phase-title">Prestige &amp; Seasons</span>
+            <span class="rm-phase-date">v5.0 · TBD</span>
+          </div>
+          <div class="rm-features">
+            <div class="rm-feature"><span class="rm-feature-icon">🔄</span><span class="rm-feature-name">Prestige reset with permanent bonuses</span><span class="rm-feature-detail">New game+</span></div>
+            <div class="rm-feature"><span class="rm-feature-icon">📅</span><span class="rm-feature-name">Seasonal events &amp; limited items</span><span class="rm-feature-detail">Time-limited</span></div>
+            <div class="rm-feature"><span class="rm-feature-icon">🎭</span><span class="rm-feature-name">Transmog &amp; skin system</span><span class="rm-feature-detail">Visual customization</span></div>
+            <div class="rm-feature"><span class="rm-feature-icon">📊</span><span class="rm-feature-name">Advanced analytics dashboard</span><span class="rm-feature-detail">Deep insights</span></div>
+          </div>
+        </div>
+
+      </div><!-- /timeline -->
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p>Grindly Wiki &mdash; Community-maintained game guide</p>
+        <p class="footer-sub">Data auto-synced from game source</p>
+      </div>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+(function(){
+  // Collapsible nav
+  document.querySelectorAll('.nav-group-title').forEach(function(title) {
+    title.addEventListener('click', function() {
+      this.parentElement.classList.toggle('collapsed');
+    });
+  });
+})();
+</script>
+<script src="wiki-search.js"></script>
+<script src="wiki-config.js"></script>
+<script src="wiki-skins.js"></script>
+<script src="wiki-online.js"></script>
+
+</body>
+</html>
