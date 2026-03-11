@@ -49,6 +49,7 @@
     { name: 'Attack Potion', url: 'item.html?id=atk_potion', cat: 'Consumable', icon: '\u2697\uFE0F' },
     { name: 'Vitality Potion', url: 'item.html?id=hp_potion', cat: 'Consumable', icon: '\u{1F48A}' },
     { name: 'Regen Potion', url: 'item.html?id=regen_potion', cat: 'Consumable', icon: '\u{1F489}' },
+    { name: 'Death Insurance', url: 'item.html?id=death_insurance', cat: 'Consumable', icon: '\u{1F6E1}\uFE0F' },
     // Raw Materials
     { name: 'Iron Ore', url: 'item.html?id=ore_iron', cat: 'Material', icon: '\u{1FAA8}' },
     { name: 'Monster Fang', url: 'item.html?id=monster_fang', cat: 'Material', icon: '\u{1F9B7}' },

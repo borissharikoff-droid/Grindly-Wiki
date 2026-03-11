@@ -569,10 +569,11 @@ var ITEMS = [
   { id:'craft_dragon_crown', name:'Dragon Crown', slot:'head', rarity:'legendary', icon:'\uD83D\uDC51', desc:'A crown forged from dragon scales \u2014 radiates ancient power.', perks:[{type:'atk_boost',value:8,desc:'+8 ATK'},{type:'hp_boost',value:30,desc:'+30 HP'}] },
   { id:'craft_troll_aegis', name:'Troll Aegis', slot:'body', rarity:'legendary', icon:'\uD83D\uDC9C', desc:'Armor fueled by a troll heart \u2014 regenerates endlessly.', perks:[{type:'hp_boost',value:40,desc:'+40 HP'},{type:'hp_regen_boost',value:8,desc:'+8 HP Regen/s'}] },
   { id:'craft_dragonfire_blade', name:'Dragonfire Blade', slot:'weapon', rarity:'mythic', icon:'\uD83D\uDD25', desc:'Forged in dragonfire \u2014 the ultimate weapon.', perks:[{type:'atk_boost',value:20,desc:'+20 ATK'},{type:'hp_boost',value:15,desc:'+15 HP'},{type:'hp_regen_boost',value:5,desc:'+5 HP Regen/s'}] },
+  { id:'death_insurance', name:'Death Insurance', slot:'consumable', rarity:'rare', icon:'\uD83D\uDEE1\uFE0F', desc:'Auto-consumed on death to prevent item loss. Gold penalty still applies.', perks:[] },
   // Chests
   { id:'common_chest', name:'Common Bag', slot:'chest', rarity:'common', icon:'\uD83D\uDCE6', desc:'A basic loot bag. Contains common equipment.', perks:[], chest:'common_chest' },
-  { id:'rare_chest', name:'Rare Bag', slot:'chest', rarity:'rare', icon:'\uD83C\uDF81', desc:'A quality loot bag. Contains common and rare equipment.', perks:[], chest:'rare_chest' },
-  { id:'epic_chest', name:'Epic Bag', slot:'chest', rarity:'epic', icon:'\uD83E\uDE99', desc:'A superior loot bag. Contains rare and epic equipment, plus potions.', perks:[], chest:'epic_chest' },
+  { id:'rare_chest', name:'Rare Bag', slot:'chest', rarity:'rare', icon:'\uD83C\uDF81', desc:'A quality loot bag. Contains common and rare equipment, with a small chance at epic.', perks:[], chest:'rare_chest' },
+  { id:'epic_chest', name:'Epic Bag', slot:'chest', rarity:'epic', icon:'\uD83E\uDE99', desc:'A superior loot bag. Contains rare and epic equipment, with a small chance at legendary, plus potions.', perks:[], chest:'epic_chest' },
   { id:'legendary_chest', name:'Legendary Bag', slot:'chest', rarity:'legendary', icon:'\uD83D\uDC8E', desc:'An extraordinary loot bag. Contains epic, legendary, and mythic equipment, plus potions.', perks:[], chest:'legendary_chest' },
 ];
 
@@ -602,13 +603,14 @@ var RECIPES = [
   { id:'recipe_warlord_gauntlets', out:'craft_warlord_gauntlets', ing:[{id:'warlord_sigil',qty:2},{id:'orc_shard',qty:5},{id:'clovers',qty:3}], lvl:40, xp:350, sec:1500 },
   { id:'recipe_troll_aegis', out:'craft_troll_aegis', ing:[{id:'troll_heart',qty:2},{id:'troll_hide',qty:5},{id:'ancient_dust',qty:2},{id:'crystal_root',qty:1}], lvl:60, xp:700, sec:3000 },
   { id:'recipe_dragonfire_blade', out:'craft_dragonfire_blade', ing:[{id:'dragon_heart',qty:2},{id:'dragon_scale',qty:5},{id:'void_fragment',qty:2},{id:'star_bloom',qty:3}], lvl:80, xp:1500, sec:5400 },
+  { id:'recipe_death_insurance', out:'death_insurance', outQty:1, ing:[{id:'wheat',qty:5},{id:'herbs',qty:5}], lvl:10, xp:25, sec:20 },
 ];
 
 // Chest drop tables
 var CHESTS = {
   common_chest: { name:'Common Bag', rarity:'common', items:['wooden_helm','wooden_plate','wooden_sword','wooden_legs','wooden_ring'] },
-  rare_chest: { name:'Rare Bag', rarity:'rare', items:['wooden_helm','wooden_plate','wooden_sword','wooden_legs','wooden_ring','copper_helm','copper_plate','copper_sword','copper_legs','copper_ring'] },
-  epic_chest: { name:'Epic Bag', rarity:'epic', items:['copper_helm','copper_plate','copper_sword','copper_legs','copper_ring','shadow_helm','shadow_plate','shadow_sword','shadow_legs','shadow_ring','atk_potion','hp_potion','regen_potion'] },
+  rare_chest: { name:'Rare Bag', rarity:'rare', items:['wooden_helm','wooden_plate','wooden_sword','wooden_legs','wooden_ring','copper_helm','copper_plate','copper_sword','copper_legs','copper_ring','shadow_helm','shadow_plate','shadow_sword','shadow_legs','shadow_ring'] },
+  epic_chest: { name:'Epic Bag', rarity:'epic', items:['copper_helm','copper_plate','copper_sword','copper_legs','copper_ring','shadow_helm','shadow_plate','shadow_sword','shadow_legs','shadow_ring','golden_helm','golden_plate','golden_sword','golden_legs','golden_ring','atk_potion','hp_potion','regen_potion','def_potion'] },
   legendary_chest: { name:'Legendary Bag', rarity:'legendary', items:['shadow_helm','shadow_plate','shadow_sword','shadow_legs','shadow_ring','golden_helm','golden_plate','golden_sword','golden_legs','golden_ring','void_helm','void_plate','void_sword','void_legs','void_ring','atk_potion','hp_potion','regen_potion'] },
 };
 
