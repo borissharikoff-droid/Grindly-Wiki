@@ -572,6 +572,27 @@ var ITEMS = [
   { id:'craft_dragon_crown', name:'Dragon Crown', slot:'head', rarity:'legendary', icon:'\uD83D\uDC51', desc:'A crown forged from dragon scales \u2014 radiates ancient power.', perks:[{type:'atk_boost',value:8,desc:'+8 ATK'},{type:'hp_boost',value:30,desc:'+30 HP'}] },
   { id:'craft_troll_aegis', name:'Troll Aegis', slot:'body', rarity:'legendary', icon:'\uD83D\uDEE1\uFE0F', desc:'A legendary shield forged from the heart of a troll king.', perks:[{type:'hp_boost',value:40,desc:'+40 HP'},{type:'hp_regen_boost',value:8,desc:'+8 HP Regen/s'},{type:'def_boost',value:6,desc:'+6 DEF'}] },
   { id:'craft_dragonfire_blade', name:'Dragonfire Blade', slot:'weapon', rarity:'mythic', icon:'\uD83D\uDD25', desc:'Forged in dragonfire \u2014 the ultimate weapon.', perks:[{type:'atk_boost',value:20,desc:'+20 ATK'},{type:'hp_boost',value:15,desc:'+15 HP'},{type:'hp_regen_boost',value:5,desc:'+5 HP Regen/s'}] },
+  // Lich Set (Legendary, Zone 7 — Shadow Crypt)
+  { id:'craft_lich_helm', name:'Lich Helm', slot:'head', rarity:'legendary', icon:'\uD83D\uDC80', desc:'A helm carved from lich bone, imbued with necrotic energy.', perks:[{type:'atk_boost',value:18,desc:'+18 ATK'},{type:'hp_boost',value:60,desc:'+60 HP'},{type:'xp_global_boost',value:0.08,desc:'+8% Global XP'}] },
+  { id:'craft_lich_plate', name:'Lich Plate', slot:'body', rarity:'legendary', icon:'\uD83D\uDEE1\uFE0F', desc:'Shadow-forged plate that drinks incoming damage.', perks:[{type:'hp_boost',value:150,desc:'+150 HP'},{type:'atk_boost',value:10,desc:'+10 ATK'},{type:'def_boost',value:8,desc:'+8 DEF'}] },
+  { id:'craft_lich_sword', name:'Lich Blade', slot:'weapon', rarity:'legendary', icon:'\u2694\uFE0F', desc:'A sword of crystallized necromantic energy \u2014 drains life on hit.', perks:[{type:'atk_boost',value:22,desc:'+22 ATK'},{type:'hp_regen_boost',value:6,desc:'+6 HP Regen/s'}] },
+  { id:'craft_lich_legs', name:'Lich Greaves', slot:'legs', rarity:'legendary', icon:'\uD83E\uDDBF', desc:'Greaves inscribed with death runes \u2014 light as shadow.', perks:[{type:'atk_boost',value:16,desc:'+16 ATK'},{type:'hp_boost',value:70,desc:'+70 HP'}] },
+  { id:'craft_lich_ring', name:'Lich Sigil Ring', slot:'ring', rarity:'legendary', icon:'\uD83D\uDC8E', desc:'A ring bearing the Necromancer Lord\'s sigil \u2014 pulses with dark vitality.', perks:[{type:'atk_boost',value:12,desc:'+12 ATK'},{type:'hp_regen_boost',value:7,desc:'+7 HP Regen/s'}] },
+  // Titan Set (Mythic, Zone 8 — Celestial Spire)
+  { id:'craft_titan_helm', name:'Titan Helm', slot:'head', rarity:'mythic', icon:'\u26A1', desc:'Forged from a Titan Core \u2014 channels the power of storms.', perks:[{type:'atk_boost',value:24,desc:'+24 ATK'},{type:'hp_boost',value:100,desc:'+100 HP'},{type:'xp_global_boost',value:0.08,desc:'+8% Global XP'}] },
+  { id:'craft_titan_plate', name:'Titan Plate', slot:'body', rarity:'mythic', icon:'\uD83C\uDF29\uFE0F', desc:'Storm-hardened plate that nullifies the strongest blows.', perks:[{type:'hp_boost',value:200,desc:'+200 HP'},{type:'atk_boost',value:14,desc:'+14 ATK'},{type:'def_boost',value:15,desc:'+15 DEF'},{type:'streak_shield',value:1,desc:'Streak Shield'}] },
+  { id:'craft_titan_sword', name:'Storm Titan Blade', slot:'weapon', rarity:'mythic', icon:'\u26A1', desc:'Lightning crystallized into a blade \u2014 the sky screams when it swings.', perks:[{type:'atk_boost',value:28,desc:'+28 ATK'},{type:'hp_regen_boost',value:8,desc:'+8 HP Regen/s'}] },
+  { id:'craft_titan_legs', name:'Titan Greaves', slot:'legs', rarity:'mythic', icon:'\uD83E\uDDBF', desc:'Greaves charged with celestial static \u2014 each step crackles.', perks:[{type:'atk_boost',value:20,desc:'+20 ATK'},{type:'hp_boost',value:100,desc:'+100 HP'}] },
+  { id:'craft_titan_ring', name:'Titan Core Ring', slot:'ring', rarity:'mythic', icon:'\uD83D\uDD2E', desc:'A ring housing a shard of the Storm Titan\'s core \u2014 radiates limitless energy.', perks:[{type:'atk_boost',value:16,desc:'+16 ATK'},{type:'hp_regen_boost',value:10,desc:'+10 HP Regen/s'},{type:'xp_global_boost',value:0.08,desc:'+8% Global XP'}] },
+  // Raid-exclusive mythic items
+  { id:'raid_ancient_ring', name:'Ancient Relic Ring', slot:'ring', rarity:'mythic', icon:'\uD83D\uDC8D', desc:'Forged in the fires of ancient raids. Untold gold flows to its bearer.', perks:[{type:'atk_boost',value:22,desc:'+22 ATK'},{type:'hp_regen_boost',value:10,desc:'+10 HP Regen'}], source:'Raid' },
+  { id:'raid_void_blade', name:'Void Conqueror Blade', slot:'weapon', rarity:'mythic', icon:'\uD83D\uDDE1\uFE0F', desc:'Wielded only by those who have faced the mythic hydra and lived.', perks:[{type:'atk_boost',value:35,desc:'+35 ATK'},{type:'hp_regen_boost',value:15,desc:'+15 HP Regen'},{type:'xp_global_boost',value:0.10,desc:'+10% Global XP'}], source:'Raid' },
+  { id:'raid_eternal_crown', name:'Eternal Crown', slot:'head', rarity:'mythic', icon:'\uD83D\uDC51', desc:'The crown of the eternal titan. Only the worthy shall wear it.', perks:[{type:'atk_boost',value:28,desc:'+28 ATK'},{type:'hp_boost',value:180,desc:'+180 HP'},{type:'xp_global_boost',value:0.15,desc:'+15% Global XP'},{type:'def_boost',value:12,desc:'+12 DEF'}], source:'Raid' },
+  // Zone 7-8 Crafting Materials
+  { id:'shadow_dust', name:'Shadow Dust', slot:'material', rarity:'epic', icon:'\uD83D\uDC9C', desc:'Crystallized essence of shadow creatures.', perks:[{type:'cosmetic',value:0,desc:'Crafting material \u2014 Shadow Crypt'}], source:'Shadow Crypt mobs (30-50%)' },
+  { id:'lich_crystal', name:'Lich Crystal', slot:'material', rarity:'legendary', icon:'\uD83D\uDC8E', desc:'A shard of pure necromantic energy, pulsing with dark magic.', perks:[{type:'cosmetic',value:0,desc:'Boss material \u2014 Necromancer Lord'}], source:'Boss: Necromancer Lord (\u00D71)' },
+  { id:'storm_shard', name:'Storm Shard', slot:'material', rarity:'epic', icon:'\u26A1', desc:'Solidified lightning from celestial beings.', perks:[{type:'cosmetic',value:0,desc:'Crafting material \u2014 Celestial Spire'}], source:'Celestial Spire mobs (30-50%)' },
+  { id:'titan_core', name:'Titan Core', slot:'material', rarity:'mythic', icon:'\uD83D\uDD2E', desc:'The crystallized heart of a Storm Titan.', perks:[{type:'cosmetic',value:0,desc:'Boss material \u2014 Storm Titan'}], source:'Boss: Storm Titan (\u00D71)' },
   { id:'death_insurance', name:'Death Insurance', slot:'material', rarity:'rare', icon:'\uD83D\uDCDC', desc:'A protective ward. Auto-consumed on arena death to prevent item loss.', perks:[{type:'cosmetic',value:0,desc:'Consumable \u2014 prevents item loss on death'}], source:'Crafting' },
   // Food
   { id:'food_bread', name:'Bread', slot:'food', rarity:'common', icon:'\uD83C\uDF5E', desc:'Simple wheat bread. Restores a small amount of health.', perks:[{type:'cosmetic',value:0,desc:'Heal 30 HP'}], source:'Cooking' },
@@ -624,6 +645,18 @@ var RECIPES = [
   { id:'recipe_troll_aegis', out:'craft_troll_aegis', ing:[{id:'troll_heart',qty:2},{id:'troll_hide',qty:5},{id:'ancient_dust',qty:2},{id:'crystal_root',qty:1}], lvl:60, xp:700, sec:3000, gold:4000 },
   { id:'recipe_dragonfire_blade', out:'craft_dragonfire_blade', ing:[{id:'dragon_heart',qty:2},{id:'dragon_scale',qty:5},{id:'void_fragment',qty:2},{id:'star_bloom',qty:3}], lvl:80, xp:1500, sec:5400 },
   { id:'recipe_death_insurance', out:'death_insurance', outQty:1, ing:[{id:'iron_bar',qty:1},{id:'magic_essence',qty:2}], lvl:20, xp:120, sec:60, inter:true },
+  // Lich Set (Zone 7)
+  { id:'recipe_lich_helm',  out:'craft_lich_helm',  ing:[{id:'shadow_dust',qty:3},{id:'lich_crystal',qty:1},{id:'void_crystal',qty:2}],   lvl:70, xp:1000, sec:2700, gold:5000 },
+  { id:'recipe_lich_plate', out:'craft_lich_plate', ing:[{id:'shadow_dust',qty:5},{id:'lich_crystal',qty:2},{id:'orchids',qty:3}],         lvl:80, xp:1200, sec:4500, gold:8000 },
+  { id:'recipe_lich_sword', out:'craft_lich_sword', ing:[{id:'shadow_dust',qty:4},{id:'lich_crystal',qty:1},{id:'void_fragment',qty:2}],   lvl:75, xp:1100, sec:3600, gold:6000 },
+  { id:'recipe_lich_legs',  out:'craft_lich_legs',  ing:[{id:'shadow_dust',qty:3},{id:'lich_crystal',qty:1},{id:'star_bloom',qty:2}],      lvl:72, xp:900,  sec:2400, gold:4000 },
+  { id:'recipe_lich_ring',  out:'craft_lich_ring',  ing:[{id:'shadow_dust',qty:2},{id:'lich_crystal',qty:1}],                              lvl:68, xp:800,  sec:1800, gold:3000 },
+  // Titan Set (Zone 8)
+  { id:'recipe_titan_helm',  out:'craft_titan_helm',  ing:[{id:'storm_shard',qty:3},{id:'titan_core',qty:1},{id:'lich_crystal',qty:2}],      lvl:85, xp:2000, sec:5400, gold:12000 },
+  { id:'recipe_titan_plate', out:'craft_titan_plate', ing:[{id:'storm_shard',qty:5},{id:'titan_core',qty:2},{id:'orchids',qty:3}],           lvl:90, xp:2500, sec:7200, gold:18000 },
+  { id:'recipe_titan_sword', out:'craft_titan_sword', ing:[{id:'storm_shard',qty:4},{id:'titan_core',qty:1},{id:'shadow_dust',qty:4}],       lvl:88, xp:2200, sec:6000, gold:15000 },
+  { id:'recipe_titan_legs',  out:'craft_titan_legs',  ing:[{id:'storm_shard',qty:3},{id:'titan_core',qty:1},{id:'star_bloom',qty:2}],        lvl:85, xp:1800, sec:4800, gold:10000 },
+  { id:'recipe_titan_ring',  out:'craft_titan_ring',  ing:[{id:'storm_shard',qty:2},{id:'titan_core',qty:1},{id:'lich_crystal',qty:1}],      lvl:82, xp:1600, sec:4200, gold:8000 },
 ];
 
 // Chest drop tables

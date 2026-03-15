@@ -45,6 +45,22 @@
     { name: 'Dragon Crown', url: 'item.html?id=craft_dragon_crown', cat: 'Equipment', icon: '\u{1F451}' },
     { name: 'Troll Aegis', url: 'item.html?id=craft_troll_aegis', cat: 'Equipment', icon: '\u{1F49C}' },
     { name: 'Dragonfire Blade', url: 'item.html?id=craft_dragonfire_blade', cat: 'Equipment', icon: '\u{1F525}' },
+    // Lich Set (Legendary, Zone 7)
+    { name: 'Lich Helm', url: 'item.html?id=craft_lich_helm', cat: 'Equipment', icon: '\uD83D\uDC80' },
+    { name: 'Lich Plate', url: 'item.html?id=craft_lich_plate', cat: 'Equipment', icon: '\u{1F6E1}\uFE0F' },
+    { name: 'Lich Blade', url: 'item.html?id=craft_lich_sword', cat: 'Equipment', icon: '\u2694\uFE0F' },
+    { name: 'Lich Greaves', url: 'item.html?id=craft_lich_legs', cat: 'Equipment', icon: '\u{1F9BF}' },
+    { name: 'Lich Sigil Ring', url: 'item.html?id=craft_lich_ring', cat: 'Equipment', icon: '\u{1F48E}' },
+    // Titan Set (Mythic, Zone 8)
+    { name: 'Titan Helm', url: 'item.html?id=craft_titan_helm', cat: 'Equipment', icon: '\u26A1' },
+    { name: 'Titan Plate', url: 'item.html?id=craft_titan_plate', cat: 'Equipment', icon: '\uD83C\uDF29\uFE0F' },
+    { name: 'Storm Titan Blade', url: 'item.html?id=craft_titan_sword', cat: 'Equipment', icon: '\u26A1' },
+    { name: 'Titan Greaves', url: 'item.html?id=craft_titan_legs', cat: 'Equipment', icon: '\u{1F9BF}' },
+    { name: 'Titan Core Ring', url: 'item.html?id=craft_titan_ring', cat: 'Equipment', icon: '\u{1F52E}' },
+    // Raid-exclusive mythic items
+    { name: 'Ancient Relic Ring', url: 'item.html?id=raid_ancient_ring', cat: 'Equipment', icon: '\u{1F48D}' },
+    { name: 'Void Conqueror Blade', url: 'item.html?id=raid_void_blade', cat: 'Equipment', icon: '\u{1F5E1}\uFE0F' },
+    { name: 'Eternal Crown', url: 'item.html?id=raid_eternal_crown', cat: 'Equipment', icon: '\u{1F451}' },
     // Potions
     { name: 'Attack Potion', url: 'item.html?id=atk_potion', cat: 'Consumable', icon: '\u2697\uFE0F' },
     { name: 'Vitality Potion', url: 'item.html?id=hp_potion', cat: 'Consumable', icon: '\u{1F48A}' },
@@ -76,10 +92,14 @@
     { name: 'Orc Shard', url: 'item.html?id=orc_shard', cat: 'Material', icon: '\u{1FAA8}' },
     { name: 'Troll Hide', url: 'item.html?id=troll_hide', cat: 'Material', icon: '\u{1F9CC}' },
     { name: 'Dragon Scale', url: 'item.html?id=dragon_scale', cat: 'Material', icon: '\u{1F409}' },
+    { name: 'Shadow Dust', url: 'item.html?id=shadow_dust', cat: 'Material', icon: '\uD83D\uDC9C' },
+    { name: 'Storm Shard', url: 'item.html?id=storm_shard', cat: 'Material', icon: '\u26A1' },
     // Boss Materials
     { name: 'Warlord Sigil', url: 'item.html?id=warlord_sigil', cat: 'Material', icon: '\u{1F531}' },
     { name: 'Troll Heart', url: 'item.html?id=troll_heart', cat: 'Material', icon: '\u{1F49C}' },
     { name: 'Dragon Heart', url: 'item.html?id=dragon_heart', cat: 'Material', icon: '\u2764\uFE0F\u200D\u{1F525}' },
+    { name: 'Lich Crystal', url: 'item.html?id=lich_crystal', cat: 'Material', icon: '\u{1F48E}' },
+    { name: 'Titan Core', url: 'item.html?id=titan_core', cat: 'Material', icon: '\u{1F52E}' },
     // Seeds & Plants
     { name: 'Wheat Seed', url: 'item.html?id=wheat_seed', cat: 'Seed', icon: '\u{1F33E}' },
     { name: 'Herb Seed', url: 'item.html?id=herb_seed', cat: 'Seed', icon: '\u{1F33F}' },
@@ -165,6 +185,8 @@
     { name: 'Orc Stronghold', url: 'arena.html', cat: 'Arena', icon: '\u{1F3F0}' },
     { name: 'Troll Bridge', url: 'arena.html', cat: 'Arena', icon: '\u{1F309}' },
     { name: 'Dragon Lair', url: 'arena.html', cat: 'Arena', icon: '\u{1F409}' },
+    { name: 'Shadow Crypt', url: 'arena.html', cat: 'Arena', icon: '\u{1F480}' },
+    { name: 'Celestial Spire', url: 'arena.html', cat: 'Arena', icon: '\u26A1' },
   ];
 
   var input = document.getElementById('searchInput');

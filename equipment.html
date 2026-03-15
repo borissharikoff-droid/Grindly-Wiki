@@ -270,6 +270,22 @@
         {id:'void_legs',  icon:'\u{1F9BF}',name:'Void Legs',  slot:'legs',  perk:'+12 ATK \u00B7 +60 HP',                    stats:{atk:12,hp:60}},
         {id:'void_ring',  icon:'\u{1F300}',name:'Void Ring',  slot:'ring',  perk:'+10 ATK \u00B7 +5 Regen \u00B7 +8% XP',    stats:{atk:10,regen:5,xp:8}},
       ]},
+    { name:'Lich Set', rarity:'legendary', ids:['craft_lich_helm','craft_lich_plate','craft_lich_sword','craft_lich_legs','craft_lich_ring'],
+      items:[
+        {id:'craft_lich_helm',  icon:'\uD83D\uDC80',name:'Lich Helm',       slot:'head',  perk:'+18 ATK \u00B7 +60 HP \u00B7 +8% XP',                stats:{atk:18,hp:60,xp:8}},
+        {id:'craft_lich_plate', icon:'\uD83D\uDEE1\uFE0F',name:'Lich Plate',slot:'body',  perk:'+150 HP \u00B7 +10 ATK \u00B7 +8 DEF',                stats:{hp:150,atk:10,def:8}},
+        {id:'craft_lich_sword', icon:'\u2694\uFE0F',name:'Lich Blade',      slot:'weapon',perk:'+22 ATK \u00B7 +6 HP Regen/s',                         stats:{atk:22,regen:6}},
+        {id:'craft_lich_legs',  icon:'\uD83E\uDDBF',name:'Lich Greaves',    slot:'legs',  perk:'+16 ATK \u00B7 +70 HP',                                stats:{atk:16,hp:70}},
+        {id:'craft_lich_ring',  icon:'\uD83D\uDC8E',name:'Lich Sigil Ring', slot:'ring',  perk:'+12 ATK \u00B7 +7 HP Regen/s',                         stats:{atk:12,regen:7}},
+      ]},
+    { name:'Titan Set', rarity:'mythic', ids:['craft_titan_helm','craft_titan_plate','craft_titan_sword','craft_titan_legs','craft_titan_ring'],
+      items:[
+        {id:'craft_titan_helm',  icon:'\u26A1',name:'Titan Helm',            slot:'head',  perk:'+24 ATK \u00B7 +100 HP \u00B7 +8% XP',                 stats:{atk:24,hp:100,xp:8}},
+        {id:'craft_titan_plate', icon:'\uD83C\uDF29\uFE0F',name:'Titan Plate',slot:'body', perk:'+200 HP \u00B7 +14 ATK \u00B7 +15 DEF \u00B7 Streak Shield', stats:{hp:200,atk:14,def:15,special:'Streak Shield'}},
+        {id:'craft_titan_sword', icon:'\u26A1',name:'Storm Titan Blade',     slot:'weapon',perk:'+28 ATK \u00B7 +8 HP Regen/s',                          stats:{atk:28,regen:8}},
+        {id:'craft_titan_legs',  icon:'\uD83E\uDDBF',name:'Titan Greaves',   slot:'legs',  perk:'+20 ATK \u00B7 +100 HP',                                stats:{atk:20,hp:100}},
+        {id:'craft_titan_ring',  icon:'\uD83D\uDD2E',name:'Titan Core Ring', slot:'ring',  perk:'+16 ATK \u00B7 +10 HP Regen/s \u00B7 +8% XP',           stats:{atk:16,regen:10,xp:8}},
+      ]},
   ];
 
   var CRAFTED = [
@@ -287,6 +303,18 @@
     {id:'craft_dragon_crown',    icon:'\u{1F451}',name:'Dragon Crown',       slot:'head',  rarity:'legendary',perk:'+8 ATK \u00B7 +30 HP'},
     {id:'craft_troll_aegis',     icon:'\u{1F49C}',name:'Troll Aegis',        slot:'body',  rarity:'legendary',perk:'+40 HP \u00B7 +8 HP Regen/s \u00B7 +6 DEF'},
     {id:'craft_dragonfire_blade', icon:'\u{1F525}',name:'Dragonfire Blade',  slot:'weapon',rarity:'mythic',   perk:'+20 ATK \u00B7 +15 HP \u00B7 +5 Regen'},
+    // Lich Set (Legendary, Zone 7)
+    {id:'craft_lich_helm',  icon:'\uD83D\uDC80',  name:'Lich Helm',        slot:'head',  rarity:'legendary', perk:'+18 ATK \u00B7 +60 HP \u00B7 +8% XP'},
+    {id:'craft_lich_plate', icon:'\uD83D\uDEE1\uFE0F',name:'Lich Plate',   slot:'body',  rarity:'legendary', perk:'+150 HP \u00B7 +10 ATK \u00B7 +8 DEF'},
+    {id:'craft_lich_sword', icon:'\u2694\uFE0F',  name:'Lich Blade',       slot:'weapon',rarity:'legendary', perk:'+22 ATK \u00B7 +6 HP Regen/s'},
+    {id:'craft_lich_legs',  icon:'\uD83E\uDDBF',  name:'Lich Greaves',     slot:'legs',  rarity:'legendary', perk:'+16 ATK \u00B7 +70 HP'},
+    {id:'craft_lich_ring',  icon:'\uD83D\uDC8E',  name:'Lich Sigil Ring',  slot:'ring',  rarity:'legendary', perk:'+12 ATK \u00B7 +7 HP Regen/s'},
+    // Titan Set (Mythic, Zone 8)
+    {id:'craft_titan_helm',  icon:'\u26A1',        name:'Titan Helm',       slot:'head',  rarity:'mythic',    perk:'+24 ATK \u00B7 +100 HP \u00B7 +8% XP'},
+    {id:'craft_titan_plate', icon:'\uD83C\uDF29\uFE0F',name:'Titan Plate',  slot:'body',  rarity:'mythic',    perk:'+200 HP \u00B7 +14 ATK \u00B7 +15 DEF \u00B7 Streak Shield'},
+    {id:'craft_titan_sword', icon:'\u26A1',        name:'Storm Titan Blade',slot:'weapon',rarity:'mythic',    perk:'+28 ATK \u00B7 +8 HP Regen/s'},
+    {id:'craft_titan_legs',  icon:'\uD83E\uDDBF',  name:'Titan Greaves',    slot:'legs',  rarity:'mythic',    perk:'+20 ATK \u00B7 +100 HP'},
+    {id:'craft_titan_ring',  icon:'\uD83D\uDD2E',  name:'Titan Core Ring',  slot:'ring',  rarity:'mythic',    perk:'+16 ATK \u00B7 +10 HP Regen/s \u00B7 +8% XP'},
   ];
 
   var CONSUMABLES = [
