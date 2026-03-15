@@ -65,11 +65,11 @@
     <!-- Hero -->
     <section class="hero">
       <h1>Arena &amp; Bosses</h1>
-      <p class="hero-sub">Battle through 6 zones, defeat mobs for XP &amp; gold, and challenge bosses for a chance at loot bags. Boss chest drops are not guaranteed.</p>
+      <p class="hero-sub">Battle through 8 zones, defeat mobs for XP &amp; gold, and challenge bosses for a chance at loot bags. Boss chest drops are not guaranteed.</p>
       <div class="hero-stats">
-        <div class="hero-stat"><span class="hero-stat-num">6</span><span class="hero-stat-label">Zones</span></div>
-        <div class="hero-stat"><span class="hero-stat-num">18</span><span class="hero-stat-label">Mobs</span></div>
-        <div class="hero-stat"><span class="hero-stat-num">6</span><span class="hero-stat-label">Bosses</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">8</span><span class="hero-stat-label">Zones</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">24</span><span class="hero-stat-label">Mobs</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">8</span><span class="hero-stat-label">Bosses</span></div>
       </div>
     </section>
 
@@ -132,6 +132,8 @@
               <tr><td>4 &mdash; Orc Stronghold</td><td>Zone 3</td><td>Lvl 15</td><td><a href="item.html?id=craft_goblin_blade" style="color:var(--gold)">Goblin Blade</a></td><td><a href="item.html?id=goblin_tooth" style="color:var(--gold)">Goblin Tooth</a> &times;3 + <a href="item.html?id=blossoms" style="color:var(--gold)">Blossoms</a> &times;2</td></tr>
               <tr><td>5 &mdash; Troll Bridge</td><td>Zone 4</td><td>Lvl 25</td><td><a href="item.html?id=craft_wolf_pendant" style="color:var(--gold)">Wolf Fang Pendant</a> + <a href="item.html?id=craft_orc_plate" style="color:var(--gold)">Orc Plate</a></td><td><a href="item.html?id=wolf_fang" style="color:var(--gold)">Wolf Fang</a> &times;2 + <a href="item.html?id=orc_shard" style="color:var(--gold)">Orc Shard</a> &times;2 + <a href="item.html?id=clovers" style="color:var(--gold)">Clovers</a> &times;2</td></tr>
               <tr><td>6 &mdash; Dragon Lair</td><td>Zone 5</td><td>Lvl 40</td><td><a href="item.html?id=craft_troll_cloak" style="color:var(--gold)">Troll Cloak</a></td><td><a href="item.html?id=troll_hide" style="color:var(--gold)">Troll Hide</a> &times;2 + <a href="item.html?id=orchids" style="color:var(--gold)">Orchids</a> &times;2</td></tr>
+              <tr><td>7 &mdash; Shadow Crypt</td><td>Zone 6</td><td>Lvl 55</td><td>&mdash;</td><td><a href="item.html?id=dragon_scale" style="color:var(--gold)">Dragon Scale</a> &times;2 + <a href="item.html?id=dragon_heart" style="color:var(--gold)">Dragon Heart</a> &times;1</td></tr>
+              <tr><td>8 &mdash; Celestial Spire</td><td>Zone 7</td><td>Lvl 75</td><td>&mdash;</td><td><a href="item.html?id=lich_crystal" style="color:var(--gold)">Lich Crystal</a> &times;2 + <a href="item.html?id=troll_heart" style="color:var(--gold)">Troll Heart</a> &times;1</td></tr>
             </tbody>
           </table>
         </div>
@@ -180,6 +182,8 @@
               <tr><td>Orc Warlord</td><td>25</td><td>180</td><td>4</td><td><span class="rarity epic">Shadow Set</span> (29 ATK, 105 HP, 5 Regen)</td></tr>
               <tr><td>Troll Overlord</td><td>40</td><td>230</td><td>7</td><td><span class="rarity legendary">Golden Set</span> (44 ATK, 150 HP, 7 Regen)</td></tr>
               <tr><td>Ancient Dragon</td><td>55</td><td>300</td><td>10</td><td><span class="rarity mythic">Void Set</span> (62 ATK, 230 HP, 10 Regen)</td></tr>
+              <tr><td>Necromancer Lord</td><td>75</td><td>380</td><td>13</td><td><span class="rarity mythic">Void Set</span> + warrior bonuses + potions</td></tr>
+              <tr><td>Storm Titan</td><td>100</td><td>500</td><td>18</td><td>Full endgame build required</td></tr>
             </tbody>
           </table>
         </div>
@@ -195,6 +199,8 @@
         <button class="ar-tab" onclick="arSwitch('z4',this)">Orc Stronghold</button>
         <button class="ar-tab" onclick="arSwitch('z5',this)">Troll Bridge</button>
         <button class="ar-tab" onclick="arSwitch('z6',this)">Dragon Lair</button>
+        <button class="ar-tab" onclick="arSwitch('z7',this)">Shadow Crypt</button>
+        <button class="ar-tab" onclick="arSwitch('z8',this)">Celestial Spire</button>
       </div>
 
       <!-- ═══ All Zones ═══ -->
@@ -324,6 +330,48 @@
               </div>
               <div class="zone-boss"><span data-boss-id="dragon">&#x1F409;</span> <strong>Ancient Dragon</strong><span class="mob-stat">4,800 HP</span><span class="mob-stat">15 ATK (&plusmn;35%)</span><span class="mob-stat">12 DEF</span><span class="mob-stat">Req: 55 ATK &middot; 300 HP &middot; 10 Regen</span><span class="mob-stat">12,000 Warrior XP</span></div>
               <div class="zone-drops">Boss drops: <a href="item.html?id=dragon_heart" style="color:var(--gold)">Dragon Heart</a> &times;1 &middot; Reward: <span data-chest-id="legendary_chest" class="zone-drop-chest">&#x1F48E;</span> <a href="item.html?id=legendary_chest" class="rarity legendary">Legendary Bag</a> <span style="color:var(--text-dim);font-size:11px">(55% drop &middot; 30% Epic &middot; 15% nothing)</span></div>
+            </div>
+          </div>
+
+          <!-- Zone 7 -->
+          <div class="zone-card" style="--zone-color: #a855f7;">
+            <div class="zone-header">
+              <span class="zone-icon" data-zone-id="zone7">&#x1F480;</span>
+              <div>
+                <h3>Zone 7 — Shadow Crypt</h3>
+                <span class="zone-req">Clear Zone 6 &middot; Warrior Lvl.55</span>
+              </div>
+            </div>
+            <div class="zone-body">
+              <div class="zone-entry-cost">Entry cost: <a href="item.html?id=dragon_scale" style="color:var(--gold)">Dragon Scale</a> &times;2 + <a href="item.html?id=dragon_heart" style="color:var(--gold)">Dragon Heart</a> &times;1 <span style="color:var(--text-dim);font-size:11px">(consumed per run)</span></div>
+              <div class="zone-mobs">
+                <div class="mob-row"><span data-mob-id="skeleton_archer">&#x1F480;</span> Skeleton Archer<span class="mob-stat">2,800 HP</span><span class="mob-stat">16 ATK (&plusmn;30%)</span><span class="mob-stat">8 DEF</span><span class="mob-stat">35,000 XP</span><span class="mob-stat">280-420g</span><span class="mob-stat">30% Shadow Dust &times;2</span></div>
+                <div class="mob-row"><span data-mob-id="zombie_knight">&#x1F480;</span> Zombie Knight<span class="mob-stat">4,000 HP</span><span class="mob-stat">17 ATK (&plusmn;30%)</span><span class="mob-stat">10 DEF</span><span class="mob-stat">55,000 XP</span><span class="mob-stat">380-580g</span><span class="mob-stat">40% Shadow Dust &times;3</span></div>
+                <div class="mob-row"><span data-mob-id="lich_apprentice">&#x1F480;</span> Lich Apprentice<span class="mob-stat">5,200 HP</span><span class="mob-stat">18.5 ATK (&plusmn;35%)</span><span class="mob-stat">11 DEF</span><span class="mob-stat">80,000 XP</span><span class="mob-stat">480-700g</span><span class="mob-stat">50% Shadow Dust &times;4</span></div>
+              </div>
+              <div class="zone-boss"><span data-boss-id="lich">&#x1F480;</span> <strong>Necromancer Lord</strong><span class="mob-stat">6,500 HP</span><span class="mob-stat">20 ATK (&plusmn;40%)</span><span class="mob-stat">13 DEF</span><span class="mob-stat">Req: 75 ATK &middot; 380 HP &middot; 13 Regen &middot; 8 DEF</span><span class="mob-stat">30,000 Warrior XP</span></div>
+              <div class="zone-drops">Boss drops: <a href="item.html?id=lich_crystal" style="color:var(--gold)">Lich Crystal</a> &times;1 &middot; Reward: <span data-chest-id="legendary_chest" class="zone-drop-chest">&#x1F48E;</span> <a href="item.html?id=legendary_chest" class="rarity legendary">Legendary Bag</a> <span style="color:var(--text-dim);font-size:11px">(55% drop &middot; 30% Epic &middot; 15% nothing)</span></div>
+            </div>
+          </div>
+
+          <!-- Zone 8 -->
+          <div class="zone-card" style="--zone-color: #38bdf8;">
+            <div class="zone-header">
+              <span class="zone-icon" data-zone-id="zone8">&#x26A1;</span>
+              <div>
+                <h3>Zone 8 — Celestial Spire</h3>
+                <span class="zone-req">Clear Zone 7 &middot; Warrior Lvl.75</span>
+              </div>
+            </div>
+            <div class="zone-body">
+              <div class="zone-entry-cost">Entry cost: <a href="item.html?id=lich_crystal" style="color:var(--gold)">Lich Crystal</a> &times;2 + <a href="item.html?id=troll_heart" style="color:var(--gold)">Troll Heart</a> &times;1 <span style="color:var(--text-dim);font-size:11px">(consumed per run)</span></div>
+              <div class="zone-mobs">
+                <div class="mob-row"><span data-mob-id="sky_serpent">&#x1F40D;</span> Sky Serpent<span class="mob-stat">4,500 HP</span><span class="mob-stat">21 ATK (&plusmn;30%)</span><span class="mob-stat">11 DEF</span><span class="mob-stat">100,000 XP</span><span class="mob-stat">450-650g</span><span class="mob-stat">30% Storm Shard &times;2</span></div>
+                <div class="mob-row"><span data-mob-id="thunder_drake">&#x1F985;</span> Thunder Drake<span class="mob-stat">6,200 HP</span><span class="mob-stat">23 ATK (&plusmn;35%)</span><span class="mob-stat">13 DEF</span><span class="mob-stat">160,000 XP</span><span class="mob-stat">600-900g</span><span class="mob-stat">40% Storm Shard &times;3</span></div>
+                <div class="mob-row"><span data-mob-id="storm_elemental">&#x1F32A;&#xFE0F;</span> Storm Elemental<span class="mob-stat">8,000 HP</span><span class="mob-stat">25 ATK (&plusmn;40%)</span><span class="mob-stat">15 DEF</span><span class="mob-stat">230,000 XP</span><span class="mob-stat">750-1,100g</span><span class="mob-stat">50% Storm Shard &times;4</span></div>
+              </div>
+              <div class="zone-boss"><span data-boss-id="titan">&#x26A1;</span> <strong>Storm Titan</strong><span class="mob-stat">10,000 HP</span><span class="mob-stat">28 ATK (&plusmn;45%)</span><span class="mob-stat">18 DEF</span><span class="mob-stat">Req: 100 ATK &middot; 500 HP &middot; 18 Regen &middot; 15 DEF</span><span class="mob-stat">80,000 Warrior XP</span></div>
+              <div class="zone-drops">Boss drops: <a href="item.html?id=titan_core" style="color:var(--gold)">Titan Core</a> &times;1 &middot; Reward: <span data-chest-id="legendary_chest" class="zone-drop-chest">&#x1F48E;</span> <a href="item.html?id=legendary_chest" class="rarity legendary">Legendary Bag</a> <span style="color:var(--text-dim);font-size:11px">(55% drop &middot; 30% Epic &middot; 15% nothing)</span></div>
             </div>
           </div>
 
@@ -493,8 +541,66 @@
             <li>Costs 2 <a href="item.html?id=troll_hide" style="color:var(--gold)">Troll Hide</a> + 3 <a href="item.html?id=orchids" style="color:var(--gold)">Orchids</a> per run &mdash; grow Orchid Seeds (90 min each) and farm Troll Hide from Zone 5</li>
             <li>Boss requires <strong>55 ATK, 300 HP, 10 Regen</strong> &mdash; you need the full <span class="rarity mythic">Void Set</span> (67 ATK, 330 HP, 10 Regen with base stats) plus warrior bonuses</li>
             <li>Ancient Dragon has <strong>12 DEF</strong> and <strong>&plusmn;35% damage spread</strong> &mdash; food loadout with healing is essential</li>
-            <li>Boss drops exclusive <a href="item.html?id=dragon_heart" style="color:var(--gold)">Dragon Heart</a> &mdash; rarest boss material in the game</li>
+            <li>Boss drops exclusive <a href="item.html?id=dragon_heart" style="color:var(--gold)">Dragon Heart</a> &mdash; required to enter Zone 7</li>
             <li>Legendary Bags can drop <span class="rarity mythic">Void Set</span> pieces and permanent stat potions (ATK/HP/Regen/DEF)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="panel-z7" class="ar-panel">
+        <div class="zone-cards">
+          <div class="zone-card" style="--zone-color: #a855f7;">
+            <div class="zone-header"><span class="zone-icon" data-zone-id="zone7">&#x1F480;</span><div><h3>Zone 7 — Shadow Crypt</h3><span class="zone-req">Clear Zone 6 &middot; Warrior Lvl.55</span></div></div>
+            <div class="zone-body">
+              <div class="zone-entry-cost">Entry cost: <a href="item.html?id=dragon_scale" style="color:var(--gold)">Dragon Scale</a> &times;2 + <a href="item.html?id=dragon_heart" style="color:var(--gold)">Dragon Heart</a> &times;1 <span style="color:var(--text-dim);font-size:11px">(consumed per run)</span></div>
+              <div class="zone-mobs">
+                <div class="mob-row"><span data-mob-id="skeleton_archer">&#x1F480;</span> Skeleton Archer<span class="mob-stat">2,800 HP</span><span class="mob-stat">16 ATK (&plusmn;30%)</span><span class="mob-stat">8 DEF</span><span class="mob-stat">35,000 XP</span><span class="mob-stat">280-420g</span><span class="mob-stat">30% Shadow Dust &times;2</span></div>
+                <div class="mob-row"><span data-mob-id="zombie_knight">&#x1F480;</span> Zombie Knight<span class="mob-stat">4,000 HP</span><span class="mob-stat">17 ATK (&plusmn;30%)</span><span class="mob-stat">10 DEF</span><span class="mob-stat">55,000 XP</span><span class="mob-stat">380-580g</span><span class="mob-stat">40% Shadow Dust &times;3</span></div>
+                <div class="mob-row"><span data-mob-id="lich_apprentice">&#x1F480;</span> Lich Apprentice<span class="mob-stat">5,200 HP</span><span class="mob-stat">18.5 ATK (&plusmn;35%)</span><span class="mob-stat">11 DEF</span><span class="mob-stat">80,000 XP</span><span class="mob-stat">480-700g</span><span class="mob-stat">50% Shadow Dust &times;4</span></div>
+              </div>
+              <div class="zone-boss"><span data-boss-id="lich">&#x1F480;</span> <strong>Necromancer Lord</strong><span class="mob-stat">6,500 HP</span><span class="mob-stat">20 ATK (&plusmn;40%)</span><span class="mob-stat">13 DEF</span><span class="mob-stat">Req: 75 ATK &middot; 380 HP &middot; 13 Regen &middot; 8 DEF</span><span class="mob-stat">30,000 Warrior XP</span></div>
+              <div class="zone-drops">Boss drops: <a href="item.html?id=lich_crystal" style="color:var(--gold)">Lich Crystal</a> &times;1 &middot; Reward: <span data-chest-id="legendary_chest" class="zone-drop-chest">&#x1F48E;</span> <a href="item.html?id=legendary_chest" class="rarity legendary">Legendary Bag</a> <span style="color:var(--text-dim);font-size:11px">(55% drop &middot; 30% Epic &middot; 15% nothing)</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="info-box" style="margin-top:14px">
+          <h4>Zone 7 Strategy</h4>
+          <ul>
+            <li>First post-endgame zone &mdash; requires <strong>Warrior Lvl.55</strong> and costs 2 <a href="item.html?id=dragon_scale" style="color:var(--gold)">Dragon Scale</a> + 1 <a href="item.html?id=dragon_heart" style="color:var(--gold)">Dragon Heart</a> per run</li>
+            <li>Entry cost is expensive &mdash; stockpile Dragon materials from Zone 6 before attempting</li>
+            <li>Boss requires <strong>75 ATK, 380 HP, 13 Regen, 8 DEF</strong> &mdash; Void Set plus significant warrior bonuses and potions needed</li>
+            <li>Necromancer Lord has <strong>&plusmn;40% damage variance</strong> &mdash; highest variance yet, bring a full food loadout</li>
+            <li>Farm <a href="item.html?id=shadow_dust" style="color:var(--gold)">Shadow Dust</a> from mobs (30-50% drop) for future crafting</li>
+            <li>Boss drops exclusive <a href="item.html?id=lich_crystal" style="color:var(--gold)">Lich Crystal</a> &mdash; required for Zone 8 entry</li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="panel-z8" class="ar-panel">
+        <div class="zone-cards">
+          <div class="zone-card" style="--zone-color: #38bdf8;">
+            <div class="zone-header"><span class="zone-icon" data-zone-id="zone8">&#x26A1;</span><div><h3>Zone 8 — Celestial Spire</h3><span class="zone-req">Clear Zone 7 &middot; Warrior Lvl.75</span></div></div>
+            <div class="zone-body">
+              <div class="zone-entry-cost">Entry cost: <a href="item.html?id=lich_crystal" style="color:var(--gold)">Lich Crystal</a> &times;2 + <a href="item.html?id=troll_heart" style="color:var(--gold)">Troll Heart</a> &times;1 <span style="color:var(--text-dim);font-size:11px">(consumed per run)</span></div>
+              <div class="zone-mobs">
+                <div class="mob-row"><span data-mob-id="sky_serpent">&#x1F40D;</span> Sky Serpent<span class="mob-stat">4,500 HP</span><span class="mob-stat">21 ATK (&plusmn;30%)</span><span class="mob-stat">11 DEF</span><span class="mob-stat">100,000 XP</span><span class="mob-stat">450-650g</span><span class="mob-stat">30% Storm Shard &times;2</span></div>
+                <div class="mob-row"><span data-mob-id="thunder_drake">&#x1F985;</span> Thunder Drake<span class="mob-stat">6,200 HP</span><span class="mob-stat">23 ATK (&plusmn;35%)</span><span class="mob-stat">13 DEF</span><span class="mob-stat">160,000 XP</span><span class="mob-stat">600-900g</span><span class="mob-stat">40% Storm Shard &times;3</span></div>
+                <div class="mob-row"><span data-mob-id="storm_elemental">&#x1F32A;&#xFE0F;</span> Storm Elemental<span class="mob-stat">8,000 HP</span><span class="mob-stat">25 ATK (&plusmn;40%)</span><span class="mob-stat">15 DEF</span><span class="mob-stat">230,000 XP</span><span class="mob-stat">750-1,100g</span><span class="mob-stat">50% Storm Shard &times;4</span></div>
+              </div>
+              <div class="zone-boss"><span data-boss-id="titan">&#x26A1;</span> <strong>Storm Titan</strong><span class="mob-stat">10,000 HP</span><span class="mob-stat">28 ATK (&plusmn;45%)</span><span class="mob-stat">18 DEF</span><span class="mob-stat">Req: 100 ATK &middot; 500 HP &middot; 18 Regen &middot; 15 DEF</span><span class="mob-stat">80,000 Warrior XP</span></div>
+              <div class="zone-drops">Boss drops: <a href="item.html?id=titan_core" style="color:var(--gold)">Titan Core</a> &times;1 &middot; Reward: <span data-chest-id="legendary_chest" class="zone-drop-chest">&#x1F48E;</span> <a href="item.html?id=legendary_chest" class="rarity legendary">Legendary Bag</a> <span style="color:var(--text-dim);font-size:11px">(55% drop &middot; 30% Epic &middot; 15% nothing)</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="info-box" style="margin-top:14px">
+          <h4>Zone 8 Strategy</h4>
+          <ul>
+            <li>The ultimate endgame zone &mdash; requires <strong>Warrior Lvl.75</strong> and extremely costly entry: 2 <a href="item.html?id=lich_crystal" style="color:var(--gold)">Lich Crystal</a> + 1 <a href="item.html?id=troll_heart" style="color:var(--gold)">Troll Heart</a></li>
+            <li>All enemies deal 21-25 ATK with high DEF (11-15) &mdash; you need maximum ATK to overcome damage reduction</li>
+            <li>Storm Titan requires <strong>100 ATK, 500 HP, 18 Regen, 15 DEF</strong> &mdash; absolute maximum gear, warrior bonuses, and potions required</li>
+            <li>Titan has <strong>&plusmn;45% damage variance</strong> and <strong>18 DEF</strong> &mdash; the most demanding fight in the game</li>
+            <li>Farm <a href="item.html?id=storm_shard" style="color:var(--gold)">Storm Shard</a> from mobs (30-50% drop) for future crafting</li>
+            <li>Boss drops exclusive <a href="item.html?id=titan_core" style="color:var(--gold)">Titan Core</a> (mythic rarity) &mdash; the rarest material in Grindly</li>
           </ul>
         </div>
       </div>
