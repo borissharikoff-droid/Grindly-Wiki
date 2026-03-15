@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cooking Tests Report – Grindly Wiki</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── Test-specific styles ── */
+.ts-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.ts-summary-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-ornate);
+  border-radius: 8px;
+  text-align: center;
+}
+.ts-summary-card.pass { border-left: 3px solid #4ade80; }
+.ts-summary-card.total { border-left: 3px solid var(--gold); }
+.ts-summary-card.warn { border-left: 3px solid #fbbf24; }
+.ts-big-num {
+  font-family: var(--font-title);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--gold-bright);
+}
+.ts-big-num.green { color: #4ade80; }
+.ts-big-num.red { color: #ef4444; }
+.ts-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+}
+
+/* Test group accordion */
+.tg-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-ornate);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  transition: border-color 0.2s;
+}
+.tg-card:hover { border-color: var(--gold-dim); }
+
+.tg-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.12s;
+}
+.tg-header:hover { background: rgba(255,255,255,0.02); }
+
+.tg-icon { font-size: 18px; flex-shrink: 0; }
+.tg-name {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-bright);
+}
+.tg-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.04);
+}
+.tg-count.green { color: #4ade80; background: rgba(74,222,128,0.08); }
+.tg-badge {
+  font-size: 9px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(0,255,136,0.1);
+  color: #4ade80;
+  border: 1px solid rgba(0,255,136,0.2);
+}
+.tg-arrow {
+  font-size: 10px;
+  color: var(--text-dim);
+  transition: transform 0.2s;
+}
+.tg-card.open .tg-arrow { transform: rotate(180deg); }
+.tg-body {
+  display: none;
+  padding: 0 16px 12px;
+  animation: patchFadeIn 0.15s ease;
+}
+.tg-card.open .tg-body { display: block; }
+
+/* Individual test rows */
+.ts-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--text);
+  transition: background 0.1s;
+}
+.ts-row:hover { background: rgba(212,168,67,0.04); }
+.ts-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.ts-dot.pass { background: #4ade80; box-shadow: 0 0 4px rgba(74,222,128,0.4); }
+.ts-dot.fail { background: #ef4444; box-shadow: 0 0 4px rgba(239,68,68,0.4); }
+.ts-dot.warn { background: #fbbf24; }
+.ts-test-name { flex: 1; }
+
+/* Coverage bars */
+.cv-bar-wrap {
+  background: rgba(255,255,255,0.04);
+  border-radius: 4px;
+  height: 6px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+.cv-bar {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #4ade80 0%, var(--gold) 100%);
+  transition: width 0.6s ease;
+}
+
+/* Findings */
+.finding-card {
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.finding-card.info {
+  background: linear-gradient(135deg, rgba(96,165,250,0.08) 0%, var(--bg-card) 50%);
+  border: 1px solid rgba(96,165,250,0.2);
+  border-left: 3px solid #60a5fa;
+}
+.finding-card.warn {
+  background: linear-gradient(135deg, rgba(251,191,36,0.08) 0%, var(--bg-card) 50%);
+  border: 1px solid rgba(251,191,36,0.2);
+  border-left: 3px solid #fbbf24;
+}
+.finding-card strong { color: var(--text-bright); }
+.finding-card code {
+  font-size: 11px;
+  background: rgba(212,168,67,0.1);
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: var(--gold);
+}
+
+/* Progress ring */
+.ts-ring-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 18px 0;
+}
+.ts-ring { position: relative; width: 120px; height: 120px; }
+.ts-ring svg { transform: rotate(-90deg); }
+.ts-ring-bg { fill: none; stroke: rgba(255,255,255,0.04); stroke-width: 8; }
+.ts-ring-fg { fill: none; stroke: #4ade80; stroke-width: 8; stroke-linecap: round;
+  stroke-dasharray: 339.3; stroke-dashoffset: 0; transition: stroke-dashoffset 1s ease; }
+.ts-ring-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.ts-ring-pct {
+  font-family: var(--font-title);
+  font-size: 26px;
+  font-weight: 800;
+  color: #4ade80;
+}
+.ts-ring-sub {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+</head>
+<body>
+
+<!-- Top Bar -->
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">G</span>
+      <span class="logo-text">Grindly<small>Wiki</small></span>
+    </a>
+    <div class="top-right">
+      <div class="player-count">
+        <span class="pulse-dot"></span>
+        <span>Productivity RPG</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Page Layout -->
+<div class="page-wrap">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="search-box">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search wiki..." autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-title"><span class="arrow">&#9660;</span> Pages</div>
+      <ul class="nav-links" id="wikiNav"></ul>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+
+    <div class="breadcrumbs">
+      <a href="index.html">Home</a>
+      <span class="bc-sep">&#9656;</span>
+      <a href="cooking.html">Cooking</a>
+      <span class="bc-sep">&#9656;</span>
+      <span class="bc-current">Test Report</span>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero">
+      <h1>Cooking System — Test Report</h1>
+      <p class="hero-sub">Comprehensive test suite covering all cooking mechanics, store logic, and balance</p>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-num">213</span>
+          <span class="hero-stat-label">Total Tests</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num" style="color:#4ade80">213</span>
+          <span class="hero-stat-label">Passed</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num" style="color:#ef4444">0</span>
+          <span class="hero-stat-label">Failed</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">13</span>
+          <span class="hero-stat-label">Test Groups</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">54ms</span>
+          <span class="hero-stat-label">Runtime</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pass Rate Ring -->
+    <div class="content" style="text-align:center">
+      <div class="ts-ring-wrap">
+        <div class="ts-ring">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle class="ts-ring-bg" cx="60" cy="60" r="54"/>
+            <circle class="ts-ring-fg" cx="60" cy="60" r="54" style="stroke-dashoffset: 0"/>
+          </svg>
+          <div class="ts-ring-label">
+            <span class="ts-ring-pct">100%</span>
+            <span class="ts-ring-sub">Pass Rate</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ Test Groups ═══ -->
+    <div class="content">
+      <h2 class="section-title"><span class="section-icon">🧪</span> Test Groups</h2>
+      <p class="section-desc">
+        Each group covers a distinct area of the cooking system. Click any group to see individual test cases.
+      </p>
+
+      <!-- Group 1: Food Items -->
+      <div class="tg-card" onclick="this.classList.toggle('open')">
+        <div class="tg-header">
+          <span class="tg-icon">🍞</span>
+          <span class="tg-name">Food Items</span>
+          <span class="tg-count green">9 / 9</span>
+          <span class="tg-badge">PASS</span>
+          <span class="tg-arrow">&#9660;</span>
+        </div>
+        <div class="tg-body">
+          <p class="section-desc">Data integrity for all 16 food definitions: IDs, names, rarities, effects, maps.</p>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">has at least 14 food items</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">every food item has a unique id</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">every food id starts with "food_"</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">every food item has name, icon, rarity, description</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">every food item has at least a heal effect</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">higher rarity foods have higher total effect values</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">FOOD_ITEM_MAP contains all items</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">getFoodItemById returns correct item or undefined</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">FOOD_IDS matches all food item ids</span></div>
+        </div>
+      </div>
+
+      <!-- Group 2: Recipes -->
+      <div class="tg-card" onclick="this.classList.toggle('open')">
+        <div class="tg-header">
+          <span class="tg-icon">📜</span>
+          <span class="tg-name">Cooking Recipes</span>
+          <span class="tg-count green">13 / 13</span>
+          <span class="tg-badge">PASS</span>
+          <span class="tg-arrow">&#9660;</span>
+        </div>
+        <div class="tg-body">
+          <p class="section-desc">All 15 recipes: structure, steps, ingredients, XP scaling, level gating, output mapping.</p>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">has at least 15 recipes</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">every recipe has a unique id</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">every recipe id starts with "cook_"</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">every recipe maps to an existing food item</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">every recipe has outputQty &gt;= 1</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">every recipe has at least 1 ingredient</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">every recipe has at least 2 steps</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">every step has label, icon, and positive secPerItem</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">higher rarity recipes require higher chef levels</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">higher rarity recipes give more XP per item</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">COOKING_RECIPE_MAP contains all recipes by id</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">no two recipes produce the same food item</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">step counts match expected ranges per rarity</span></div>
+        </div>
+      </div>
+
+      <!-- Group 3: Instruments -->
+      <div class="tg-card" onclick="this.classList.toggle('open')">
+        <div class="tg-header">
+          <span class="tg-icon">🔪</span>
+          <span class="tg-name">Cooking Instruments</span>
+          <span class="tg-count green">11 / 11</span>
+          <span class="tg-badge">PASS</span>
+          <span class="tg-arrow">&#9660;</span>
+        </div>
+        <div class="tg-body">
+          <p class="section-desc">6 instruments, 5 tiers each: bonus monotonicity, costs, base/max values, unlock rules.</p>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">has exactly 6 instruments</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">every instrument has unique id</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">every instrument has exactly 5 tiers</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">tier bonuses are non-decreasing</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">tier costs are non-decreasing</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">base tier (0) has zero bonuses and zero cost</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">max tier has speedBonus=0.32, burnReduction=1.0</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">knife and pot start unlocked (cost 0)</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">DEFAULT_UNLOCKED_INSTRUMENTS contains only free instruments</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">COOK_INSTRUMENT_MAP is complete</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">pan, bowl, oven, mortar require gold to unlock</span></div>
+        </div>
+      </div>
+
+      <!-- Group 4: Step Mapping -->
+      <div class="tg-card" onclick="this.classList.toggle('open')">
+        <div class="tg-header">
+          <span class="tg-icon">🗺️</span>
+          <span class="tg-name">Step-to-Instrument Mapping</span>
+          <span class="tg-count green">8 / 8</span>
+          <span class="tg-badge">PASS</span>
+          <span class="tg-arrow">&#9660;</span>
+        </div>
+        <div class="tg-body">
+          <p class="section-desc">stepToInstrument keyword matching for all 6 instruments, plus recipeInstruments and hasInstrumentsForRecipe.</p>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">maps knife keywords correctly (chop, dice, peel, slice...)</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">maps pan keywords correctly (sear, grill, fry, roast...)</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">maps oven keywords correctly (bake, seal, feast bake)</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">maps mortar keywords correctly (grind, crush, strain, distill...)</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">maps pot keywords correctly (boil, simmer, stew, slow cook...)</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">falls back to bowl for unmatched keywords</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">every recipe step maps to a valid instrument</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">recipeInstruments returns unique instruments</span></div>
+        </div>
+      </div>
+
+      <!-- Group 5: Speed, Burn & Quality -->
+      <div class="tg-card" onclick="this.classList.toggle('open')">
+        <div class="tg-header">
+          <span class="tg-icon">🔥</span>
+          <span class="tg-name">Speed, Burn &amp; Quality Formulas</span>
+          <span class="tg-count green">24 / 24</span>
+          <span class="tg-badge">PASS</span>
+          <span class="tg-arrow">&#9660;</span>
+        </div>
+        <div class="tg-body">
+          <p class="section-desc">Chef speed multiplier (6 brackets), double chance, instrument speed, burn/quality calculations.</p>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">instrumentSpeedMult: tier 0 = 1.0, tier 4 = 0.68</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">chef speed: L0=1.0, L10=0.9, L25=0.8, L40=0.7, L60=0.55, L80=0.4</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">chef double: L0-24=0%, L25-59=15%, L60+=45%</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">effectiveBurnChance: base rates, mid-tier reduction, max-tier = 0</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">effectiveQualityBonus: tier-0 = 0, scales with upgrades</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">higher rarity has higher base burn chance</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">multiplier decreases monotonically with level</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">+ 17 more individual value checks</span></div>
+        </div>
+      </div>
+
+      <!-- Group 6: Affordability & Duration -->
+      <div class="tg-card" onclick="this.classList.toggle('open')">
+        <div class="tg-header">
+          <span class="tg-icon">⏱️</span>
+          <span class="tg-name">Affordability &amp; Duration Helpers</span>
+          <span class="tg-count green">16 / 16</span>
+          <span class="tg-badge">PASS</span>
+          <span class="tg-arrow">&#9660;</span>
+        </div>
+        <div class="tg-body">
+          <p class="section-desc">canAffordCookRecipe, maxAffordableCookQty, cookDuration, cookStepDuration, cookTotalDuration, formatCookTime.</p>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">canAfford: true/false for exact, excess, lacking materials</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">canAfford: scales with quantity</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">maxAffordable: limited by scarcest ingredient</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">cookDuration: scales linearly, chef level reduces</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">cookStepDuration: instrument + chef stack, min 1s</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">cookTotalDuration: sum of steps * qty, L80 &lt; 50%</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">formatCookTime: seconds, minutes, hours, sub-second</span></div>
+        </div>
+      </div>
+
+      <!-- Group 7: Mystery Stew -->
+      <div class="tg-card" onclick="this.classList.toggle('open')">
+        <div class="tg-header">
+          <span class="tg-icon">🫠</span>
+          <span class="tg-name">Mystery Stew</span>
+          <span class="tg-count green">2 / 2</span>
+          <span class="tg-badge">PASS</span>
+          <span class="tg-arrow">&#9660;</span>
+        </div>
+        <div class="tg-body">
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">has correct id, name, icon, rarity, effect</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">MYSTERY_STEW_XP = 5</span></div>
+        </div>
+      </div>
+
+      <!-- Group 8: Recipe Matching -->
+      <div class="tg-card" onclick="this.classList.toggle('open')">
+        <div class="tg-header">
+          <span class="tg-icon">🔍</span>
+          <span class="tg-name">Recipe Matching (Discovery)</span>
+          <span class="tg-count green">16 / 16</span>
+          <span class="tg-badge">PASS</span>
+          <span class="tg-arrow">&#9660;</span>
+        </div>
+        <div class="tg-body">
+          <p class="section-desc">matchRecipeFromIngredients (exact qty match) and matchRecipeByIds (cauldron ID-only match).</p>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">exact match: bread, multi-ingredient, empty, wrong combo</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">exact match: excess qty accepted, insufficient rejected</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">exact match: ignores empty id slots</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">exact match: covers most recipes with own ingredients</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">ID-only match: order-independent, deduplication</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">ID-only match: covers most recipes with ingredient IDs</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">apple_pie/apple_jam ambiguity documented</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">filters falsy values, handles null returns</span></div>
+        </div>
+      </div>
+
+      <!-- Group 9: Mastery -->
+      <div class="tg-card" onclick="this.classList.toggle('open')">
+        <div class="tg-header">
+          <span class="tg-icon">⭐</span>
+          <span class="tg-name">Mastery System</span>
+          <span class="tg-count green">22 / 22</span>
+          <span class="tg-badge">PASS</span>
+          <span class="tg-arrow">&#9660;</span>
+        </div>
+        <div class="tg-body">
+          <p class="section-desc">5-star mastery: thresholds, getMasteryStars, getMasteryBonus (all 5 levels), cooksToNextStar, monotonicity.</p>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">MASTERY_MAX_STARS = 5, thresholds increasing</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">getMasteryStars: 0=1★, 5=2★, 15=3★, 35=4★, 75=5★</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">getMasteryBonus: all 5 star levels validated</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">cooksToNextStar: correct for all thresholds, 0 when maxed</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">bonuses non-decreasing: buff, save, double, XP multiplier</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">out-of-range clamping: star 0 = bonus[0], star 99 = bonus[4]</span></div>
+        </div>
+      </div>
+
+      <!-- Group 10: Recipe Hints -->
+      <div class="tg-card" onclick="this.classList.toggle('open')">
+        <div class="tg-header">
+          <span class="tg-icon">💡</span>
+          <span class="tg-name">Recipe Hints</span>
+          <span class="tg-count green">6 / 6</span>
+          <span class="tg-badge">PASS</span>
+          <span class="tg-arrow">&#9660;</span>
+        </div>
+        <div class="tg-body">
+          <p class="section-desc">getRecipeHint hint detail progression based on chef level.</p>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">L0-9: vague rarity hint ("simple", "mythical"...)</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">L10-29: ingredient count + first ingredient name</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">L30-49: all ingredient names (no quantities)</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">L50+: full recipe with quantities</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">invalid food ID returns "???"</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">mythic rarity hint at low level</span></div>
+        </div>
+      </div>
+
+      <!-- Group 11: Cooking Store -->
+      <div class="tg-card" onclick="this.classList.toggle('open')">
+        <div class="tg-header">
+          <span class="tg-icon">🏪</span>
+          <span class="tg-name">Cooking Store (Zustand)</span>
+          <span class="tg-count green">57 / 57</span>
+          <span class="tg-badge">PASS</span>
+          <span class="tg-arrow">&#9660;</span>
+        </div>
+        <div class="tg-body">
+          <p class="section-desc">Full store test: hydrate, startCook, tick (all branches), cancelJob, computeActiveDone, instrument unlock/upgrade, discovery, mastery.</p>
+
+          <div class="sub-title">hydrate (3 tests)</div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">loads defaults from empty localStorage</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">restores saved state (XP, instruments, discovery)</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">migrates old jobs without steps array</span></div>
+
+          <div class="sub-title">startCook (7 tests)</div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">returns "invalid" for nonexistent recipe</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">returns "not_enough" when lacking ingredients</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">returns "locked" when missing instrument</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">returns "ok" and creates active job</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">consumes correct qty for multi-item batch</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">queues job when one is already active</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">speed-adjusted effective steps, persists to localStorage</span></div>
+
+          <div class="sub-title">tick (10 tests)</div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">no-op when no active job</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">no-op when insufficient time elapsed</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">auto-advances non-final step</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">grants output on final step (no burn)</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">burns item when random &lt; burnChance</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">grants XP even on burn</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">resets to step 0 for next item in batch</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">promotes next queue job after completion</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">sets activeJob=null when all done</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">stores lastRoll, increments mastery</span></div>
+
+          <div class="sub-title">cancelJob (4 tests)</div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">refunds remaining ingredients</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">refunds and removes queued job</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">promotes queue head to active</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">does nothing for non-existent job</span></div>
+
+          <div class="sub-title">computeActiveDone (3 tests)</div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">returns 0 when no job / just started</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">does not exceed totalQty</span></div>
+
+          <div class="sub-title">unlockInstrument (6 tests)</div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">unlocks with sufficient level + gold</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">fails: low level, low gold, already unlocked</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">free instruments don't spend gold, persists to localStorage</span></div>
+
+          <div class="sub-title">upgradeInstrument (6 tests)</div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">upgrades tier 0 → 1</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">fails: not unlocked, insufficient gold, max tier</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">upgrades through all 5 tiers sequentially</span></div>
+
+          <div class="sub-title">tryFreeformCook — Cauldron (8 tests)</div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">returns "not_enough" for empty / unaffordable</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">mystery_stew for non-matching combo, grants XP</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">discovers recipe on first match, starts cooking</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">returns "known" for already discovered</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">discovery without cooking when can't afford full qty</span></div>
+
+          <div class="sub-title">isDiscovered / getStars / incrementMastery (10 tests)</div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">isDiscovered: false for unknown, true for discovered</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">getStars: correct star levels from cook count</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">incrementMastery: 0 → 1, persists to localStorage</span></div>
+        </div>
+      </div>
+
+      <!-- Group 12: Integration & Edge Cases -->
+      <div class="tg-card" onclick="this.classList.toggle('open')">
+        <div class="tg-header">
+          <span class="tg-icon">🔗</span>
+          <span class="tg-name">Integration &amp; Edge Cases</span>
+          <span class="tg-count green">12 / 12</span>
+          <span class="tg-badge">PASS</span>
+          <span class="tg-arrow">&#9660;</span>
+        </div>
+        <div class="tg-body">
+          <p class="section-desc">Full cook cycles, batch processing, mastery stacking, quality bonuses, localStorage corruption, data consistency.</p>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">every recipe starts with all instruments unlocked</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">bread cooks with default instruments</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">full cycle: start → tick all steps → complete → XP</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">mastery XP multiplier applies correctly</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">quality bonus grants extra output items</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">3-item batch processes sequentially</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">cancel refunds proportional to uncompleted</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">no duplicate ingredient IDs in any recipe</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">chef double + mastery double stack &lt; 1.0 (=0.65)</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">localStorage corruption handled gracefully</span></div>
+        </div>
+      </div>
+
+      <!-- Group 13: Progression Balance -->
+      <div class="tg-card" onclick="this.classList.toggle('open')">
+        <div class="tg-header">
+          <span class="tg-icon">⚖️</span>
+          <span class="tg-name">Progression Balance</span>
+          <span class="tg-count green">7 / 7</span>
+          <span class="tg-badge">PASS</span>
+          <span class="tg-arrow">&#9660;</span>
+        </div>
+        <div class="tg-body">
+          <p class="section-desc">Sanity checks on game balance: level gating, burn rates, XP scaling, endgame timing.</p>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">common recipes accessible at level 0-5</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">mythic recipes require level 70+</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">mythic burn 35% (significant but not guaranteed)</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">XP per item: no &gt;10x jumps between recipes</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">instrument unlock levels are increasing</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">total gold for max instruments &lt; 1M</span></div>
+          <div class="ts-row"><span class="ts-dot pass"></span><span class="ts-test-name">max level + instruments: mythic &lt; 5min per item</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ Coverage Map ═══ -->
+    <div class="content">
+      <h2 class="section-title"><span class="section-icon">📊</span> Coverage Map</h2>
+      <p class="section-desc">What's tested across each source file in the cooking system.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Source File</th>
+              <th>Lines</th>
+              <th>Functions Tested</th>
+              <th>Tests</th>
+              <th>Coverage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>lib/cooking.ts</code></td>
+              <td>843</td>
+              <td>getFoodItemById, isFoodId, stepToInstrument, recipeInstruments, hasInstrumentsForRecipe, instrumentSpeedMult, effectiveBurnChance, effectiveQualityBonus, getChefSpeedMultiplier, getChefDoubleChance, canAffordCookRecipe, maxAffordableCookQty, cookDuration, cookStepDuration, cookTotalDuration, formatCookTime, matchRecipeFromIngredients, matchRecipeByIds, getMasteryStars, getMasteryBonus, cooksToNextStar, getRecipeHint</td>
+              <td>156</td>
+              <td>
+                <div class="cv-bar-wrap"><div class="cv-bar" style="width:100%"></div></div>
+              </td>
+            </tr>
+            <tr>
+              <td><code>stores/cookingStore.ts</code></td>
+              <td>592</td>
+              <td>hydrate, startCook, advanceStep, tick, cancelJob, computeActiveDone, unlockInstrument, upgradeInstrument, tryFreeformCook, isDiscovered, getStars, incrementMastery</td>
+              <td>57</td>
+              <td>
+                <div class="cv-bar-wrap"><div class="cv-bar" style="width:100%"></div></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ═══ Notable Findings ═══ -->
+    <div class="content">
+      <h2 class="section-title"><span class="section-icon">🔎</span> Notable Findings</h2>
+      <p class="section-desc">Issues and observations discovered during testing.</p>
+
+      <div class="finding-card warn">
+        <strong>Ambiguous Recipe Match: Apple Pie vs Apple Jam</strong><br>
+        <code>cook_apple_pie</code> and <code>cook_apple_jam</code> share the same ingredient IDs (<code>apples</code> + <code>wheat</code>). Both <code>matchRecipeFromIngredients</code> and <code>matchRecipeByIds</code> always return Apple Jam first (earlier in array). This means a player cannot discover Apple Pie via the Cauldron — it will always match Apple Jam.
+      </div>
+
+      <div class="finding-card info">
+        <strong>"Steep &amp; Strain" Maps to Mortar, Not Pot</strong><br>
+        The step label <em>"Steep &amp; Strain"</em> in <code>cook_orchid_tea</code> matches the mortar regex (<code>/strain/</code>) before the pot regex (<code>/steep/</code>) can match. This means Orchid Tea requires mortar (unlocked at level 25), which may be intentional for progression gating.
+      </div>
+
+      <div class="finding-card info">
+        <strong>Chef Double + Mastery Double Stack to 65%</strong><br>
+        At max chef level (60+) the double output chance is 45%, and at 5-star mastery it adds 20% more. These stack additively to 65% total — high but still under 100%, which is correct.
+      </div>
+    </div>
+
+    <!-- ═══ Test Environment ═══ -->
+    <div class="content">
+      <h2 class="section-title"><span class="section-icon">⚙️</span> Test Environment</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Property</th><th>Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Framework</td><td><code>Vitest 4.0.18</code></td></tr>
+            <tr><td>Test File</td><td><code>src/tests/cooking.test.ts</code></td></tr>
+            <tr><td>Runtime</td><td><code>54ms</code> (tests only)</td></tr>
+            <tr><td>Total Duration</td><td><code>518ms</code> (incl. transform + import)</td></tr>
+            <tr><td>Store</td><td>Zustand with in-memory localStorage mock</td></tr>
+            <tr><td>RNG</td><td>Deterministic via <code>vi.spyOn(Math, 'random')</code></td></tr>
+            <tr><td>Date</td><td>2026-03-13</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="index.html">Wiki Home</a>
+      <a href="cooking.html">Cooking</a>
+      <a href="patches.html">Patch Notes</a>
+    </div>
+    <div class="footer-divider"></div>
+    <p>Grindly &mdash; Productivity RPG</p>
+    <p class="footer-sub">Test report generated 2026-03-13</p>
+  </div>
+</footer>
+
+<script src="wiki-nav.js"></script>
+<script src="wiki-search.js"></script>
+</body>
+</html>
