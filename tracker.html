@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Activity Tracker — Grindly Wiki</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.tracker-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:20px}
+.tracker-card{background:var(--card-inner);border:1px solid var(--border-inner);border-radius:10px;padding:14px 16px}
+.tracker-card h4{margin:0 0 6px;font-size:13px;font-weight:600}
+.tracker-card p{margin:0;font-size:12px;color:var(--text-dim);line-height:1.5}
+.skill-row{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--card-inner);border:1px solid var(--border-inner);border-radius:7px;margin-bottom:6px}
+.skill-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.skill-name{font-size:13px;font-weight:600;width:110px;flex-shrink:0}
+.skill-cat{font-size:12px;color:var(--text-dim);font-family:var(--font-mono)}
+.skill-apps{font-size:11px;color:rgba(255,255,255,.35);margin-top:2px}
+.idle-box{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:8px;padding:12px 16px;margin-bottom:20px}
+.idle-box h4{color:#f87171;margin:0 0 6px;font-size:13px}
+.idle-box p{margin:0;font-size:12px;color:var(--text-dim);line-height:1.5}
+.tech-badge{display:inline-block;padding:2px 7px;border-radius:3px;font-size:11px;font-family:var(--font-mono);background:rgba(255,255,255,.07);border:1px solid var(--border-inner);color:var(--text-dim);margin:2px}
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+</head>
+<body>
+
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">G</span>
+      <span class="logo-text">Grindly<small>Wiki</small></span>
+    </a>
+    <div class="top-right">
+      <div class="player-count">
+        <span class="pulse-dot"></span>
+        <span>Productivity RPG</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="page-wrap">
+  <aside class="sidebar">
+    <div class="search-box">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search wiki..." autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-title"><span class="arrow">&#9660;</span> Pages</div>
+      <ul class="nav-links" id="wikiNav"></ul>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="breadcrumbs"><a href="index.html">Home</a><span class="bc-sep">&#9656;</span><span class="bc-current">Activity Tracker</span></div>
+
+    <section class="hero">
+      <h1>Activity Tracker</h1>
+      <p class="hero-sub">Grindly uses a background PowerShell process to detect what app you're working in and convert that time into skill XP. Windows-only. No keylogger — only app names are recorded.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="hero-stat-num">~1.5s</span><span class="hero-stat-label">Update interval</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">13</span><span class="hero-stat-label">Skills tracked</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">Win32</span><span class="hero-stat-label">API based</span></div>
+      </div>
+    </section>
+
+    <section class="content">
+
+      <!-- How it works -->
+      <h2 class="section-title"><span class="section-icon">⚙️</span> How It Works</h2>
+      <p class="section-desc">When you start a grind session, Grindly spawns a PowerShell subprocess that polls Windows APIs every ~1.5 seconds to detect the active foreground window.</p>
+
+      <div class="tracker-grid">
+        <div class="tracker-card">
+          <h4>Active Window Detection</h4>
+          <p>Uses <span class="tech-badge">GetForegroundWindow</span> (Win32) to identify the currently focused app. Reads the process name and window title.</p>
+        </div>
+        <div class="tracker-card">
+          <h4>Keystroke Activity</h4>
+          <p>Uses <span class="tech-badge">GetAsyncKeyState</span> to count keystrokes in the active window. Used to distinguish active work from passively watching a video.</p>
+        </div>
+        <div class="tracker-card">
+          <h4>Idle Detection</h4>
+          <p>Uses <span class="tech-badge">GetLastInputInfo</span> to measure time since the last user input. If idle too long, the session pauses automatically.</p>
+        </div>
+        <div class="tracker-card">
+          <h4>Local Storage Only</h4>
+          <p>All activity data is stored locally in <span class="tech-badge">%APPDATA%/Grindly/grindly.sqlite</span>. Only aggregated XP totals are synced to the cloud.</p>
+        </div>
+      </div>
+
+      <!-- Data format -->
+      <h2 class="section-title"><span class="section-icon">📡</span> Data Format</h2>
+      <p class="section-desc">The PowerShell subprocess outputs a single line every ~1.5 seconds in this format:</p>
+      <div class="info-box" style="margin-bottom:20px">
+        <code style="font-size:12px;color:var(--gold)">WIN:ProcessName|WindowTitle|KeystrokeCount|IdleMs</code>
+        <p style="font-size:12px;color:var(--text-dim);margin:8px 0 0">Example: <code>WIN:code.exe|App.tsx — Grindly|42|800</code><br>
+        The Electron main process parses this and maps the process name to a skill category. Only the category is stored — the full window title is used for display only and is not synced.</p>
+      </div>
+
+      <!-- Idle -->
+      <h2 class="section-title"><span class="section-icon">💤</span> Idle Detection</h2>
+      <div class="idle-box">
+        <h4>AFK Pause</h4>
+        <p>If no keyboard or mouse input is detected for a configurable idle threshold, the session automatically pauses and displays an AFK indicator. Time spent idle does not earn XP. Resuming activity restarts XP tracking immediately.</p>
+      </div>
+      <p class="section-desc">The <strong>No AFK Run</strong> daily quest requires you to complete a session without triggering AFK pause — a reward for focused, uninterrupted work.</p>
+
+      <!-- Skill mapping -->
+      <h2 class="section-title"><span class="section-icon">🎯</span> App → Skill Mapping</h2>
+      <p class="section-desc">Each app is matched to a category based on the process name. The category then maps to a skill that earns XP.</p>
+
+      <div style="margin-bottom:20px">
+        <div class="skill-row">
+          <div class="skill-dot" style="background:#00ff88"></div>
+          <div class="skill-name">💻 Developer</div>
+          <div><div class="skill-cat">coding</div><div class="skill-apps">VS Code, JetBrains IDEs, Cursor, Vim, Terminal/CMD</div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-dot" style="background:#ff6b9d"></div>
+          <div class="skill-name">🎨 Designer</div>
+          <div><div class="skill-cat">design</div><div class="skill-apps">Figma, Adobe XD, Photoshop, Illustrator, Sketch</div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-dot" style="background:#5865F2"></div>
+          <div class="skill-name">🎮 Gamer</div>
+          <div><div class="skill-cat">games</div><div class="skill-apps">Steam games, game launchers, emulators</div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-dot" style="background:#57F287"></div>
+          <div class="skill-name">💬 Communicator</div>
+          <div><div class="skill-cat">social</div><div class="skill-apps">Slack, Discord, Teams, Zoom, Skype, Telegram</div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-dot" style="background:#faa61a"></div>
+          <div class="skill-name">🔬 Researcher</div>
+          <div><div class="skill-cat">browsing</div><div class="skill-apps">Chrome, Firefox, Edge, Safari — general browsing</div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-dot" style="background:#eb459e"></div>
+          <div class="skill-name">🎬 Creator</div>
+          <div><div class="skill-cat">creative</div><div class="skill-apps">Premiere, DaVinci Resolve, After Effects, OBS, Blender</div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-dot" style="background:#00d4ff"></div>
+          <div class="skill-name">📚 Learner</div>
+          <div><div class="skill-cat">learning</div><div class="skill-apps">Udemy, Coursera, Notion, Obsidian, Anki</div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-dot" style="background:#1db954"></div>
+          <div class="skill-name">🎵 Listener</div>
+          <div><div class="skill-cat">music</div><div class="skill-apps">Spotify, Apple Music, VLC (audio), music production apps</div></div>
+        </div>
+      </div>
+
+      <div class="info-box" style="margin-bottom:20px">
+        <h4>Warrior, Farmer, Crafter, Chef</h4>
+        <p style="font-size:13px;color:var(--text-dim);margin:6px 0 0">These four skills are earned through <strong>in-game actions</strong>, not tracked app time. Warrior XP comes from arena kills. Farmer XP from harvesting. Crafter XP from crafting. Chef XP from cooking. No desktop app is needed for these.</p>
+      </div>
+
+      <!-- Privacy -->
+      <h2 class="section-title"><span class="section-icon">🔒</span> Privacy</h2>
+      <div class="tracker-grid">
+        <div class="tracker-card">
+          <h4>What is recorded</h4>
+          <p>Process name (e.g. <code>code.exe</code>), activity category, and time durations. Window titles are used locally for display only.</p>
+        </div>
+        <div class="tracker-card">
+          <h4>What is NOT recorded</h4>
+          <p>Screen content, file names, keystrokes content, clipboard, or any personal data. Keystroke count (not content) is used only for idle detection.</p>
+        </div>
+        <div class="tracker-card">
+          <h4>What is synced</h4>
+          <p>Only cumulative XP per skill is synced to the cloud. Raw activity logs stay on your machine in the local SQLite database.</p>
+        </div>
+        <div class="tracker-card">
+          <h4>Windows only</h4>
+          <p>The tracker uses Windows-specific Win32 APIs. macOS/Linux are not supported. The app will launch on other OSes but the tracker won't produce XP.</p>
+        </div>
+      </div>
+
+    </section>
+  </main>
+</div>
+
+<script src="wiki-search.js"></script>
+<script src="wiki-nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Achievements — Grindly Wiki</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.ach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-bottom:20px}
+.ach-card{background:var(--card-inner);border:1px solid var(--border-inner);border-radius:8px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px}
+.ach-icon{font-size:20px;width:30px;text-align:center;flex-shrink:0;margin-top:1px}
+.ach-name{font-size:12px;font-weight:700;color:var(--text)}
+.ach-desc{font-size:11px;color:var(--text-dim);margin-top:2px;line-height:1.4}
+.ach-reward{font-size:10px;color:var(--gold);margin-top:4px;font-family:var(--font-mono)}
+.ach-xp{font-size:10px;color:rgba(255,255,255,.35);margin-top:2px}
+.cat-title{font-size:11px;font-weight:700;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--text-dim);margin:20px 0 10px;padding:4px 10px;border-radius:4px;background:rgba(255,255,255,.04);display:inline-block}
+.reward-type{display:inline-block;padding:1px 6px;border-radius:3px;font-size:10px;font-weight:700;margin-left:4px}
+.rt-avatar{background:rgba(99,179,237,.1);color:#63b3ed}
+.rt-badge{background:rgba(72,199,142,.1);color:#48c78e}
+.rt-frame{background:rgba(139,92,246,.12);color:#a78bfa}
+.rt-boost{background:rgba(251,191,36,.1);color:#fbbf24}
+.rt-title{background:rgba(255,255,255,.06);color:var(--text-dim)}
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+</head>
+<body>
+
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">G</span>
+      <span class="logo-text">Grindly<small>Wiki</small></span>
+    </a>
+    <div class="top-right">
+      <div class="player-count">
+        <span class="pulse-dot"></span>
+        <span>Productivity RPG</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="page-wrap">
+  <aside class="sidebar">
+    <div class="search-box">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search wiki..." autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-title"><span class="arrow">&#9660;</span> Pages</div>
+      <ul class="nav-links" id="wikiNav"></ul>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="breadcrumbs"><a href="index.html">Home</a><span class="bc-sep">&#9656;</span><span class="bc-current">Achievements</span></div>
+
+    <section class="hero">
+      <h1>Achievements</h1>
+      <p class="hero-sub">Unlock cosmetic rewards — avatars, profile frames, badges, and skill boosts — by hitting milestones across all game systems. Achievements are checked automatically.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="hero-stat-num">40+</span><span class="hero-stat-label">Achievements</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">🖼️</span><span class="hero-stat-label">Frames &amp; Avatars</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">⚡</span><span class="hero-stat-label">XP Rewards</span></div>
+      </div>
+    </section>
+
+    <section class="content">
+
+      <div class="info-box" style="margin-bottom:20px">
+        <h4>Reward Types</h4>
+        <p style="font-size:12px;color:var(--text-dim);margin:6px 0 0;line-height:1.6">
+          <span class="reward-type rt-avatar">Avatar</span> Emoji avatar shown on your profile<br>
+          <span class="reward-type rt-frame">Frame</span> Profile frame border (diamond, crown, ember, blaze, inferno, code, art, forge, garden, etc.)<br>
+          <span class="reward-type rt-badge">Badge</span> Badge displayed on your profile card<br>
+          <span class="reward-type rt-boost">Skill Boost</span> Bonus XP added directly to a skill<br>
+          <span class="reward-type rt-title">Title</span> Title shown under your username
+        </p>
+      </div>
+
+      <!-- Grind -->
+      <div class="cat-title">⚙️ Grind</div>
+      <div class="ach-grid">
+        <div class="ach-card">
+          <div class="ach-icon">🚀</div>
+          <div>
+            <div class="ach-name">First Steps</div>
+            <div class="ach-desc">Complete your first grind session</div>
+            <div class="ach-reward">🚀 Rocket avatar <span class="reward-type rt-avatar">Avatar</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">⚔️</div>
+          <div>
+            <div class="ach-name">Code Warrior</div>
+            <div class="ach-desc">2+ hours of coding in one session</div>
+            <div class="ach-reward">⚔️ Warrior avatar <span class="reward-type rt-avatar">Avatar</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">🏃</div>
+          <div>
+            <div class="ach-name">Marathon</div>
+            <div class="ach-desc">2+ hours in a single session without break</div>
+            <div class="ach-reward">🏃 Marathon avatar <span class="reward-type rt-avatar">Avatar</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">💎</div>
+          <div>
+            <div class="ach-name">Dedicated</div>
+            <div class="ach-desc">Complete 10 sessions</div>
+            <div class="ach-reward">Diamond frame <span class="reward-type rt-frame">Frame</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">👑</div>
+          <div>
+            <div class="ach-name">Grind Lord</div>
+            <div class="ach-desc">Complete 50 sessions</div>
+            <div class="ach-reward">Crown frame <span class="reward-type rt-frame">Frame</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Streak -->
+      <div class="cat-title">🔥 Streak</div>
+      <div class="ach-grid">
+        <div class="ach-card">
+          <div class="ach-icon">🔥</div>
+          <div>
+            <div class="ach-name">On Fire</div>
+            <div class="ach-desc">2 day streak</div>
+            <div class="ach-reward">🔥 Fire badge <span class="reward-type rt-badge">Badge</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">⚡</div>
+          <div>
+            <div class="ach-name">Streak Master</div>
+            <div class="ach-desc">7 day streak</div>
+            <div class="ach-reward">Ember frame <span class="reward-type rt-frame">Frame</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">🔥</div>
+          <div>
+            <div class="ach-name">Streak Legend</div>
+            <div class="ach-desc">14 day streak</div>
+            <div class="ach-reward">Blaze frame <span class="reward-type rt-frame">Frame</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">🌟</div>
+          <div>
+            <div class="ach-name">Unstoppable</div>
+            <div class="ach-desc">30 day streak</div>
+            <div class="ach-reward">🌟 Star avatar + Inferno frame <span class="reward-type rt-avatar">Avatar</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Special (Time-based) -->
+      <div class="cat-title">✨ Special</div>
+      <div class="ach-grid">
+        <div class="ach-card">
+          <div class="ach-icon">🦉</div>
+          <div>
+            <div class="ach-name">Night Owl</div>
+            <div class="ach-desc">Start a session after midnight (before 5 AM)</div>
+            <div class="ach-reward">🦉 Night Owl avatar <span class="reward-type rt-avatar">Avatar</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">🐦</div>
+          <div>
+            <div class="ach-name">Early Bird</div>
+            <div class="ach-desc">Start a session before 7 AM</div>
+            <div class="ach-reward">🐦 Early Bird avatar <span class="reward-type rt-avatar">Avatar</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Social -->
+      <div class="cat-title">🌐 Social</div>
+      <div class="ach-grid">
+        <div class="ach-card">
+          <div class="ach-icon">🤝</div>
+          <div>
+            <div class="ach-name">Squad Up</div>
+            <div class="ach-desc">Add your first friend</div>
+            <div class="ach-reward">🤝 Handshake avatar <span class="reward-type rt-avatar">Avatar</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">🌐</div>
+          <div>
+            <div class="ach-name">Popular</div>
+            <div class="ach-desc">Have 5 friends</div>
+            <div class="ach-reward">🌐 Globe avatar <span class="reward-type rt-avatar">Avatar</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">🦋</div>
+          <div>
+            <div class="ach-name">Social Butterfly</div>
+            <div class="ach-desc">Have 10 friends</div>
+            <div class="ach-reward">🦋 Butterfly avatar <span class="reward-type rt-avatar">Avatar</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Farming -->
+      <div class="cat-title">🌾 Farming</div>
+      <div class="ach-grid">
+        <div class="ach-card">
+          <div class="ach-icon">🌾</div>
+          <div>
+            <div class="ach-name">First Harvest</div>
+            <div class="ach-desc">Harvest 1 crop</div>
+            <div class="ach-reward">🌾 Harvest badge <span class="reward-type rt-badge">Badge</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">🌻</div>
+          <div>
+            <div class="ach-name">Master Gardener</div>
+            <div class="ach-desc">Harvest 100 crops</div>
+            <div class="ach-reward">Garden frame <span class="reward-type rt-frame">Frame</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">🌿</div>
+          <div>
+            <div class="ach-name">Botanist</div>
+            <div class="ach-desc">Plant all 9 seed types at least once</div>
+            <div class="ach-reward">🌿 Botanist avatar <span class="reward-type rt-avatar">Avatar</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">💜</div>
+          <div>
+            <div class="ach-name">Void Farmer</div>
+            <div class="ach-desc">Harvest a Void Blossom</div>
+            <div class="ach-reward">Void Farm frame <span class="reward-type rt-frame">Frame</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Crafting -->
+      <div class="cat-title">⚒️ Crafting</div>
+      <div class="ach-grid">
+        <div class="ach-card">
+          <div class="ach-icon">🔨</div>
+          <div>
+            <div class="ach-name">Apprentice Smith</div>
+            <div class="ach-desc">Craft 1 item</div>
+            <div class="ach-reward">🔨 Smith badge <span class="reward-type rt-badge">Badge</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">⚒️</div>
+          <div>
+            <div class="ach-name">Master Crafter</div>
+            <div class="ach-desc">Craft 50 items</div>
+            <div class="ach-reward">Forge frame <span class="reward-type rt-frame">Frame</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">🔥</div>
+          <div>
+            <div class="ach-name">Dragonforged</div>
+            <div class="ach-desc">Craft the Dragonfire Blade</div>
+            <div class="ach-reward">🐲 Dragonforged avatar <span class="reward-type rt-avatar">Avatar</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cooking -->
+      <div class="cat-title">🍳 Cooking</div>
+      <div class="ach-grid">
+        <div class="ach-card">
+          <div class="ach-icon">🍲</div>
+          <div>
+            <div class="ach-name">Sous Chef</div>
+            <div class="ach-desc">Cook 1 dish</div>
+            <div class="ach-reward">🍲 Cook badge <span class="reward-type rt-badge">Badge</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">🏅</div>
+          <div>
+            <div class="ach-name">Iron Chef</div>
+            <div class="ach-desc">Cook 50 dishes</div>
+            <div class="ach-reward">🏅 Iron Chef avatar <span class="reward-type rt-avatar">Avatar</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">🍽️</div>
+          <div>
+            <div class="ach-name">Grand Chef</div>
+            <div class="ach-desc">Cook a mythic dish</div>
+            <div class="ach-reward">Grand Chef frame <span class="reward-type rt-frame">Frame</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arena -->
+      <div class="cat-title">⚔️ Arena</div>
+      <div class="ach-grid">
+        <div class="ach-card">
+          <div class="ach-icon">🏰</div>
+          <div>
+            <div class="ach-name">Dungeon Delver</div>
+            <div class="ach-desc">Complete 1 dungeon</div>
+            <div class="ach-reward">🏰 Dungeon badge <span class="reward-type rt-badge">Badge</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">🗺️</div>
+          <div>
+            <div class="ach-name">Zone Clearer</div>
+            <div class="ach-desc">Clear all 6 base zones</div>
+            <div class="ach-reward">Conqueror frame <span class="reward-type rt-frame">Frame</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">💀</div>
+          <div>
+            <div class="ach-name">Monster Slayer</div>
+            <div class="ach-desc">Kill 100 mobs</div>
+            <div class="ach-reward">💀 Slayer badge <span class="reward-type rt-badge">Badge</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">🐉</div>
+          <div>
+            <div class="ach-name">Dragon Slayer</div>
+            <div class="ach-desc">Defeat the Ancient Dragon</div>
+            <div class="ach-reward">🐉 Dragon Slayer avatar <span class="reward-type rt-avatar">Avatar</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gold -->
+      <div class="cat-title">🪙 Gold</div>
+      <div class="ach-grid">
+        <div class="ach-card">
+          <div class="ach-icon">💰</div>
+          <div>
+            <div class="ach-name">Pocket Change</div>
+            <div class="ach-desc">Accumulate 1,000 gold</div>
+            <div class="ach-reward">💰 Gold badge <span class="reward-type rt-badge">Badge</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">💎</div>
+          <div>
+            <div class="ach-name">Gold Hoarder</div>
+            <div class="ach-desc">Accumulate 10,000 gold</div>
+            <div class="ach-reward">Treasury frame <span class="reward-type rt-frame">Frame</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">👑</div>
+          <div>
+            <div class="ach-name">Dragon's Treasury</div>
+            <div class="ach-desc">Accumulate 100,000 gold</div>
+            <div class="ach-reward">💎 Treasury avatar <span class="reward-type rt-avatar">Avatar</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skill -->
+      <div class="cat-title">📈 Skill Milestones</div>
+      <div class="ach-grid">
+        <div class="ach-card">
+          <div class="ach-icon">💻</div>
+          <div>
+            <div class="ach-name">Coding Intern</div>
+            <div class="ach-desc">Developer LVL 10</div>
+            <div class="ach-reward">+30 min Developer XP <span class="reward-type rt-boost">Boost</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">⚡</div>
+          <div>
+            <div class="ach-name">Full Stack</div>
+            <div class="ach-desc">Developer LVL 50</div>
+            <div class="ach-reward">Code frame <span class="reward-type rt-frame">Frame</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">👑</div>
+          <div>
+            <div class="ach-name">10x Engineer</div>
+            <div class="ach-desc">Developer LVL 99</div>
+            <div class="ach-reward">🧠 Architect avatar <span class="reward-type rt-avatar">Avatar</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">🎨</div>
+          <div>
+            <div class="ach-name">Pixel Pusher</div>
+            <div class="ach-desc">Designer LVL 10</div>
+            <div class="ach-reward">+30 min Designer XP <span class="reward-type rt-boost">Boost</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">🖌️</div>
+          <div>
+            <div class="ach-name">Art Director</div>
+            <div class="ach-desc">Designer LVL 50</div>
+            <div class="ach-reward">Art frame <span class="reward-type rt-frame">Frame</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">🎮</div>
+          <div>
+            <div class="ach-name">Pro Gamer</div>
+            <div class="ach-desc">Gamer LVL 25</div>
+            <div class="ach-reward">+30 min Gamer XP <span class="reward-type rt-boost">Boost</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">⚔️</div>
+          <div>
+            <div class="ach-name">Battle Hardened</div>
+            <div class="ach-desc">Warrior LVL 25</div>
+            <div class="ach-reward">⚔️ Warrior badge <span class="reward-type rt-badge">Badge</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">🌱</div>
+          <div>
+            <div class="ach-name">Green Thumb</div>
+            <div class="ach-desc">Farmer LVL 25</div>
+            <div class="ach-reward">🌱 Farmer badge <span class="reward-type rt-badge">Badge</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">⚒️</div>
+          <div>
+            <div class="ach-name">Artisan</div>
+            <div class="ach-desc">Crafter LVL 25</div>
+            <div class="ach-reward">⚒️ Artisan badge <span class="reward-type rt-badge">Badge</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">🍳</div>
+          <div>
+            <div class="ach-name">Chef de Cuisine</div>
+            <div class="ach-desc">Chef LVL 25</div>
+            <div class="ach-reward">🍳 Chef badge <span class="reward-type rt-badge">Badge</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">🏛️</div>
+          <div>
+            <div class="ach-name">Renaissance</div>
+            <div class="ach-desc">Total skill level 500+</div>
+            <div class="ach-reward">Renaissance frame <span class="reward-type rt-frame">Frame</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">🌟</div>
+          <div>
+            <div class="ach-name">Polymath</div>
+            <div class="ach-desc">3 skills at LVL 25+</div>
+            <div class="ach-reward">Star frame <span class="reward-type rt-frame">Frame</span></div>
+          </div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-icon">🔮</div>
+          <div>
+            <div class="ach-name">Jack of All Trades</div>
+            <div class="ach-desc">All 8 base skills at LVL 10+</div>
+            <div class="ach-reward">🔮 Crystal avatar <span class="reward-type rt-avatar">Avatar</span></div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+</div>
+
+<script src="wiki-search.js"></script>
+<script src="wiki-nav.js"></script>
+</body>
+</html>

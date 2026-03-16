@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Quests &amp; Weekly Challenges — Grindly Wiki</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.quest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:20px}
+.quest-card{background:var(--card-inner);border:1px solid var(--border-inner);border-radius:10px;padding:14px 16px;display:flex;align-items:flex-start;gap:12px}
+.quest-icon{font-size:22px;width:34px;text-align:center;flex-shrink:0;margin-top:1px}
+.quest-title{font-size:13px;font-weight:600;color:var(--text)}
+.quest-desc{font-size:12px;color:var(--text-dim);margin-top:3px;line-height:1.5}
+.quest-reward{display:inline-flex;align-items:center;gap:5px;margin-top:6px;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;font-family:var(--font-mono)}
+.reward-common{background:rgba(255,255,255,.07);color:var(--text-dim);border:1px solid var(--border-inner)}
+.reward-rare{background:rgba(99,179,237,.12);color:#63b3ed;border:1px solid rgba(99,179,237,.25)}
+.reward-epic{background:rgba(139,92,246,.14);color:#a78bfa;border:1px solid rgba(139,92,246,.3)}
+.reward-legendary{background:rgba(251,191,36,.12);color:#fbbf24;border:1px solid rgba(251,191,36,.3)}
+.bonus-box{background:linear-gradient(135deg,rgba(251,191,36,.08),rgba(251,191,36,.03));border:1px solid rgba(251,191,36,.3);border-radius:10px;padding:16px 18px;margin-bottom:20px;display:flex;align-items:center;gap:14px}
+.bonus-icon{font-size:28px;flex-shrink:0}
+.bonus-label{font-size:14px;font-weight:700;color:var(--gold)}
+.bonus-desc{font-size:12px;color:var(--text-dim);margin-top:3px;line-height:1.5}
+.streak-card{display:flex;align-items:center;gap:12px;background:var(--card-inner);border:1px solid var(--border-inner);border-radius:8px;padding:12px 16px;margin-bottom:10px}
+.streak-icon{font-size:22px;width:32px;text-align:center;flex-shrink:0}
+.streak-label{font-size:13px;font-weight:600;color:var(--gold)}
+.streak-desc{font-size:12px;color:var(--text-dim);margin-top:2px}
+.reset-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;font-family:var(--font-mono);background:rgba(99,179,237,.1);color:#63b3ed;border:1px solid rgba(99,179,237,.25)}
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+</head>
+<body>
+
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">G</span>
+      <span class="logo-text">Grindly<small>Wiki</small></span>
+    </a>
+    <div class="top-right">
+      <div class="player-count">
+        <span class="pulse-dot"></span>
+        <span>Productivity RPG</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="page-wrap">
+  <aside class="sidebar">
+    <div class="search-box">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search wiki..." autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-title"><span class="arrow">&#9660;</span> Pages</div>
+      <ul class="nav-links" id="wikiNav"></ul>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="breadcrumbs"><a href="index.html">Home</a><span class="bc-sep">&#9656;</span><span class="bc-current">Daily Quests &amp; Weekly Challenges</span></div>
+
+    <section class="hero">
+      <h1>Quests</h1>
+      <p class="hero-sub">Complete daily and weekly objectives to earn chests. Claim all 6 daily quests for a bonus legendary chest and build your quest streak.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="hero-stat-num">6</span><span class="hero-stat-label">Daily Quests</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">6</span><span class="hero-stat-label">Weekly Challenges</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">🏆</span><span class="hero-stat-label">Legendary bonus</span></div>
+      </div>
+    </section>
+
+    <section class="content">
+
+      <!-- Daily Quests -->
+      <h2 class="section-title"><span class="section-icon">🎯</span> Daily Quests</h2>
+      <p class="section-desc">6 quests refresh every day at midnight. Complete each quest and click Claim to collect your chest reward. Progress is tracked automatically as you use the app.</p>
+
+      <div class="quest-grid">
+        <div class="quest-card">
+          <div class="quest-icon">🎯</div>
+          <div>
+            <div class="quest-title">Focus Sprint</div>
+            <div class="quest-desc">Accumulate 45 minutes of focused grind.</div>
+            <span class="quest-reward reward-common">📦 Common Chest</span>
+          </div>
+        </div>
+        <div class="quest-card">
+          <div class="quest-icon">🔥</div>
+          <div>
+            <div class="quest-title">No AFK Run</div>
+            <div class="quest-desc">Finish a session without AFK pause.</div>
+            <span class="quest-reward reward-rare">📦 Rare Chest</span>
+          </div>
+        </div>
+        <div class="quest-card">
+          <div class="quest-icon">💻</div>
+          <div>
+            <div class="quest-title">Code Push</div>
+            <div class="quest-desc">Earn 900 Developer XP in a single day.</div>
+            <span class="quest-reward reward-epic">📦 Epic Chest</span>
+          </div>
+        </div>
+        <div class="quest-card">
+          <div class="quest-icon">⚔️</div>
+          <div>
+            <div class="quest-title">Dungeon Run</div>
+            <div class="quest-desc">Complete 1 arena dungeon.</div>
+            <span class="quest-reward reward-rare">📦 Rare Chest</span>
+          </div>
+        </div>
+        <div class="quest-card">
+          <div class="quest-icon">🌾</div>
+          <div>
+            <div class="quest-title">Green Thumb</div>
+            <div class="quest-desc">Harvest 2 crops from your farm.</div>
+            <span class="quest-reward reward-common">📦 Common Chest</span>
+          </div>
+        </div>
+        <div class="quest-card">
+          <div class="quest-icon">⚒️</div>
+          <div>
+            <div class="quest-title">Artisan Work</div>
+            <div class="quest-desc">Complete 1 crafting job.</div>
+            <span class="quest-reward reward-common">📦 Common Chest</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Complete All Bonus -->
+      <div class="bonus-box">
+        <div class="bonus-icon">🏆</div>
+        <div>
+          <div class="bonus-label">Complete All Bonus — Legendary Chest</div>
+          <div class="bonus-desc">Claim all 6 daily quest rewards to unlock the <strong>Complete All</strong> bonus: a free Legendary Chest. This also increments your Quest Streak if you complete it on consecutive days.</div>
+        </div>
+      </div>
+
+      <!-- Quest Streak -->
+      <h2 class="section-title"><span class="section-icon">🔥</span> Quest Streak</h2>
+      <p class="section-desc">Your streak counts how many days in a row you've claimed all 6 daily quests. Streak resets if you miss a day.</p>
+
+      <div class="streak-card">
+        <div class="streak-icon">🔥</div>
+        <div>
+          <div class="streak-label">Daily Quest Streak</div>
+          <div class="streak-desc">Claim the Complete All bonus each day to keep your streak alive. Missing a day resets to 0. Streak milestones unlock <a href="achievements.html" style="color:var(--gold)">streak achievements</a>.</div>
+        </div>
+      </div>
+
+      <!-- Resets -->
+      <h2 class="section-title"><span class="section-icon">🕐</span> Reset Schedule</h2>
+      <div class="table-wrap" style="margin-bottom:20px">
+        <table>
+          <thead><tr><th>Quest Type</th><th>Reset Time</th><th>Bonus</th></tr></thead>
+          <tbody>
+            <tr><td>Daily Quests</td><td><span class="reset-badge">Every midnight (local time)</span></td><td>Legendary Chest on complete-all</td></tr>
+            <tr><td>Weekly Challenges</td><td><span class="reset-badge">Every Monday (midnight)</span></td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Weekly Challenges -->
+      <h2 class="section-title"><span class="section-icon">📅</span> Weekly Challenges</h2>
+      <p class="section-desc">6 challenges that reset each Monday. These target larger goals across the whole week — grind time, dungeon runs, harvests, crafting, cooking, and XP.</p>
+
+      <div class="quest-grid">
+        <div class="quest-card">
+          <div class="quest-icon">⏱</div>
+          <div>
+            <div class="quest-title">Grind Master</div>
+            <div class="quest-desc">Grind for 3 hours this week (tracked focus time).</div>
+            <span class="quest-reward reward-epic">📦 Epic Chest</span>
+          </div>
+        </div>
+        <div class="quest-card">
+          <div class="quest-icon">🏆</div>
+          <div>
+            <div class="quest-title">Arena Champion</div>
+            <div class="quest-desc">Complete 5 dungeon runs this week.</div>
+            <span class="quest-reward reward-epic">📦 Epic Chest</span>
+          </div>
+        </div>
+        <div class="quest-card">
+          <div class="quest-icon">🌿</div>
+          <div>
+            <div class="quest-title">Farm Baron</div>
+            <div class="quest-desc">Harvest 15 crops this week.</div>
+            <span class="quest-reward reward-rare">📦 Rare Chest</span>
+          </div>
+        </div>
+        <div class="quest-card">
+          <div class="quest-icon">⚒️</div>
+          <div>
+            <div class="quest-title">Master Crafter</div>
+            <div class="quest-desc">Craft 5 items this week.</div>
+            <span class="quest-reward reward-rare">📦 Rare Chest</span>
+          </div>
+        </div>
+        <div class="quest-card">
+          <div class="quest-icon">🍳</div>
+          <div>
+            <div class="quest-title">Gourmet</div>
+            <div class="quest-desc">Cook 5 meals this week.</div>
+            <span class="quest-reward reward-rare">📦 Rare Chest</span>
+          </div>
+        </div>
+        <div class="quest-card">
+          <div class="quest-icon">⚡</div>
+          <div>
+            <div class="quest-title">XP Hunter</div>
+            <div class="quest-desc">Earn 10,000 skill XP this week.</div>
+            <span class="quest-reward reward-epic">📦 Epic Chest</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <h4>How Progress is Tracked</h4>
+        <p style="font-size:13px;color:var(--text-dim);margin:6px 0 0">Progress updates automatically as you use the app. Focus time increments during tracked grind sessions. Developer XP is counted from the daily total. Dungeon, harvest, craft, and cook progress update the moment you complete each action. You don't need to do anything — just play.</p>
+      </div>
+
+    </section>
+  </main>
+</div>
+
+<script src="wiki-search.js"></script>
+<script src="wiki-nav.js"></script>
+</body>
+</html>

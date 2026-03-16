@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketplace — Grindly Wiki</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.mp-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:18px}
+.mp-tab{padding:7px 16px;border-radius:8px;border:1px solid var(--border-inner);background:transparent;color:var(--text-dim);font-size:13px;font-family:var(--font-mono)}
+.mp-tab.active{color:var(--gold);border-color:var(--gold);background:rgba(251,191,36,.08)}
+.flow-step{display:flex;align-items:flex-start;gap:14px;padding:12px 0;border-bottom:1px solid var(--border-inner)}
+.flow-step:last-child{border-bottom:none}
+.flow-num{width:26px;height:26px;border-radius:50%;background:var(--gold);color:#000;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.flow-text{font-size:13px;color:var(--text-dim);line-height:1.5}
+.flow-text strong{color:var(--text)}
+.blocked-item{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);font-size:12px;color:#f87171;margin:3px}
+.feature-card{background:var(--card-inner);border:1px solid var(--border-inner);border-radius:10px;padding:14px 16px;margin-bottom:10px}
+.feature-card h4{margin:0 0 6px;font-size:13px;font-weight:600}
+.feature-card p{margin:0;font-size:12px;color:var(--text-dim);line-height:1.5}
+.tab-label{display:inline-block;padding:3px 9px;border-radius:4px;font-size:11px;font-weight:700;font-family:var(--font-mono);border:1px solid;margin:1px}
+.tab-listings{background:rgba(99,179,237,.1);color:#63b3ed;border-color:rgba(99,179,237,.25)}
+.tab-sell{background:rgba(72,199,142,.1);color:#48c78e;border-color:rgba(72,199,142,.25)}
+.tab-mylistings{background:rgba(139,92,246,.12);color:#a78bfa;border-color:rgba(139,92,246,.25)}
+.tab-history{background:rgba(255,255,255,.06);color:var(--text-dim);border-color:var(--border-inner)}
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+</head>
+<body>
+
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">G</span>
+      <span class="logo-text">Grindly<small>Wiki</small></span>
+    </a>
+    <div class="top-right">
+      <div class="player-count">
+        <span class="pulse-dot"></span>
+        <span>Productivity RPG</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="page-wrap">
+  <aside class="sidebar">
+    <div class="search-box">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search wiki..." autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-title"><span class="arrow">&#9660;</span> Pages</div>
+      <ul class="nav-links" id="wikiNav"></ul>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="breadcrumbs"><a href="index.html">Home</a><span class="bc-sep">&#9656;</span><span class="bc-current">Marketplace</span></div>
+
+    <section class="hero">
+      <h1>Marketplace</h1>
+      <p class="hero-sub">Player-to-player trading. List items from your inventory, browse the order book, and buy at the best available price — one row per item with multiple price tiers.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="hero-stat-num">P2P</span><span class="hero-stat-label">Player trading</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">📈</span><span class="hero-stat-label">Price sparklines</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">🪙</span><span class="hero-stat-label">Gold currency</span></div>
+      </div>
+    </section>
+
+    <section class="content">
+
+      <!-- Tabs Overview -->
+      <h2 class="section-title"><span class="section-icon">📑</span> Marketplace Tabs</h2>
+      <p class="section-desc">The Marketplace has four tabs:</p>
+
+      <div class="table-wrap" style="margin-bottom:20px">
+        <table>
+          <thead><tr><th>Tab</th><th>What it shows</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tab-label tab-listings">Listings</span></td><td>Order book — all active listings grouped by item, sorted by price</td></tr>
+            <tr><td><span class="tab-label tab-sell">Sell</span></td><td>Your inventory — click any item to open the List for Sale modal</td></tr>
+            <tr><td><span class="tab-label tab-mylistings">My Listings</span></td><td>Your active listings with a Cancel button for each</td></tr>
+            <tr><td><span class="tab-label tab-history">History</span></td><td>Recently completed trades (buyer, seller, price, quantity, time)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Order Book -->
+      <h2 class="section-title"><span class="section-icon">📖</span> Order Book</h2>
+      <p class="section-desc">The Listings tab shows an <strong>order book</strong>: one row per item type. Expand a row to see all available price tiers. Each tier shows the price per unit, total available quantity, and a price sparkline showing the price history over time.</p>
+
+      <div class="feature-card">
+        <h4>Floor Price</h4>
+        <p>The lowest price available for an item across all sellers. The floor price badge is shown prominently on each item row — this is what you'll pay if you hit the Buy button without expanding the tiers.</p>
+      </div>
+      <div class="feature-card">
+        <h4>Price Sparkline</h4>
+        <p>Each item row includes a mini sparkline chart showing recent price history. Green = price trending up, red = trending down. Hover for exact values.</p>
+      </div>
+      <div class="feature-card">
+        <h4>Partial Buys</h4>
+        <p>When a listing has multiple units available, you can buy a partial quantity. Enter how many you want — you only pay for what you buy. The listing remains active for other buyers.</p>
+      </div>
+
+      <!-- How to List -->
+      <h2 class="section-title"><span class="section-icon">💰</span> Listing Items for Sale</h2>
+      <p class="section-desc">Open the <strong>Sell</strong> tab, then click any item in your inventory to open the List for Sale modal.</p>
+
+      <div class="info-box" style="margin-bottom:20px">
+        <div class="flow-step">
+          <div class="flow-num">1</div>
+          <div class="flow-text">Go to <strong>Marketplace → Sell tab</strong>. Your inventory is displayed.</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">2</div>
+          <div class="flow-text">Click the item you want to sell. A modal opens showing the current floor price.</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">3</div>
+          <div class="flow-text">Set your <strong>price per unit</strong> and <strong>quantity</strong>. You can't list an item that's currently equipped (it subtracts 1 from your sellable quantity).</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">4</div>
+          <div class="flow-text">Click <strong>List for Sale</strong>. The item is moved to the marketplace. It appears instantly in the Listings tab.</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">5</div>
+          <div class="flow-text">Manage active listings in <strong>My Listings</strong>. Click Cancel to remove a listing and return the item to your inventory.</div>
+        </div>
+      </div>
+
+      <!-- Blocked Items -->
+      <h2 class="section-title"><span class="section-icon">🚫</span> Non-Tradeable Items</h2>
+      <p class="section-desc">The following consumable items cannot be listed on the marketplace:</p>
+
+      <div style="margin-bottom:20px">
+        <span class="blocked-item">🧪 ATK Potion</span>
+        <span class="blocked-item">❤️ HP Potion</span>
+        <span class="blocked-item">💚 Regen Potion</span>
+        <span class="blocked-item">🛡️ DEF Potion</span>
+        <span class="blocked-item">☠️ Death Insurance</span>
+      </div>
+
+      <div class="info-box" style="margin-bottom:20px">
+        <p style="font-size:13px;color:var(--text-dim);margin:0">Consumable potions and Death Insurance are bound to the player who earned them and cannot be transferred. All equipment (head, top, accessory, aura), materials, farming items, and chests are tradeable.</p>
+      </div>
+
+      <!-- Gold -->
+      <h2 class="section-title"><span class="section-icon">🪙</span> Currency</h2>
+      <p class="section-desc">All trades use <strong>gold</strong> as the currency. Gold is earned by killing mobs in the Arena, completing dungeons, and from quest chests. Your current gold balance is displayed in the top-right of the Marketplace page.</p>
+
+      <div class="table-wrap" style="margin-bottom:20px">
+        <table>
+          <thead><tr><th>Source</th><th>How to earn gold</th></tr></thead>
+          <tbody>
+            <tr><td>Arena Mob Kills</td><td>Every mob kill drops gold based on zone tier</td></tr>
+            <tr><td>Dungeon Clears</td><td>Bonus gold on dungeon completion</td></tr>
+            <tr><td>Quest Chests</td><td>Open chests from daily/weekly quests for gold rolls</td></tr>
+            <tr><td>Marketplace Sales</td><td>Receive gold when a buyer purchases your listing</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+  </main>
+</div>
+
+<script src="wiki-search.js"></script>
+<script src="wiki-nav.js"></script>
+</body>
+</html>

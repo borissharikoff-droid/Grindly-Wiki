@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Friends &amp; Social — Grindly Wiki</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.friend-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:20px}
+.friend-card{background:var(--card-inner);border:1px solid var(--border-inner);border-radius:10px;padding:14px 16px}
+.friend-card h4{margin:0 0 6px;font-size:13px;font-weight:600}
+.friend-card p{margin:0;font-size:12px;color:var(--text-dim);line-height:1.5}
+.feed-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border-inner);font-size:12px;color:var(--text-dim)}
+.feed-item:last-child{border-bottom:none}
+.feed-icon{font-size:16px;width:24px;text-align:center;flex-shrink:0;margin-top:1px}
+.feed-item strong{color:var(--text)}
+.tab-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;font-family:var(--font-mono);background:rgba(255,255,255,.06);color:var(--text-dim);border:1px solid var(--border-inner)}
+.tab-active{background:rgba(251,191,36,.1);color:#fbbf24;border-color:rgba(251,191,36,.25)}
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+</head>
+<body>
+
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">G</span>
+      <span class="logo-text">Grindly<small>Wiki</small></span>
+    </a>
+    <div class="top-right">
+      <div class="player-count">
+        <span class="pulse-dot"></span>
+        <span>Productivity RPG</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="page-wrap">
+  <aside class="sidebar">
+    <div class="search-box">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search wiki..." autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-title"><span class="arrow">&#9660;</span> Pages</div>
+      <ul class="nav-links" id="wikiNav"></ul>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="breadcrumbs"><a href="index.html">Home</a><span class="bc-sep">&#9656;</span><span class="bc-current">Friends &amp; Social</span></div>
+
+    <section class="hero">
+      <h1>Friends &amp; Social</h1>
+      <p class="hero-sub">Add friends, watch their activity in real time, compare stats, chat, climb the leaderboard, and team up in guilds and raids.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="hero-stat-num">👥</span><span class="hero-stat-label">Friends list</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">📊</span><span class="hero-stat-label">Leaderboard</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">🏰</span><span class="hero-stat-label">Guilds &amp; Raids</span></div>
+      </div>
+    </section>
+
+    <section class="content">
+
+      <!-- Friends Tabs -->
+      <h2 class="section-title"><span class="section-icon">📑</span> Friends Page Tabs</h2>
+      <div class="table-wrap" style="margin-bottom:20px">
+        <table>
+          <thead><tr><th>Tab / Section</th><th>What it contains</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tab-badge tab-active">Friends</span></td><td>Friend list with activity feed, online status, pending requests</td></tr>
+            <tr><td><span class="tab-badge">Leaderboard</span></td><td>Global and friends-only XP ranking by total skill level</td></tr>
+            <tr><td><span class="tab-badge">Guild</span></td><td>Your guild panel or guild browser — see <a href="guilds.html" style="color:var(--gold)">Guilds</a></td></tr>
+            <tr><td><span class="tab-badge">Party</span></td><td>Raid party panel — invite friends to an active raid</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Adding Friends -->
+      <h2 class="section-title"><span class="section-icon">➕</span> Adding Friends</h2>
+      <p class="section-desc">Search for any player by their username and send a friend request. They'll see a pending request at the top of their Friends tab.</p>
+
+      <div class="friend-grid">
+        <div class="friend-card">
+          <h4>Send a Request</h4>
+          <p>Click <strong>Add Friend</strong> in the Friends tab. Type the player's exact username and hit Send. The request appears in their Pending Requests list.</p>
+        </div>
+        <div class="friend-card">
+          <h4>Accept / Decline</h4>
+          <p>Pending requests appear at the top of your Friends tab. Accept to add them as a friend, or decline to dismiss the request.</p>
+        </div>
+        <div class="friend-card">
+          <h4>Remove a Friend</h4>
+          <p>Open a friend's profile and select <strong>Remove Friend</strong>. This removes the connection for both players.</p>
+        </div>
+        <div class="friend-card">
+          <h4>Friend Profile</h4>
+          <p>Click any friend to open their profile: level, skills, equipped gear, active session status, and options to chat, compare, or invite to guild/raid.</p>
+        </div>
+      </div>
+
+      <!-- Activity Feed -->
+      <h2 class="section-title"><span class="section-icon">📡</span> Activity Feed</h2>
+      <p class="section-desc">The main friend list shows a live activity feed — events from your friends appear as they happen. Feed events include:</p>
+
+      <div class="info-box" style="margin-bottom:20px">
+        <div class="feed-item">
+          <div class="feed-icon">⚔️</div>
+          <div><strong>Boss Kill</strong> — friend defeated a boss in the arena (shows boss name and zone)</div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-icon">🏆</div>
+          <div><strong>Achievement Unlocked</strong> — friend earned a new achievement (shows icon, name, XP reward)</div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-icon">💎</div>
+          <div><strong>Rare Drop</strong> — friend received an epic, legendary, or mythic item from a chest</div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-icon">⬆️</div>
+          <div><strong>Level Up</strong> — friend gained a level in any skill</div>
+        </div>
+        <div class="feed-item">
+          <div class="feed-icon">🌿</div>
+          <div><strong>Farm / Craft events</strong> — rare harvests and notable crafts</div>
+        </div>
+      </div>
+
+      <!-- Compare -->
+      <h2 class="section-title"><span class="section-icon">📊</span> Compare Stats</h2>
+      <p class="section-desc">Open a friend's profile and tap <strong>Compare</strong> to view a side-by-side skill comparison. Each skill bar shows your XP vs theirs, with color coding for who's ahead.</p>
+
+      <!-- Chat -->
+      <h2 class="section-title"><span class="section-icon">💬</span> Chat</h2>
+      <p class="section-desc">Open a friend's profile and tap <strong>Message</strong> to start a direct message thread. Unread badge appears on the Friends tab nav icon when you have new messages.</p>
+
+      <!-- Leaderboard -->
+      <h2 class="section-title"><span class="section-icon">🏅</span> Leaderboard</h2>
+      <p class="section-desc">The Leaderboard tab ranks players by <strong>total skill level</strong> (sum of all skill levels). Switch between the global leaderboard and a friends-only view.</p>
+
+      <div class="table-wrap" style="margin-bottom:20px">
+        <table>
+          <thead><tr><th>Column</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>Rank</td><td>Position in the leaderboard (1 = highest total level)</td></tr>
+            <tr><td>Player</td><td>Avatar, username, and title</td></tr>
+            <tr><td>Total Level</td><td>Sum of all skill levels across all 13 skills</td></tr>
+            <tr><td>Top Skill</td><td>The skill with the highest level for that player</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Raids & Guilds links -->
+      <h2 class="section-title"><span class="section-icon">🔗</span> Related Features</h2>
+      <div class="friend-grid">
+        <div class="friend-card">
+          <h4><a href="guilds.html" style="color:var(--gold)">Guilds</a></h4>
+          <p>Create or join a guild from the Friends → Guild tab. Guild members share passive +5% XP and +5% gold buffs and can pool gold in the guild chest.</p>
+        </div>
+        <div class="friend-card">
+          <h4><a href="raids.html" style="color:var(--gold)">Raids &amp; Party</a></h4>
+          <p>Invite friends to join your active raid from the Friends → Party panel. Party members can attack the same raid boss and share in the rewards.</p>
+        </div>
+      </div>
+
+    </section>
+  </main>
+</div>
+
+<script src="wiki-search.js"></script>
+<script src="wiki-nav.js"></script>
+</body>
+</html>
