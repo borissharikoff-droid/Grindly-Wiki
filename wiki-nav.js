@@ -13,6 +13,8 @@
     { href: 'loot.html',      label: 'Loot Bags',        dot: 'orange' },
     { href: 'materials.html', label: 'Materials',         dot: 'purple' },
     { href: 'arena.html',     label: 'Arena &amp; Bosses', dot: 'red' },
+    { href: 'raids.html',     label: 'Raids',              dot: 'purple' },
+    { href: 'guilds.html',    label: 'Guilds',             dot: 'gold' },
     { href: 'crafting.html',  label: 'Crafting',          dot: 'cyan' },
     { href: 'cooking.html',   label: 'Cooking',           dot: 'orange', badge: 'WIP' },
     { href: 'farming.html',   label: 'Farming',           dot: 'green' },

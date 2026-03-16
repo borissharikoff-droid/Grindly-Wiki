@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raids — Grindly Wiki</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px}
+.tier-card{border-radius:12px;border:1px solid var(--border-inner);overflow:hidden}
+.tier-card-head{padding:14px 16px;display:flex;align-items:center;gap:10px}
+.tier-card-icon{font-size:26px;width:36px;text-align:center}
+.tier-card-name{font-size:15px;font-weight:700}
+.tier-card-lore{font-size:11px;color:rgba(255,255,255,.45);font-style:italic;margin-top:2px}
+.tier-card-body{padding:14px 16px;background:var(--card-inner)}
+.tier-stat{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:12px}
+.tier-stat:last-child{border-bottom:none}
+.tier-stat-label{color:var(--text-dim)}
+.tier-stat-val{font-weight:600;font-family:var(--font-mono)}
+.phase-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.phase-card{background:var(--card-inner);border:1px solid var(--border-inner);border-radius:8px;padding:12px;text-align:center}
+.phase-num{font-size:22px;font-weight:800;margin-bottom:4px}
+.phase-hp{font-size:11px;color:var(--text-dim);margin-bottom:6px}
+.phase-mult{font-size:13px;font-weight:700}
+.phase-1 .phase-num{color:#22d3ee}
+.phase-2 .phase-num{color:#f59e0b}
+.phase-3 .phase-num{color:#ef4444}
+.req-tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:600;margin:2px;font-family:var(--font-mono)}
+.req-warrior{background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.3)}
+.req-skill{background:rgba(34,211,238,.15);color:#67e8f9;border:1px solid rgba(34,211,238,.3)}
+.req-zone{background:rgba(132,204,22,.15);color:#a3e635;border:1px solid rgba(132,204,22,.3)}
+.req-party{background:rgba(168,85,247,.15);color:#c084fc;border:1px solid rgba(168,85,247,.3)}
+.req-tribute{background:rgba(251,191,36,.15);color:#fbbf24;border:1px solid rgba(251,191,36,.3)}
+.loot-exclusive{display:flex;align-items:center;gap:12px;background:var(--card-inner);border:1px solid var(--border-inner);border-radius:8px;padding:12px 16px;margin-bottom:10px}
+.loot-icon{font-size:24px;width:32px;text-align:center;flex-shrink:0}
+.loot-name{font-size:13px;font-weight:600}
+.loot-chance{font-size:12px;color:var(--text-dim);margin-top:2px}
+.invite-flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0}
+.invite-step{background:var(--card-inner);border:1px solid var(--border-inner);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--text-dim)}
+.invite-step strong{color:var(--text)}
+.invite-arrow{color:var(--text-dim);font-size:14px}
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+</head>
+<body>
+
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">G</span>
+      <span class="logo-text">Grindly<small>Wiki</small></span>
+    </a>
+    <div class="top-right">
+      <div class="player-count">
+        <span class="pulse-dot"></span>
+        <span>Productivity RPG</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="page-wrap">
+  <aside class="sidebar">
+    <div class="search-box">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search wiki..." autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-title"><span class="arrow">&#9660;</span> Pages</div>
+      <ul class="nav-links" id="wikiNav"></ul>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="breadcrumbs"><a href="index.html">Home</a><span class="bc-sep">&#9656;</span><span class="bc-current">Raids</span></div>
+
+    <section class="hero">
+      <h1>Raids</h1>
+      <p class="hero-sub">Multi-day co-op boss hunts. Invite party members, burn tribute items to open the gate, and deal daily damage until the boss falls — or time runs out.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="hero-stat-num">3</span><span class="hero-stat-label">Raid Tiers</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">3</span><span class="hero-stat-label">Phases</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">3</span><span class="hero-stat-label">Exclusive Drops</span></div>
+      </div>
+    </section>
+
+    <section class="content">
+
+      <!-- Overview -->
+      <h2 class="section-title"><span class="section-icon">⚔️</span> How Raids Work</h2>
+      <p class="section-desc">A raid is a persistent boss fight that lasts multiple days. Each day you launch a normal arena fight against the raid encounter — if you win, your damage chips away at the raid boss's massive HP pool. The raid is won when the total HP reaches 0 before the timer expires.</p>
+
+      <div class="info-box" style="margin-bottom:20px">
+        <h4>Daily Flow</h4>
+        <ol class="step-list">
+          <li><strong>Start the Raid</strong> — meet all requirements, burn tribute items, raid is created</li>
+          <li><strong>Invite Party</strong> — send invites to friends via the Friends tab; they join the same raid</li>
+          <li><strong>Daily Attack</strong> — each party member fights the encounter once per day; winning deals <code>contribution_per_win</code> damage to the boss</li>
+          <li><strong>Watch the Phase</strong> — boss ATK increases as its HP drops (3 phases)</li>
+          <li><strong>Claim Victory</strong> — when boss HP = 0 the raid is won; click Claim to collect chest + exclusive loot chance</li>
+          <li><strong>Raid Fails</strong> — if the timer expires before HP = 0, the raid is marked failed and dismissed</li>
+        </ol>
+      </div>
+
+      <!-- Raid Tiers -->
+      <h2 class="section-title"><span class="section-icon">🏆</span> Raid Tiers</h2>
+      <p class="section-desc">Three tiers of increasing difficulty, duration, and reward quality. Each tier has its own encounter boss, tribute requirement, and exclusive loot.</p>
+
+      <div class="tier-grid">
+
+        <!-- Ancient -->
+        <div class="tier-card" style="border-color:rgba(34,211,238,.3)">
+          <div class="tier-card-head" style="background:rgba(34,211,238,.08)">
+            <div class="tier-card-icon">🗿</div>
+            <div>
+              <div class="tier-card-name" style="color:#22d3ee">Ancient Raid</div>
+              <div class="tier-card-lore">The Ancient Golem stirs from centuries of slumber.</div>
+            </div>
+          </div>
+          <div class="tier-card-body">
+            <div class="tier-stat"><span class="tier-stat-label">Duration</span><span class="tier-stat-val">2 days</span></div>
+            <div class="tier-stat"><span class="tier-stat-label">Boss HP</span><span class="tier-stat-val">1,000,000</span></div>
+            <div class="tier-stat"><span class="tier-stat-label">Contribution/Win</span><span class="tier-stat-val">150,000</span></div>
+            <div class="tier-stat"><span class="tier-stat-label">Encounter</span><span class="tier-stat-val">Ancient Golem (HP 2000, ATK 14)</span></div>
+            <div class="tier-stat"><span class="tier-stat-label">Tribute</span><span class="tier-stat-val">3× Epic items</span></div>
+            <div class="tier-stat"><span class="tier-stat-label">Party Minimum</span><span class="tier-stat-val">2 players</span></div>
+            <div class="tier-stat"><span class="tier-stat-label">Reward</span><span class="tier-stat-val">Epic Chest + 15% Legendary bonus</span></div>
+            <div style="margin-top:10px">
+              <span class="req-tag req-warrior">Warrior Lvl 50</span>
+              <span class="req-tag req-skill">4 Skills Lvl 40+</span>
+              <span class="req-tag req-zone">6 Zones Cleared</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mythic -->
+        <div class="tier-card" style="border-color:rgba(168,85,247,.3)">
+          <div class="tier-card-head" style="background:rgba(168,85,247,.08)">
+            <div class="tier-card-icon">🐲</div>
+            <div>
+              <div class="tier-card-name" style="color:#a855f7">Mythic Raid</div>
+              <div class="tier-card-lore">Seven heads. Seven deaths. A prize unlike any other.</div>
+            </div>
+          </div>
+          <div class="tier-card-body">
+            <div class="tier-stat"><span class="tier-stat-label">Duration</span><span class="tier-stat-val">4 days</span></div>
+            <div class="tier-stat"><span class="tier-stat-label">Boss HP</span><span class="tier-stat-val">5,000,000</span></div>
+            <div class="tier-stat"><span class="tier-stat-label">Contribution/Win</span><span class="tier-stat-val">400,000</span></div>
+            <div class="tier-stat"><span class="tier-stat-label">Encounter</span><span class="tier-stat-val">Mythic Hydra (HP 3500, ATK 22)</span></div>
+            <div class="tier-stat"><span class="tier-stat-label">Tribute</span><span class="tier-stat-val">3× Legendary items</span></div>
+            <div class="tier-stat"><span class="tier-stat-label">Party Minimum</span><span class="tier-stat-val">2 players</span></div>
+            <div class="tier-stat"><span class="tier-stat-label">Reward</span><span class="tier-stat-val">Legendary Chest + guaranteed Legendary bonus</span></div>
+            <div style="margin-top:10px">
+              <span class="req-tag req-warrior">Warrior Lvl 65</span>
+              <span class="req-tag req-skill">4 Skills Lvl 55+</span>
+              <span class="req-tag req-zone">8 Zones Cleared</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Eternal -->
+        <div class="tier-card" style="border-color:rgba(245,158,11,.3)">
+          <div class="tier-card-head" style="background:rgba(245,158,11,.08)">
+            <div class="tier-card-icon">⚡</div>
+            <div>
+              <div class="tier-card-name" style="color:#f59e0b">Eternal Raid</div>
+              <div class="tier-card-lore">Before the world was named, the Titan ruled. It still does.</div>
+            </div>
+          </div>
+          <div class="tier-card-body">
+            <div class="tier-stat"><span class="tier-stat-label">Duration</span><span class="tier-stat-val">7 days</span></div>
+            <div class="tier-stat"><span class="tier-stat-label">Boss HP</span><span class="tier-stat-val">20,000,000</span></div>
+            <div class="tier-stat"><span class="tier-stat-label">Contribution/Win</span><span class="tier-stat-val">800,000</span></div>
+            <div class="tier-stat"><span class="tier-stat-label">Encounter</span><span class="tier-stat-val">Eternal Titan (HP 6000, ATK 32)</span></div>
+            <div class="tier-stat"><span class="tier-stat-label">Tribute</span><span class="tier-stat-val">2× Mythic items</span></div>
+            <div class="tier-stat"><span class="tier-stat-label">Party Minimum</span><span class="tier-stat-val">3 players</span></div>
+            <div class="tier-stat"><span class="tier-stat-label">Reward</span><span class="tier-stat-val">Legendary Chest + guaranteed Legendary bonus</span></div>
+            <div style="margin-top:10px">
+              <span class="req-tag req-warrior">Warrior Lvl 80</span>
+              <span class="req-tag req-skill">4 Skills Lvl 70+</span>
+              <span class="req-tag req-zone">8 Zones Cleared</span>
+              <span class="req-tag req-party">3 Party Members</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Requirements summary -->
+      <h2 class="section-title"><span class="section-icon">🔒</span> Entry Requirements</h2>
+      <p class="section-desc">All requirements must be met to start a raid. They are checked when you attempt to launch.</p>
+
+      <div class="table-wrap" style="margin-bottom:20px">
+        <table>
+          <thead><tr><th>Requirement</th><th>Ancient</th><th>Mythic</th><th>Eternal</th></tr></thead>
+          <tbody>
+            <tr><td>Warrior Level</td><td>50</td><td>65</td><td>80</td></tr>
+            <tr><td>Skills at level req</td><td>4 skills ≥ Lvl 40</td><td>4 skills ≥ Lvl 55</td><td>4 skills ≥ Lvl 70</td></tr>
+            <tr><td>Zones Cleared</td><td>6</td><td>8</td><td>8</td></tr>
+            <tr><td>Party Size (minimum)</td><td>2</td><td>2</td><td>3</td></tr>
+            <tr><td>Tribute (burned on start)</td><td>3× Epic rarity+</td><td>3× Legendary rarity+</td><td>2× Mythic rarity+</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Boss Phases -->
+      <h2 class="section-title"><span class="section-icon">💀</span> Boss Phases</h2>
+      <p class="section-desc">As the raid boss loses HP it gets stronger. The encounter ATK multiplier increases each phase — make sure your gear can keep up.</p>
+
+      <div class="phase-grid">
+        <div class="phase-card phase-1">
+          <div class="phase-num">Phase 1</div>
+          <div class="phase-hp">HP &gt; 66%</div>
+          <div class="phase-mult" style="color:#22d3ee">1.0× ATK</div>
+          <p style="font-size:11px;color:var(--text-dim);margin:6px 0 0">Normal difficulty — use this phase to get your party organized.</p>
+        </div>
+        <div class="phase-card phase-2">
+          <div class="phase-num">Phase 2</div>
+          <div class="phase-hp">HP 33–66%</div>
+          <div class="phase-mult" style="color:#f59e0b">1.4× ATK</div>
+          <p style="font-size:11px;color:var(--text-dim);margin:6px 0 0">Boss rages — encounter hits 40% harder. Gear becomes more important.</p>
+        </div>
+        <div class="phase-card phase-3">
+          <div class="phase-num">Phase 3</div>
+          <div class="phase-hp">HP &lt; 33%</div>
+          <div class="phase-mult" style="color:#ef4444">1.8× ATK</div>
+          <p style="font-size:11px;color:var(--text-dim);margin:6px 0 0">Final push — encounter hits 80% harder. Only strong builds survive.</p>
+        </div>
+      </div>
+
+      <!-- Party System -->
+      <h2 class="section-title"><span class="section-icon">👥</span> Party &amp; Invites</h2>
+      <p class="section-desc">You can invite friends to join your active raid directly from the <strong>Friends</strong> tab. Invited players join as participants and can deal damage each day.</p>
+
+      <div class="invite-flow">
+        <div class="invite-step"><strong>Start a Raid</strong><br>You become the raid leader</div>
+        <div class="invite-arrow">→</div>
+        <div class="invite-step"><strong>Friends tab</strong><br>Open Raid Party panel</div>
+        <div class="invite-arrow">→</div>
+        <div class="invite-step"><strong>Send Invite</strong><br>Tap a friend → Invite</div>
+        <div class="invite-arrow">→</div>
+        <div class="invite-step"><strong>Friend Accepts</strong><br>Pending invite in their Raids tab</div>
+        <div class="invite-arrow">→</div>
+        <div class="invite-step"><strong>Joined!</strong><br>Participates in daily attacks</div>
+      </div>
+
+      <div class="info-box" style="margin-bottom:20px">
+        <h4>Party Rules</h4>
+        <ul style="margin:6px 0 0;padding-left:18px;font-size:13px;color:var(--text-dim);line-height:1.8">
+          <li>Only <strong>one active raid</strong> per player at a time</li>
+          <li>Each party member can attack <strong>once per day</strong></li>
+          <li>Winning the daily encounter deals <code>contribution_per_win</code> damage to the shared boss HP</li>
+          <li>Losing the daily encounter deals <strong>0 damage</strong> — day is wasted</li>
+          <li>Invited players join the existing raid — they do NOT burn tribute</li>
+          <li>A live HP bar is shown on the <strong>Home screen</strong> while a raid is active</li>
+        </ul>
+      </div>
+
+      <!-- Tribute -->
+      <h2 class="section-title"><span class="section-icon">🔥</span> Tribute</h2>
+      <p class="section-desc">Starting a raid requires <strong>burning</strong> tribute items from your inventory. Tribute items are destroyed permanently — they are the cost of entry.</p>
+
+      <div class="table-wrap" style="margin-bottom:20px">
+        <table>
+          <thead><tr><th>Tier</th><th>Required Tribute</th><th>Min Rarity</th></tr></thead>
+          <tbody>
+            <tr><td>⚙️ Ancient</td><td>3 items</td><td>Epic or better</td></tr>
+            <tr><td>🐲 Mythic</td><td>3 items</td><td>Legendary or better</td></tr>
+            <tr><td>⚡ Eternal</td><td>2 items</td><td>Mythic only</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Exclusive Loot -->
+      <h2 class="section-title"><span class="section-icon">💎</span> Raid-Exclusive Loot</h2>
+      <p class="section-desc">Each raid tier has a unique item that can only drop from that tier's victory. Drop chance is rolled on claim — not guaranteed.</p>
+
+      <div class="loot-exclusive">
+        <div class="loot-icon">💍</div>
+        <div>
+          <div class="loot-name" style="color:#a78bfa">Raid Ancient Ring <span style="font-size:11px;color:var(--text-dim);font-weight:400">(raid_ancient_ring)</span></div>
+          <div class="loot-chance">Ancient Raid — <strong>8% drop chance</strong> on victory</div>
+        </div>
+      </div>
+      <div class="loot-exclusive">
+        <div class="loot-icon">⚔️</div>
+        <div>
+          <div class="loot-name" style="color:#c084fc">Raid Void Blade <span style="font-size:11px;color:var(--text-dim);font-weight:400">(raid_void_blade)</span></div>
+          <div class="loot-chance">Mythic Raid — <strong>12% drop chance</strong> on victory</div>
+        </div>
+      </div>
+      <div class="loot-exclusive">
+        <div class="loot-icon">👑</div>
+        <div>
+          <div class="loot-name" style="color:#fbbf24">Raid Eternal Crown <span style="font-size:11px;color:var(--text-dim);font-weight:400">(raid_eternal_crown)</span></div>
+          <div class="loot-chance">Eternal Raid — <strong>20% drop chance</strong> on victory</div>
+        </div>
+      </div>
+
+      <div class="info-box" style="margin-top:16px;margin-bottom:20px">
+        <p style="margin:0;font-size:13px;color:var(--text-dim)">🎲 Exclusive item drops are checked <strong>once per raid victory</strong>. If the roll fails you still receive the standard reward chest. Exclusive items can be re-attempted by starting a new raid.</p>
+      </div>
+
+      <!-- Tips -->
+      <h2 class="section-title"><span class="section-icon">💡</span> Tips &amp; Strategy</h2>
+      <div class="guild-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:20px">
+        <div class="guild-card" style="background:var(--card-inner);border:1px solid var(--border-inner);border-radius:10px;padding:14px">
+          <h4 style="margin:0 0 6px;font-size:13px;font-weight:600">Attack Daily</h4>
+          <p style="margin:0;font-size:12px;color:var(--text-dim)">Missing a day means 0 damage for the party that day. Coordinate with party members to keep up consistent pressure on the boss HP.</p>
+        </div>
+        <div class="guild-card" style="background:var(--card-inner);border:1px solid var(--border-inner);border-radius:10px;padding:14px">
+          <h4 style="margin:0 0 6px;font-size:13px;font-weight:600">Gear for Phase 3</h4>
+          <p style="margin:0;font-size:12px;color:var(--text-dim)">The encounter hits 1.8× harder in Phase 3. Make sure your HP and HP Regen can survive the Eternal Titan at full rage (ATK 32 × 1.8 = 57.6).</p>
+        </div>
+        <div class="guild-card" style="background:var(--card-inner);border:1px solid var(--border-inner);border-radius:10px;padding:14px">
+          <h4 style="margin:0 0 6px;font-size:13px;font-weight:600">Save Mythic Tribute</h4>
+          <p style="margin:0;font-size:12px;color:var(--text-dim)">Eternal Raid requires 2× Mythic items. Mythic items are rare — prioritize crafting or opening chests to stockpile before attempting Eternal.</p>
+        </div>
+        <div class="guild-card" style="background:var(--card-inner);border:1px solid var(--border-inner);border-radius:10px;padding:14px">
+          <h4 style="margin:0 0 6px;font-size:13px;font-weight:600">Track HP on Home</h4>
+          <p style="margin:0;font-size:12px;color:var(--text-dim)">When a raid is active a live HP bar appears on the Home screen showing tier, phase, and boss HP%. Use it to gauge how many attacks are left.</p>
+        </div>
+      </div>
+
+    </section>
+  </main>
+</div>
+
+<script src="wiki-search.js"></script>
+<script src="wiki-nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guilds — Grindly Wiki</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.guild-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:20px}
+.guild-card{background:var(--card-inner);border:1px solid var(--border-inner);border-radius:10px;padding:16px}
+.guild-card h4{margin:0 0 6px;font-size:14px;font-weight:600}
+.guild-card p{margin:0;font-size:13px;color:var(--text-dim);line-height:1.5}
+.role-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;font-family:var(--font-mono)}
+.role-owner{background:rgba(251,191,36,.15);color:#fbbf24;border:1px solid rgba(251,191,36,.3)}
+.role-officer{background:rgba(139,92,246,.15);color:#a78bfa;border:1px solid rgba(139,92,246,.3)}
+.role-member{background:rgba(255,255,255,.06);color:var(--text-dim);border:1px solid var(--border-inner)}
+.buff-card{display:flex;align-items:center;gap:12px;background:var(--card-inner);border:1px solid var(--border-inner);border-radius:8px;padding:12px 16px;margin-bottom:10px}
+.buff-icon{font-size:22px;width:32px;text-align:center;flex-shrink:0}
+.buff-label{font-size:13px;font-weight:600;color:var(--gold)}
+.buff-desc{font-size:12px;color:var(--text-dim);margin-top:2px}
+.step-list{counter-reset:steps}
+.step-list li{counter-increment:steps;padding:10px 14px 10px 48px;position:relative;border-left:2px solid var(--border-inner);margin-bottom:8px;font-size:13px;color:var(--text-dim);line-height:1.5}
+.step-list li::before{content:counter(steps);position:absolute;left:-13px;top:8px;width:24px;height:24px;border-radius:50%;background:var(--gold);color:#000;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1}
+.step-list strong{color:var(--text)}
+.tax-bar{height:8px;border-radius:4px;background:linear-gradient(90deg,rgba(251,191,36,.6),rgba(239,68,68,.6));margin:6px 0}
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+</head>
+<body>
+
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">G</span>
+      <span class="logo-text">Grindly<small>Wiki</small></span>
+    </a>
+    <div class="top-right">
+      <div class="player-count">
+        <span class="pulse-dot"></span>
+        <span>Productivity RPG</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="page-wrap">
+  <aside class="sidebar">
+    <div class="search-box">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search wiki..." autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-title"><span class="arrow">&#9660;</span> Pages</div>
+      <ul class="nav-links" id="wikiNav"></ul>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="breadcrumbs"><a href="index.html">Home</a><span class="bc-sep">&#9656;</span><span class="bc-current">Guilds</span></div>
+
+    <section class="hero">
+      <h1>Guilds</h1>
+      <p class="hero-sub">Form a guild with friends, earn passive buffs, pool gold in the guild chest, and launch multi-day raids together.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="hero-stat-num">+5%</span><span class="hero-stat-label">Skill XP buff</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">+5%</span><span class="hero-stat-label">Arena Gold buff</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">0–15%</span><span class="hero-stat-label">Tax Rate</span></div>
+      </div>
+    </section>
+
+    <section class="content">
+
+      <!-- Creating a Guild -->
+      <h2 class="section-title"><span class="section-icon">🏰</span> Creating a Guild</h2>
+      <p class="section-desc">Guilds are created from the <strong>Friends → Guild</strong> tab. Creating a guild costs <strong>500 🪙 gold</strong>. You become the <span class="role-badge role-owner">Owner</span> automatically.</p>
+
+      <div class="info-box" style="margin-bottom:20px">
+        <h4>Guild Identity</h4>
+        <div class="table-wrap" style="margin-top:10px">
+          <table>
+            <thead><tr><th>Field</th><th>Details</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Name</strong></td><td>Your guild's full display name</td></tr>
+              <tr><td><strong>Tag</strong></td><td>Short 2–5 character tag shown next to member names (e.g. <code>[GRD]</code>)</td></tr>
+              <tr><td><strong>Description</strong></td><td>Optional recruitment text visible when browsing guilds</td></tr>
+              <tr><td><strong>Creation Cost</strong></td><td>500 🪙 gold (one-time, deducted on creation)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Joining a Guild -->
+      <h2 class="section-title"><span class="section-icon">🤝</span> Joining a Guild</h2>
+      <p class="section-desc">You can join a guild in two ways: browse public guilds in the Guild tab or accept an <strong>invite</strong> sent by an Officer+ member via your Friend's profile page.</p>
+
+      <div class="guild-grid">
+        <div class="guild-card">
+          <h4>Browse &amp; Join</h4>
+          <p>Open Friends → Guild → Browse. Search by name or browse top guilds sorted by chest gold. Click any guild to join instantly (if not already in one).</p>
+        </div>
+        <div class="guild-card">
+          <h4>Accept an Invite</h4>
+          <p>Officers and the Owner can invite friends directly from their Friend Profile page. Pending invites appear at the top of your Guild tab — accept or decline.</p>
+        </div>
+      </div>
+
+      <!-- Roles & Permissions -->
+      <h2 class="section-title"><span class="section-icon">👑</span> Roles &amp; Permissions</h2>
+      <p class="section-desc">Every guild member has a role. Roles determine what actions you can take within the guild.</p>
+
+      <div class="table-wrap" style="margin-bottom:20px">
+        <table>
+          <thead>
+            <tr><th>Role</th><th>Invite Members</th><th>Kick Members</th><th>Promote/Demote</th><th>Set Tax Rate</th><th>Deposit Gold</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="role-badge role-owner">Owner</span></td>
+              <td>✅</td><td>✅ (all)</td><td>✅</td><td>✅</td><td>✅</td>
+            </tr>
+            <tr>
+              <td><span class="role-badge role-officer">Officer</span></td>
+              <td>✅</td><td>✅ (members only)</td><td>❌</td><td>❌</td><td>✅</td>
+            </tr>
+            <tr>
+              <td><span class="role-badge role-member">Member</span></td>
+              <td>❌</td><td>❌</td><td>❌</td><td>❌</td><td>✅</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Passive Buffs -->
+      <h2 class="section-title"><span class="section-icon">⚡</span> Guild Passive Buffs</h2>
+      <p class="section-desc">Simply being in a guild grants you two permanent passive bonuses — no action required. Buffs apply instantly on join and are removed on leave.</p>
+
+      <div class="buff-card">
+        <div class="buff-icon">⚡</div>
+        <div>
+          <div class="buff-label">+5% Skill XP</div>
+          <div class="buff-desc">All skill XP earned from focus sessions is multiplied by <strong>1.05</strong>. Applies to all 12 skills — Developer, Designer, Gamer, etc.</div>
+        </div>
+      </div>
+      <div class="buff-card">
+        <div class="buff-icon">🪙</div>
+        <div>
+          <div class="buff-label">+5% Arena Gold</div>
+          <div class="buff-desc">Gold earned from mob kills in the Arena is multiplied by <strong>1.05</strong>. Stacks additively with Hot Zone and food bonuses.</div>
+        </div>
+      </div>
+
+      <!-- Tax System -->
+      <h2 class="section-title"><span class="section-icon">💰</span> Guild Tax</h2>
+      <p class="section-desc">The <span class="role-badge role-owner">Owner</span> can set a tax rate from <strong>0% to 15%</strong>. Tax is automatically deducted from every arena mob kill gold reward and deposited into the Guild Chest.</p>
+
+      <div class="info-box" style="margin-bottom:20px">
+        <h4>How Tax Works</h4>
+        <ol class="step-list">
+          <li><strong>Owner sets tax rate</strong> (0–15%) via the slider in the Guild tab</li>
+          <li>Player kills an arena mob — e.g. earns <strong>1000g</strong></li>
+          <li>At 10% tax: <strong>100g goes to Guild Chest</strong>, player keeps 900g</li>
+          <li>Tax contribution counted toward <strong>member contribution score</strong></li>
+        </ol>
+        <div class="tax-bar"></div>
+        <p style="font-size:12px;color:var(--text-dim);margin:0">Tax range: 0% (off) → 15% (maximum). Default is 0%.</p>
+      </div>
+
+      <!-- Guild Chest -->
+      <h2 class="section-title"><span class="section-icon">🎁</span> Guild Chest</h2>
+      <p class="section-desc">The guild chest pools gold contributed by all members through tax and manual deposits. Any member can deposit gold manually at any time.</p>
+
+      <div class="table-wrap" style="margin-bottom:20px">
+        <table>
+          <thead><tr><th>Source</th><th>How it works</th></tr></thead>
+          <tbody>
+            <tr><td>Arena Tax</td><td>Automatic % of every mob kill gold based on tax rate</td></tr>
+            <tr><td>Manual Deposit</td><td>Any member opens Guild tab → Deposit Gold → enter amount</td></tr>
+            <tr><td>Raid Rewards</td><td>Completed <a href="raids.html" style="color:var(--gold)">Guild Raids</a> deposit gold and items to the chest</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Member Management -->
+      <h2 class="section-title"><span class="section-icon">👥</span> Member Management</h2>
+      <p class="section-desc">The Owner can manage all members. Officers can kick regular members. Member list shows contribution gold, online status, and current activity.</p>
+
+      <div class="guild-grid">
+        <div class="guild-card">
+          <h4>Kick a Member</h4>
+          <p>Owner/Officer: open member list, click the member row, tap <strong>Kick</strong>. An inline confirmation (<strong>✓ ✗</strong>) appears before the action is final.</p>
+        </div>
+        <div class="guild-card">
+          <h4>Promote / Demote</h4>
+          <p>Owner only. Promote a member to <span class="role-badge role-officer" style="font-size:10px">Officer</span> or demote an Officer back to <span class="role-badge role-member" style="font-size:10px">Member</span> via the member row actions.</p>
+        </div>
+        <div class="guild-card">
+          <h4>View All Members</h4>
+          <p>By default the list shows 12 members. Tap <strong>+ X more</strong> to expand the full roster. Tap <strong>▲ show less</strong> to collapse.</p>
+        </div>
+        <div class="guild-card">
+          <h4>Activity Log</h4>
+          <p>Every join, leave, and gold deposit is recorded in the guild's activity log (last 20 events), visible to all members.</p>
+        </div>
+      </div>
+
+      <!-- Leaving a Guild -->
+      <h2 class="section-title"><span class="section-icon">🚪</span> Leaving a Guild</h2>
+      <p class="section-desc">Any member can leave at any time. You immediately lose the +5% XP and +5% gold buffs. Contributed gold stays in the chest.</p>
+      <div class="info-box" style="margin-bottom:20px">
+        <p style="margin:0;font-size:13px;color:var(--text-dim)">⚠️ <strong>Owners cannot leave</strong> their guild without first transferring ownership or disbanding. To disband, remove all members first.</p>
+      </div>
+
+    </section>
+  </main>
+</div>
+
+<script src="wiki-search.js"></script>
+<script src="wiki-nav.js"></script>
+</body>
+</html>
