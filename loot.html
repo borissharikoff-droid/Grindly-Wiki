@@ -33,6 +33,7 @@
 .pool-title h4{font-family:var(--font-title);font-size:14px;color:var(--bag-color,var(--text-bright));margin:0}
 .pool-title-rate{font-family:var(--font-mono);font-size:11px;color:var(--text-dim);margin-left:auto}
 .pct-bar{display:inline-block;height:4px;border-radius:2px;vertical-align:middle;margin-right:6px}
+.row-secondary td{color:var(--text-dim)}.row-secondary td a{color:var(--gold-dim)!important}.row-secondary td a:hover{color:var(--gold)!important}
 
 /* ══════ Modifier Breakdown ══════ */
 .mod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:14px}
@@ -106,7 +107,7 @@
 
           <a href="item.html?id=common_chest" class="bag-card" style="--bag-color:#9CA3AF">
             <div class="bag-card-header">
-              <div class="bag-card-icon" data-chest-id="common_chest">&#128230;</div>
+              <div class="bag-card-icon">&#128230;</div>
               <div>
                 <div class="bag-card-title">Common Bag</div>
                 <div class="bag-card-sub"><span class="rarity common">Common</span> &middot; 70% base drop rate</div>
@@ -122,7 +123,7 @@
 
           <a href="item.html?id=rare_chest" class="bag-card" style="--bag-color:#38BDF8">
             <div class="bag-card-header">
-              <div class="bag-card-icon" data-chest-id="rare_chest">&#127873;</div>
+              <div class="bag-card-icon">&#127873;</div>
               <div>
                 <div class="bag-card-title">Rare Bag</div>
                 <div class="bag-card-sub"><span class="rarity rare">Rare</span> &middot; 22% base drop rate</div>
@@ -138,7 +139,7 @@
 
           <a href="item.html?id=epic_chest" class="bag-card" style="--bag-color:#C084FC">
             <div class="bag-card-header">
-              <div class="bag-card-icon" data-chest-id="epic_chest">&#129689;</div>
+              <div class="bag-card-icon">&#129689;</div>
               <div>
                 <div class="bag-card-title">Epic Bag</div>
                 <div class="bag-card-sub"><span class="rarity epic">Epic</span> &middot; 7% base drop rate</div>
@@ -154,7 +155,7 @@
 
           <a href="item.html?id=legendary_chest" class="bag-card" style="--bag-color:#FACC15">
             <div class="bag-card-header">
-              <div class="bag-card-icon" data-chest-id="legendary_chest">&#128142;</div>
+              <div class="bag-card-icon">&#128142;</div>
               <div>
                 <div class="bag-card-title">Legendary Bag</div>
                 <div class="bag-card-sub"><span class="rarity legendary">Legendary</span> &middot; 1% base drop rate</div>
@@ -194,7 +195,7 @@
         <!-- Common Bag -->
         <div class="pool-section" style="--bag-color:#9CA3AF">
           <div class="pool-title">
-            <div class="pool-title-icon" data-chest-id="common_chest">&#128230;</div>
+            <div class="pool-title-icon">&#128230;</div>
             <h4>Common Bag</h4>
             <span class="pool-title-rate">5 items &middot; equal weight</span>
           </div>
@@ -215,7 +216,7 @@
         <!-- Rare Bag -->
         <div class="pool-section" style="--bag-color:#38BDF8">
           <div class="pool-title">
-            <div class="pool-title-icon" data-chest-id="rare_chest">&#127873;</div>
+            <div class="pool-title-icon">&#127873;</div>
             <h4>Rare Bag</h4>
             <span class="pool-title-rate">15 items &middot; Copper favoured &middot; small Epic chance</span>
           </div>
@@ -228,11 +229,11 @@
                 <tr><td><a href="item.html?id=copper_sword" style="color:var(--gold)">Copper Sword</a></td><td><span class="rarity rare">Rare</span></td><td>Weapon</td><td class="perk">+6 ATK</td><td>10.0%</td></tr>
                 <tr><td><a href="item.html?id=copper_legs" style="color:var(--gold)">Copper Legs</a></td><td><span class="rarity rare">Rare</span></td><td>Legs</td><td class="perk">+3 ATK, +10 HP</td><td>10.0%</td></tr>
                 <tr><td><a href="item.html?id=copper_ring" style="color:var(--gold)">Copper Ring</a></td><td><span class="rarity rare">Rare</span></td><td>Ring</td><td class="perk">+2 Regen</td><td>10.0%</td></tr>
-                <tr style="opacity:.7"><td><a href="item.html?id=wooden_helm" style="color:var(--gold)">Wooden Helm</a></td><td><span class="rarity common">Common</span></td><td>Head</td><td class="perk">+2 ATK</td><td>6.7%</td></tr>
-                <tr style="opacity:.7"><td><a href="item.html?id=wooden_plate" style="color:var(--gold)">Wooden Plate</a></td><td><span class="rarity common">Common</span></td><td>Body</td><td class="perk">+15 HP</td><td>6.7%</td></tr>
-                <tr style="opacity:.7"><td><a href="item.html?id=wooden_sword" style="color:var(--gold)">Wooden Sword</a></td><td><span class="rarity common">Common</span></td><td>Weapon</td><td class="perk">+3 ATK</td><td>6.7%</td></tr>
-                <tr style="opacity:.7"><td><a href="item.html?id=wooden_legs" style="color:var(--gold)">Wooden Legs</a></td><td><span class="rarity common">Common</span></td><td>Legs</td><td class="perk">+1 ATK</td><td>6.7%</td></tr>
-                <tr style="opacity:.7"><td><a href="item.html?id=wooden_ring" style="color:var(--gold)">Wooden Ring</a></td><td><span class="rarity common">Common</span></td><td>Ring</td><td class="perk">+1 Regen</td><td>6.7%</td></tr>
+                <tr class="row-secondary"><td><a href="item.html?id=wooden_helm" style="color:var(--gold)">Wooden Helm</a></td><td><span class="rarity common">Common</span></td><td>Head</td><td class="perk">+2 ATK</td><td>6.7%</td></tr>
+                <tr class="row-secondary"><td><a href="item.html?id=wooden_plate" style="color:var(--gold)">Wooden Plate</a></td><td><span class="rarity common">Common</span></td><td>Body</td><td class="perk">+15 HP</td><td>6.7%</td></tr>
+                <tr class="row-secondary"><td><a href="item.html?id=wooden_sword" style="color:var(--gold)">Wooden Sword</a></td><td><span class="rarity common">Common</span></td><td>Weapon</td><td class="perk">+3 ATK</td><td>6.7%</td></tr>
+                <tr class="row-secondary"><td><a href="item.html?id=wooden_legs" style="color:var(--gold)">Wooden Legs</a></td><td><span class="rarity common">Common</span></td><td>Legs</td><td class="perk">+1 ATK</td><td>6.7%</td></tr>
+                <tr class="row-secondary"><td><a href="item.html?id=wooden_ring" style="color:var(--gold)">Wooden Ring</a></td><td><span class="rarity common">Common</span></td><td>Ring</td><td class="perk">+1 Regen</td><td>6.7%</td></tr>
                 <tr style="background:rgba(192,132,252,.06)"><td><a href="item.html?id=shadow_helm" style="color:var(--gold)">Shadow Helm</a></td><td><span class="rarity epic">Epic</span></td><td>Head</td><td class="perk">+7 ATK, +20 HP</td><td>3.3%</td></tr>
                 <tr style="background:rgba(192,132,252,.06)"><td><a href="item.html?id=shadow_plate" style="color:var(--gold)">Shadow Plate</a></td><td><span class="rarity epic">Epic</span></td><td>Body</td><td class="perk">+60 HP, +3 ATK</td><td>3.3%</td></tr>
                 <tr style="background:rgba(192,132,252,.06)"><td><a href="item.html?id=shadow_sword" style="color:var(--gold)">Shadow Sword</a></td><td><span class="rarity epic">Epic</span></td><td>Weapon</td><td class="perk">+10 ATK, +2 Regen</td><td>3.3%</td></tr>
@@ -246,7 +247,7 @@
         <!-- Epic Bag -->
         <div class="pool-section" style="--bag-color:#C084FC">
           <div class="pool-title">
-            <div class="pool-title-icon" data-chest-id="epic_chest">&#129689;</div>
+            <div class="pool-title-icon">&#129689;</div>
             <h4>Epic Bag</h4>
             <span class="pool-title-rate">19 items &middot; Shadow favoured &middot; small Legendary chance + Potions</span>
           </div>
@@ -259,11 +260,11 @@
                 <tr><td><a href="item.html?id=shadow_sword" style="color:var(--gold)">Shadow Sword</a></td><td><span class="rarity epic">Epic</span></td><td>Weapon</td><td class="perk">+10 ATK, +2 Regen</td><td>8.8%</td></tr>
                 <tr><td><a href="item.html?id=shadow_legs" style="color:var(--gold)">Shadow Legs</a></td><td><span class="rarity epic">Epic</span></td><td>Legs</td><td class="perk">+5 ATK, +25 HP</td><td>8.8%</td></tr>
                 <tr><td><a href="item.html?id=shadow_ring" style="color:var(--gold)">Shadow Ring</a></td><td><span class="rarity epic">Epic</span></td><td>Ring</td><td class="perk">+4 ATK, +3 Regen</td><td>8.8%</td></tr>
-                <tr style="opacity:.7"><td><a href="item.html?id=copper_helm" style="color:var(--gold)">Copper Helm</a></td><td><span class="rarity rare">Rare</span></td><td>Head</td><td class="perk">+4 ATK, +10 HP</td><td>5.9%</td></tr>
-                <tr style="opacity:.7"><td><a href="item.html?id=copper_plate" style="color:var(--gold)">Copper Plate</a></td><td><span class="rarity rare">Rare</span></td><td>Body</td><td class="perk">+35 HP</td><td>5.9%</td></tr>
-                <tr style="opacity:.7"><td><a href="item.html?id=copper_sword" style="color:var(--gold)">Copper Sword</a></td><td><span class="rarity rare">Rare</span></td><td>Weapon</td><td class="perk">+6 ATK</td><td>5.9%</td></tr>
-                <tr style="opacity:.7"><td><a href="item.html?id=copper_legs" style="color:var(--gold)">Copper Legs</a></td><td><span class="rarity rare">Rare</span></td><td>Legs</td><td class="perk">+3 ATK, +10 HP</td><td>5.9%</td></tr>
-                <tr style="opacity:.7"><td><a href="item.html?id=copper_ring" style="color:var(--gold)">Copper Ring</a></td><td><span class="rarity rare">Rare</span></td><td>Ring</td><td class="perk">+2 Regen</td><td>5.9%</td></tr>
+                <tr class="row-secondary"><td><a href="item.html?id=copper_helm" style="color:var(--gold)">Copper Helm</a></td><td><span class="rarity rare">Rare</span></td><td>Head</td><td class="perk">+4 ATK, +10 HP</td><td>5.9%</td></tr>
+                <tr class="row-secondary"><td><a href="item.html?id=copper_plate" style="color:var(--gold)">Copper Plate</a></td><td><span class="rarity rare">Rare</span></td><td>Body</td><td class="perk">+35 HP</td><td>5.9%</td></tr>
+                <tr class="row-secondary"><td><a href="item.html?id=copper_sword" style="color:var(--gold)">Copper Sword</a></td><td><span class="rarity rare">Rare</span></td><td>Weapon</td><td class="perk">+6 ATK</td><td>5.9%</td></tr>
+                <tr class="row-secondary"><td><a href="item.html?id=copper_legs" style="color:var(--gold)">Copper Legs</a></td><td><span class="rarity rare">Rare</span></td><td>Legs</td><td class="perk">+3 ATK, +10 HP</td><td>5.9%</td></tr>
+                <tr class="row-secondary"><td><a href="item.html?id=copper_ring" style="color:var(--gold)">Copper Ring</a></td><td><span class="rarity rare">Rare</span></td><td>Ring</td><td class="perk">+2 Regen</td><td>5.9%</td></tr>
                 <tr style="background:rgba(250,204,21,.06)"><td><a href="item.html?id=golden_helm" style="color:var(--gold)">Golden Helm</a></td><td><span class="rarity legendary">Legendary</span></td><td>Head</td><td class="perk">+10 ATK, +30 HP, +5% XP</td><td>2.9%</td></tr>
                 <tr style="background:rgba(250,204,21,.06)"><td><a href="item.html?id=golden_plate" style="color:var(--gold)">Golden Plate</a></td><td><span class="rarity legendary">Legendary</span></td><td>Body</td><td class="perk">+80 HP, +5 ATK, Shield</td><td>2.9%</td></tr>
                 <tr style="background:rgba(250,204,21,.06)"><td><a href="item.html?id=golden_sword" style="color:var(--gold)">Golden Sword</a></td><td><span class="rarity legendary">Legendary</span></td><td>Weapon</td><td class="perk">+15 ATK, +3 Regen</td><td>2.9%</td></tr>
@@ -281,7 +282,7 @@
         <!-- Legendary Bag -->
         <div class="pool-section" style="--bag-color:#FACC15">
           <div class="pool-title">
-            <div class="pool-title-icon" data-chest-id="legendary_chest">&#128142;</div>
+            <div class="pool-title-icon">&#128142;</div>
             <h4>Legendary Bag</h4>
             <span class="pool-title-rate">18 items &middot; Golden favoured + Void + Potions</span>
           </div>
@@ -299,11 +300,11 @@
                 <tr><td><a href="item.html?id=void_sword" style="color:var(--gold)">Void Sword</a></td><td><span class="rarity mythic">Mythic</span></td><td>Weapon</td><td class="perk">+18 ATK, +5 Regen</td><td>2.8%</td></tr>
                 <tr><td><a href="item.html?id=void_legs" style="color:var(--gold)">Void Legs</a></td><td><span class="rarity mythic">Mythic</span></td><td>Legs</td><td class="perk">+12 ATK, +60 HP</td><td>2.8%</td></tr>
                 <tr><td><a href="item.html?id=void_ring" style="color:var(--gold)">Void Ring</a></td><td><span class="rarity mythic">Mythic</span></td><td>Ring</td><td class="perk">+10 ATK, +5 Regen, +8% XP</td><td>2.8%</td></tr>
-                <tr style="opacity:.7"><td><a href="item.html?id=shadow_helm" style="color:var(--gold)">Shadow Helm</a></td><td><span class="rarity epic">Epic</span></td><td>Head</td><td class="perk">+7 ATK, +20 HP</td><td>5.6%</td></tr>
-                <tr style="opacity:.7"><td><a href="item.html?id=shadow_plate" style="color:var(--gold)">Shadow Plate</a></td><td><span class="rarity epic">Epic</span></td><td>Body</td><td class="perk">+60 HP, +3 ATK</td><td>5.6%</td></tr>
-                <tr style="opacity:.7"><td><a href="item.html?id=shadow_sword" style="color:var(--gold)">Shadow Sword</a></td><td><span class="rarity epic">Epic</span></td><td>Weapon</td><td class="perk">+10 ATK, +2 Regen</td><td>5.6%</td></tr>
-                <tr style="opacity:.7"><td><a href="item.html?id=shadow_legs" style="color:var(--gold)">Shadow Legs</a></td><td><span class="rarity epic">Epic</span></td><td>Legs</td><td class="perk">+5 ATK, +25 HP</td><td>5.6%</td></tr>
-                <tr style="opacity:.7"><td><a href="item.html?id=shadow_ring" style="color:var(--gold)">Shadow Ring</a></td><td><span class="rarity epic">Epic</span></td><td>Ring</td><td class="perk">+4 ATK, +3 Regen</td><td>5.6%</td></tr>
+                <tr class="row-secondary"><td><a href="item.html?id=shadow_helm" style="color:var(--gold)">Shadow Helm</a></td><td><span class="rarity epic">Epic</span></td><td>Head</td><td class="perk">+7 ATK, +20 HP</td><td>5.6%</td></tr>
+                <tr class="row-secondary"><td><a href="item.html?id=shadow_plate" style="color:var(--gold)">Shadow Plate</a></td><td><span class="rarity epic">Epic</span></td><td>Body</td><td class="perk">+60 HP, +3 ATK</td><td>5.6%</td></tr>
+                <tr class="row-secondary"><td><a href="item.html?id=shadow_sword" style="color:var(--gold)">Shadow Sword</a></td><td><span class="rarity epic">Epic</span></td><td>Weapon</td><td class="perk">+10 ATK, +2 Regen</td><td>5.6%</td></tr>
+                <tr class="row-secondary"><td><a href="item.html?id=shadow_legs" style="color:var(--gold)">Shadow Legs</a></td><td><span class="rarity epic">Epic</span></td><td>Legs</td><td class="perk">+5 ATK, +25 HP</td><td>5.6%</td></tr>
+                <tr class="row-secondary"><td><a href="item.html?id=shadow_ring" style="color:var(--gold)">Shadow Ring</a></td><td><span class="rarity epic">Epic</span></td><td>Ring</td><td class="perk">+4 ATK, +3 Regen</td><td>5.6%</td></tr>
                 <tr><td><a href="item.html?id=atk_potion" style="color:var(--gold)">Attack Potion</a></td><td><span class="rarity mythic">Mythic</span></td><td>Consumable</td><td class="perk">+1 permanent ATK</td><td>5.6%</td></tr>
                 <tr><td><a href="item.html?id=hp_potion" style="color:var(--gold)">Vitality Potion</a></td><td><span class="rarity mythic">Mythic</span></td><td>Consumable</td><td class="perk">+1 permanent HP</td><td>5.6%</td></tr>
                 <tr><td><a href="item.html?id=regen_potion" style="color:var(--gold)">Regen Potion</a></td><td><span class="rarity mythic">Mythic</span></td><td>Consumable</td><td class="perk">+1 permanent Regen</td><td>5.6%</td></tr>

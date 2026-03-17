@@ -185,10 +185,26 @@
       </div>
 
     </section>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-links">
+          <a href="index.html">Wiki Home</a>
+          <a href="patches.html">Patch Notes</a>
+          <a href="roadmap.html">Roadmap</a>
+          <a href="https://github.com/borissharikoff-droid/Idly" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <div class="footer-divider"></div>
+        <p style="font-size:11px;color:var(--text-dim)">Grindly Wiki &mdash; Community-maintained game guide</p>
+        <p class="footer-sub">Data auto-synced from game source</p>
+      </div>
+    </footer>
   </main>
 </div>
 
 <script src="wiki-search.js"></script>
 <script src="wiki-nav.js"></script>
+<button class="back-to-top" id="backToTop" title="Back to top">&#8593;</button>
+<script>var btt=document.getElementById('backToTop');window.addEventListener('scroll',function(){btt.classList.toggle('visible',window.scrollY>300)});btt.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});</script>
 </body>
 </html>
