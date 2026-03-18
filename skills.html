@@ -281,7 +281,7 @@
 
     <section class="content">
       <h2 class="section-title"><span class="section-icon">&#9876;&#65039;</span> Skills</h2>
-      <p class="section-desc">Grindly tracks <strong>12 skills</strong> across productivity, creativity, and in-game activities. Each skill has <strong>99 levels</strong>. Max total skill level: <strong>1,188</strong>. Skills that reach level 99 can be <a href="prestige.html" style="color:var(--gold);text-decoration:underline">prestiged</a> up to 5 times for permanent XP bonuses and cosmetic rewards.</p>
+      <p class="section-desc">Grindly tracks <strong>13 skills</strong> across productivity, creativity, and in-game activities. Each skill has <strong>99 levels</strong>. Max total skill level: <strong>1,287</strong>. Skills that reach level 99 can be <a href="prestige.html" style="color:var(--gold);text-decoration:underline">prestiged</a> up to 5 times for permanent XP bonuses and cosmetic rewards.</p>
 
       <!-- Tabs -->
       <div class="sk-tabs">
@@ -391,7 +391,7 @@
             <div class="skill-card-body">
               <div class="skill-card-name">Farmer</div>
               <div class="skill-card-category">farming</div>
-              <div class="skill-card-desc">Plant seeds and harvest crops. XP from planting (10&ndash;160) and harvesting (50&ndash;800).</div>
+              <div class="skill-card-desc">Plant seeds and harvest crops. XP from planting (10&ndash;160) and harvesting (50&ndash;4,800).</div>
               <span class="skill-card-tag ingame">In-Game</span>
             </div>
           </div>
@@ -412,6 +412,16 @@
               <div class="skill-card-name">Crafter</div>
               <div class="skill-card-category">crafting</div>
               <div class="skill-card-desc">Craft items at the forge. Higher level = faster crafting &amp; double output chance.</div>
+              <span class="skill-card-tag ingame">In-Game</span>
+            </div>
+          </div>
+
+          <div class="skill-card" style="--skill-color: #fb923c" onclick="showSkillDetail('chef')">
+            <div class="skill-card-icon">&#127859;</div>
+            <div class="skill-card-body">
+              <div class="skill-card-name">Cooking</div>
+              <div class="skill-card-category">cooking</div>
+              <div class="skill-card-desc">Cook food from harvested crops. Higher level = faster cooking &amp; better dishes.</div>
               <span class="skill-card-tag ingame">In-Game</span>
             </div>
           </div>
@@ -480,7 +490,7 @@
           <h3>Useful Numbers</h3>
           <ul>
             <li>Max XP per skill: <strong style="color:var(--gold)">3,600,000</strong> (1,000 hours in seconds)</li>
-            <li>Total skills: <strong style="color:var(--gold)">12</strong> &mdash; max total level: <strong style="color:var(--gold)">1,188</strong></li>
+            <li>Total skills: <strong style="color:var(--gold)">13</strong> &mdash; max total level: <strong style="color:var(--gold)">1,287</strong></li>
             <li>XP per second: <code>1</code> (before multipliers)</li>
             <li>Time to reach level 10: <strong>~1.8 hours</strong> (fast early progression)</li>
             <li>Time to reach level 50: <strong>~153 hours</strong> (mid-game)</li>
@@ -552,6 +562,8 @@
                 <tr><td>Orc Warlord</td><td class="bonus-value">2,000</td></tr>
                 <tr><td>Troll Overlord</td><td class="bonus-value">5,000</td></tr>
                 <tr><td>Ancient Dragon</td><td class="bonus-value">12,000</td></tr>
+                <tr><td>Necromancer Lord</td><td class="bonus-value">30,000</td></tr>
+                <tr><td>Storm Titan</td><td class="bonus-value">80,000</td></tr>
               </tbody>
             </table>
           </div>
@@ -564,14 +576,14 @@
               <thead><tr><th>Seed</th><th>Rarity</th><th>XP on Plant</th><th>XP on Harvest</th><th>Grow Time</th></tr></thead>
               <tbody>
                 <tr><td>Wheat Seed</td><td>Common</td><td class="bonus-value">10</td><td class="bonus-value">50</td><td>5 min</td></tr>
-                <tr><td>Herb Seed</td><td>Common</td><td class="bonus-value">10</td><td class="bonus-value">50</td><td>8 min</td></tr>
-                <tr><td>Apple Seed</td><td style="color:#5865F2">Rare</td><td class="bonus-value">20</td><td class="bonus-value">100</td><td>20 min</td></tr>
-                <tr><td>Blossom Seed</td><td style="color:#5865F2">Rare</td><td class="bonus-value">20</td><td class="bonus-value">100</td><td>25 min</td></tr>
-                <tr><td>Clover Seed</td><td style="color:#a855f7">Epic</td><td class="bonus-value">40</td><td class="bonus-value">200</td><td>1h</td></tr>
-                <tr><td>Orchid Seed</td><td style="color:#a855f7">Epic</td><td class="bonus-value">40</td><td class="bonus-value">200</td><td>1.5h</td></tr>
-                <tr><td>Star Bloom Seed</td><td style="color:#fbbf24">Legendary</td><td class="bonus-value">80</td><td class="bonus-value">400</td><td>3h</td></tr>
-                <tr><td>Crystal Root Seed</td><td style="color:#fbbf24">Legendary</td><td class="bonus-value">80</td><td class="bonus-value">400</td><td>4h</td></tr>
-                <tr><td>Void Spore</td><td style="color:#f43f5e">Mythic</td><td class="bonus-value">160</td><td class="bonus-value">800</td><td>8h</td></tr>
+                <tr><td>Herb Seed</td><td>Common</td><td class="bonus-value">10</td><td class="bonus-value">80</td><td>8 min</td></tr>
+                <tr><td>Apple Seed</td><td style="color:#5865F2">Rare</td><td class="bonus-value">20</td><td class="bonus-value">200</td><td>20 min</td></tr>
+                <tr><td>Blossom Seed</td><td style="color:#5865F2">Rare</td><td class="bonus-value">20</td><td class="bonus-value">250</td><td>25 min</td></tr>
+                <tr><td>Clover Seed</td><td style="color:#a855f7">Epic</td><td class="bonus-value">40</td><td class="bonus-value">600</td><td>1h</td></tr>
+                <tr><td>Orchid Seed</td><td style="color:#a855f7">Epic</td><td class="bonus-value">40</td><td class="bonus-value">900</td><td>1.5h</td></tr>
+                <tr><td>Star Bloom Seed</td><td style="color:#fbbf24">Legendary</td><td class="bonus-value">80</td><td class="bonus-value">1,800</td><td>3h</td></tr>
+                <tr><td>Crystal Root Seed</td><td style="color:#fbbf24">Legendary</td><td class="bonus-value">80</td><td class="bonus-value">2,400</td><td>4h</td></tr>
+                <tr><td>Void Spore</td><td style="color:#f43f5e">Mythic</td><td class="bonus-value">160</td><td class="bonus-value">4,800</td><td>8h</td></tr>
               </tbody>
             </table>
           </div>
