@@ -1080,6 +1080,295 @@
   .boss-grid { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
+<!-- Promo-style font additions -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* ══════ PROMO VISUAL OVERRIDES — homepage only ══════ */
+
+/* Hero — dark blue bg, white Inter headline */
+.hero-landing {
+  background:
+    radial-gradient(ellipse at 25% 0%, rgba(129,140,248,0.14) 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 0%, rgba(56,189,248,0.09) 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 80%, rgba(212,168,67,0.05) 0%, transparent 50%),
+    #09090f !important;
+  border-bottom: 1px solid rgba(255,255,255,0.07) !important;
+}
+.hero-title {
+  font-family: 'Inter', 'Segoe UI', sans-serif !important;
+  font-size: 44px !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.035em !important;
+  line-height: 1.05 !important;
+  color: #fff !important;
+  text-shadow: none !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  background-clip: unset !important;
+  margin-bottom: 14px !important;
+}
+.hero-sub {
+  font-size: 14px !important;
+  color: rgba(255,255,255,0.42) !important;
+  max-width: 440px !important;
+}
+.hero-sub strong { color: rgba(255,255,255,0.72) !important; font-weight: 600 !important; }
+.hero-badge {
+  background: rgba(129,140,248,0.1) !important;
+  border-color: rgba(129,140,248,0.28) !important;
+  color: #818cf8 !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  letter-spacing: 0.08em !important;
+}
+.hero-badge .pulse-dot { background: #818cf8 !important; box-shadow: 0 0 5px rgba(129,140,248,0.6) !important; }
+.btn-primary {
+  background: #4f46e5 !important;
+  box-shadow: 0 4px 24px rgba(79,70,229,0.45) !important;
+  color: #fff !important;
+}
+.btn-primary:hover { background: #4338ca !important; box-shadow: 0 8px 36px rgba(79,70,229,0.55) !important; color: #fff !important; }
+
+/* Stats bar — hero */
+.hs-num {
+  background: linear-gradient(135deg, #818cf8, #38bdf8) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* Skills infographic dark override */
+.skills-infographic {
+  background: #0c0c17 !important;
+  border-bottom-color: rgba(255,255,255,0.06) !important;
+}
+.skills-infographic h2 {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  color: #fff !important;
+}
+.skill-card {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.07) !important;
+}
+.skill-card:hover { border-color: var(--skill-color) !important; }
+.skill-name { color: rgba(255,255,255,0.85) !important; font-family: 'Inter', sans-serif !important; }
+.skill-cats { color: rgba(255,255,255,0.28) !important; }
+.skill-level { color: var(--skill-color) !important; }
+
+/* ══════ PROMO-STYLE FEATURE CARDS ══════ */
+.pcard {
+  display: flex;
+  min-height: 220px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: #0c0c17;
+}
+.pcard.reverse { flex-direction: row-reverse; }
+.pcard-ss {
+  flex: 0 0 52%;
+  background: #111121;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.pcard-ss::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(129,140,248,0.07) 0%, transparent 65%);
+}
+.pcard-ss img {
+  max-width: 100%;
+  max-height: 190px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 12px 48px rgba(0,0,0,0.65), 0 2px 0 rgba(255,255,255,0.04) inset;
+  position: relative;
+  transition: transform 0.35s ease;
+}
+.pcard:hover .pcard-ss img { transform: scale(1.02) translateY(-2px); }
+.pcard-info {
+  flex: 1;
+  background: #0e0e1a;
+  border-left: 1px solid rgba(255,255,255,0.05);
+  padding: 26px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 11px;
+}
+.pcard.reverse .pcard-info {
+  border-left: none;
+  border-right: 1px solid rgba(255,255,255,0.05);
+}
+.pcard-tag {
+  font-family: 'JetBrains Mono', 'Cascadia Code', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #818cf8;
+}
+.pcard-title {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+.pcard-desc {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.65;
+  max-width: 260px;
+}
+.pcard-feats {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-top: 2px;
+}
+.pcard-feat {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+}
+.pcard-ic {
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  background: rgba(129,140,248,0.1);
+  border: 1px solid rgba(129,140,248,0.16);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.pcard-fn { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.8); }
+.pcard-fs { font-size: 11px; color: rgba(255,255,255,0.28); margin-top: 1px; line-height: 1.4; }
+.pcard-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: #818cf8;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color 0.15s;
+}
+.pcard-link:hover { color: #a5b4fc; }
+
+/* Item showcase dark override */
+.items-showcase-v2 {
+  background: #0c0c17 !important;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+}
+.items-showcase-v2 h2 {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  color: #fff !important;
+}
+.items-showcase-v2 .sub { color: rgba(255,255,255,0.3) !important; }
+.belt-outer::before { background: linear-gradient(to right, #0c0c17, transparent) !important; }
+.belt-outer::after { background: linear-gradient(to left, #0c0c17, transparent) !important; }
+
+/* Social feat-row dark override */
+#sc-social {
+  background: #0c0c17 !important;
+  border-bottom-color: rgba(255,255,255,0.06) !important;
+}
+
+/* Arena bosses dark override */
+.arena-bosses {
+  background: #0c0c17 !important;
+  border-bottom-color: rgba(255,255,255,0.06) !important;
+}
+.arena-bosses h2 {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  color: #fff !important;
+}
+.boss-card {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.07) !important;
+}
+
+/* Leaderboard dark override */
+.lb-section {
+  background: #0c0c17 !important;
+  border-bottom-color: rgba(255,255,255,0.06) !important;
+}
+.lb-section h2 {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  color: #fff !important;
+}
+.lb-row {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.07) !important;
+}
+.lb-row:hover { border-color: rgba(129,140,248,0.35) !important; }
+
+/* Guild strip dark override */
+.guild-strip-v2 {
+  background: rgba(255,255,255,0.04) !important;
+  border-color: rgba(255,255,255,0.06) !important;
+}
+.gstrip-v2 { background: #0c0c17 !important; }
+.gstrip-v2:hover { background: #111121 !important; }
+.gstrip-v2-title { font-family: 'Inter', sans-serif !important; font-weight: 700 !important; letter-spacing: -0.01em !important; }
+
+/* Feature chips dark override */
+.fchip {
+  background: #13131f !important;
+  border-color: rgba(255,255,255,0.07) !important;
+}
+.fchip:hover { border-color: rgba(129,140,248,0.35) !important; }
+.fchip-label { font-family: 'Inter', sans-serif !important; color: #fff !important; }
+
+/* Final CTA dark override */
+.final-cta {
+  background: radial-gradient(ellipse at 50% 100%, rgba(79,70,229,0.12) 0%, transparent 60%) !important;
+  border-bottom-color: rgba(255,255,255,0.06) !important;
+}
+.final-cta h2 {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.025em !important;
+  color: #fff !important;
+}
+
+/* Section titles dark override */
+.content .section-title {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.015em !important;
+  color: rgba(255,255,255,0.7) !important;
+}
+
+/* Responsive pcard */
+@media (max-width: 768px) {
+  .pcard, .pcard.reverse { flex-direction: column !important; }
+  .pcard-ss { flex: none !important; min-height: 150px; padding: 14px; }
+  .pcard-ss img { max-height: 130px !important; }
+  .pcard-info { border-left: none !important; border-right: none !important; border-top: 1px solid rgba(255,255,255,0.05) !important; padding: 16px 14px !important; }
+  .pcard-title { font-size: 17px !important; }
+  .pcard-desc { max-width: 100% !important; }
+  .hero-title { font-size: 30px !important; }
+}
+@media (max-width: 400px) {
+  .hero-title { font-size: 26px !important; }
+}
+</style>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 </head>
 <body>
@@ -1253,76 +1542,106 @@
       </div>
     </section>
 
-    <!-- ══════ Feature rows — alternating layout ══════ -->
-    <div class="feat-row" id="sc-skills">
-      <div class="feat-text">
-        <span class="feat-tag" style="background:rgba(56,189,248,0.1);color:#38bdf8;border:1px solid rgba(56,189,248,0.15)">Passive Leveling</span>
-        <h3>13 skills that level while you work</h3>
-        <p>Code, design, browse, game &mdash; every minute earns XP automatically. No manual input.</p>
-        <a href="skills.html" class="feat-link">Browse skills &#8594;</a>
-      </div>
-      <div class="feat-img">
+    <!-- ══════ Feature rows — promo card style ══════ -->
+    <div class="pcard" id="sc-skills">
+      <div class="pcard-ss">
         <img src="img/skills.png" alt="Skills page">
       </div>
+      <div class="pcard-info">
+        <div class="pcard-tag">Passive Leveling</div>
+        <div class="pcard-title">8 skills that level<br>while you work</div>
+        <div class="pcard-desc">Code, design, browse, game — every minute earns XP automatically. Zero manual input. Ever.</div>
+        <div class="pcard-feats">
+          <div class="pcard-feat"><div class="pcard-ic">📊</div><div><div class="pcard-fn">Auto-tracked</div><div class="pcard-fs">Detects active app, no timers</div></div></div>
+          <div class="pcard-feat"><div class="pcard-ic">⚡</div><div><div class="pcard-fn">99 levels per skill</div><div class="pcard-fs">Exponential XP curve, real progression</div></div></div>
+          <div class="pcard-feat"><div class="pcard-ic">🏆</div><div><div class="pcard-fn">Prestige system</div><div class="pcard-fs">5 tiers, +25% XP bonus each</div></div></div>
+        </div>
+        <a href="skills.html" class="pcard-link">Browse skills →</a>
+      </div>
     </div>
 
-    <div class="feat-row reverse">
-      <div class="feat-text">
-        <span class="feat-tag" style="background:rgba(245,158,11,0.1);color:#f59e0b;border:1px solid rgba(245,158,11,0.15)">AI Insights</span>
-        <h3>Know where your time goes</h3>
-        <p>Focus quality, distraction %, context switches, habits. All tracked and analyzed.</p>
-        <a href="skills.html" class="feat-link">Learn more &#8594;</a>
-      </div>
-      <div class="feat-img">
+    <div class="pcard reverse">
+      <div class="pcard-ss">
         <img src="img/analytics.png" alt="Analytics">
       </div>
+      <div class="pcard-info">
+        <div class="pcard-tag">AI Insights</div>
+        <div class="pcard-title">Know exactly where<br>your time goes</div>
+        <div class="pcard-desc">Focus quality score, distraction %, context switches, streak habits. All tracked and analyzed automatically.</div>
+        <div class="pcard-feats">
+          <div class="pcard-feat"><div class="pcard-ic">🎯</div><div><div class="pcard-fn">Focus quality score</div><div class="pcard-fs">0–100% rating per session</div></div></div>
+          <div class="pcard-feat"><div class="pcard-ic">📈</div><div><div class="pcard-fn">Activity breakdown</div><div class="pcard-fs">Daily / weekly / 30-day charts</div></div></div>
+          <div class="pcard-feat"><div class="pcard-ic">🤖</div><div><div class="pcard-fn">DeepSeek AI summary</div><div class="pcard-fs">Natural language session recap</div></div></div>
+        </div>
+        <a href="tracker.html" class="pcard-link">Learn more →</a>
+      </div>
     </div>
 
-    <div class="feat-row">
-      <div class="feat-text">
-        <span class="feat-tag" style="background:rgba(192,132,252,0.1);color:#c084fc;border:1px solid rgba(192,132,252,0.15)">5 Rarity Tiers</span>
-        <h3>Open loot bags. Equip mythic gear.</h3>
-        <p>Focus sessions drop chests. Crack them for gear from Common to Mythic.</p>
-        <a href="loot.html" class="feat-link">View loot tables &#8594;</a>
-      </div>
-      <div class="feat-img">
+    <div class="pcard">
+      <div class="pcard-ss">
         <img src="img/loot.png" alt="Loot">
       </div>
+      <div class="pcard-info">
+        <div class="pcard-tag">5 Rarity Tiers</div>
+        <div class="pcard-title">Open loot bags.<br>Equip mythic gear.</div>
+        <div class="pcard-desc">Focus sessions drop chests. Crack them open for gear ranging from Common grey to pink Mythic.</div>
+        <div class="pcard-feats">
+          <div class="pcard-feat"><div class="pcard-ic">🎁</div><div><div class="pcard-fn">4 chest types</div><div class="pcard-fs">Common → Legendary, pity timer</div></div></div>
+          <div class="pcard-feat"><div class="pcard-ic">⚔️</div><div><div class="pcard-fn">89 unique items</div><div class="pcard-fs">Weapons, armor, accessories, auras</div></div></div>
+          <div class="pcard-feat"><div class="pcard-ic">💎</div><div><div class="pcard-fn">Item Power system</div><div class="pcard-fs">Every perk adds measurable IP</div></div></div>
+        </div>
+        <a href="loot.html" class="pcard-link">View loot tables →</a>
+      </div>
     </div>
 
-    <div class="feat-row reverse">
-      <div class="feat-text">
-        <span class="feat-tag" style="background:rgba(239,68,68,0.1);color:#ef4444;border:1px solid rgba(239,68,68,0.15)">PvE Combat</span>
-        <h3>Fight mobs. Kill bosses. Get rich.</h3>
-        <p>8 dungeon zones with turn-based combat. Gold, materials &amp; warrior XP on every kill.</p>
-        <a href="arena.html" class="feat-link">Arena guide &#8594;</a>
-      </div>
-      <div class="feat-img">
+    <div class="pcard reverse">
+      <div class="pcard-ss">
         <img src="img/arena.png" alt="Arena">
       </div>
+      <div class="pcard-info">
+        <div class="pcard-tag">PvE Combat</div>
+        <div class="pcard-title">Fight mobs.<br>Kill bosses. Get rich.</div>
+        <div class="pcard-desc">6 dungeon zones with turn-based combat. Gold, rare materials and warrior XP drop on every kill.</div>
+        <div class="pcard-feats">
+          <div class="pcard-feat"><div class="pcard-ic">🐉</div><div><div class="pcard-fn">6 zones, 6 bosses</div><div class="pcard-fs">Slime → Dragon Elder</div></div></div>
+          <div class="pcard-feat"><div class="pcard-ic">💰</div><div><div class="pcard-fn">Gold rewards</div><div class="pcard-fs">Spend in marketplace or craft</div></div></div>
+          <div class="pcard-feat"><div class="pcard-ic">🗡️</div><div><div class="pcard-fn">Warrior XP</div><div class="pcard-fs">13th skill, combat-only leveling</div></div></div>
+        </div>
+        <a href="arena.html" class="pcard-link">Arena guide →</a>
+      </div>
     </div>
 
-    <div class="feat-row">
-      <div class="feat-text">
-        <span class="feat-tag" style="background:rgba(34,211,238,0.1);color:#22d3ee;border:1px solid rgba(34,211,238,0.15)">22 Recipes</span>
-        <h3>Craft endgame weapons. Grow a farm.</h3>
-        <p>Smelt ores, refine materials, forge gear. Plant seeds, harvest crops, sell on the marketplace.</p>
-        <a href="crafting.html" class="feat-link">View recipes &#8594;</a>
-      </div>
-      <div class="feat-img">
+    <div class="pcard">
+      <div class="pcard-ss">
         <img src="img/craft.png" alt="Crafting">
       </div>
+      <div class="pcard-info">
+        <div class="pcard-tag">Crafting &amp; Farming</div>
+        <div class="pcard-title">Forge endgame gear.<br>Grow a real farm.</div>
+        <div class="pcard-desc">Smelt ores, refine materials, forge legendary weapons. Plant seeds, harvest crops, sell on the marketplace.</div>
+        <div class="pcard-feats">
+          <div class="pcard-feat"><div class="pcard-ic">⚒️</div><div><div class="pcard-fn">22 craft recipes</div><div class="pcard-fs">Intermediate mats + final gear</div></div></div>
+          <div class="pcard-feat"><div class="pcard-ic">🌱</div><div><div class="pcard-fn">9 seeds, 8 farm plots</div><div class="pcard-fs">Passive income, buffs, cooking</div></div></div>
+          <div class="pcard-feat"><div class="pcard-ic">🍳</div><div><div class="pcard-fn">16 cooking recipes</div><div class="pcard-fs">Temporary combat &amp; XP buffs</div></div></div>
+        </div>
+        <a href="crafting.html" class="pcard-link">View recipes →</a>
+      </div>
     </div>
 
-    <div class="feat-row reverse">
-      <div class="feat-text">
-        <span class="feat-tag" style="background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.15)">Player Economy</span>
-        <h3>Trade with real players</h3>
-        <p>List drops, buy upgrades, climb leaderboards. Real-time chat with friends.</p>
-        <a href="marketplace.html" class="feat-link">Browse marketplace &#8594;</a>
-      </div>
-      <div class="feat-img">
+    <div class="pcard reverse">
+      <div class="pcard-ss">
         <img src="img/marketplace.png" alt="Marketplace">
+      </div>
+      <div class="pcard-info">
+        <div class="pcard-tag">Player Economy</div>
+        <div class="pcard-title">Trade with<br>real players</div>
+        <div class="pcard-desc">List your drops, buy upgrades, climb leaderboards. Live marketplace with real-time pricing and gold transfers.</div>
+        <div class="pcard-feats">
+          <div class="pcard-feat"><div class="pcard-ic">🏪</div><div><div class="pcard-fn">Live listings</div><div class="pcard-fs">Real players, real prices</div></div></div>
+          <div class="pcard-feat"><div class="pcard-ic">📊</div><div><div class="pcard-fn">Price history</div><div class="pcard-fs">Track what items sell for</div></div></div>
+          <div class="pcard-feat"><div class="pcard-ic">💬</div><div><div class="pcard-fn">Friends &amp; leaderboards</div><div class="pcard-fs">See who's grinding hardest</div></div></div>
+        </div>
+        <a href="marketplace.html" class="pcard-link">Browse marketplace →</a>
       </div>
     </div>
 
