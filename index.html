@@ -716,6 +716,369 @@
   .icard-img { width: 26px; height: 26px; }
   .icard-name { font-size: 7px; }
 }
+
+/* ══════ Skills Infographic ══════ */
+.skills-infographic {
+  padding: 28px 24px;
+  border-bottom: 1px solid var(--border-inner);
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(56,189,248,0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(192,132,252,0.04) 0%, transparent 50%);
+}
+.skills-infographic h2 {
+  font-family: var(--font-title);
+  font-size: 18px;
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 4px;
+}
+.skills-infographic .sub { font-size: 11px; color: var(--text-dim); text-align: center; margin-bottom: 20px; }
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  max-width: 660px;
+  margin: 0 auto;
+}
+.skill-card {
+  padding: 14px 10px 12px;
+  border-radius: 10px;
+  text-align: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-inner);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.skill-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, var(--skill-color) 0%, transparent 65%);
+  opacity: 0.04;
+  transition: opacity 0.25s;
+}
+.skill-card:hover { transform: translateY(-4px); border-color: var(--skill-color); box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+.skill-card:hover::before { opacity: 0.1; }
+.skill-icon { font-size: 22px; line-height: 1; display: block; position: relative; }
+.skill-name { font-family: var(--font-title); font-size: 9px; font-weight: 700; color: var(--text-bright); position: relative; }
+.skill-cats { font-size: 8px; color: var(--text-dim); line-height: 1.3; position: relative; }
+.skill-xp-bar { width: 100%; height: 3px; border-radius: 2px; background: rgba(255,255,255,0.06); overflow: hidden; margin-top: 4px; }
+.skill-xp-fill { height: 100%; border-radius: 2px; background: var(--skill-color); width: 0; transition: width 1.8s cubic-bezier(0.34,1.56,0.64,1); }
+.skill-level { font-size: 7px; font-family: var(--font-mono); color: var(--skill-color); opacity: 0.8; position: relative; }
+
+/* ══════ Item Belt — auto-scrolling ══════ */
+.items-showcase-v2 {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border-inner);
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(244,114,182,0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 50%, rgba(192,132,252,0.04) 0%, transparent 50%);
+  overflow: hidden;
+}
+.items-showcase-v2 .sec-head { text-align: center; padding: 0 24px; margin-bottom: 20px; }
+.items-showcase-v2 h2 { font-family: var(--font-title); font-size: 18px; color: var(--gold); margin-bottom: 4px; }
+.items-showcase-v2 .sub { font-size: 11px; color: var(--text-dim); }
+.belt-outer { overflow: hidden; position: relative; }
+.belt-outer::before, .belt-outer::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+.belt-outer::before { left: 0; background: linear-gradient(to right, var(--bg-dark), transparent); }
+.belt-outer::after { right: 0; background: linear-gradient(to left, var(--bg-dark), transparent); }
+.belt-track {
+  display: flex;
+  gap: 12px;
+  width: max-content;
+  padding: 4px 0;
+  animation: beltScroll 50s linear infinite;
+}
+.belt-track:hover { animation-play-state: paused; }
+@keyframes beltScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.belt-track2 { animation-duration: 45s; animation-direction: reverse; }
+.icard-v2 {
+  flex-shrink: 0;
+  width: 90px;
+  padding: 10px 6px 8px;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+.icard-v2:hover { transform: translateY(-6px) scale(1.06); z-index: 1; }
+.icard-v2::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, var(--glow-color) 0%, transparent 70%);
+  opacity: 0.07;
+}
+.icard-v2-img { width: 46px; height: 46px; object-fit: contain; position: relative; filter: drop-shadow(0 0 8px var(--glow-color)); animation: float 3s ease-in-out infinite; }
+.icard-v2-name { font-size: 8px; font-weight: 600; line-height: 1.2; position: relative; }
+.icard-v2-rarity { font-size: 7px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; position: relative; }
+/* rarity themes reused from .icard */
+.icard-v2.r-common   { --glow-color: #9ca3af; background: rgba(156,163,175,0.06); border-color: rgba(156,163,175,0.2); color: #9ca3af; }
+.icard-v2.r-rare     { --glow-color: #38bdf8; background: rgba(56,189,248,0.06); border-color: rgba(56,189,248,0.2); color: #38bdf8; }
+.icard-v2.r-epic     { --glow-color: #c084fc; background: rgba(192,132,252,0.06); border-color: rgba(192,132,252,0.2); color: #c084fc; }
+.icard-v2.r-legendary{ --glow-color: #facc15; background: rgba(250,204,21,0.06); border-color: rgba(250,204,21,0.25); color: #facc15; }
+.icard-v2.r-mythic   { --glow-color: #f472b6; background: rgba(244,114,182,0.06); border-color: rgba(244,114,182,0.25); color: #f472b6; }
+/* stagger floats */
+.icard-v2:nth-child(2) .icard-v2-img { animation-delay: 0.3s; }
+.icard-v2:nth-child(3) .icard-v2-img { animation-delay: 0.6s; }
+.icard-v2:nth-child(4) .icard-v2-img { animation-delay: 0.9s; }
+.icard-v2:nth-child(5) .icard-v2-img { animation-delay: 0.4s; }
+.icard-v2:nth-child(6) .icard-v2-img { animation-delay: 0.7s; }
+.belt-rows { display: flex; flex-direction: column; gap: 10px; }
+
+/* ══════ Arena Boss Grid ══════ */
+.arena-bosses {
+  padding: 28px 24px;
+  border-bottom: 1px solid var(--border-inner);
+  background: radial-gradient(ellipse at 50% 100%, rgba(239,68,68,0.07) 0%, transparent 60%);
+}
+.arena-bosses h2 { font-family: var(--font-title); font-size: 18px; color: var(--gold); text-align: center; margin-bottom: 4px; }
+.arena-bosses .sub { font-size: 11px; color: var(--text-dim); text-align: center; margin-bottom: 20px; }
+.boss-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 560px;
+  margin: 0 auto 16px;
+}
+.boss-card {
+  padding: 14px 12px 12px;
+  border-radius: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-inner);
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.boss-card:hover { transform: translateY(-3px); border-color: rgba(239,68,68,0.35); box-shadow: 0 8px 24px rgba(239,68,68,0.1); }
+.boss-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 100%, rgba(239,68,68,0.05) 0%, transparent 70%);
+}
+.boss-img { width: 48px; height: 48px; object-fit: contain; display: block; margin: 0 auto 7px; filter: drop-shadow(0 2px 8px rgba(239,68,68,0.3)); transition: transform 0.3s; position: relative; }
+.boss-card:hover .boss-img { transform: scale(1.12) rotate(-3deg); }
+.boss-name { font-family: var(--font-title); font-size: 9px; font-weight: 700; color: var(--text-bright); margin-bottom: 3px; position: relative; }
+.boss-zone { font-size: 8px; color: var(--text-dim); margin-bottom: 5px; position: relative; }
+.boss-hp-bar { height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; margin-bottom: 5px; position: relative; }
+.boss-hp-fill { height: 100%; border-radius: 2px; }
+.boss-stats { display: flex; justify-content: center; gap: 10px; position: relative; }
+.boss-stat { font-size: 8px; font-family: var(--font-mono); color: var(--text-dim); }
+.boss-stat span { color: var(--text-bright); font-weight: 700; }
+
+/* ══════ Enhanced Social Mock V2 ══════ */
+.social-mock-v2 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 300px;
+  position: relative;
+}
+.sm2-panel {
+  background: rgba(8,6,2,0.98);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.6);
+}
+.sm2-header {
+  padding: 8px 12px;
+  font-size: 9px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-dim);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+.sm2-header .sm2-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 5px rgba(74,222,128,0.6); flex-shrink: 0; }
+.sm2-header-title { flex: 1; }
+.sm2-badge { background: rgba(74,222,128,0.15); color: #4ade80; border: 1px solid rgba(74,222,128,0.25); border-radius: 10px; padding: 1px 7px; font-size: 8px; }
+.sm2-friend {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.035);
+}
+.sm2-friend:last-child { border-bottom: none; }
+.sm2-avatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 800; color: rgba(0,0,0,0.85);
+  flex-shrink: 0; position: relative;
+}
+.sm2-lv {
+  position: absolute; bottom: -2px; right: -3px;
+  background: var(--bg-dark); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px; padding: 0px 3px;
+  font-size: 7px; font-family: var(--font-mono); font-weight: 700;
+  color: var(--gold-dim); line-height: 1.5;
+}
+.sm2-info { flex: 1; min-width: 0; }
+.sm2-name { font-size: 11px; font-weight: 600; color: var(--text-bright); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sm2-activity { font-size: 9px; color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sm2-xp-tag { font-size: 9px; font-family: var(--font-mono); color: var(--gold-dim); flex-shrink: 0; }
+.sm2-status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.sm2-status-dot.online  { background: #4ade80; box-shadow: 0 0 5px rgba(74,222,128,0.5); }
+.sm2-status-dot.idle    { background: #fbbf24; }
+/* Group chat panel */
+.sm2-group-head {
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.02);
+  display: flex; align-items: center; gap: 8px;
+}
+.sm2-group-icon { font-size: 16px; }
+.sm2-group-name { font-family: var(--font-title); font-size: 10px; font-weight: 700; color: var(--text-bright); flex: 1; }
+.sm2-group-count { font-size: 8px; font-family: var(--font-mono); color: var(--text-dim); }
+.sm2-chat { padding: 8px 12px; display: flex; flex-direction: column; gap: 6px; }
+.sm2-msg { display: flex; gap: 7px; }
+.sm2-msg-av { width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 7px; font-weight: 800; color: rgba(0,0,0,0.85); margin-top: 1px; }
+.sm2-msg-body { flex: 1; min-width: 0; }
+.sm2-msg-name { font-size: 9px; font-weight: 700; margin-bottom: 1px; }
+.sm2-msg-text { font-size: 10px; color: var(--text-dim); line-height: 1.4; }
+.sm2-typing {
+  display: flex; align-items: center; gap: 7px;
+  padding: 5px 12px 7px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.sm2-typing-dots { display: flex; gap: 3px; }
+.sm2-typing-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--text-dim); animation: typingBounce 1.2s ease-in-out infinite; }
+.sm2-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.sm2-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typingBounce {
+  0%,60%,100% { transform: translateY(0); opacity: 0.3; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+.sm2-typing-label { font-size: 9px; color: var(--text-dim); font-style: italic; }
+.sm2-msg-bar {
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 7px 12px;
+  display: flex; gap: 6px; align-items: center;
+}
+.sm2-input {
+  flex: 1;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 6px;
+  padding: 4px 9px;
+  font-size: 9px;
+  color: rgba(255,255,255,0.2);
+  pointer-events: none;
+}
+.sm2-send { width: 22px; height: 22px; border-radius: 5px; background: rgba(212,168,67,0.15); border: 1px solid rgba(212,168,67,0.2); display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--gold-dim); }
+/* Activity feed */
+.activity-feed {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 6px 12px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.activity-item {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 9px; color: var(--text-dim);
+  animation: fadeUp 0.5s ease both;
+}
+.activity-item:nth-child(1) { animation-delay: 0s; }
+.activity-item:nth-child(2) { animation-delay: 0.1s; }
+.activity-item:nth-child(3) { animation-delay: 0.2s; }
+.act-icon { font-size: 12px; flex-shrink: 0; }
+.act-name { color: var(--text-bright); font-weight: 600; }
+.act-time { margin-left: auto; font-family: var(--font-mono); font-size: 8px; flex-shrink: 0; }
+
+/* ══════ Enhanced Guild Strip ══════ */
+.guild-strip-v2 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border-inner);
+  border-top: 1px solid var(--border-inner);
+  border-bottom: 1px solid var(--border-inner);
+}
+.gstrip-v2 {
+  padding: 20px 16px;
+  background: var(--bg-dark);
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+  text-decoration: none; color: inherit;
+  transition: background 0.2s, transform 0.2s;
+  position: relative; overflow: hidden;
+}
+.gstrip-v2:hover { background: rgba(255,255,255,0.02); transform: translateY(-2px); }
+.gstrip-v2::before {
+  content: '';
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 40px; height: 2px;
+  background: var(--strip-color, var(--gold));
+  border-radius: 2px 2px 0 0;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.gstrip-v2:hover::before { opacity: 1; }
+.gstrip-v2-icon { font-size: 28px; line-height: 1; }
+.gstrip-v2-title { font-family: var(--font-title); font-size: 12px; font-weight: 700; color: var(--text-bright); }
+.gstrip-v2-desc { font-size: 10px; color: var(--text-dim); line-height: 1.4; max-width: 150px; }
+.gstrip-v2-tag { font-size: 8px; font-family: var(--font-mono); padding: 2px 8px; border-radius: 10px; margin-top: 2px; }
+
+/* ══════ Responsive additions ══════ */
+@media (max-width: 900px) {
+  .guild-strip-v2 { grid-template-columns: 1fr; }
+  .gstrip-v2 { flex-direction: row; text-align: left; padding: 14px 18px; gap: 12px; }
+  .gstrip-v2-desc { max-width: none; }
+  .boss-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+  .skills-grid { grid-template-columns: repeat(4, 1fr); gap: 5px; }
+  .skill-card { padding: 10px 6px; }
+  .skill-icon { font-size: 18px; }
+  .skill-name { font-size: 8px; }
+  .skill-cats { display: none; }
+  .boss-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .boss-card { padding: 10px 8px; }
+  .boss-img { width: 36px; height: 36px; }
+  .boss-name { font-size: 8px; }
+  .social-mock-v2 { max-width: 100%; }
+  .arena-bosses { padding: 20px 12px; }
+  .skills-infographic { padding: 20px 12px; }
+  .items-showcase-v2 { padding: 20px 0; }
+}
+@media (max-width: 480px) {
+  .boss-grid { grid-template-columns: repeat(2, 1fr); }
+}
 </style>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 </head>
@@ -826,6 +1189,70 @@
 
     <!-- live-stats-bar replaced by inline hero stats above -->
 
+    <!-- ══════ Skills Infographic ══════ -->
+    <section class="skills-infographic">
+      <h2>8 Skills. 99 Levels Each.</h2>
+      <p class="sub">Every app you use earns XP automatically — no manual input ever</p>
+      <div class="skills-grid" id="skillsGrid">
+        <a href="skills.html#developer" class="skill-card" style="--skill-color:#38bdf8">
+          <span class="skill-icon">💻</span>
+          <span class="skill-name">Developer</span>
+          <span class="skill-cats">VS Code · Cursor · Terminal</span>
+          <span class="skill-level">Lv 1–99</span>
+          <div class="skill-xp-bar"><div class="skill-xp-fill" data-w="88"></div></div>
+        </a>
+        <a href="skills.html#designer" class="skill-card" style="--skill-color:#c084fc">
+          <span class="skill-icon">🎨</span>
+          <span class="skill-name">Designer</span>
+          <span class="skill-cats">Figma · Photoshop · Canva</span>
+          <span class="skill-level">Lv 1–99</span>
+          <div class="skill-xp-bar"><div class="skill-xp-fill" data-w="72"></div></div>
+        </a>
+        <a href="skills.html#gamer" class="skill-card" style="--skill-color:#4ade80">
+          <span class="skill-icon">🎮</span>
+          <span class="skill-name">Gamer</span>
+          <span class="skill-cats">Steam · Epic · Riot</span>
+          <span class="skill-level">Lv 1–99</span>
+          <div class="skill-xp-bar"><div class="skill-xp-fill" data-w="65"></div></div>
+        </a>
+        <a href="skills.html#communicator" class="skill-card" style="--skill-color:#22d3ee">
+          <span class="skill-icon">💬</span>
+          <span class="skill-name">Communicator</span>
+          <span class="skill-cats">Discord · Slack · Teams</span>
+          <span class="skill-level">Lv 1–99</span>
+          <div class="skill-xp-bar"><div class="skill-xp-fill" data-w="54"></div></div>
+        </a>
+        <a href="skills.html#researcher" class="skill-card" style="--skill-color:#f59e0b">
+          <span class="skill-icon">🔍</span>
+          <span class="skill-name">Researcher</span>
+          <span class="skill-cats">Chrome · Firefox · Edge</span>
+          <span class="skill-level">Lv 1–99</span>
+          <div class="skill-xp-bar"><div class="skill-xp-fill" data-w="79"></div></div>
+        </a>
+        <a href="skills.html#creator" class="skill-card" style="--skill-color:#fb923c">
+          <span class="skill-icon">✏️</span>
+          <span class="skill-name">Creator</span>
+          <span class="skill-cats">Premiere · Blender · After Effects</span>
+          <span class="skill-level">Lv 1–99</span>
+          <div class="skill-xp-bar"><div class="skill-xp-fill" data-w="43"></div></div>
+        </a>
+        <a href="skills.html#learner" class="skill-card" style="--skill-color:#fbbf24">
+          <span class="skill-icon">📚</span>
+          <span class="skill-name">Learner</span>
+          <span class="skill-cats">Notion · Obsidian · Anki</span>
+          <span class="skill-level">Lv 1–99</span>
+          <div class="skill-xp-bar"><div class="skill-xp-fill" data-w="61"></div></div>
+        </a>
+        <a href="skills.html#listener" class="skill-card" style="--skill-color:#f472b6">
+          <span class="skill-icon">🎵</span>
+          <span class="skill-name">Listener</span>
+          <span class="skill-cats">Spotify · YouTube Music</span>
+          <span class="skill-level">Lv 1–99</span>
+          <div class="skill-xp-bar"><div class="skill-xp-fill" data-w="37"></div></div>
+        </a>
+      </div>
+    </section>
+
     <!-- ══════ Feature rows — alternating layout ══════ -->
     <div class="feat-row" id="sc-skills">
       <div class="feat-text">
@@ -908,46 +1335,103 @@
         <a href="friends.html" class="feat-link">Social features &#8594;</a>
       </div>
       <div class="feat-img">
-        <!-- Live CSS mockup of the Friends & Chat UI -->
-        <div class="social-mock">
-          <div class="sm-panel">
-            <div class="sm-header">
-              <span class="sm-online-dot"></span>Friends Online &nbsp;&middot;&nbsp; 3
+        <!-- Enhanced Social Mock V2 -->
+        <div class="social-mock-v2">
+          <!-- Friends panel -->
+          <div class="sm2-panel">
+            <div class="sm2-header">
+              <span class="sm2-dot"></span>
+              <span class="sm2-header-title">Friends Online</span>
+              <span class="sm2-badge">3 online</span>
             </div>
-            <div class="sm-friend">
-              <div class="sm-avatar" style="background:#38bdf8">MX</div>
-              <div class="sm-info">
-                <div class="sm-name">MaxGrinder</div>
-                <div class="sm-activity">⚔️ Dragon Lair &middot; Wave 4</div>
+            <div class="sm2-friend">
+              <div class="sm2-avatar" style="background:#38bdf8">MX<span class="sm2-lv">47</span></div>
+              <div class="sm2-info">
+                <div class="sm2-name">MaxGrinder</div>
+                <div class="sm2-activity">⚔️ Dragon Lair · Wave 4</div>
               </div>
-              <div class="sm-status-dot online"></div>
+              <span class="sm2-xp-tag">+22 XP/m</span>
+              <div class="sm2-status-dot online"></div>
             </div>
-            <div class="sm-friend">
-              <div class="sm-avatar" style="background:#c084fc">KV</div>
-              <div class="sm-info">
-                <div class="sm-name">Katrinka_V</div>
-                <div class="sm-activity">💻 Coding &middot; Dev +14 XP/min</div>
+            <div class="sm2-friend">
+              <div class="sm2-avatar" style="background:#c084fc">KV<span class="sm2-lv">63</span></div>
+              <div class="sm2-info">
+                <div class="sm2-name">Katrinka_V</div>
+                <div class="sm2-activity">💻 Coding · Dev XP</div>
               </div>
-              <div class="sm-status-dot online"></div>
+              <span class="sm2-xp-tag">+14 XP/m</span>
+              <div class="sm2-status-dot online"></div>
             </div>
-            <div class="sm-friend">
-              <div class="sm-avatar" style="background:#f472b6">ZX</div>
-              <div class="sm-info">
-                <div class="sm-name">ZeroxDev</div>
-                <div class="sm-activity">😴 Idle &middot; 12 min</div>
+            <div class="sm2-friend">
+              <div class="sm2-avatar" style="background:#f472b6">ZX<span class="sm2-lv">31</span></div>
+              <div class="sm2-info">
+                <div class="sm2-name">ZeroxDev</div>
+                <div class="sm2-activity">😴 Idle · 12 min</div>
               </div>
-              <div class="sm-status-dot idle"></div>
+              <span class="sm2-xp-tag" style="color:var(--text-dim)">idle</span>
+              <div class="sm2-status-dot idle"></div>
             </div>
           </div>
-          <div class="sm-panel">
-            <div class="sm-header">💬 Pixel Warriors &nbsp;&middot;&nbsp; Guild Chat</div>
-            <div class="sm-chat">
-              <div class="sm-msg"><span class="sm-user" style="color:#facc15">MaxGrinder:</span> <span class="sm-text">just dropped Void Blade 🔥</span></div>
-              <div class="sm-msg"><span class="sm-user" style="color:#c084fc">Katrinka_V:</span> <span class="sm-text">nice!! raid tonight?</span></div>
-              <div class="sm-msg"><span class="sm-user" style="color:#38bdf8">ZeroxDev:</span> <span class="sm-text">in, give me 10 min</span></div>
-              <div class="sm-msg-bar">
-                <div class="sm-msg-bar-input">Type a message…</div>
-                <div class="sm-msg-bar-send">↵</div>
+          <!-- Group chat panel -->
+          <div class="sm2-panel">
+            <div class="sm2-group-head">
+              <span class="sm2-group-icon">⚔️</span>
+              <span class="sm2-group-name">Pixel Warriors</span>
+              <span class="sm2-group-count">8 members</span>
+            </div>
+            <div class="sm2-chat">
+              <div class="sm2-msg">
+                <div class="sm2-msg-av" style="background:#facc15">MX</div>
+                <div class="sm2-msg-body">
+                  <div class="sm2-msg-name" style="color:#facc15">MaxGrinder</div>
+                  <div class="sm2-msg-text">just dropped Void Blade 🔥</div>
+                </div>
+              </div>
+              <div class="sm2-msg">
+                <div class="sm2-msg-av" style="background:#c084fc">KV</div>
+                <div class="sm2-msg-body">
+                  <div class="sm2-msg-name" style="color:#c084fc">Katrinka_V</div>
+                  <div class="sm2-msg-text">nice!! raid tonight?</div>
+                </div>
+              </div>
+              <div class="sm2-msg">
+                <div class="sm2-msg-av" style="background:#38bdf8">ZX</div>
+                <div class="sm2-msg-body">
+                  <div class="sm2-msg-name" style="color:#38bdf8">ZeroxDev</div>
+                  <div class="sm2-msg-text">in, give me 10 min 🐉</div>
+                </div>
+              </div>
+            </div>
+            <div class="sm2-typing">
+              <div class="sm2-typing-dots">
+                <div class="sm2-typing-dot"></div>
+                <div class="sm2-typing-dot"></div>
+                <div class="sm2-typing-dot"></div>
+              </div>
+              <span class="sm2-typing-label">MaxGrinder is typing…</span>
+            </div>
+            <div class="sm2-msg-bar">
+              <div class="sm2-input">Message Pixel Warriors…</div>
+              <div class="sm2-send">↵</div>
+            </div>
+          </div>
+          <!-- Activity feed -->
+          <div class="sm2-panel">
+            <div class="activity-feed">
+              <div class="activity-item">
+                <span class="act-icon">🎁</span>
+                <span><span class="act-name">Katrinka_V</span> opened a Legendary Bag</span>
+                <span class="act-time">2m</span>
+              </div>
+              <div class="activity-item">
+                <span class="act-icon">⚔️</span>
+                <span><span class="act-name">MaxGrinder</span> defeated Dragon Elder</span>
+                <span class="act-time">5m</span>
+              </div>
+              <div class="activity-item">
+                <span class="act-icon">⬆️</span>
+                <span><span class="act-name">ZeroxDev</span> reached Dev Lv 32</span>
+                <span class="act-time">12m</span>
               </div>
             </div>
           </div>
@@ -955,106 +1439,154 @@
       </div>
     </div>
 
-    <!-- ══════ Item Showcase — real skins ══════ -->
-    <section class="items-showcase">
-      <h2>Loot &amp; Gear</h2>
-      <p class="sub">Click any item &mdash; full stats, drop sources &amp; recipes on every page</p>
-
-      <div class="item-belt">
-        <!-- Weapons -->
-        <a href="item.html?id=craft_dragonfire_blade" class="icard r-legendary">
-          <img class="icard-img" src="img/skins/item_craft_dragonfire_blade.webp" alt="Dragonfire Blade">
-          <span class="icard-name">Dragonfire Blade</span>
-          <span class="icard-rarity">Legendary</span>
-        </a>
-        <a href="item.html?id=craft_void_blade" class="icard r-mythic">
-          <img class="icard-img" src="img/skins/item_craft_void_blade.webp" alt="Void Blade">
-          <span class="icard-name">Void Blade</span>
-          <span class="icard-rarity">Mythic</span>
-        </a>
-        <a href="item.html?id=void_sword" class="icard r-mythic">
-          <img class="icard-img" src="img/skins/item_void_sword.webp" alt="Void Sword">
-          <span class="icard-name">Void Sword</span>
-          <span class="icard-rarity">Mythic</span>
-        </a>
-        <!-- Armor -->
-        <a href="item.html?id=golden_plate" class="icard r-legendary">
-          <img class="icard-img" src="img/skins/item_golden_plate.webp" alt="Golden Plate">
-          <span class="icard-name">Golden Plate</span>
-          <span class="icard-rarity">Legendary</span>
-        </a>
-        <a href="item.html?id=craft_dragon_crown" class="icard r-legendary">
-          <img class="icard-img" src="img/skins/item_craft_dragon_crown.webp" alt="Dragon Crown">
-          <span class="icard-name">Dragon Crown</span>
-          <span class="icard-rarity">Legendary</span>
-        </a>
-        <a href="item.html?id=void_helm" class="icard r-mythic">
-          <img class="icard-img" src="img/skins/item_void_helm.webp" alt="Void Helm">
-          <span class="icard-name">Void Helm</span>
-          <span class="icard-rarity">Mythic</span>
-        </a>
-        <!-- Accessories -->
-        <a href="item.html?id=shadow_ring" class="icard r-epic">
-          <img class="icard-img" src="img/skins/item_shadow_ring.webp" alt="Shadow Ring">
-          <span class="icard-name">Shadow Ring</span>
-          <span class="icard-rarity">Epic</span>
-        </a>
-        <a href="item.html?id=craft_troll_aegis" class="icard r-legendary">
-          <img class="icard-img" src="img/skins/item_craft_troll_aegis.webp" alt="Troll Aegis">
-          <span class="icard-name">Troll Aegis</span>
-          <span class="icard-rarity">Legendary</span>
-        </a>
-        <!-- Chests -->
-        <a href="item.html?id=legendary_chest" class="icard r-legendary">
-          <img class="icard-img" src="img/skins/chest_legendary_chest.webp" alt="Legendary Bag">
-          <span class="icard-name">Legendary Bag</span>
-          <span class="icard-rarity">Legendary</span>
-        </a>
-        <!-- Potions -->
-        <a href="item.html?id=hp_potion" class="icard r-mythic">
-          <img class="icard-img" src="img/skins/item_hp_potion.webp" alt="Vitality Potion">
-          <span class="icard-name">Vitality Potion</span>
-          <span class="icard-rarity">Mythic</span>
-        </a>
-        <!-- Boss material -->
-        <a href="item.html?id=dragon_heart" class="icard r-legendary">
-          <img class="icard-img" src="img/skins/item_dragon_heart.webp" alt="Dragon Heart">
-          <span class="icard-name">Dragon Heart</span>
-          <span class="icard-rarity">Legendary</span>
-        </a>
-        <!-- Crafted gear -->
-        <a href="item.html?id=craft_orc_plate" class="icard r-epic">
-          <img class="icard-img" src="img/skins/item_craft_orc_plate.webp" alt="Orc Plate">
-          <span class="icard-name">Orc Plate</span>
-          <span class="icard-rarity">Epic</span>
-        </a>
+    <!-- ══════ Item Showcase — auto-scroll belt ══════ -->
+    <section class="items-showcase-v2">
+      <div class="sec-head">
+        <h2>Loot &amp; Gear</h2>
+        <p class="sub">89 items across 5 rarity tiers — hover to pause &mdash; click for full stats</p>
+      </div>
+      <div class="belt-rows">
+        <!-- Row 1 — Weapons & Armor (left to right) -->
+        <div class="belt-outer">
+          <div class="belt-track">
+            <a href="item.html?id=craft_void_blade" class="icard-v2 r-mythic"><img class="icard-v2-img" src="img/skins/item_craft_void_blade.webp" alt="Void Blade"><span class="icard-v2-name">Void Blade</span><span class="icard-v2-rarity">Mythic</span></a>
+            <a href="item.html?id=void_helm" class="icard-v2 r-mythic"><img class="icard-v2-img" src="img/skins/item_void_helm.webp" alt="Void Helm"><span class="icard-v2-name">Void Helm</span><span class="icard-v2-rarity">Mythic</span></a>
+            <a href="item.html?id=void_plate" class="icard-v2 r-mythic"><img class="icard-v2-img" src="img/skins/item_void_plate.webp" alt="Void Plate"><span class="icard-v2-name">Void Plate</span><span class="icard-v2-rarity">Mythic</span></a>
+            <a href="item.html?id=void_ring" class="icard-v2 r-mythic"><img class="icard-v2-img" src="img/skins/item_void_ring.webp" alt="Void Ring"><span class="icard-v2-name">Void Ring</span><span class="icard-v2-rarity">Mythic</span></a>
+            <a href="item.html?id=craft_dragonfire_blade" class="icard-v2 r-legendary"><img class="icard-v2-img" src="img/skins/item_craft_dragonfire_blade.webp" alt="Dragonfire Blade"><span class="icard-v2-name">Dragonfire Blade</span><span class="icard-v2-rarity">Legendary</span></a>
+            <a href="item.html?id=golden_plate" class="icard-v2 r-legendary"><img class="icard-v2-img" src="img/skins/item_golden_plate.webp" alt="Golden Plate"><span class="icard-v2-name">Golden Plate</span><span class="icard-v2-rarity">Legendary</span></a>
+            <a href="item.html?id=craft_dragon_crown" class="icard-v2 r-legendary"><img class="icard-v2-img" src="img/skins/item_craft_dragon_crown.webp" alt="Dragon Crown"><span class="icard-v2-name">Dragon Crown</span><span class="icard-v2-rarity">Legendary</span></a>
+            <a href="item.html?id=craft_troll_aegis" class="icard-v2 r-legendary"><img class="icard-v2-img" src="img/skins/item_craft_troll_aegis.webp" alt="Troll Aegis"><span class="icard-v2-name">Troll Aegis</span><span class="icard-v2-rarity">Legendary</span></a>
+            <a href="item.html?id=golden_helm" class="icard-v2 r-legendary"><img class="icard-v2-img" src="img/skins/item_golden_helm.webp" alt="Golden Helm"><span class="icard-v2-name">Golden Helm</span><span class="icard-v2-rarity">Legendary</span></a>
+            <a href="item.html?id=craft_orc_plate" class="icard-v2 r-epic"><img class="icard-v2-img" src="img/skins/item_craft_orc_plate.webp" alt="Orc Plate"><span class="icard-v2-name">Orc Plate</span><span class="icard-v2-rarity">Epic</span></a>
+            <a href="item.html?id=shadow_ring" class="icard-v2 r-epic"><img class="icard-v2-img" src="img/skins/item_shadow_ring.webp" alt="Shadow Ring"><span class="icard-v2-name">Shadow Ring</span><span class="icard-v2-rarity">Epic</span></a>
+            <a href="item.html?id=craft_scale_robe" class="icard-v2 r-epic"><img class="icard-v2-img" src="img/skins/item_craft_scale_robe.webp" alt="Scale Robe"><span class="icard-v2-name">Scale Robe</span><span class="icard-v2-rarity">Epic</span></a>
+            <!-- duplicate for seamless loop -->
+            <a href="item.html?id=craft_void_blade" class="icard-v2 r-mythic"><img class="icard-v2-img" src="img/skins/item_craft_void_blade.webp" alt="Void Blade"><span class="icard-v2-name">Void Blade</span><span class="icard-v2-rarity">Mythic</span></a>
+            <a href="item.html?id=void_helm" class="icard-v2 r-mythic"><img class="icard-v2-img" src="img/skins/item_void_helm.webp" alt="Void Helm"><span class="icard-v2-name">Void Helm</span><span class="icard-v2-rarity">Mythic</span></a>
+            <a href="item.html?id=void_plate" class="icard-v2 r-mythic"><img class="icard-v2-img" src="img/skins/item_void_plate.webp" alt="Void Plate"><span class="icard-v2-name">Void Plate</span><span class="icard-v2-rarity">Mythic</span></a>
+            <a href="item.html?id=void_ring" class="icard-v2 r-mythic"><img class="icard-v2-img" src="img/skins/item_void_ring.webp" alt="Void Ring"><span class="icard-v2-name">Void Ring</span><span class="icard-v2-rarity">Mythic</span></a>
+            <a href="item.html?id=craft_dragonfire_blade" class="icard-v2 r-legendary"><img class="icard-v2-img" src="img/skins/item_craft_dragonfire_blade.webp" alt="Dragonfire Blade"><span class="icard-v2-name">Dragonfire Blade</span><span class="icard-v2-rarity">Legendary</span></a>
+            <a href="item.html?id=golden_plate" class="icard-v2 r-legendary"><img class="icard-v2-img" src="img/skins/item_golden_plate.webp" alt="Golden Plate"><span class="icard-v2-name">Golden Plate</span><span class="icard-v2-rarity">Legendary</span></a>
+            <a href="item.html?id=craft_dragon_crown" class="icard-v2 r-legendary"><img class="icard-v2-img" src="img/skins/item_craft_dragon_crown.webp" alt="Dragon Crown"><span class="icard-v2-name">Dragon Crown</span><span class="icard-v2-rarity">Legendary</span></a>
+            <a href="item.html?id=craft_troll_aegis" class="icard-v2 r-legendary"><img class="icard-v2-img" src="img/skins/item_craft_troll_aegis.webp" alt="Troll Aegis"><span class="icard-v2-name">Troll Aegis</span><span class="icard-v2-rarity">Legendary</span></a>
+            <a href="item.html?id=golden_helm" class="icard-v2 r-legendary"><img class="icard-v2-img" src="img/skins/item_golden_helm.webp" alt="Golden Helm"><span class="icard-v2-name">Golden Helm</span><span class="icard-v2-rarity">Legendary</span></a>
+            <a href="item.html?id=craft_orc_plate" class="icard-v2 r-epic"><img class="icard-v2-img" src="img/skins/item_craft_orc_plate.webp" alt="Orc Plate"><span class="icard-v2-name">Orc Plate</span><span class="icard-v2-rarity">Epic</span></a>
+            <a href="item.html?id=shadow_ring" class="icard-v2 r-epic"><img class="icard-v2-img" src="img/skins/item_shadow_ring.webp" alt="Shadow Ring"><span class="icard-v2-name">Shadow Ring</span><span class="icard-v2-rarity">Epic</span></a>
+            <a href="item.html?id=craft_scale_robe" class="icard-v2 r-epic"><img class="icard-v2-img" src="img/skins/item_craft_scale_robe.webp" alt="Scale Robe"><span class="icard-v2-name">Scale Robe</span><span class="icard-v2-rarity">Epic</span></a>
+          </div>
+        </div>
+        <!-- Row 2 — Chests, Potions, Materials, Seeds (right to left) -->
+        <div class="belt-outer">
+          <div class="belt-track belt-track2">
+            <a href="item.html?id=legendary_chest" class="icard-v2 r-legendary"><img class="icard-v2-img" src="img/skins/chest_legendary_chest.webp" alt="Legendary Bag"><span class="icard-v2-name">Legendary Bag</span><span class="icard-v2-rarity">Legendary</span></a>
+            <a href="item.html?id=epic_chest" class="icard-v2 r-epic"><img class="icard-v2-img" src="img/skins/chest_epic_chest.webp" alt="Epic Bag"><span class="icard-v2-name">Epic Bag</span><span class="icard-v2-rarity">Epic</span></a>
+            <a href="item.html?id=hp_potion" class="icard-v2 r-mythic"><img class="icard-v2-img" src="img/skins/item_hp_potion.webp" alt="Vitality Potion"><span class="icard-v2-name">Vitality Potion</span><span class="icard-v2-rarity">Mythic</span></a>
+            <a href="item.html?id=dragon_heart" class="icard-v2 r-legendary"><img class="icard-v2-img" src="img/skins/item_dragon_heart.webp" alt="Dragon Heart"><span class="icard-v2-name">Dragon Heart</span><span class="icard-v2-rarity">Legendary</span></a>
+            <a href="item.html?id=dragon_scale" class="icard-v2 r-legendary"><img class="icard-v2-img" src="img/skins/item_dragon_scale.webp" alt="Dragon Scale"><span class="icard-v2-name">Dragon Scale</span><span class="icard-v2-rarity">Legendary</span></a>
+            <a href="item.html?id=ancient_dust" class="icard-v2 r-epic"><img class="icard-v2-img" src="img/skins/item_ancient_dust.webp" alt="Ancient Dust"><span class="icard-v2-name">Ancient Dust</span><span class="icard-v2-rarity">Epic</span></a>
+            <a href="item.html?id=essence_vial" class="icard-v2 r-epic"><img class="icard-v2-img" src="img/skins/item_essence_vial.webp" alt="Essence Vial"><span class="icard-v2-name">Essence Vial</span><span class="icard-v2-rarity">Epic</span></a>
+            <a href="item.html?id=warlord_sigil" class="icard-v2 r-legendary"><img class="icard-v2-img" src="img/skins/item_warlord_sigil.webp" alt="Warlord Sigil"><span class="icard-v2-name">Warlord Sigil</span><span class="icard-v2-rarity">Legendary</span></a>
+            <a href="item.html?id=void_spore" class="icard-v2 r-mythic"><img class="icard-v2-img" src="img/skins/seed_void_spore.webp" alt="Void Spore"><span class="icard-v2-name">Void Spore</span><span class="icard-v2-rarity">Mythic</span></a>
+            <a href="item.html?id=starbloom" class="icard-v2 r-epic"><img class="icard-v2-img" src="img/skins/seed_starbloom_seed.webp" alt="Starbloom"><span class="icard-v2-name">Starbloom</span><span class="icard-v2-rarity">Epic</span></a>
+            <a href="item.html?id=crystal_root" class="icard-v2 r-rare"><img class="icard-v2-img" src="img/skins/item_crystal_root.webp" alt="Crystal Root"><span class="icard-v2-name">Crystal Root</span><span class="icard-v2-rarity">Rare</span></a>
+            <a href="item.html?id=atk_potion" class="icard-v2 r-rare"><img class="icard-v2-img" src="img/skins/item_atk_potion.webp" alt="Attack Potion"><span class="icard-v2-name">Attack Potion</span><span class="icard-v2-rarity">Rare</span></a>
+            <!-- duplicate -->
+            <a href="item.html?id=legendary_chest" class="icard-v2 r-legendary"><img class="icard-v2-img" src="img/skins/chest_legendary_chest.webp" alt="Legendary Bag"><span class="icard-v2-name">Legendary Bag</span><span class="icard-v2-rarity">Legendary</span></a>
+            <a href="item.html?id=epic_chest" class="icard-v2 r-epic"><img class="icard-v2-img" src="img/skins/chest_epic_chest.webp" alt="Epic Bag"><span class="icard-v2-name">Epic Bag</span><span class="icard-v2-rarity">Epic</span></a>
+            <a href="item.html?id=hp_potion" class="icard-v2 r-mythic"><img class="icard-v2-img" src="img/skins/item_hp_potion.webp" alt="Vitality Potion"><span class="icard-v2-name">Vitality Potion</span><span class="icard-v2-rarity">Mythic</span></a>
+            <a href="item.html?id=dragon_heart" class="icard-v2 r-legendary"><img class="icard-v2-img" src="img/skins/item_dragon_heart.webp" alt="Dragon Heart"><span class="icard-v2-name">Dragon Heart</span><span class="icard-v2-rarity">Legendary</span></a>
+            <a href="item.html?id=dragon_scale" class="icard-v2 r-legendary"><img class="icard-v2-img" src="img/skins/item_dragon_scale.webp" alt="Dragon Scale"><span class="icard-v2-name">Dragon Scale</span><span class="icard-v2-rarity">Legendary</span></a>
+            <a href="item.html?id=ancient_dust" class="icard-v2 r-epic"><img class="icard-v2-img" src="img/skins/item_ancient_dust.webp" alt="Ancient Dust"><span class="icard-v2-name">Ancient Dust</span><span class="icard-v2-rarity">Epic</span></a>
+            <a href="item.html?id=essence_vial" class="icard-v2 r-epic"><img class="icard-v2-img" src="img/skins/item_essence_vial.webp" alt="Essence Vial"><span class="icard-v2-name">Essence Vial</span><span class="icard-v2-rarity">Epic</span></a>
+            <a href="item.html?id=warlord_sigil" class="icard-v2 r-legendary"><img class="icard-v2-img" src="img/skins/item_warlord_sigil.webp" alt="Warlord Sigil"><span class="icard-v2-name">Warlord Sigil</span><span class="icard-v2-rarity">Legendary</span></a>
+            <a href="item.html?id=void_spore" class="icard-v2 r-mythic"><img class="icard-v2-img" src="img/skins/seed_void_spore.webp" alt="Void Spore"><span class="icard-v2-name">Void Spore</span><span class="icard-v2-rarity">Mythic</span></a>
+            <a href="item.html?id=starbloom" class="icard-v2 r-epic"><img class="icard-v2-img" src="img/skins/seed_starbloom_seed.webp" alt="Starbloom"><span class="icard-v2-name">Starbloom</span><span class="icard-v2-rarity">Epic</span></a>
+            <a href="item.html?id=crystal_root" class="icard-v2 r-rare"><img class="icard-v2-img" src="img/skins/item_crystal_root.webp" alt="Crystal Root"><span class="icard-v2-name">Crystal Root</span><span class="icard-v2-rarity">Rare</span></a>
+            <a href="item.html?id=atk_potion" class="icard-v2 r-rare"><img class="icard-v2-img" src="img/skins/item_atk_potion.webp" alt="Attack Potion"><span class="icard-v2-name">Attack Potion</span><span class="icard-v2-rarity">Rare</span></a>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- ══════ Guild / Raids / Party Strip ══════ -->
-    <div class="guild-strip">
-      <a href="guilds.html" class="gstrip-item">
-        <span class="gstrip-icon">⚔️</span>
+    <!-- ══════ Guild / Raids / Party Strip V2 ══════ -->
+    <div class="guild-strip-v2">
+      <a href="guilds.html" class="gstrip-v2" style="--strip-color:#facc15">
+        <span class="gstrip-v2-icon">⚔️</span>
         <div>
-          <div class="gstrip-title">Guilds</div>
-          <div class="gstrip-desc">Form a guild, share a leaderboard, compete as a team</div>
+          <div class="gstrip-v2-title">Guilds</div>
+          <div class="gstrip-v2-desc">Form a guild, share a leaderboard, compete as a team</div>
+          <span class="gstrip-v2-tag" style="background:rgba(250,204,21,0.1);color:#facc15;border:1px solid rgba(250,204,21,0.2)">Coming soon</span>
         </div>
       </a>
-      <a href="raids.html" class="gstrip-item">
-        <span class="gstrip-icon">🐉</span>
+      <a href="raids.html" class="gstrip-v2" style="--strip-color:#ef4444">
+        <span class="gstrip-v2-icon">🐉</span>
         <div>
-          <div class="gstrip-title">Raid Bosses</div>
-          <div class="gstrip-desc">Multiplayer boss fights — coordinate your party, share the rewards</div>
+          <div class="gstrip-v2-title">Raid Bosses</div>
+          <div class="gstrip-v2-desc">Multiplayer boss fights — coordinate your party, share the rewards</div>
+          <span class="gstrip-v2-tag" style="background:rgba(239,68,68,0.1);color:#ef4444;border:1px solid rgba(239,68,68,0.2)">Coming soon</span>
         </div>
       </a>
-      <a href="friends.html" class="gstrip-item">
-        <span class="gstrip-icon">💬</span>
+      <a href="friends.html" class="gstrip-v2" style="--strip-color:#4ade80">
+        <span class="gstrip-v2-icon">💬</span>
         <div>
-          <div class="gstrip-title">Group Chats</div>
-          <div class="gstrip-desc">Persistent group threads — react to drops, plan sessions together</div>
+          <div class="gstrip-v2-title">Group Chats</div>
+          <div class="gstrip-v2-desc">Persistent group threads — react to drops, plan sessions together</div>
+          <span class="gstrip-v2-tag" style="background:rgba(74,222,128,0.1);color:#4ade80;border:1px solid rgba(74,222,128,0.2)">Live now</span>
         </div>
       </a>
     </div>
+
+    <!-- ══════ Arena Boss Preview ══════ -->
+    <section class="arena-bosses">
+      <h2>6 Dungeon Zones. 18 Mob Types.</h2>
+      <p class="sub">Turn-based boss fights — kill mobs, earn gold &amp; materials, drop mythic loot</p>
+      <div class="boss-grid">
+        <a href="arena.html#slime-caverns" class="boss-card">
+          <img class="boss-img" src="img/skins/boss_slime.webp" alt="Slime Boss">
+          <div class="boss-name">Slime King</div>
+          <div class="boss-zone">Slime Caverns · Zone 1</div>
+          <div class="boss-hp-bar"><div class="boss-hp-fill" style="width:30%;background:linear-gradient(90deg,#4ade80,#86efac)"></div></div>
+          <div class="boss-stats"><span class="boss-stat">HP <span>800</span></span><span class="boss-stat">ATK <span>18</span></span></div>
+        </a>
+        <a href="arena.html#goblin-warrens" class="boss-card">
+          <img class="boss-img" src="img/skins/boss_goblin.webp" alt="Goblin Boss">
+          <div class="boss-name">Goblin Chieftain</div>
+          <div class="boss-zone">Goblin Warrens · Zone 2</div>
+          <div class="boss-hp-bar"><div class="boss-hp-fill" style="width:45%;background:linear-gradient(90deg,#a3e635,#bef264)"></div></div>
+          <div class="boss-stats"><span class="boss-stat">HP <span>1,200</span></span><span class="boss-stat">ATK <span>28</span></span></div>
+        </a>
+        <a href="arena.html#wolf-forest" class="boss-card">
+          <img class="boss-img" src="img/skins/boss_wolf.webp" alt="Wolf Boss">
+          <div class="boss-name">Alpha Wolf</div>
+          <div class="boss-zone">Wolf Forest · Zone 3</div>
+          <div class="boss-hp-bar"><div class="boss-hp-fill" style="width:60%;background:linear-gradient(90deg,#38bdf8,#7dd3fc)"></div></div>
+          <div class="boss-stats"><span class="boss-stat">HP <span>2,000</span></span><span class="boss-stat">ATK <span>42</span></span></div>
+        </a>
+        <a href="arena.html#orc-fortress" class="boss-card">
+          <img class="boss-img" src="img/skins/boss_orc.webp" alt="Orc Boss">
+          <div class="boss-name">Orc Warlord</div>
+          <div class="boss-zone">Orc Fortress · Zone 4</div>
+          <div class="boss-hp-bar"><div class="boss-hp-fill" style="width:72%;background:linear-gradient(90deg,#f59e0b,#fcd34d)"></div></div>
+          <div class="boss-stats"><span class="boss-stat">HP <span>3,500</span></span><span class="boss-stat">ATK <span>65</span></span></div>
+        </a>
+        <a href="arena.html#troll-bridge" class="boss-card">
+          <img class="boss-img" src="img/skins/boss_troll.webp" alt="Troll Boss">
+          <div class="boss-name">Stone Troll</div>
+          <div class="boss-zone">Troll Bridge · Zone 5</div>
+          <div class="boss-hp-bar"><div class="boss-hp-fill" style="width:85%;background:linear-gradient(90deg,#c084fc,#e879f9)"></div></div>
+          <div class="boss-stats"><span class="boss-stat">HP <span>6,000</span></span><span class="boss-stat">ATK <span>95</span></span></div>
+        </a>
+        <a href="arena.html#dragon-lair" class="boss-card">
+          <img class="boss-img" src="img/skins/boss_dragon.webp" alt="Dragon Boss">
+          <div class="boss-name">Dragon Elder</div>
+          <div class="boss-zone">Dragon Lair · Zone 6</div>
+          <div class="boss-hp-bar"><div class="boss-hp-fill" style="width:100%;background:linear-gradient(90deg,#ef4444,#f97316)"></div></div>
+          <div class="boss-stats"><span class="boss-stat">HP <span>12,000</span></span><span class="boss-stat">ATK <span>140</span></span></div>
+        </a>
+      </div>
+      <div style="text-align:center"><a href="arena.html" class="feat-link">Full arena guide &#8594;</a></div>
+    </section>
 
     <!-- ══════ Live Leaderboard ══════ -->
     <section class="lb-section">
@@ -1334,5 +1866,38 @@
 
 <button class="back-to-top" id="backToTop" title="Back to top">&#8593;</button>
 <script>var btt=document.getElementById('backToTop');window.addEventListener('scroll',function(){btt.classList.toggle('visible',window.scrollY>300)});btt.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});</script>
+
+<script>
+// Animate skill XP bars on scroll into view
+(function() {
+  var fills = document.querySelectorAll('.skill-xp-fill[data-w]');
+  if (!fills.length) return;
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.style.width = e.target.getAttribute('data-w') + '%';
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  fills.forEach(function(f) { io.observe(f); });
+})();
+
+// Animate leaderboard bars on scroll
+(function() {
+  var bars = document.querySelectorAll('.lb-bar');
+  if (!bars.length) return;
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        var w = e.target.getAttribute('data-w');
+        if (w) { e.target.style.width = w + '%'; }
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  bars.forEach(function(b) { io.observe(b); });
+})();
+</script>
 </body>
 </html>
