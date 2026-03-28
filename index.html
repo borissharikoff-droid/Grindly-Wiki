@@ -1161,19 +1161,19 @@
 /* ══════ PROMO-STYLE FEATURE CARDS ══════ */
 .pcard {
   display: flex;
-  min-height: 220px;
+  min-height: 280px;
   overflow: hidden;
   border-bottom: 1px solid rgba(255,255,255,0.06);
   background: #0c0c17;
 }
 .pcard.reverse { flex-direction: row-reverse; }
 .pcard-ss {
-  flex: 0 0 52%;
+  flex: 0 0 55%;
   background: #111121;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px 20px;
+  padding: 16px;
   position: relative;
   overflow: hidden;
 }
@@ -1184,13 +1184,16 @@
   background: radial-gradient(ellipse at center, rgba(129,140,248,0.07) 0%, transparent 65%);
 }
 .pcard-ss img {
+  width: 100%;
   max-width: 100%;
-  max-height: 190px;
+  height: auto;
+  max-height: none;
   border-radius: 10px;
   border: 1px solid rgba(255,255,255,0.07);
   box-shadow: 0 12px 48px rgba(0,0,0,0.65), 0 2px 0 rgba(255,255,255,0.04) inset;
   position: relative;
   transition: transform 0.35s ease;
+  display: block;
 }
 .pcard:hover .pcard-ss img { transform: scale(1.02) translateY(-2px); }
 .pcard-info {
@@ -1358,8 +1361,8 @@
 /* Responsive pcard */
 @media (max-width: 768px) {
   .pcard, .pcard.reverse { flex-direction: column !important; }
-  .pcard-ss { flex: none !important; min-height: 150px; padding: 14px; }
-  .pcard-ss img { max-height: 130px !important; }
+  .pcard-ss { flex: none !important; min-height: 180px; padding: 12px; }
+  .pcard-ss img { width: 100% !important; }
   .pcard-info { border-left: none !important; border-right: none !important; border-top: 1px solid rgba(255,255,255,0.05) !important; padding: 16px 14px !important; }
   .pcard-title { font-size: 17px !important; }
   .pcard-desc { max-width: 100% !important; }
