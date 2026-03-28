@@ -428,6 +428,180 @@
   margin-left: auto; margin-right: auto;
 }
 
+/* ══════ Social Mock UI ══════ */
+.social-mock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 288px;
+  position: relative;
+}
+.sm-panel {
+  background: rgba(10,8,3,0.97);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+}
+.sm-header {
+  padding: 7px 12px;
+  font-size: 9px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-dim);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.025);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.sm-header .sm-online-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 5px rgba(74,222,128,0.6);
+  flex-shrink: 0;
+}
+.sm-friend {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.sm-friend:last-child { border-bottom: none; }
+.sm-avatar {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 800;
+  color: rgba(0,0,0,0.85);
+  flex-shrink: 0;
+}
+.sm-info { flex: 1; min-width: 0; }
+.sm-name { font-size: 11px; font-weight: 600; color: var(--text-bright); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sm-activity { font-size: 9px; color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sm-status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.sm-status-dot.online  { background: #4ade80; box-shadow: 0 0 5px rgba(74,222,128,0.5); }
+.sm-status-dot.idle    { background: #fbbf24; }
+.sm-status-dot.offline { background: rgba(255,255,255,0.15); }
+/* Chat */
+.sm-chat { padding: 8px 12px; display: flex; flex-direction: column; gap: 5px; }
+.sm-msg { font-size: 10px; line-height: 1.4; }
+.sm-msg .sm-user { font-weight: 700; margin-right: 2px; }
+.sm-msg .sm-text { color: var(--text-dim); }
+.sm-msg-bar {
+  margin-top: 5px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding-top: 7px;
+  display: flex; gap: 6px; align-items: center;
+}
+.sm-msg-bar-input {
+  flex: 1;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 6px;
+  padding: 4px 9px;
+  font-size: 9px;
+  color: rgba(255,255,255,0.2);
+  font-family: var(--font-mono);
+  pointer-events: none;
+}
+.sm-msg-bar-send {
+  width: 22px; height: 22px;
+  border-radius: 5px;
+  background: rgba(212,168,67,0.15);
+  border: 1px solid rgba(212,168,67,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+  color: var(--gold-dim);
+}
+
+/* ══════ Leaderboard Section ══════ */
+.lb-section {
+  padding: 28px 24px;
+  border-bottom: 1px solid var(--border-inner);
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(212,168,67,0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(56,189,248,0.04) 0%, transparent 50%);
+}
+.lb-section h2 {
+  font-family: var(--font-title);
+  font-size: 18px;
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 4px;
+}
+.lb-section .sub { font-size: 11px; color: var(--text-dim); text-align: center; margin-bottom: 20px; }
+.lb-list { max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; gap: 5px; }
+.lb-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-inner);
+  border-radius: 8px;
+  transition: all 0.2s;
+  animation: fadeUp 0.5s ease both;
+}
+.lb-row:nth-child(1) { animation-delay: 0.0s; }
+.lb-row:nth-child(2) { animation-delay: 0.07s; }
+.lb-row:nth-child(3) { animation-delay: 0.14s; }
+.lb-row:nth-child(4) { animation-delay: 0.21s; }
+.lb-row:nth-child(5) { animation-delay: 0.28s; }
+.lb-row:hover { border-color: var(--gold-dim); transform: translateX(4px); }
+.lb-rank {
+  font-family: var(--font-title); font-size: 13px; font-weight: 700;
+  width: 26px; text-align: center; flex-shrink: 0;
+}
+.lb-rank.r1 { color: #facc15; }
+.lb-rank.r2 { color: #9ca3af; }
+.lb-rank.r3 { color: #d97706; }
+.lb-rank.rn { color: var(--text-dim); font-size: 11px; }
+.lb-avatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 800; color: rgba(0,0,0,0.85);
+  flex-shrink: 0;
+}
+.lb-name { flex: 1; font-size: 12px; font-weight: 600; color: var(--text-bright); min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lb-bar-wrap { flex: 2; height: 5px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; min-width: 60px; }
+.lb-bar { height: 100%; border-radius: 3px; width: 0%; transition: width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.lb-row:nth-child(1) .lb-bar { background: linear-gradient(90deg, #ca8a04, #fde047); }
+.lb-row:nth-child(2) .lb-bar { background: linear-gradient(90deg, #6b7280, #d1d5db); }
+.lb-row:nth-child(3) .lb-bar { background: linear-gradient(90deg, #92400e, #f59e0b); }
+.lb-row:nth-child(4) .lb-bar { background: linear-gradient(90deg, #1d4ed8, #38bdf8); }
+.lb-row:nth-child(5) .lb-bar { background: linear-gradient(90deg, #7e22ce, #c084fc); }
+.lb-xp { font-family: var(--font-mono); font-size: 9px; color: var(--text-dim); text-align: right; width: 54px; flex-shrink: 0; }
+.lb-cta { text-align: center; margin-top: 14px; }
+.lb-cta a { font-size: 11px; font-family: var(--font-mono); color: var(--gold); text-decoration: none; font-weight: 600; transition: color 0.2s; }
+.lb-cta a:hover { color: var(--gold-bright); }
+
+/* ══════ Guild / Social Strip ══════ */
+.guild-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border-inner);
+  border-top: 1px solid var(--border-inner);
+  border-bottom: 1px solid var(--border-inner);
+}
+.gstrip-item {
+  padding: 22px 18px;
+  background: var(--bg-dark);
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  text-decoration: none; color: inherit;
+  transition: background 0.2s, transform 0.2s;
+}
+.gstrip-item:hover { background: rgba(255,255,255,0.025); transform: translateY(-2px); }
+.gstrip-icon { font-size: 30px; line-height: 1; }
+.gstrip-title { font-family: var(--font-title); font-size: 13px; font-weight: 700; color: var(--text-bright); }
+.gstrip-desc { font-size: 10px; color: var(--text-dim); line-height: 1.45; max-width: 160px; }
+
 /* ══════ Responsive — Tablet ══════ */
 @media (max-width: 900px) {
   .feat-row { grid-template-columns: 1fr; min-height: auto; }
@@ -435,6 +609,14 @@
   .feat-row.reverse .feat-img { order: 2; }
   .feat-img img { max-width: 240px; }
   .feat-text { padding: 20px 16px; }
+}
+
+/* ══════ Responsive for new sections — Tablet ══════ */
+@media (max-width: 900px) {
+  .guild-strip { grid-template-columns: 1fr; }
+  .gstrip-item { flex-direction: row; text-align: left; padding: 14px 18px; gap: 12px; }
+  .gstrip-desc { max-width: none; }
+  .lb-section { padding: 22px 18px; }
 }
 
 /* ══════ Responsive — Mobile ══════ */
@@ -496,6 +678,14 @@
   .icard-img { width: 32px; height: 32px; }
   .icard-name { font-size: 8px; }
   .icard-rarity { font-size: 6px; }
+
+  /* Leaderboard */
+  .lb-section { padding: 18px 12px; }
+  .lb-section h2 { font-size: 16px; }
+  .lb-row { padding: 7px 10px; gap: 7px; }
+  .lb-name { font-size: 11px; }
+  .lb-bar-wrap { flex: 1.5; min-width: 40px; }
+  .lb-xp { width: 44px; font-size: 8px; }
 
   /* Feature chips */
   .feat-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
@@ -702,10 +892,66 @@
         <span class="feat-tag" style="background:rgba(251,191,36,0.1);color:#fbbf24;border:1px solid rgba(251,191,36,0.15)">Player Economy</span>
         <h3>Trade with real players</h3>
         <p>List drops, buy upgrades, climb leaderboards. Real-time chat with friends.</p>
-        <a href="equipment.html" class="feat-link">Browse equipment &#8594;</a>
+        <a href="marketplace.html" class="feat-link">Browse marketplace &#8594;</a>
       </div>
       <div class="feat-img">
         <img src="img/marketplace.png" alt="Marketplace">
+      </div>
+    </div>
+
+    <!-- ══════ Social & Friends Feature Row ══════ -->
+    <div class="feat-row" id="sc-social">
+      <div class="feat-text">
+        <span class="feat-tag" style="background:rgba(74,222,128,0.1);color:#4ade80;border:1px solid rgba(74,222,128,0.15)">Community</span>
+        <h3>Friends, Guilds &amp; Group Chats</h3>
+        <p>See who's online, challenge friends to arena fights, join guild raids. Group threads keep your party synced — react to drops, plan sessions, share loot.</p>
+        <a href="friends.html" class="feat-link">Social features &#8594;</a>
+      </div>
+      <div class="feat-img">
+        <!-- Live CSS mockup of the Friends & Chat UI -->
+        <div class="social-mock">
+          <div class="sm-panel">
+            <div class="sm-header">
+              <span class="sm-online-dot"></span>Friends Online &nbsp;&middot;&nbsp; 3
+            </div>
+            <div class="sm-friend">
+              <div class="sm-avatar" style="background:#38bdf8">MX</div>
+              <div class="sm-info">
+                <div class="sm-name">MaxGrinder</div>
+                <div class="sm-activity">⚔️ Dragon Lair &middot; Wave 4</div>
+              </div>
+              <div class="sm-status-dot online"></div>
+            </div>
+            <div class="sm-friend">
+              <div class="sm-avatar" style="background:#c084fc">KV</div>
+              <div class="sm-info">
+                <div class="sm-name">Katrinka_V</div>
+                <div class="sm-activity">💻 Coding &middot; Dev +14 XP/min</div>
+              </div>
+              <div class="sm-status-dot online"></div>
+            </div>
+            <div class="sm-friend">
+              <div class="sm-avatar" style="background:#f472b6">ZX</div>
+              <div class="sm-info">
+                <div class="sm-name">ZeroxDev</div>
+                <div class="sm-activity">😴 Idle &middot; 12 min</div>
+              </div>
+              <div class="sm-status-dot idle"></div>
+            </div>
+          </div>
+          <div class="sm-panel">
+            <div class="sm-header">💬 Pixel Warriors &nbsp;&middot;&nbsp; Guild Chat</div>
+            <div class="sm-chat">
+              <div class="sm-msg"><span class="sm-user" style="color:#facc15">MaxGrinder:</span> <span class="sm-text">just dropped Void Blade 🔥</span></div>
+              <div class="sm-msg"><span class="sm-user" style="color:#c084fc">Katrinka_V:</span> <span class="sm-text">nice!! raid tonight?</span></div>
+              <div class="sm-msg"><span class="sm-user" style="color:#38bdf8">ZeroxDev:</span> <span class="sm-text">in, give me 10 min</span></div>
+              <div class="sm-msg-bar">
+                <div class="sm-msg-bar-input">Type a message…</div>
+                <div class="sm-msg-bar-send">↵</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -783,6 +1029,45 @@
           <span class="icard-rarity">Epic</span>
         </a>
       </div>
+    </section>
+
+    <!-- ══════ Guild / Raids / Party Strip ══════ -->
+    <div class="guild-strip">
+      <a href="guilds.html" class="gstrip-item">
+        <span class="gstrip-icon">⚔️</span>
+        <div>
+          <div class="gstrip-title">Guilds</div>
+          <div class="gstrip-desc">Form a guild, share a leaderboard, compete as a team</div>
+        </div>
+      </a>
+      <a href="raids.html" class="gstrip-item">
+        <span class="gstrip-icon">🐉</span>
+        <div>
+          <div class="gstrip-title">Raid Bosses</div>
+          <div class="gstrip-desc">Multiplayer boss fights — coordinate your party, share the rewards</div>
+        </div>
+      </a>
+      <a href="friends.html" class="gstrip-item">
+        <span class="gstrip-icon">💬</span>
+        <div>
+          <div class="gstrip-title">Group Chats</div>
+          <div class="gstrip-desc">Persistent group threads — react to drops, plan sessions together</div>
+        </div>
+      </a>
+    </div>
+
+    <!-- ══════ Live Leaderboard ══════ -->
+    <section class="lb-section">
+      <h2>Top Grinders</h2>
+      <p class="sub">Live rankings &mdash; real players, updated continuously</p>
+      <div class="lb-list" id="lbList">
+        <div class="lb-row"><span class="lb-rank r1">🥇</span><div class="lb-avatar" style="background:#facc15">—</div><span class="lb-name">Loading…</span><div class="lb-bar-wrap"><div class="lb-bar" style="width:0"></div></div><span class="lb-xp">—</span></div>
+        <div class="lb-row"><span class="lb-rank r2">🥈</span><div class="lb-avatar" style="background:#9ca3af">—</div><span class="lb-name">Loading…</span><div class="lb-bar-wrap"><div class="lb-bar" style="width:0"></div></div><span class="lb-xp">—</span></div>
+        <div class="lb-row"><span class="lb-rank r3">🥉</span><div class="lb-avatar" style="background:#d97706">—</div><span class="lb-name">Loading…</span><div class="lb-bar-wrap"><div class="lb-bar" style="width:0"></div></div><span class="lb-xp">—</span></div>
+        <div class="lb-row"><span class="lb-rank rn">4</span><div class="lb-avatar" style="background:#38bdf8">—</div><span class="lb-name">Loading…</span><div class="lb-bar-wrap"><div class="lb-bar" style="width:0"></div></div><span class="lb-xp">—</span></div>
+        <div class="lb-row"><span class="lb-rank rn">5</span><div class="lb-avatar" style="background:#c084fc">—</div><span class="lb-name">Loading…</span><div class="lb-bar-wrap"><div class="lb-bar" style="width:0"></div></div><span class="lb-xp">—</span></div>
+      </div>
+      <div class="lb-cta"><a href="friends.html">Full leaderboard &#8594;</a></div>
     </section>
 
     <!-- ══════ Feature chips ══════ -->
@@ -977,6 +1262,73 @@
   }).catch(function() {
     // silently ignore — stats bar stays hidden if Supabase is unreachable
   });
+})();
+</script>
+
+<script>
+(function(){
+  var SB_URL = 'https://athiojjreuexcmziqbcn.supabase.co';
+  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF0aGlvampyZXVleGNtemlxYmNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0MjU1NjksImV4cCI6MjA4NjAwMTU2OX0.VU8aWawpq5zA4y-RTpWGJN_5Gne6THcF2OZPg1RVIKs';
+  var COLORS = ['#facc15','#9ca3af','#d97706','#38bdf8','#c084fc','#4ade80','#f472b6','#a78bfa'];
+  var RANK_HTML = ['🥇','🥈','🥉'];
+  var RANK_CLASS = ['r1','r2','r3','rn','rn'];
+
+  function fmtXp(n) {
+    if (n >= 1000000) return (n / 1000000).toFixed(2) + 'M XP';
+    if (n >= 1000) return (n / 1000).toFixed(1) + 'K XP';
+    return n + ' XP';
+  }
+  function initials(name) {
+    if (!name) return '?';
+    var parts = name.split(/[_\s-]/);
+    if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
+    return name.slice(0, 2).toUpperCase();
+  }
+
+  fetch(SB_URL + '/rest/v1/user_skills?select=user_id,total_xp,profiles(username)&limit=1000', {
+    headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(rows) {
+    // Aggregate total_xp per user
+    var map = {};
+    rows.forEach(function(row) {
+      var uid = row.user_id;
+      var xp = row.total_xp || 0;
+      var uname = (row.profiles && row.profiles.username) ? row.profiles.username : uid.slice(0,8);
+      if (!map[uid]) map[uid] = { name: uname, xp: 0 };
+      map[uid].xp += xp;
+    });
+    var sorted = Object.values(map).sort(function(a, b) { return b.xp - a.xp; }).slice(0, 5);
+    if (sorted.length === 0) return;
+
+    var maxXp = sorted[0].xp || 1;
+    var list = document.getElementById('lbList');
+    if (!list) return;
+    list.innerHTML = '';
+    sorted.forEach(function(player, i) {
+      var pct = Math.max(4, Math.round((player.xp / maxXp) * 100));
+      var color = COLORS[i % COLORS.length];
+      var rankHtml = i < 3 ? RANK_HTML[i] : (i + 1);
+      var rankClass = RANK_CLASS[i] || 'rn';
+      var row = document.createElement('div');
+      row.className = 'lb-row';
+      row.innerHTML =
+        '<span class="lb-rank ' + rankClass + '">' + rankHtml + '</span>' +
+        '<div class="lb-avatar" style="background:' + color + '">' + initials(player.name) + '</div>' +
+        '<span class="lb-name">' + player.name.replace(/</g,'&lt;') + '</span>' +
+        '<div class="lb-bar-wrap"><div class="lb-bar" style="width:0%"></div></div>' +
+        '<span class="lb-xp">' + fmtXp(player.xp) + '</span>';
+      list.appendChild(row);
+      // animate bar after paint
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          row.querySelector('.lb-bar').style.width = pct + '%';
+        });
+      });
+    });
+  })
+  .catch(function() { /* silently ignore */ });
 })();
 </script>
 
