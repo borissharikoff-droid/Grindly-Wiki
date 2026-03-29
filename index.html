@@ -1407,15 +1407,22 @@
   100% { transform: translate(var(--dx),var(--dy)) scale(0); opacity: 0; }
 }
 .ld-rarity-label {
-  font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 900;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  animation: ldFlash 0.5s ease; margin-bottom: 4px;
+  font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 900;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  animation: ldFlash 0.5s ease; margin-bottom: 6px;
+  padding: 2px 12px; border-radius: 20px;
+  background: rgba(255,255,255,0.06); border: 1px solid currentColor;
+  opacity: 0.85;
 }
 @keyframes ldFlash { 0%{transform:scale(1.5);opacity:0} 50%{transform:scale(1.1)} 100%{transform:scale(1);opacity:1} }
-.ld-item-box { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-.ld-item-img { width: 60px; height: 60px; object-fit: contain; filter: drop-shadow(0 0 12px rgba(255,255,255,0.2)); }
+.ld-item-box { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.ld-item-img {
+  width: 72px; height: 72px; object-fit: contain;
+  filter: drop-shadow(0 0 12px rgba(255,255,255,0.2));
+  transition: filter 0.3s;
+}
 .ld-item-name { font-size: 13px; font-weight: 700; color: #fff; }
-.ld-item-rarity { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
+.ld-item-rarity { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; }
 .ld-item-desc { font-size: 9px; color: rgba(255,255,255,0.4); text-align: center; max-width: 180px; line-height: 1.4; }
 .ld-nav { display: flex; align-items: center; gap: 12px; margin-top: 4px; }
 .ld-nav button {
@@ -1435,19 +1442,21 @@
 .ld-btns button:hover { background: rgba(255,255,255,0.1); }
 
 /* ── Arena demo ── */
-.demo-arena { gap: 8px; }
+.demo-arena { gap: 6px; transition: background 0.5s; }
 .ad-boss-section { display: flex; flex-direction: column; align-items: center; gap: 3px; }
-.ad-boss-img { width: 56px; height: 56px; object-fit: contain; filter: drop-shadow(0 2px 12px rgba(239,68,68,0.4)); animation: bossFloat 3s ease-in-out infinite; }
-.ad-boss-name { font-family: var(--font-title,serif); font-size: 11px; font-weight: 700; color: #fff; }
-.ad-boss-zone { font-size: 8px; color: rgba(255,255,255,0.35); }
+.ad-boss-img { width: 66px; height: 66px; object-fit: contain; filter: drop-shadow(0 2px 16px rgba(239,68,68,0.5)); animation: bossFloat 3s ease-in-out infinite; transition: filter 0.4s; }
+.ad-boss-name { font-family: var(--font-title,serif); font-size: 12px; font-weight: 700; color: #fff; }
+.ad-boss-zone { font-size: 8px; color: rgba(255,255,255,0.35); font-family: 'JetBrains Mono', monospace; }
 .ad-hp-row { display: flex; align-items: center; gap: 7px; width: 100%; }
 .ad-hp-lbl { font-size: 8px; color: rgba(255,255,255,0.4); width: 38px; flex-shrink: 0; font-family: 'JetBrains Mono', monospace; }
-.ad-hp-bar { flex: 1; height: 6px; background: rgba(255,255,255,0.07); border-radius: 3px; overflow: hidden; }
-.ad-hp-fill { height: 100%; border-radius: 3px; transition: width 0.4s ease; }
-.ad-hp-num { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: rgba(255,255,255,0.5); width: 28px; text-align: right; flex-shrink: 0; }
-.ad-gold-row { font-size: 10px; color: #facc15; font-weight: 600; }
-.ad-float-wrap { height: 22px; display: flex; align-items: center; justify-content: center; }
-.ad-float { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 900; opacity: 0; transition: opacity 0.15s, transform 0.5s; color: #ef4444; }
+.ad-hp-bar { flex: 1; height: 7px; background: rgba(255,255,255,0.07); border-radius: 4px; overflow: hidden; }
+.ad-hp-fill { height: 100%; border-radius: 4px; transition: width 0.4s ease; }
+.ad-hp-num { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: rgba(255,255,255,0.5); width: 30px; text-align: right; flex-shrink: 0; }
+.ad-stats-row { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 0 2px; }
+.ad-gold-row { font-size: 10px; color: #facc15; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+.ad-kills-row { font-size: 9px; color: rgba(255,255,255,0.3); font-family: 'JetBrains Mono', monospace; }
+.ad-float-wrap { height: 20px; display: flex; align-items: center; justify-content: center; }
+.ad-float { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 900; opacity: 0; transition: opacity 0.15s, transform 0.5s; color: #facc15; }
 .ad-float.show { opacity: 1; transform: translateY(-10px) !important; }
 .ad-atk-btn {
   background: linear-gradient(135deg,#ef4444,#dc2626); border: none; border-radius: 8px;
@@ -1498,6 +1507,8 @@
 
 /* ── Marketplace demo ── */
 .demo-market { gap: 0; padding: 0; justify-content: flex-start; }
+/* hide generic badge — md-live already serves this role */
+#demoMarket .demo-badge { display: none; }
 .md-header { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 10px 14px 8px; border-bottom: 1px solid rgba(255,255,255,0.06); }
 .md-title { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.8); }
 .md-live { font-size: 9px; color: #4ade80; font-family: 'JetBrains Mono', monospace; animation: sm2OnlinePulse 2s infinite; }
@@ -2540,7 +2551,10 @@
             <div class="ad-hp-bar"><div class="ad-hp-fill" id="adPlayerBar" style="width:100%;background:linear-gradient(90deg,#4ade80,#22d3ee)"></div></div>
             <span class="ad-hp-num" id="adPlayerHp">150</span>
           </div>
-          <div class="ad-gold-row">💰 Gold: <span id="adGold">0</span></div>
+          <div class="ad-stats-row">
+            <div class="ad-gold-row">💰 <span id="adGold">0</span></div>
+            <div class="ad-kills-row">Kills: <span id="adKills">0</span></div>
+          </div>
           <div class="ad-float-wrap"><div class="ad-float" id="adFloat"></div></div>
           <button class="ad-atk-btn" id="adAtkBtn" onclick="adAttack()">⚔️ Attack</button>
         </div>
@@ -3526,16 +3540,20 @@ function ldShowItem() {
   var rarLbl = document.getElementById('ldRarLbl');
   rarLbl.textContent = it.rarity.toUpperCase();
   rarLbl.style.color = it.rarColor;
-  rarLbl.style.textShadow = '0 0 18px ' + it.rarColor + '99';
+  rarLbl.style.borderColor = it.rarColor + '55';
+  rarLbl.style.textShadow = '0 0 14px ' + it.rarColor + '88';
   var img = document.getElementById('ldImg');
   img.src = it.img;
-  img.style.filter = 'drop-shadow(0 0 16px ' + it.rarColor + '88)';
+  img.style.filter = 'drop-shadow(0 0 20px ' + it.rarColor + 'aa)';
   document.getElementById('ldName').textContent = it.name;
   var rarEl = document.getElementById('ldRar');
   rarEl.textContent = it.rarity.toUpperCase();
   rarEl.style.color = it.rarColor;
   document.getElementById('ldDesc').textContent = it.desc;
   document.getElementById('ldCtr').textContent = (ldIdx + 1) + ' / ' + ldItems.length;
+  // Tint demo module bg with rarity color
+  var mod = document.getElementById('demoLoot');
+  if (mod) mod.style.background = 'radial-gradient(ellipse at 50% 30%,'+it.rarColor+'28 0%,transparent 55%),linear-gradient(160deg,#0d0d1c,#0a0a16)';
 }
 
 function ldPrev() { if (ldIdx > 0) { ldIdx--; ldShowItem(); } }
@@ -3543,27 +3561,33 @@ function ldNext() { if (ldIdx < ldItems.length - 1) { ldIdx++; ldShowItem(); } }
 function ldMore() {
   document.getElementById('ldPhase2').style.display = 'none';
   document.getElementById('ldPhase1').style.display = '';
+  var mod = document.getElementById('demoLoot');
+  if (mod) mod.style.background = '';
 }
 function ldReset() { ldMore(); }
 
 // ── Arena demo (auto-combat, like app) ──
 var AD_BOSSES = [
-  { img:'img/skins/boss_slime.webp',  name:'Slime King',        zone:'Zone 1 · Slime Caverns', hp:800,  atk:12, gold:40  },
-  { img:'img/skins/boss_goblin.webp', name:'Goblin Chieftain',  zone:'Zone 2 · Goblin Warrens',hp:600,  atk:16, gold:70  },
-  { img:'img/skins/boss_wolf.webp',   name:'Wolf Alpha',        zone:'Zone 3 · Dark Forest',   hp:950,  atk:22, gold:95  },
-  { img:'img/skins/boss_orc.webp',    name:'Orc Warlord',       zone:'Zone 4 · Orc Fortress',  hp:1400, atk:28, gold:145 },
+  { img:'img/skins/boss_slime.webp',  name:'Slime King',       zone:'Zone 1 · Slime Caverns', hp:800,  atk:12, gold:40,  color:'#4ade80' },
+  { img:'img/skins/boss_goblin.webp', name:'Goblin Chieftain', zone:'Zone 2 · Goblin Warrens',hp:600,  atk:16, gold:70,  color:'#f97316' },
+  { img:'img/skins/boss_wolf.webp',   name:'Wolf Alpha',       zone:'Zone 3 · Dark Forest',   hp:950,  atk:22, gold:95,  color:'#818cf8' },
+  { img:'img/skins/boss_orc.webp',    name:'Orc Warlord',      zone:'Zone 4 · Orc Fortress',  hp:1400, atk:28, gold:145, color:'#ef4444' },
 ];
-var adBossIdx = 0, adGold = 0, adRunning = false;
+var adBossIdx = 0, adGold = 0, adKills = 0, adRunning = false;
 
 function adInitBoss() {
   var b = AD_BOSSES[adBossIdx % AD_BOSSES.length];
   document.getElementById('adImg').src = b.img;
+  document.getElementById('adImg').style.filter = 'drop-shadow(0 2px 18px ' + b.color + '88)';
   document.getElementById('adBossName').textContent = b.name;
   document.getElementById('adBossZone').textContent = b.zone;
   document.getElementById('adBossHp').textContent = b.hp;
   document.getElementById('adPlayerHp').textContent = 150;
   document.getElementById('adBossBar').style.width = '100%';
   document.getElementById('adPlayerBar').style.width = '100%';
+  // Zone-color tint on the module bg
+  var mod = document.getElementById('demoArena');
+  if (mod) mod.style.background = 'radial-gradient(ellipse at 50% 0%,' + b.color + '18 0%,transparent 50%),linear-gradient(160deg,#0d0d1c,#0a0a16)';
   var btn = document.getElementById('adAtkBtn');
   btn.disabled = false; btn.textContent = '⚔️ Attack';
   adRunning = false;
@@ -3591,13 +3615,14 @@ function adAttack() {
     if (t < 1) { requestAnimationFrame(tick); return; }
     // Victory
     var gold = b.gold + Math.floor(Math.random() * 25);
-    adGold += gold;
-    document.getElementById('adGold').textContent = adGold;
+    adGold += gold; adKills++;
+    document.getElementById('adGold').textContent = adGold.toLocaleString();
+    document.getElementById('adKills').textContent = adKills;
     document.getElementById('adBossHp').textContent = '0';
     document.getElementById('adBossBar').style.width = '0%';
     var fl = document.getElementById('adFloat');
     fl.textContent = '+' + gold + ' 💰';
-    fl.style.color = '#facc15'; fl.style.transform = 'translateY(0)';
+    fl.style.transform = 'translateY(0)';
     fl.classList.add('show');
     setTimeout(function() {
       fl.classList.remove('show'); fl.style.transform = '';
