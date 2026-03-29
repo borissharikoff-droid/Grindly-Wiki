@@ -1623,6 +1623,70 @@
 .bf-change-btn { background:rgba(255,255,255,0.07) !important; border:1px solid rgba(255,255,255,0.12) !important; color:rgba(255,255,255,0.6) !important; }
 .bf-dps-row { display:flex; gap:16px; justify-content:center; align-items:center; flex-wrap:wrap; font-family:'JetBrains Mono',monospace; font-size:11px; margin:0 auto 14px; padding:9px 20px; background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.06); border-radius:8px; max-width:480px; min-height:36px; }
 .bf-dps-row span { white-space:nowrap; }
+/* ── Rarity burst on card reveal ── */
+@keyframes bopCardBurst {
+  0%   { transform: translateY(0)   scale(1); }
+  30%  { transform: translateY(-5px) scale(1.08); }
+  65%  { transform: translateY(-2px) scale(1.03); }
+  100% { transform: translateY(0)   scale(1); }
+}
+.bop-burst-epic     { animation: bopCardBurst 0.50s ease forwards !important; box-shadow: 0 0 32px rgba(192,132,252,0.55) !important; }
+.bop-burst-legendary{ animation: bopCardBurst 0.50s ease forwards !important; box-shadow: 0 0 44px rgba(250,204,21,0.60) !important; }
+.bop-burst-mythic   { animation: bopCardBurst 0.65s ease forwards !important; box-shadow: 0 0 56px rgba(244,114,182,0.70) !important; }
+
+/* ── Stat diff float on equip ── */
+@keyframes statDiffFloat {
+  0%   { opacity: 0; transform: translateX(-50%) translateY(4px);  }
+  18%  { opacity: 1; transform: translateX(-50%) translateY(-2px); }
+  70%  { opacity: 1; transform: translateX(-50%) translateY(-8px); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-24px);}
+}
+.stat-diff-float {
+  position: absolute; top: -6px; left: 50%; transform: translateX(-50%);
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 900;
+  color: #4ade80; pointer-events: none; z-index: 20; white-space: nowrap;
+  animation: statDiffFloat 1.5s ease forwards;
+  text-shadow: 0 0 8px rgba(74,222,128,0.6);
+}
+
+/* ── Floating combat damage numbers ── */
+@keyframes combatDmgFloat {
+  0%   { opacity: 0; transform: translateY(4px)  scale(0.75); }
+  20%  { opacity: 1; transform: translateY(-6px)  scale(1.15); }
+  65%  { opacity: 1; transform: translateY(-18px) scale(1);    }
+  100% { opacity: 0; transform: translateY(-32px) scale(0.85); }
+}
+.bf-dmg-float {
+  position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 900;
+  pointer-events: none; white-space: nowrap; z-index: 10; line-height: 1;
+  animation: combatDmgFloat 0.85s ease forwards;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+/* ── Live XP ticker ── */
+.live-xp-ticker {
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+  padding: 7px 20px; margin: 0 auto;
+  max-width: 960px; position: relative; overflow: hidden;
+  font-size: 10px; color: rgba(255,255,255,0.35);
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(0,255,136,0.04);
+  border-bottom: 1px solid rgba(0,255,136,0.10);
+  border-left: 1px solid rgba(0,255,136,0.06);
+  border-right: 1px solid rgba(0,255,136,0.06);
+}
+.lxt-icon { color: #4ade80; font-size: 11px; animation: glow-pulse 2s infinite; --glow-color: rgba(74,222,128,0.6); }
+.lxt-val  { color: #4ade80; font-weight: 900; font-size: 13px; letter-spacing: -0.02em; transition: color 0.25s; }
+.lxt-sep  { color: rgba(255,255,255,0.15); }
+.lxt-pop {
+  position: absolute; top: 0; left: 50%; transform: translate(-50%,-100%);
+  font-size: 9px; font-weight: 700; pointer-events: none;
+  opacity: 0; transition: opacity 0.18s;
+  background: rgba(0,0,0,0.75); padding: 2px 8px; border-radius: 4px;
+  white-space: nowrap; border: 1px solid rgba(255,255,255,0.08);
+}
+.lxt-pop.show { opacity: 1; }
+
 /* Item showcase dark override */
 .items-showcase-v2 {
   background: #0c0c17 !important;
@@ -2352,6 +2416,14 @@
       <span>Interactive demos below — click to play</span>
       <span class="in-icon">✦</span>
     </div>
+    <div class="live-xp-ticker" id="liveXpTicker">
+      <span class="lxt-icon">⚡</span>
+      <span>Session XP earned:</span>
+      <span class="lxt-val" id="lxtVal">0</span>
+      <span class="lxt-sep">·</span>
+      <span id="lxtSkill" style="transition:color 0.3s;color:rgba(255,255,255,0.3)">tracking…</span>
+      <div class="lxt-pop" id="lxtPop"></div>
+    </div>
     <div class="pcard" id="sc-skills">
       <div class="pcard-ss">
         <div class="demo-module demo-skills">
@@ -2946,7 +3018,16 @@ function bopOpen() {
       '<div class="bop-item-rar" style="color:' + item.rarColor + '">' + item.rarity.toUpperCase() + '</div>' +
       '<div class="bop-item-stats">' + (item.atk?'+'+item.atk+' ATK ':'') + (item.hp?'+'+item.hp+' HP ':'') + (item.regen?'+'+item.regen+' Reg':'') + (item.def?'+'+item.def+' DEF':'') + '</div>';
     grid.appendChild(card);
-    setTimeout(function(c){ c.classList.add('revealed'); }, 120 + i * 180, card);
+    setTimeout(function(c, rar) {
+      c.classList.add('revealed');
+      if (rar === 'epic' || rar === 'legendary' || rar === 'mythic') {
+        setTimeout(function() {
+          var cls = 'bop-burst-' + rar;
+          c.classList.add(cls);
+          setTimeout(function() { c.classList.remove(cls); }, 700);
+        }, 280);
+      }
+    }, 120 + i * 180, card, item.rarity);
   });
   setTimeout(function() {
     document.getElementById('bopAtk').textContent = totalAtk;
@@ -3023,13 +3104,40 @@ function bopEquip() {
     }, 150 + i * 200);
   });
 
+  var delay = 150 + set.items.length * 200 + 120;
   setTimeout(function() {
     animateCounterVal(document.getElementById('eqsAtk'),   24,        totalAtk,   700);
     animateCounterVal(document.getElementById('eqsHp'),    100,       totalHp,    700);
     animateCounterVal(document.getElementById('eqsRegen'), 1,         totalRegen, 700);
     animateCounterVal(document.getElementById('eqsDef'),   0,         totalDef,   700);
     animateCounterVal(document.getElementById('eqsIp'),    0,         ip,         800);
-  }, 150 + set.items.length * 200 + 120);
+  }, delay);
+
+  // Stat diff floats — spawn "+X" above each stat chip after counters start
+  var diffs = [
+    { id:'eqsAtk',   diff: totalAtk   - 24,  color:'#f87171' },
+    { id:'eqsHp',    diff: totalHp    - 100, color:'#4ade80' },
+    { id:'eqsRegen', diff: totalRegen - 1,   color:'#22d3ee' },
+    { id:'eqsDef',   diff: totalDef   - 0,   color:'#818cf8' },
+    { id:'eqsIp',    diff: ip         - 0,   color:'#fcd34d' },
+  ];
+  diffs.forEach(function(s, si) {
+    if (s.diff <= 0) return;
+    setTimeout(function() {
+      var valEl = document.getElementById(s.id);
+      if (!valEl) return;
+      var chip = valEl.parentElement && valEl.parentElement.parentElement;
+      if (!chip) return;
+      if (chip.style.position !== 'relative') chip.style.position = 'relative';
+      var fl = document.createElement('div');
+      fl.className = 'stat-diff-float';
+      fl.textContent = '+' + s.diff;
+      fl.style.color = s.color;
+      fl.style.textShadow = '0 0 8px ' + s.color + '99';
+      chip.appendChild(fl);
+      setTimeout(function() { if (fl.parentNode) fl.remove(); }, 1600);
+    }, delay + 200 + si * 80);
+  });
 }
 
 function animateCounterVal(el, from, to, dur) {
@@ -3138,7 +3246,11 @@ function bfAutoRun() {
       var toB = Math.round(pDps * secChunk);
       var toP = Math.round(eBossDps * secChunk);
       bfAddLog('⚔️ You deal ' + toB + ' damage', 'pdmg');
-      if (toP > 0) setTimeout(function(){ bfAddLog('💢 ' + boss.name + ' hits for ' + toP, 'edamg'); }, 300);
+      bfSpawnFloat('-' + toB, '#f97316', 0);
+      if (toP > 0) setTimeout(function(){
+        bfAddLog('💢 ' + boss.name + ' hits for ' + toP, 'edamg');
+        bfSpawnFloat('-' + toP, '#ef4444', 1);
+      }, 300);
     }
 
     if (t < 1) {
@@ -3148,6 +3260,20 @@ function bfAutoRun() {
     }
   }
   requestAnimationFrame(tick);
+}
+
+function bfSpawnFloat(txt, color, side) {
+  var area = document.getElementById('bfDmg');
+  if (!area) return;
+  var fl = document.createElement('div');
+  fl.className = 'bf-dmg-float';
+  fl.textContent = txt;
+  fl.style.color = color;
+  // side 0 = player attacks (left), side 1 = boss attacks (right)
+  fl.style.left = (side === 0 ? (10 + Math.random() * 20) : (40 + Math.random() * 20)) + 'px';
+  fl.style.top = '2px';
+  area.appendChild(fl);
+  setTimeout(function() { if (fl.parentNode) fl.remove(); }, 900);
 }
 
 function bfAddLog(txt, cls) {
@@ -3519,6 +3645,46 @@ function cdCraft() {
     }, 2200);
   }, 100);
 }
+
+// ── Live XP ticker ──
+(function() {
+  var valEl = document.getElementById('lxtVal');
+  var skillEl = document.getElementById('lxtSkill');
+  var popEl = document.getElementById('lxtPop');
+  if (!valEl) return;
+  var xp = 0;
+  var SKILLS = [
+    { name:'Developer',    color:'#38bdf8' },
+    { name:'Researcher',   color:'#f59e0b' },
+    { name:'Designer',     color:'#c084fc' },
+    { name:'Learner',      color:'#fbbf24' },
+    { name:'Creator',      color:'#fb923c' },
+    { name:'Communicator', color:'#22d3ee' },
+    { name:'Gamer',        color:'#4ade80' },
+  ];
+  var skillIdx = 0;
+
+  function tick() {
+    var gain = 55 + Math.floor(Math.random() * 90);
+    xp += gain;
+    valEl.textContent = xp.toLocaleString();
+    valEl.style.color = '#4ade80';
+    setTimeout(function() { valEl.style.color = ''; }, 320);
+
+    var sk = SKILLS[skillIdx % SKILLS.length];
+    skillIdx++;
+    if (skillEl) { skillEl.textContent = sk.name + ' XP'; skillEl.style.color = sk.color; }
+    if (popEl) {
+      popEl.textContent = '+' + gain + ' ' + sk.name;
+      popEl.style.color = sk.color;
+      popEl.classList.add('show');
+      setTimeout(function() { popEl.classList.remove('show'); }, 950);
+    }
+  }
+
+  // Start after a short delay, then every 2.8s
+  setTimeout(function() { tick(); setInterval(tick, 2800); }, 1800);
+})();
 
 // ── Marketplace demo ──
 function mdBuy(row) {
