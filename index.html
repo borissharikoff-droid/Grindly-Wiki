@@ -1526,6 +1526,96 @@
 }
 .md-toast.show { opacity: 1; }
 
+/* ══════ Bag Opener ══════ */
+.bag-opener { padding:56px 24px 40px; max-width:960px; margin:0 auto; text-align:center; }
+.bop-chest-row { display:flex; justify-content:center; gap:14px; margin:24px 0 28px; flex-wrap:wrap; }
+.bop-chest { display:flex; flex-direction:column; align-items:center; gap:5px; padding:14px 18px; border-radius:12px; background:rgba(255,255,255,0.03); border:2px solid rgba(255,255,255,0.08); cursor:pointer; transition:all 0.2s; min-width:88px; }
+.bop-chest:hover { background:rgba(255,255,255,0.07); transform:translateY(-3px); border-color:rgba(255,255,255,0.15); }
+.bop-chest.bop-active { background:rgba(129,140,248,0.1); border-color:rgba(129,140,248,0.5); }
+.bop-chest.bop-mythic-style.bop-active { background:rgba(244,114,182,0.1); border-color:rgba(244,114,182,0.5); }
+.bop-chest img { width:54px; height:54px; object-fit:contain; }
+.bop-name { font-size:12px; font-weight:700; color:rgba(255,255,255,0.85); }
+.bop-sub { font-size:9px; color:rgba(255,255,255,0.35); font-family:'JetBrains Mono',monospace; }
+.bop-open-btn { background:linear-gradient(135deg,#818cf8,#6366f1); border:none; border-radius:10px; color:#fff; font-size:15px; font-weight:800; padding:13px 40px; cursor:pointer; transition:all 0.2s; box-shadow:0 6px 24px rgba(99,102,241,0.4); }
+.bop-open-btn:hover { transform:translateY(-2px); box-shadow:0 10px 32px rgba(99,102,241,0.55); }
+.bop-open-btn:active { transform:scale(0.97); }
+.bop-drop-area { margin-top:36px; }
+.bop-drop-grid { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:24px; }
+.bop-item-card { display:flex; flex-direction:column; align-items:center; gap:5px; padding:14px 12px; border-radius:12px; background:rgba(255,255,255,0.04); border:2px solid transparent; min-width:100px; max-width:118px; opacity:0; transform:translateY(24px) scale(0.88); transition:opacity 0.4s ease, transform 0.4s ease; }
+.bop-item-card.revealed { opacity:1; transform:translateY(0) scale(1); }
+.bop-item-card.r-common { border-color:rgba(156,163,175,0.4); }
+.bop-item-card.r-rare { border-color:rgba(56,189,248,0.45); }
+.bop-item-card.r-epic { border-color:rgba(192,132,252,0.5); box-shadow:0 0 18px rgba(192,132,252,0.15); }
+.bop-item-card.r-legendary { border-color:rgba(250,204,21,0.5); box-shadow:0 0 18px rgba(250,204,21,0.15); }
+.bop-item-card.r-mythic { border-color:rgba(244,114,182,0.6); box-shadow:0 0 24px rgba(244,114,182,0.22); }
+.bop-item-card img { width:54px; height:54px; object-fit:contain; filter:drop-shadow(0 2px 8px rgba(0,0,0,0.5)); }
+.bop-item-slot-lbl { font-family:'JetBrains Mono',monospace; font-size:7px; color:rgba(255,255,255,0.3); text-transform:uppercase; letter-spacing:0.1em; }
+.bop-item-name { font-size:10px; font-weight:700; color:rgba(255,255,255,0.88); text-align:center; line-height:1.2; }
+.bop-item-rar { font-family:'JetBrains Mono',monospace; font-size:8px; font-weight:700; text-transform:uppercase; }
+.bop-item-stats { font-size:8px; color:rgba(255,255,255,0.45); text-align:center; line-height:1.5; }
+.bop-set-stats { display:flex; justify-content:center; gap:14px; margin:0 0 20px; flex-wrap:wrap; }
+.bop-stat-chip { padding:7px 18px; border-radius:22px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); font-size:14px; font-weight:700; color:rgba(255,255,255,0.9); }
+.bop-actions { display:flex; gap:10px; justify-content:center; }
+.bop-equip-btn { background:linear-gradient(135deg,#4ade80,#22d3ee); border:none; border-radius:9px; color:#000; font-size:14px; font-weight:800; padding:11px 28px; cursor:pointer; transition:all 0.2s; box-shadow:0 4px 18px rgba(74,222,128,0.35); }
+.bop-equip-btn:hover { transform:translateY(-2px); box-shadow:0 6px 24px rgba(74,222,128,0.5); }
+.bop-reroll-btn { padding:11px 20px; border-radius:9px; border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.6); font-size:13px; font-weight:600; cursor:pointer; transition:background 0.15s; }
+.bop-reroll-btn:hover { background:rgba(255,255,255,0.1); }
+/* ══════ Equipment Screen ══════ */
+.equip-screen { padding:56px 24px; background:rgba(0,0,0,0.25); border-top:1px solid rgba(255,255,255,0.05); border-bottom:1px solid rgba(255,255,255,0.05); }
+.eqs-layout { display:flex; gap:36px; justify-content:center; align-items:flex-start; margin-top:32px; flex-wrap:wrap; }
+.eqs-slots { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.eqs-slot { display:flex; flex-direction:column; align-items:center; gap:5px; padding:14px 12px; border-radius:12px; min-width:110px; background:rgba(255,255,255,0.03); border:2px solid rgba(255,255,255,0.07); transition:all 0.5s; }
+.eqs-slot.equipped { border-color:rgba(129,140,248,0.45); background:rgba(129,140,248,0.07); }
+.eqs-slot.equipped.r-epic { border-color:rgba(192,132,252,0.45); background:rgba(192,132,252,0.07); }
+.eqs-slot.equipped.r-legendary { border-color:rgba(250,204,21,0.45); background:rgba(250,204,21,0.07); }
+.eqs-slot.equipped.r-mythic { border-color:rgba(244,114,182,0.5); background:rgba(244,114,182,0.08); }
+.eqs-slot-lbl { font-family:'JetBrains Mono',monospace; font-size:7px; color:rgba(255,255,255,0.3); text-transform:uppercase; letter-spacing:0.1em; }
+.eqs-slot-img-wrap { width:52px; height:52px; display:flex; align-items:center; justify-content:center; }
+.eqs-slot-img-wrap img { width:52px; height:52px; object-fit:contain; filter:drop-shadow(0 0 10px rgba(129,140,248,0.4)); }
+.eqs-empty { color:rgba(255,255,255,0.12); font-size:20px; }
+.eqs-slot-name { font-size:9px; font-weight:700; color:rgba(255,255,255,0.75); text-align:center; }
+.eqs-slot-rar { font-family:'JetBrains Mono',monospace; font-size:7px; font-weight:700; text-transform:uppercase; }
+.eqs-stats { min-width:210px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:14px; padding:20px 22px; display:flex; flex-direction:column; gap:11px; }
+.eqs-stats-title { font-size:12px; font-weight:700; color:rgba(255,255,255,0.5); padding-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.07); }
+.eqs-stat-row { display:flex; justify-content:space-between; align-items:center; font-size:12px; color:rgba(255,255,255,0.55); }
+.eqs-stat-val { font-family:'JetBrains Mono',monospace; font-size:18px; font-weight:900; color:#fff; transition:all 0.5s; }
+.eqs-ip-bar-wrap { height:4px; background:rgba(255,255,255,0.07); border-radius:2px; overflow:hidden; margin-top:-4px; }
+.eqs-ip-bar { height:100%; background:linear-gradient(90deg,#818cf8,#c084fc); border-radius:2px; transition:width 0.9s cubic-bezier(0.4,0,0.2,1); }
+.eqs-fight-btn { margin-top:6px; background:linear-gradient(135deg,#ef4444,#dc2626); border:none; border-radius:8px; color:#fff; font-size:14px; font-weight:800; padding:12px 20px; cursor:pointer; transition:all 0.2s; width:100%; box-shadow:0 4px 16px rgba(239,68,68,0.3); }
+.eqs-fight-btn:hover { transform:translateY(-1px); box-shadow:0 6px 22px rgba(239,68,68,0.5); }
+/* ══════ Boss Fight ══════ */
+.boss-fight { padding:56px 24px; text-align:center; }
+.bf-arena { display:flex; justify-content:center; align-items:center; gap:28px; margin:32px auto; flex-wrap:wrap; max-width:680px; }
+.bf-combatant { display:flex; flex-direction:column; align-items:center; gap:7px; min-width:150px; }
+.bf-boss-img { width:86px; height:86px; object-fit:contain; filter:drop-shadow(0 2px 18px rgba(239,68,68,0.5)); animation:bossFloat 3.2s ease-in-out infinite; }
+.bf-player-avatar { font-size:52px; line-height:1; filter:drop-shadow(0 2px 10px rgba(74,222,128,0.4)); }
+.bf-name { font-size:13px; font-weight:700; color:rgba(255,255,255,0.85); }
+.bf-hp-label { font-family:'JetBrains Mono',monospace; font-size:10px; color:rgba(255,255,255,0.4); }
+.bf-hp-bar-wrap { width:150px; height:9px; background:rgba(255,255,255,0.07); border-radius:5px; overflow:hidden; }
+.bf-hp-bar { height:100%; border-radius:5px; transition:width 0.4s ease; }
+.bf-enemy { background:linear-gradient(90deg,#ef4444,#f97316); }
+.bf-player { background:linear-gradient(90deg,#4ade80,#22d3ee); }
+.bf-vs-col { display:flex; flex-direction:column; align-items:center; gap:14px; }
+.bf-vs { font-family:'Inter',sans-serif; font-size:18px; font-weight:900; color:rgba(255,255,255,0.18); letter-spacing:0.1em; }
+.bf-dmg-area { height:38px; display:flex; align-items:center; justify-content:center; min-width:70px; position:relative; }
+.bf-dmg-num { font-family:'JetBrains Mono',monospace; font-size:20px; font-weight:900; position:absolute; white-space:nowrap; pointer-events:none; opacity:0; transition:opacity 0.15s, transform 0.6s; }
+.bf-log { max-width:580px; margin:0 auto 20px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.06); border-radius:9px; padding:10px 14px; max-height:88px; overflow-y:auto; display:flex; flex-direction:column; gap:2px; text-align:left; }
+.bf-log-entry { font-size:11px; color:rgba(255,255,255,0.45); line-height:1.4; }
+.bf-log-entry.pdmg { color:#f97316; } .bf-log-entry.edamg { color:#ef4444; } .bf-log-entry.hregen { color:#4ade80; } .bf-log-entry.heavy { color:#fbbf24; }
+.bf-btns { display:flex; gap:12px; justify-content:center; }
+.bf-atk-btn { background:linear-gradient(135deg,#ef4444,#dc2626); border:none; border-radius:9px; color:#fff; font-size:14px; font-weight:800; padding:13px 30px; cursor:pointer; transition:all 0.15s; box-shadow:0 4px 16px rgba(239,68,68,0.35); }
+.bf-atk-btn:hover { transform:translateY(-1px); } .bf-atk-btn:active { transform:scale(0.96); }
+.bf-atk-btn:disabled,.bf-heavy-btn:disabled { opacity:0.38; cursor:default; transform:none !important; }
+.bf-heavy-btn { background:rgba(250,204,21,0.1); border:1px solid rgba(250,204,21,0.3); border-radius:9px; color:#facc15; font-size:13px; font-weight:700; padding:13px 22px; cursor:pointer; transition:all 0.15s; }
+.bf-heavy-btn:hover { background:rgba(250,204,21,0.2); } .bf-heavy-btn small { font-size:9px; opacity:0.6; }
+.bf-result { display:flex; flex-direction:column; align-items:center; gap:12px; padding:32px 16px; }
+.bf-result-icon { font-size:52px; animation:ldFlash 0.5s ease; }
+.bf-result-title { font-family:'Inter',sans-serif; font-size:26px; font-weight:900; color:#fff; letter-spacing:-0.025em; }
+.bf-result-rewards { font-size:13px; color:rgba(255,255,255,0.55); }
+.bf-result-btns { display:flex; gap:10px; }
+.bf-replay-btn { padding:11px 26px; border-radius:8px; background:linear-gradient(135deg,#818cf8,#6366f1); border:none; color:#fff; font-size:13px; font-weight:700; cursor:pointer; transition:all 0.15s; }
+.bf-replay-btn:hover { transform:translateY(-1px); }
+.bf-change-btn { background:rgba(255,255,255,0.07) !important; border:1px solid rgba(255,255,255,0.12) !important; color:rgba(255,255,255,0.6) !important; }
 /* Item showcase dark override */
 .items-showcase-v2 {
   background: #0c0c17 !important;
@@ -1999,6 +2089,108 @@
             <a href="item.html?id=crystal_root" class="icard-v2 r-rare"><img class="icard-v2-img" src="img/skins/item_crystal_root.webp" alt="Crystal Root"><span class="icard-v2-name">Crystal Root</span><span class="icard-v2-rarity">Rare</span></a>
             <a href="item.html?id=atk_potion" class="icard-v2 r-rare"><img class="icard-v2-img" src="img/skins/item_atk_potion.webp" alt="Attack Potion"><span class="icard-v2-name">Attack Potion</span><span class="icard-v2-rarity">Rare</span></a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════ OPEN LOOT BAGS ══════ -->
+    <section class="bag-opener" id="bagOpenerSection">
+      <div class="sec-head">
+        <h2>Open Your Loot Bags</h2>
+        <p class="sub">Choose a bag — crack it open — get a full item set</p>
+      </div>
+      <div class="bop-chest-row">
+        <div class="bop-chest" data-type="rare" onclick="bopSelect(this)">
+          <img src="img/skins/chest_rare_chest.webp"><span class="bop-name">Rare Bag</span><span class="bop-sub">Rare gear</span>
+        </div>
+        <div class="bop-chest bop-active" data-type="epic" onclick="bopSelect(this)">
+          <img src="img/skins/chest_epic_chest.webp"><span class="bop-name">Epic Bag</span><span class="bop-sub">Epic full set</span>
+        </div>
+        <div class="bop-chest" data-type="legendary" onclick="bopSelect(this)">
+          <img src="img/skins/chest_legendary_chest.webp"><span class="bop-name">Legendary Bag</span><span class="bop-sub">Legendary full set</span>
+        </div>
+        <div class="bop-chest bop-mythic-style" data-type="mythic" onclick="bopSelect(this)">
+          <img src="img/skins/chest_legendary_chest.webp" style="filter:hue-rotate(280deg) brightness(1.2)"><span class="bop-name" style="color:#f472b6">Mythic Bag</span><span class="bop-sub">Full mythic set</span>
+        </div>
+      </div>
+      <button class="bop-open-btn" id="bopOpenBtn" onclick="bopOpen()">Open Bag ✦</button>
+      <div class="bop-drop-area" id="bopDropArea" style="display:none">
+        <div class="bop-drop-grid" id="bopGrid"></div>
+        <div class="bop-set-stats" id="bopStats" style="display:none">
+          <div class="bop-stat-chip">⚔️ +<span id="bopAtk">0</span> ATK</div>
+          <div class="bop-stat-chip">❤️ +<span id="bopHp">0</span> HP</div>
+          <div class="bop-stat-chip">💚 +<span id="bopRegen">0</span> Regen</div>
+        </div>
+        <div class="bop-actions" id="bopActions" style="display:none">
+          <button class="bop-equip-btn" onclick="bopEquip()">Equip This Set →</button>
+          <button class="bop-reroll-btn" onclick="bopOpen()">Open Another</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════ EQUIPMENT SCREEN ══════ -->
+    <section class="equip-screen" id="equipScreen" style="display:none">
+      <div class="sec-head">
+        <h2>Set Equipped</h2>
+        <p class="sub">Your stats are locked in — enter the arena</p>
+      </div>
+      <div class="eqs-layout">
+        <div class="eqs-slots">
+          <div class="eqs-slot" id="eqsHead"><div class="eqs-slot-lbl">HEAD</div><div class="eqs-slot-img-wrap"><span class="eqs-empty">—</span></div><div class="eqs-slot-name"></div><div class="eqs-slot-rar"></div></div>
+          <div class="eqs-slot" id="eqsTop"><div class="eqs-slot-lbl">ARMOR</div><div class="eqs-slot-img-wrap"><span class="eqs-empty">—</span></div><div class="eqs-slot-name"></div><div class="eqs-slot-rar"></div></div>
+          <div class="eqs-slot" id="eqsAcc"><div class="eqs-slot-lbl">ACCESSORY</div><div class="eqs-slot-img-wrap"><span class="eqs-empty">—</span></div><div class="eqs-slot-name"></div><div class="eqs-slot-rar"></div></div>
+          <div class="eqs-slot" id="eqsAura"><div class="eqs-slot-lbl">WEAPON</div><div class="eqs-slot-img-wrap"><span class="eqs-empty">—</span></div><div class="eqs-slot-name"></div><div class="eqs-slot-rar"></div></div>
+        </div>
+        <div class="eqs-stats">
+          <div class="eqs-stats-title">Player Stats</div>
+          <div class="eqs-stat-row"><span>⚔️ Attack</span><span class="eqs-stat-val" id="eqsAtk">24</span></div>
+          <div class="eqs-stat-row"><span>❤️ HP Max</span><span class="eqs-stat-val" id="eqsHp">100</span></div>
+          <div class="eqs-stat-row"><span>💚 Regen/turn</span><span class="eqs-stat-val" id="eqsRegen">1</span></div>
+          <div class="eqs-stat-row"><span>🛡️ Item Power</span><span class="eqs-stat-val" id="eqsIp">0</span></div>
+          <div class="eqs-ip-bar-wrap"><div class="eqs-ip-bar" id="eqsIpBar" style="width:0%"></div></div>
+          <button class="eqs-fight-btn" onclick="goFightBoss()">Enter the Arena →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════ BOSS FIGHT ══════ -->
+    <section class="boss-fight" id="bossFight" style="display:none">
+      <div class="sec-head">
+        <h2 id="bfTitle">Enter the Arena</h2>
+        <p class="sub">Turn-based combat — your equipment determines damage</p>
+      </div>
+      <div class="bf-arena">
+        <div class="bf-combatant">
+          <img class="bf-boss-img" id="bfBossImg" src="img/skins/boss_dragon.webp">
+          <div class="bf-name" id="bfBossName">Dragon Elder</div>
+          <div class="bf-hp-label">HP <span id="bfBossHpNum">4500</span> / <span id="bfBossHpMax">4500</span></div>
+          <div class="bf-hp-bar-wrap"><div class="bf-hp-bar bf-enemy" id="bfBossBar" style="width:100%"></div></div>
+        </div>
+        <div class="bf-vs-col">
+          <div class="bf-vs">VS</div>
+          <div class="bf-dmg-area" id="bfDmg"></div>
+        </div>
+        <div class="bf-combatant">
+          <div class="bf-player-avatar">🧙</div>
+          <div class="bf-name">You</div>
+          <div class="bf-hp-label">HP <span id="bfPlayerHpNum">100</span> / <span id="bfPlayerHpMax">100</span></div>
+          <div class="bf-hp-bar-wrap"><div class="bf-hp-bar bf-player" id="bfPlayerBar" style="width:100%"></div></div>
+        </div>
+      </div>
+      <div class="bf-log" id="bfLog">
+        <div class="bf-log-entry">⚔️ Open a bag and equip your gear to fight!</div>
+      </div>
+      <div class="bf-btns" id="bfBtns" style="display:none">
+        <button class="bf-atk-btn" onclick="bfAttack()">⚔️ Attack</button>
+        <button class="bf-heavy-btn" onclick="bfHeavy()">💥 Heavy Strike <small>(×2.5, 2 uses)</small></button>
+      </div>
+      <div class="bf-result" id="bfResult" style="display:none">
+        <div class="bf-result-icon" id="bfResultIcon">🏆</div>
+        <div class="bf-result-title" id="bfResultTitle">Victory!</div>
+        <div class="bf-result-rewards" id="bfResultRewards"></div>
+        <div class="bf-result-btns">
+          <button class="bf-replay-btn" onclick="bfReplay()">Fight again</button>
+          <button class="bf-replay-btn bf-change-btn" onclick="bfChangeBoss()">Change gear</button>
         </div>
       </div>
     </section>
@@ -2592,6 +2784,243 @@
   }, { threshold: 0.2 });
   bars.forEach(function(b) { io.observe(b); });
 })();
+
+// ══════ BAG OPENER + EQUIP + BOSS FIGHT ══════
+var BOP_SETS = {
+  rare: {
+    items: [
+      { slot:'HEAD',   name:'Scale Hood',     rarity:'rare',      rarColor:'#38bdf8', img:'img/skins/item_craft_scale_robe.webp',     atk:4,  hp:7,  regen:1 },
+      { slot:'ARMOR',  name:'Chain Plate',    rarity:'rare',      rarColor:'#38bdf8', img:'img/skins/item_craft_troll_aegis.webp',    atk:0,  hp:12, regen:1 },
+      { slot:'RING',   name:'Shadow Ring',    rarity:'epic',      rarColor:'#c084fc', img:'img/skins/item_shadow_ring.webp',           atk:8,  hp:0,  regen:0 },
+      { slot:'WEAPON', name:'Warlord Sigil',  rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_warlord_sigil.webp',        atk:10, hp:0,  regen:0 }
+    ],
+    boss:{ img:'img/skins/boss_goblin.webp', name:'Goblin Chieftain', zone:'Zone 2 · Goblin Warrens', hp:600,  atk:16, gold:70 }
+  },
+  epic: {
+    items: [
+      { slot:'HEAD',   name:'Scale Hood',  rarity:'epic', rarColor:'#c084fc', img:'img/skins/item_craft_scale_robe.webp', atk:6,  hp:9,  regen:1 },
+      { slot:'ARMOR',  name:'Orc Plate',   rarity:'epic', rarColor:'#c084fc', img:'img/skins/item_craft_orc_plate.webp',  atk:0,  hp:16, regen:1 },
+      { slot:'RING',   name:'Shadow Ring', rarity:'epic', rarColor:'#c084fc', img:'img/skins/item_shadow_ring.webp',      atk:10, hp:0,  regen:0 },
+      { slot:'WEAPON', name:'Troll Aegis', rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_craft_troll_aegis.webp', atk:14, hp:4, regen:0 }
+    ],
+    boss:{ img:'img/skins/boss_orc.webp', name:'Orc Warlord', zone:'Zone 4 · Orc Fortress', hp:1400, atk:28, gold:145 }
+  },
+  legendary: {
+    items: [
+      { slot:'HEAD',   name:'Golden Helm',   rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_golden_helm.webp',          atk:10, hp:14, regen:2 },
+      { slot:'ARMOR',  name:'Golden Plate',  rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_golden_plate.webp',         atk:0,  hp:22, regen:2 },
+      { slot:'RING',   name:'Warlord Sigil', rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_warlord_sigil.webp',        atk:16, hp:0,  regen:0 },
+      { slot:'WEAPON', name:'Dragon Crown',  rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_craft_dragon_crown.webp',   atk:20, hp:8,  regen:1 }
+    ],
+    boss:{ img:'img/skins/boss_troll.webp', name:'Stone Troll', zone:'Zone 5 · Troll Bridge', hp:2800, atk:44, gold:230 }
+  },
+  mythic: {
+    items: [
+      { slot:'HEAD',   name:'Void Helm',  rarity:'mythic', rarColor:'#f472b6', img:'img/skins/item_void_helm.webp',          atk:16, hp:20, regen:3 },
+      { slot:'ARMOR',  name:'Void Plate', rarity:'mythic', rarColor:'#f472b6', img:'img/skins/item_void_plate.webp',         atk:0,  hp:32, regen:3 },
+      { slot:'RING',   name:'Void Ring',  rarity:'mythic', rarColor:'#f472b6', img:'img/skins/item_void_ring.webp',          atk:22, hp:0,  regen:1 },
+      { slot:'WEAPON', name:'Void Blade', rarity:'mythic', rarColor:'#f472b6', img:'img/skins/item_craft_void_blade.webp',   atk:32, hp:0,  regen:0 }
+    ],
+    boss:{ img:'img/skins/boss_dragon.webp', name:'Dragon Elder', zone:'Zone 6 · Dragon Lair', hp:4500, atk:65, gold:480 }
+  }
+};
+
+var bopType = 'epic', bopEquipped = null;
+
+function bopSelect(el) {
+  document.querySelectorAll('.bop-chest').forEach(function(c){ c.classList.remove('bop-active'); });
+  el.classList.add('bop-active');
+  bopType = el.getAttribute('data-type');
+}
+
+function bopOpen() {
+  var set = BOP_SETS[bopType];
+  var grid = document.getElementById('bopGrid');
+  grid.innerHTML = '';
+  document.getElementById('bopDropArea').style.display = '';
+  document.getElementById('bopStats').style.display = 'none';
+  document.getElementById('bopActions').style.display = 'none';
+  var totalAtk = 0, totalHp = 0, totalRegen = 0;
+  set.items.forEach(function(item, i) {
+    totalAtk += item.atk||0; totalHp += item.hp||0; totalRegen += item.regen||0;
+    var card = document.createElement('div');
+    card.className = 'bop-item-card r-' + item.rarity;
+    card.innerHTML =
+      '<div class="bop-item-slot-lbl">' + item.slot + '</div>' +
+      '<img src="' + item.img + '" alt="' + item.name + '">' +
+      '<div class="bop-item-name">' + item.name + '</div>' +
+      '<div class="bop-item-rar" style="color:' + item.rarColor + '">' + item.rarity.toUpperCase() + '</div>' +
+      '<div class="bop-item-stats">' + (item.atk?'+'+item.atk+' ATK ':'') + (item.hp?'+'+item.hp+' HP ':'') + (item.regen?'+'+item.regen+' Reg':'') + '</div>';
+    grid.appendChild(card);
+    setTimeout(function(c){ c.classList.add('revealed'); }, 120 + i * 180, card);
+  });
+  setTimeout(function() {
+    document.getElementById('bopAtk').textContent = totalAtk;
+    document.getElementById('bopHp').textContent = totalHp;
+    document.getElementById('bopRegen').textContent = totalRegen;
+    document.getElementById('bopStats').style.display = '';
+    setTimeout(function(){ document.getElementById('bopActions').style.display = ''; }, 200);
+  }, 120 + set.items.length * 180 + 220);
+  bopEquipped = { items: set.items, boss: set.boss };
+}
+
+function bopEquip() {
+  if (!bopEquipped) return;
+  var set = bopEquipped;
+  var slotIds = ['eqsHead','eqsTop','eqsAcc','eqsAura'];
+  var totalAtk=24, totalHp=100, totalRegen=1;
+  set.items.forEach(function(it){ totalAtk+=it.atk||0; totalHp+=it.hp||0; totalRegen+=it.regen||0; });
+  var equipEl = document.getElementById('equipScreen');
+  equipEl.style.display = '';
+  slotIds.forEach(function(id) {
+    var s = document.getElementById(id);
+    s.className = 'eqs-slot';
+    s.querySelector('.eqs-slot-img-wrap').innerHTML = '<span class="eqs-empty">—</span>';
+    s.querySelector('.eqs-slot-name').textContent = '';
+    s.querySelector('.eqs-slot-rar').textContent = '';
+  });
+  setTimeout(function(){ equipEl.scrollIntoView({ behavior:'smooth', block:'center' }); }, 80);
+  set.items.forEach(function(item, i) {
+    setTimeout(function() {
+      var s = document.getElementById(slotIds[i]);
+      s.querySelector('.eqs-slot-img-wrap').innerHTML = '<img src="' + item.img + '">';
+      s.querySelector('.eqs-slot-name').textContent = item.name;
+      var rarEl = s.querySelector('.eqs-slot-rar');
+      rarEl.textContent = item.rarity.toUpperCase(); rarEl.style.color = item.rarColor;
+      s.classList.add('equipped', 'r-' + item.rarity);
+    }, 150 + i * 240);
+  });
+  setTimeout(function() {
+    animateCounterVal(document.getElementById('eqsAtk'), 24, totalAtk, 700);
+    animateCounterVal(document.getElementById('eqsHp'), 100, totalHp, 700);
+    animateCounterVal(document.getElementById('eqsRegen'), 1, totalRegen, 700);
+    var ip = totalAtk * 10 + totalHp * 5 + totalRegen * 25;
+    animateCounterVal(document.getElementById('eqsIp'), 0, ip, 800);
+    setTimeout(function(){ document.getElementById('eqsIpBar').style.width = Math.min(100, ip / 15) + '%'; }, 150);
+  }, 150 + set.items.length * 240 + 120);
+}
+
+function animateCounterVal(el, from, to, dur) {
+  var start = performance.now();
+  (function step(now) {
+    var p = Math.min(1, (now - start) / dur);
+    el.textContent = Math.round(from + (to - from) * p);
+    if (p < 1) requestAnimationFrame(step);
+  })(performance.now());
+}
+
+var bfState = {};
+
+function goFightBoss() {
+  if (!bopEquipped) return;
+  var boss = bopEquipped.boss;
+  var atk=24, hp=100, regen=1;
+  bopEquipped.items.forEach(function(it){ atk+=it.atk||0; hp+=it.hp||0; regen+=it.regen||0; });
+  bfState = { atk:atk, hp:hp, maxHp:hp, regen:regen, bossHp:boss.hp, bossMaxHp:boss.hp, bossAtk:boss.atk, boss:boss, heavyLeft:2, dead:false };
+  var el = document.getElementById('bossFight');
+  el.style.display = '';
+  setTimeout(function(){ el.scrollIntoView({ behavior:'smooth', block:'center' }); }, 80);
+  document.getElementById('bfTitle').textContent = boss.zone;
+  document.getElementById('bfBossImg').src = boss.img;
+  document.getElementById('bfBossName').textContent = boss.name;
+  document.getElementById('bfBossHpNum').textContent = boss.hp;
+  document.getElementById('bfBossHpMax').textContent = boss.hp;
+  document.getElementById('bfPlayerHpNum').textContent = hp;
+  document.getElementById('bfPlayerHpMax').textContent = hp;
+  document.getElementById('bfBossBar').style.width = '100%';
+  document.getElementById('bfPlayerBar').style.width = '100%';
+  document.getElementById('bfResult').style.display = 'none';
+  document.getElementById('bfBtns').style.display = '';
+  document.querySelector('.bf-atk-btn').disabled = false;
+  document.querySelector('.bf-heavy-btn').disabled = false;
+  document.getElementById('bfLog').innerHTML = '<div class="bf-log-entry">⚔️ ' + boss.name + ' appears! HP: ' + boss.hp + ' · ATK: ' + boss.atk + '</div>';
+}
+
+function bfLog(txt, cls) {
+  var log = document.getElementById('bfLog');
+  var d = document.createElement('div');
+  d.className = 'bf-log-entry' + (cls?' '+cls:'');
+  d.textContent = txt;
+  log.appendChild(d);
+  log.scrollTop = log.scrollHeight;
+}
+
+function bfShowDmg(txt, color) {
+  var area = document.getElementById('bfDmg');
+  var span = document.createElement('span');
+  span.className = 'bf-dmg-num';
+  span.textContent = txt;
+  span.style.color = color;
+  area.innerHTML = '';
+  area.appendChild(span);
+  requestAnimationFrame(function(){
+    span.style.opacity = '1';
+    span.style.transform = 'translateY(-18px)';
+    setTimeout(function(){ span.style.opacity = '0'; }, 550);
+  });
+}
+
+function bfDoTurn(mult) {
+  if (bfState.dead) return;
+  var dmg = Math.max(1, Math.floor((bfState.atk + Math.random()*10 - 5) * mult));
+  bfState.bossHp = Math.max(0, bfState.bossHp - dmg);
+  document.getElementById('bfBossHpNum').textContent = bfState.bossHp;
+  document.getElementById('bfBossBar').style.width = (bfState.bossHp / bfState.bossMaxHp * 100) + '%';
+  bfShowDmg('-' + dmg, mult > 1 ? '#fbbf24' : '#f97316');
+  bfLog((mult>1?'💥 Heavy strike':'⚔️ You attack') + ' — ' + dmg + ' dmg!', mult>1?'heavy':'pdmg');
+  if (bfState.bossHp <= 0) {
+    bfState.dead = true;
+    document.querySelector('.bf-atk-btn').disabled = true;
+    document.querySelector('.bf-heavy-btn').disabled = true;
+    var gold = bfState.boss.gold + Math.floor(Math.random()*60);
+    bfLog('🏆 ' + bfState.boss.name + ' defeated! +' + gold + ' 💰', 'hregen');
+    setTimeout(function(){
+      document.getElementById('bfBtns').style.display = 'none';
+      document.getElementById('bfResult').style.display = '';
+      document.getElementById('bfResultIcon').textContent = '🏆';
+      document.getElementById('bfResultTitle').textContent = 'Victory!';
+      document.getElementById('bfResultRewards').textContent = 'Earned ' + gold + ' 💰  ·  +' + Math.floor(gold/3) + ' Warrior XP  ·  Zone cleared';
+    }, 600);
+    return;
+  }
+  setTimeout(function() {
+    var bd = Math.max(1, Math.floor(bfState.bossAtk + Math.random()*12 - 6));
+    bfState.hp = Math.max(0, bfState.hp - bd);
+    if (bfState.regen > 0 && bfState.hp > 0) {
+      bfState.hp = Math.min(bfState.maxHp, bfState.hp + bfState.regen);
+      bfLog('💚 +' + bfState.regen + ' HP regen', 'hregen');
+    }
+    document.getElementById('bfPlayerHpNum').textContent = bfState.hp;
+    document.getElementById('bfPlayerBar').style.width = (bfState.hp / bfState.maxHp * 100) + '%';
+    bfLog('🐉 ' + bfState.boss.name + ' attacks — ' + bd + ' dmg!', 'edamg');
+    if (bfState.hp <= 0) {
+      bfState.dead = true;
+      document.querySelector('.bf-atk-btn').disabled = true;
+      document.querySelector('.bf-heavy-btn').disabled = true;
+      setTimeout(function(){
+        document.getElementById('bfBtns').style.display = 'none';
+        document.getElementById('bfResult').style.display = '';
+        document.getElementById('bfResultIcon').textContent = '💀';
+        document.getElementById('bfResultTitle').textContent = 'Defeated';
+        document.getElementById('bfResultRewards').textContent = 'Open a better bag to win!';
+      }, 500);
+    }
+  }, 380);
+}
+
+function bfAttack() { bfDoTurn(1); }
+function bfHeavy() {
+  if (!bfState.heavyLeft) { bfLog('💥 No Heavy Strike charges left', ''); return; }
+  bfState.heavyLeft--;
+  if (!bfState.heavyLeft) document.querySelector('.bf-heavy-btn').disabled = true;
+  bfDoTurn(2.5);
+}
+function bfReplay() { goFightBoss(); }
+function bfChangeBoss() {
+  document.getElementById('bossFight').style.display = 'none';
+  document.getElementById('equipScreen').style.display = 'none';
+  document.getElementById('bagOpenerSection').scrollIntoView({ behavior:'smooth', block:'center' });
+}
 
 // ─── Boss HP bars animate on scroll ───
 (function() {
