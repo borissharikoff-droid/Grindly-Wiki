@@ -1553,13 +1553,12 @@
 .bop-item-name { font-size:10px; font-weight:700; color:rgba(255,255,255,0.88); text-align:center; line-height:1.2; }
 .bop-item-rar { font-family:'JetBrains Mono',monospace; font-size:8px; font-weight:700; text-transform:uppercase; }
 .bop-item-stats { font-size:8px; color:rgba(255,255,255,0.45); text-align:center; line-height:1.5; }
-.bop-set-stats { display:flex; justify-content:center; gap:14px; margin:0 0 20px; flex-wrap:wrap; }
-.bop-stat-chip { padding:7px 18px; border-radius:22px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); font-size:14px; font-weight:700; color:rgba(255,255,255,0.9); }
+.bop-set-stats { margin:0 auto 20px; max-width:520px; }
 .bop-actions { display:flex; gap:10px; justify-content:center; }
-.bop-equip-btn { background:linear-gradient(135deg,#4ade80,#22d3ee); border:none; border-radius:9px; color:#000; font-size:14px; font-weight:800; padding:11px 28px; cursor:pointer; transition:all 0.2s; box-shadow:0 4px 18px rgba(74,222,128,0.35); }
-.bop-equip-btn:hover { transform:translateY(-2px); box-shadow:0 6px 24px rgba(74,222,128,0.5); }
-.bop-reroll-btn { padding:11px 20px; border-radius:9px; border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.6); font-size:13px; font-weight:600; cursor:pointer; transition:background 0.15s; }
-.bop-reroll-btn:hover { background:rgba(255,255,255,0.1); }
+.bop-equip-btn { background:linear-gradient(135deg,#818cf8,#6366f1); border:none; border-radius:9px; color:#fff; font-size:14px; font-weight:800; padding:11px 28px; cursor:pointer; transition:all 0.2s; box-shadow:0 4px 18px rgba(99,102,241,0.4); letter-spacing:0.01em; }
+.bop-equip-btn:hover { transform:translateY(-2px); box-shadow:0 6px 24px rgba(99,102,241,0.55); }
+.bop-reroll-btn { padding:11px 20px; border-radius:9px; border:1px solid rgba(255,255,255,0.10); background:rgba(255,255,255,0.04); color:rgba(255,255,255,0.5); font-size:13px; font-weight:600; cursor:pointer; transition:background 0.15s; font-family:'JetBrains Mono',monospace; }
+.bop-reroll-btn:hover { background:rgba(255,255,255,0.08); }
 /* ══════ Equipment Screen (CharacterPanel) ══════ */
 .equip-screen { padding:56px 24px; background:rgba(0,0,0,0.25); border-top:1px solid rgba(255,255,255,0.05); border-bottom:1px solid rgba(255,255,255,0.05); }
 .char-panel-wrap { max-width:520px; margin:32px auto 0; }
@@ -1618,6 +1617,8 @@
 .bf-replay-btn { padding:11px 26px; border-radius:8px; background:linear-gradient(135deg,#818cf8,#6366f1); border:none; color:#fff; font-size:13px; font-weight:700; cursor:pointer; transition:all 0.15s; }
 .bf-replay-btn:hover { transform:translateY(-1px); }
 .bf-change-btn { background:rgba(255,255,255,0.07) !important; border:1px solid rgba(255,255,255,0.12) !important; color:rgba(255,255,255,0.6) !important; }
+.bf-dps-row { display:flex; gap:16px; justify-content:center; align-items:center; flex-wrap:wrap; font-family:'JetBrains Mono',monospace; font-size:11px; margin:0 auto 14px; padding:9px 20px; background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.06); border-radius:8px; max-width:480px; min-height:36px; }
+.bf-dps-row span { white-space:nowrap; }
 /* Item showcase dark override */
 .items-showcase-v2 {
   background: #0c0c17 !important;
@@ -2119,9 +2120,28 @@
       <div class="bop-drop-area" id="bopDropArea" style="display:none">
         <div class="bop-drop-grid" id="bopGrid"></div>
         <div class="bop-set-stats" id="bopStats" style="display:none">
-          <div class="bop-stat-chip">⚔️ +<span id="bopAtk">0</span> ATK</div>
-          <div class="bop-stat-chip">❤️ +<span id="bopHp">0</span> HP</div>
-          <div class="bop-stat-chip">💚 +<span id="bopRegen">0</span> Regen</div>
+          <div class="char-stats-row" style="max-width:520px;margin:0 auto">
+            <div class="char-stat-chip" style="background:linear-gradient(135deg,rgba(248,113,113,0.07) 0%,rgba(7,7,14,0.90) 60%);border:1px solid rgba(248,113,113,0.16)">
+              <span class="char-stat-icon" style="color:#f87171">⚔</span>
+              <div><div class="char-stat-val" id="bopAtk" style="color:#f87171">0</div><div class="char-stat-lbl" style="color:rgba(248,113,113,0.4)">ATK/s</div></div>
+            </div>
+            <div class="char-stat-chip" style="background:linear-gradient(135deg,rgba(74,222,128,0.07) 0%,rgba(7,7,14,0.90) 60%);border:1px solid rgba(74,222,128,0.16)">
+              <span class="char-stat-icon" style="color:#4ade80">♥</span>
+              <div><div class="char-stat-val" id="bopHp" style="color:#4ade80">0</div><div class="char-stat-lbl" style="color:rgba(74,222,128,0.4)">HP</div></div>
+            </div>
+            <div class="char-stat-chip" style="background:linear-gradient(135deg,rgba(34,211,238,0.07) 0%,rgba(7,7,14,0.90) 60%);border:1px solid rgba(34,211,238,0.16)">
+              <span class="char-stat-icon" style="color:#22d3ee">💧</span>
+              <div><div class="char-stat-val" id="bopRegen" style="color:#22d3ee">0</div><div class="char-stat-lbl" style="color:rgba(34,211,238,0.4)">REG/s</div></div>
+            </div>
+            <div class="char-stat-chip" style="background:linear-gradient(135deg,rgba(129,140,248,0.07) 0%,rgba(7,7,14,0.90) 60%);border:1px solid rgba(129,140,248,0.16)">
+              <span class="char-stat-icon" style="color:#818cf8">🛡</span>
+              <div><div class="char-stat-val" id="bopDef" style="color:#818cf8">0</div><div class="char-stat-lbl" style="color:rgba(129,140,248,0.4)">DEF</div></div>
+            </div>
+            <div class="char-stat-chip" style="background:linear-gradient(135deg,rgba(252,211,77,0.07) 0%,rgba(7,7,14,0.90) 60%);border:1px solid rgba(252,211,77,0.16)">
+              <span class="char-stat-icon" style="color:#fcd34d">✦</span>
+              <div><div class="char-stat-val" id="bopIp" style="color:#fcd34d">0</div><div class="char-stat-lbl" style="color:rgba(252,211,77,0.4)">IP</div></div>
+            </div>
+          </div>
         </div>
         <div class="bop-actions" id="bopActions" style="display:none">
           <button class="bop-equip-btn" onclick="bopEquip()">Equip This Set →</button>
@@ -2222,7 +2242,7 @@
     <section class="boss-fight" id="bossFight" style="display:none">
       <div class="sec-head">
         <h2 id="bfTitle">Enter the Arena</h2>
-        <p class="sub">Turn-based combat — your equipment determines damage</p>
+        <p class="sub">Real-time combat — your equipment determines the outcome</p>
       </div>
       <div class="bf-arena">
         <div class="bf-combatant">
@@ -2242,13 +2262,11 @@
           <div class="bf-hp-bar-wrap"><div class="bf-hp-bar bf-player" id="bfPlayerBar" style="width:100%"></div></div>
         </div>
       </div>
+      <div class="bf-dps-row" id="bfDpsInfo"></div>
       <div class="bf-log" id="bfLog">
         <div class="bf-log-entry">⚔️ Open a bag and equip your gear to fight!</div>
       </div>
-      <div class="bf-btns" id="bfBtns" style="display:none">
-        <button class="bf-atk-btn" onclick="bfAttack()">⚔️ Attack</button>
-        <button class="bf-heavy-btn" onclick="bfHeavy()">💥 Heavy Strike <small>(×2.5, 2 uses)</small></button>
-      </div>
+      <div id="bfBtns" style="display:none"></div>
       <div class="bf-result" id="bfResult" style="display:none">
         <div class="bf-result-icon" id="bfResultIcon">🏆</div>
         <div class="bf-result-title" id="bfResultTitle">Victory!</div>
@@ -2909,17 +2927,20 @@ function bopOpen() {
   document.getElementById('bopDropArea').style.display = '';
   document.getElementById('bopStats').style.display = 'none';
   document.getElementById('bopActions').style.display = 'none';
-  var totalAtk = 0, totalHp = 0, totalRegen = 0;
+  var totalAtk=0, totalHp=0, totalRegen=0, totalDef=0;
+  var ipByRarity = {common:100, rare:150, epic:220, legendary:320, mythic:450};
+  var totalIp = 0;
   set.items.forEach(function(item, i) {
-    totalAtk += item.atk||0; totalHp += item.hp||0; totalRegen += item.regen||0;
+    totalAtk+=item.atk||0; totalHp+=item.hp||0; totalRegen+=item.regen||0; totalDef+=item.def||0;
+    totalIp += ipByRarity[item.rarity]||100;
     var card = document.createElement('div');
     card.className = 'bop-item-card r-' + item.rarity;
     card.innerHTML =
-      '<div class="bop-item-slot-lbl">' + item.slot + '</div>' +
+      '<div class="bop-item-slot-lbl">' + item.slot.toUpperCase() + '</div>' +
       '<img src="' + item.img + '" alt="' + item.name + '">' +
       '<div class="bop-item-name">' + item.name + '</div>' +
       '<div class="bop-item-rar" style="color:' + item.rarColor + '">' + item.rarity.toUpperCase() + '</div>' +
-      '<div class="bop-item-stats">' + (item.atk?'+'+item.atk+' ATK ':'') + (item.hp?'+'+item.hp+' HP ':'') + (item.regen?'+'+item.regen+' Reg':'') + '</div>';
+      '<div class="bop-item-stats">' + (item.atk?'+'+item.atk+' ATK ':'') + (item.hp?'+'+item.hp+' HP ':'') + (item.regen?'+'+item.regen+' Reg':'') + (item.def?'+'+item.def+' DEF':'') + '</div>';
     grid.appendChild(card);
     setTimeout(function(c){ c.classList.add('revealed'); }, 120 + i * 180, card);
   });
@@ -2927,6 +2948,8 @@ function bopOpen() {
     document.getElementById('bopAtk').textContent = totalAtk;
     document.getElementById('bopHp').textContent = totalHp;
     document.getElementById('bopRegen').textContent = totalRegen;
+    document.getElementById('bopDef').textContent = totalDef;
+    document.getElementById('bopIp').textContent = totalIp;
     document.getElementById('bopStats').style.display = '';
     setTimeout(function(){ document.getElementById('bopActions').style.display = ''; }, 200);
   }, 120 + set.items.length * 180 + 220);
@@ -3019,109 +3042,145 @@ var bfState = {};
 function goFightBoss() {
   if (!bopEquipped) return;
   var boss = bopEquipped.boss;
-  var atk=24, hp=100, regen=1;
-  bopEquipped.items.forEach(function(it){ atk+=it.atk||0; hp+=it.hp||0; regen+=it.regen||0; });
-  bfState = { atk:atk, hp:hp, maxHp:hp, regen:regen, bossHp:boss.hp, bossMaxHp:boss.hp, bossAtk:boss.atk, boss:boss, heavyLeft:2, dead:false };
+  var atk=24, hp=100, regen=1, def=0;
+  bopEquipped.items.forEach(function(it){ atk+=it.atk||0; hp+=it.hp||0; regen+=it.regen||0; def+=it.def||0; });
+
+  // Same formula as app: effectiveBossDps = max(bossAtk * 0.15, bossAtk - def - regen)
+  var eBossDps = Math.max(boss.atk * 0.15, boss.atk - def - regen);
+  var pDps = atk;
+
+  // Who dies first (game-seconds)
+  var bossKillSec = boss.hp / pDps;
+  var playerKillSec = (eBossDps > 0) ? (hp / eBossDps) : Infinity;
+  var victory = bossKillSec <= playerKillSec;
+  var gameDuration = Math.min(bossKillSec, playerKillSec);
+
+  // Compress to demo: 4–6s
+  var DEMO_MS = Math.min(6000, Math.max(3500, gameDuration * 60));
+
+  bfState = { atk:atk, hp:hp, maxHp:hp, def:def, regen:regen,
+              bossMaxHp:boss.hp, eBossDps:eBossDps, pDps:pDps,
+              boss:boss, victory:victory, DEMO_MS:DEMO_MS, running:false };
+
   var el = document.getElementById('bossFight');
   el.style.display = '';
   setTimeout(function(){ el.scrollIntoView({ behavior:'smooth', block:'center' }); }, 80);
+
+  // Static info
   document.getElementById('bfTitle').textContent = boss.zone;
   document.getElementById('bfBossImg').src = boss.img;
   document.getElementById('bfBossName').textContent = boss.name;
-  document.getElementById('bfBossHpNum').textContent = boss.hp;
   document.getElementById('bfBossHpMax').textContent = boss.hp;
-  document.getElementById('bfPlayerHpNum').textContent = hp;
   document.getElementById('bfPlayerHpMax').textContent = hp;
+
+  // DPS row — matches app's combat stats display
+  var mitigation = def + regen;
+  document.getElementById('bfDpsInfo').innerHTML =
+    '<span style="color:#4ade80cc">⚔ ' + pDps + '/s</span>' +
+    '<span style="color:#f87171cc">♥ −' + boss.atk + '/s</span>' +
+    (mitigation > 0 ? '<span style="color:#818cf8cc">🛡 −' + mitigation + '</span>' : '') +
+    '<span style="color:#fbbf24cc">= −' + eBossDps.toFixed(1) + '/s net</span>';
+
+  // Reset
   document.getElementById('bfBossBar').style.width = '100%';
   document.getElementById('bfPlayerBar').style.width = '100%';
+  document.getElementById('bfBossHpNum').textContent = boss.hp;
+  document.getElementById('bfPlayerHpNum').textContent = hp;
   document.getElementById('bfResult').style.display = 'none';
-  document.getElementById('bfBtns').style.display = '';
-  document.querySelector('.bf-atk-btn').disabled = false;
-  document.querySelector('.bf-heavy-btn').disabled = false;
-  document.getElementById('bfLog').innerHTML = '<div class="bf-log-entry">⚔️ ' + boss.name + ' appears! HP: ' + boss.hp + ' · ATK: ' + boss.atk + '</div>';
+  var logEl = document.getElementById('bfLog');
+  logEl.innerHTML = '';
+  bfAddLog('⚔️ ' + boss.name + ' appears! ' + boss.hp + ' HP · ' + boss.atk + ' ATK/s', '');
+
+  setTimeout(bfAutoRun, 700);
 }
 
-function bfLog(txt, cls) {
+function bfAutoRun() {
+  if (bfState.running) return;
+  bfState.running = true;
+  var start = performance.now();
+  var boss = bfState.boss;
+  var maxBoss = bfState.bossMaxHp;
+  var maxPlayer = bfState.maxHp;
+  var demo = bfState.DEMO_MS;
+  var victory = bfState.victory;
+  var eBossDps = bfState.eBossDps;
+  var pDps = bfState.pDps;
+  var lastLogMs = -9999;
+  var logEvery = Math.max(800, demo / 5);
+
+  function tick(now) {
+    var elapsed = now - start;
+    var t = Math.min(1, elapsed / demo);
+
+    var bossHp, playerHp;
+    if (victory) {
+      // Boss dies at end; player hp drains but doesn't reach 0
+      bossHp = Math.max(0, maxBoss * (1 - t));
+      playerHp = Math.min(maxPlayer, Math.max(1, maxPlayer - eBossDps * (elapsed / 1000)));
+    } else {
+      // Player dies at end; boss hp drains but doesn't reach 0
+      playerHp = Math.max(0, maxPlayer * (1 - t));
+      bossHp = Math.min(maxBoss, Math.max(1, maxBoss - pDps * (elapsed / 1000)));
+    }
+
+    document.getElementById('bfBossHpNum').textContent = Math.round(bossHp);
+    document.getElementById('bfBossBar').style.width = (bossHp / maxBoss * 100) + '%';
+    document.getElementById('bfPlayerHpNum').textContent = Math.round(playerHp);
+    document.getElementById('bfPlayerBar').style.width = (playerHp / maxPlayer * 100) + '%';
+
+    if (elapsed - lastLogMs >= logEvery) {
+      lastLogMs = elapsed;
+      var secChunk = logEvery / 1000;
+      var toB = Math.round(pDps * secChunk);
+      var toP = Math.round(eBossDps * secChunk);
+      bfAddLog('⚔️ You deal ' + toB + ' damage', 'pdmg');
+      if (toP > 0) setTimeout(function(){ bfAddLog('💢 ' + boss.name + ' hits for ' + toP, 'edamg'); }, 300);
+    }
+
+    if (t < 1) {
+      requestAnimationFrame(tick);
+    } else {
+      setTimeout(function() { bfFinish(victory); }, 320);
+    }
+  }
+  requestAnimationFrame(tick);
+}
+
+function bfAddLog(txt, cls) {
   var log = document.getElementById('bfLog');
   var d = document.createElement('div');
-  d.className = 'bf-log-entry' + (cls?' '+cls:'');
+  d.className = 'bf-log-entry' + (cls ? ' ' + cls : '');
   d.textContent = txt;
   log.appendChild(d);
   log.scrollTop = log.scrollHeight;
 }
 
-function bfShowDmg(txt, color) {
-  var area = document.getElementById('bfDmg');
-  var span = document.createElement('span');
-  span.className = 'bf-dmg-num';
-  span.textContent = txt;
-  span.style.color = color;
-  area.innerHTML = '';
-  area.appendChild(span);
-  requestAnimationFrame(function(){
-    span.style.opacity = '1';
-    span.style.transform = 'translateY(-18px)';
-    setTimeout(function(){ span.style.opacity = '0'; }, 550);
-  });
-}
-
-function bfDoTurn(mult) {
-  if (bfState.dead) return;
-  var dmg = Math.max(1, Math.floor((bfState.atk + Math.random()*10 - 5) * mult));
-  bfState.bossHp = Math.max(0, bfState.bossHp - dmg);
-  document.getElementById('bfBossHpNum').textContent = bfState.bossHp;
-  document.getElementById('bfBossBar').style.width = (bfState.bossHp / bfState.bossMaxHp * 100) + '%';
-  bfShowDmg('-' + dmg, mult > 1 ? '#fbbf24' : '#f97316');
-  bfLog((mult>1?'💥 Heavy strike':'⚔️ You attack') + ' — ' + dmg + ' dmg!', mult>1?'heavy':'pdmg');
-  if (bfState.bossHp <= 0) {
-    bfState.dead = true;
-    document.querySelector('.bf-atk-btn').disabled = true;
-    document.querySelector('.bf-heavy-btn').disabled = true;
-    var gold = bfState.boss.gold + Math.floor(Math.random()*60);
-    bfLog('🏆 ' + bfState.boss.name + ' defeated! +' + gold + ' 💰', 'hregen');
-    setTimeout(function(){
-      document.getElementById('bfBtns').style.display = 'none';
-      document.getElementById('bfResult').style.display = '';
-      document.getElementById('bfResultIcon').textContent = '🏆';
-      document.getElementById('bfResultTitle').textContent = 'Victory!';
-      document.getElementById('bfResultRewards').textContent = 'Earned ' + gold + ' 💰  ·  +' + Math.floor(gold/3) + ' Warrior XP  ·  Zone cleared';
-    }, 600);
-    return;
+function bfFinish(victory) {
+  bfState.running = false;
+  var boss = bfState.boss;
+  document.getElementById('bfResult').style.display = '';
+  if (victory) {
+    var gold = boss.gold + Math.floor(Math.random() * 60);
+    var wXp = Math.floor(boss.gold / 3);
+    document.getElementById('bfResultIcon').textContent = '🏆';
+    document.getElementById('bfResultTitle').textContent = 'Victory!';
+    document.getElementById('bfResultRewards').textContent = 'Earned ' + gold + ' 💰  ·  +' + wXp + ' Warrior XP  ·  Zone cleared';
+    bfAddLog('🏆 ' + boss.name + ' defeated!', 'hregen');
+    document.getElementById('bfBossHpNum').textContent = '0';
+    document.getElementById('bfBossBar').style.width = '0%';
+  } else {
+    document.getElementById('bfResultIcon').textContent = '💀';
+    document.getElementById('bfResultTitle').textContent = 'Defeated';
+    document.getElementById('bfResultRewards').textContent = 'Upgrade your gear — open a better bag!';
+    bfAddLog('💀 You were defeated...', 'edamg');
+    document.getElementById('bfPlayerHpNum').textContent = '0';
+    document.getElementById('bfPlayerBar').style.width = '0%';
   }
-  setTimeout(function() {
-    var bd = Math.max(1, Math.floor(bfState.bossAtk + Math.random()*12 - 6));
-    bfState.hp = Math.max(0, bfState.hp - bd);
-    if (bfState.regen > 0 && bfState.hp > 0) {
-      bfState.hp = Math.min(bfState.maxHp, bfState.hp + bfState.regen);
-      bfLog('💚 +' + bfState.regen + ' HP regen', 'hregen');
-    }
-    document.getElementById('bfPlayerHpNum').textContent = bfState.hp;
-    document.getElementById('bfPlayerBar').style.width = (bfState.hp / bfState.maxHp * 100) + '%';
-    bfLog('🐉 ' + bfState.boss.name + ' attacks — ' + bd + ' dmg!', 'edamg');
-    if (bfState.hp <= 0) {
-      bfState.dead = true;
-      document.querySelector('.bf-atk-btn').disabled = true;
-      document.querySelector('.bf-heavy-btn').disabled = true;
-      setTimeout(function(){
-        document.getElementById('bfBtns').style.display = 'none';
-        document.getElementById('bfResult').style.display = '';
-        document.getElementById('bfResultIcon').textContent = '💀';
-        document.getElementById('bfResultTitle').textContent = 'Defeated';
-        document.getElementById('bfResultRewards').textContent = 'Open a better bag to win!';
-      }, 500);
-    }
-  }, 380);
 }
 
-function bfAttack() { bfDoTurn(1); }
-function bfHeavy() {
-  if (!bfState.heavyLeft) { bfLog('💥 No Heavy Strike charges left', ''); return; }
-  bfState.heavyLeft--;
-  if (!bfState.heavyLeft) document.querySelector('.bf-heavy-btn').disabled = true;
-  bfDoTurn(2.5);
-}
-function bfReplay() { goFightBoss(); }
+function bfReplay() { bfState.running = false; goFightBoss(); }
 function bfChangeBoss() {
+  bfState.running = false;
   document.getElementById('bossFight').style.display = 'none';
   document.getElementById('equipScreen').style.display = 'none';
   document.getElementById('bagOpenerSection').scrollIntoView({ behavior:'smooth', block:'center' });
