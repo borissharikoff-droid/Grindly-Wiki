@@ -1554,6 +1554,10 @@
 .bop-item-rar { font-family:'JetBrains Mono',monospace; font-size:8px; font-weight:700; text-transform:uppercase; }
 .bop-item-stats { font-size:8px; color:rgba(255,255,255,0.45); text-align:center; line-height:1.5; }
 .bop-set-stats { margin:0 auto 20px; max-width:520px; }
+.bop-set-stats .char-stat-chip { padding:6px 5px; gap:4px; }
+.bop-set-stats .char-stat-val { font-size:11px; }
+.bop-set-stats .char-stat-icon { font-size:9px; }
+.bop-set-stats .char-stat-lbl { font-size:6px; }
 .bop-actions { display:flex; gap:10px; justify-content:center; }
 .bop-equip-btn { background:linear-gradient(135deg,#818cf8,#6366f1); border:none; border-radius:9px; color:#fff; font-size:14px; font-weight:800; padding:11px 28px; cursor:pointer; transition:all 0.2s; box-shadow:0 4px 18px rgba(99,102,241,0.4); letter-spacing:0.01em; }
 .bop-equip-btn:hover { transform:translateY(-2px); box-shadow:0 6px 24px rgba(99,102,241,0.55); }
@@ -3285,6 +3289,246 @@ function bfChangeBoss() {
     setInterval(nextMsg, 3800);
   }, 2000);
 })();
+
+// ══════ PCARD DEMO FUNCTIONS ══════
+
+// ── Skills demo ──
+function dsXp(row) {
+  var bar = row.querySelector('.ds-bar');
+  var lvEl = row.querySelector('.ds-lv');
+  var pop = row.querySelector('.ds-pop');
+  var cur = parseFloat(bar.style.width) || 0;
+  var gain = 6 + Math.floor(Math.random() * 9);
+  var next = Math.min(99, cur + gain);
+  bar.style.width = next + '%';
+  var lv = parseInt(lvEl.dataset.lv || 0);
+  if (next >= (lv + 1) * 4) {
+    lv++;
+    lvEl.dataset.lv = lv;
+    lvEl.textContent = 'Lv ' + lv;
+    lvEl.style.color = '#4ade80';
+    setTimeout(function(){ lvEl.style.color = ''; }, 900);
+  }
+  var xp = 80 + Math.floor(Math.random() * 180);
+  pop.textContent = '+' + xp + ' XP';
+  pop.classList.add('show');
+  setTimeout(function(){ pop.classList.remove('show'); }, 750);
+}
+
+// ── Analytics demo — animate bars on scroll ──
+(function() {
+  var el = document.getElementById('demoAnalytics');
+  if (!el) return;
+  var done = false;
+  var obs = new IntersectionObserver(function(entries) {
+    if (done || !entries[0].isIntersecting) return;
+    done = true;
+    el.querySelectorAll('.an-bar').forEach(function(b, i) {
+      setTimeout(function(){ b.style.width = (b.dataset.w || 0) + '%'; }, i * 120 + 200);
+    });
+  }, { threshold: 0.3 });
+  obs.observe(el);
+})();
+
+function anBoost(row) {
+  var bar = row.querySelector('.an-bar');
+  var timeEl = row.querySelector('.an-time');
+  var cur = parseFloat(bar.style.width) || 0;
+  bar.style.width = Math.min(100, cur + 12) + '%';
+  var parts = (timeEl.textContent || '0h 00m').match(/(\d+)h (\d+)m/);
+  var h = parseInt(parts ? parts[1] : 0), m = parseInt(parts ? parts[2] : 0);
+  m += 18; if (m >= 60) { h++; m -= 60; }
+  timeEl.textContent = h + 'h ' + (m < 10 ? '0' : '') + m + 'm';
+  var scoreEl = document.getElementById('anScore');
+  if (scoreEl) {
+    var s = Math.min(100, parseInt(scoreEl.textContent || 84) + 1 + Math.floor(Math.random() * 2));
+    scoreEl.textContent = s;
+    scoreEl.style.color = s >= 90 ? '#4ade80' : s >= 70 ? '#facc15' : '#f87171';
+  }
+}
+
+// ── Loot demo ──
+var LD_SETS = {
+  common: [
+    { name:'Iron Helm',    rarity:'common',    rarColor:'#9ca3af', img:'img/skins/item_craft_scale_robe.webp',   desc:'+3 HP · Basic armor' },
+    { name:'Copper Ring',  rarity:'rare',      rarColor:'#38bdf8', img:'img/skins/item_shadow_ring.webp',        desc:'+4 ATK · Lucky drop' },
+    { name:'Chain Coat',   rarity:'common',    rarColor:'#9ca3af', img:'img/skins/item_craft_troll_aegis.webp',  desc:'+5 HP · Solid protection' },
+  ],
+  epic: [
+    { name:'Shadow Ring',  rarity:'epic',      rarColor:'#c084fc', img:'img/skins/item_shadow_ring.webp',        desc:'+10 ATK · Night bonus' },
+    { name:'Orc Plate',    rarity:'epic',      rarColor:'#c084fc', img:'img/skins/item_craft_orc_plate.webp',    desc:'+16 HP · Heavy armor' },
+    { name:'Scale Hood',   rarity:'epic',      rarColor:'#c084fc', img:'img/skins/item_craft_scale_robe.webp',   desc:'+9 HP · +1 Regen' },
+    { name:'Troll Aegis',  rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_craft_troll_aegis.webp',  desc:'+14 ATK · Rare bonus!' },
+    { name:'Warlord Sigil',rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_warlord_sigil.webp',      desc:'+16 ATK · Pity drop' },
+  ],
+  legendary: [
+    { name:'Dragon Crown', rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_craft_dragon_crown.webp', desc:'+20 ATK · +8 HP · Fire perk' },
+    { name:'Golden Helm',  rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_golden_helm.webp',        desc:'+10 ATK · +14 HP' },
+    { name:'Golden Plate', rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_golden_plate.webp',       desc:'+22 HP · +2 Regen' },
+    { name:'Warlord Sigil',rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_warlord_sigil.webp',      desc:'+16 ATK · Leader perk' },
+    { name:'Void Ring',    rarity:'mythic',    rarColor:'#f472b6', img:'img/skins/item_void_ring.webp',          desc:'+22 ATK · MYTHIC PITY!' },
+  ],
+};
+var ldType = 'epic', ldItems = [], ldIdx = 0;
+
+function ldSelect(el) {
+  document.querySelectorAll('.ld-chest').forEach(function(c){ c.classList.remove('ld-active'); });
+  el.classList.add('ld-active');
+  ldType = el.dataset.type;
+}
+
+function ldOpen() {
+  ldItems = LD_SETS[ldType] || LD_SETS.epic;
+  ldIdx = 0;
+  var parts = document.getElementById('ldParts');
+  parts.innerHTML = '';
+  var colors = ['#818cf8','#c084fc','#facc15','#4ade80','#f472b6','#38bdf8'];
+  for (var i = 0; i < 20; i++) {
+    var p = document.createElement('div');
+    p.className = 'ld-particle';
+    p.style.cssText = 'left:50%;top:50%;background:'+colors[i%colors.length]+
+      ';--dx:'+(Math.random()*200-100)+'px;--dy:'+(Math.random()*200-100)+'px';
+    parts.appendChild(p);
+  }
+  document.getElementById('ldPhase1').style.display = 'none';
+  document.getElementById('ldPhase2').style.display = '';
+  ldShowItem();
+}
+
+function ldShowItem() {
+  var it = ldItems[ldIdx];
+  var rarLbl = document.getElementById('ldRarLbl');
+  rarLbl.textContent = it.rarity.toUpperCase();
+  rarLbl.style.color = it.rarColor;
+  rarLbl.style.textShadow = '0 0 18px ' + it.rarColor + '99';
+  var img = document.getElementById('ldImg');
+  img.src = it.img;
+  img.style.filter = 'drop-shadow(0 0 16px ' + it.rarColor + '88)';
+  document.getElementById('ldName').textContent = it.name;
+  var rarEl = document.getElementById('ldRar');
+  rarEl.textContent = it.rarity.toUpperCase();
+  rarEl.style.color = it.rarColor;
+  document.getElementById('ldDesc').textContent = it.desc;
+  document.getElementById('ldCtr').textContent = (ldIdx + 1) + ' / ' + ldItems.length;
+}
+
+function ldPrev() { if (ldIdx > 0) { ldIdx--; ldShowItem(); } }
+function ldNext() { if (ldIdx < ldItems.length - 1) { ldIdx++; ldShowItem(); } }
+function ldMore() {
+  document.getElementById('ldPhase2').style.display = 'none';
+  document.getElementById('ldPhase1').style.display = '';
+}
+function ldReset() { ldMore(); }
+
+// ── Arena demo (auto-combat, like app) ──
+var AD_BOSSES = [
+  { img:'img/skins/boss_slime.webp',  name:'Slime King',        zone:'Zone 1 · Slime Caverns', hp:800,  atk:12, gold:40  },
+  { img:'img/skins/boss_goblin.webp', name:'Goblin Chieftain',  zone:'Zone 2 · Goblin Warrens',hp:600,  atk:16, gold:70  },
+  { img:'img/skins/boss_wolf.webp',   name:'Wolf Alpha',        zone:'Zone 3 · Dark Forest',   hp:950,  atk:22, gold:95  },
+  { img:'img/skins/boss_orc.webp',    name:'Orc Warlord',       zone:'Zone 4 · Orc Fortress',  hp:1400, atk:28, gold:145 },
+];
+var adBossIdx = 0, adGold = 0, adRunning = false;
+
+function adInitBoss() {
+  var b = AD_BOSSES[adBossIdx % AD_BOSSES.length];
+  document.getElementById('adImg').src = b.img;
+  document.getElementById('adBossName').textContent = b.name;
+  document.getElementById('adBossZone').textContent = b.zone;
+  document.getElementById('adBossHp').textContent = b.hp;
+  document.getElementById('adPlayerHp').textContent = 150;
+  document.getElementById('adBossBar').style.width = '100%';
+  document.getElementById('adPlayerBar').style.width = '100%';
+  var btn = document.getElementById('adAtkBtn');
+  btn.disabled = false; btn.textContent = '⚔️ Attack';
+  adRunning = false;
+}
+
+function adAttack() {
+  if (adRunning) return;
+  adRunning = true;
+  var btn = document.getElementById('adAtkBtn');
+  btn.disabled = true; btn.textContent = 'Fighting...';
+  var b = AD_BOSSES[adBossIdx % AD_BOSSES.length];
+  var pDps = 28, eBoss = Math.max(b.atk * 0.15, b.atk - 10);
+  var bossHp = b.hp, playerHp = 150;
+  var DEMO_MS = Math.min(2800, Math.max(1400, (b.hp / pDps) * 50));
+  var start = performance.now();
+
+  (function tick(now) {
+    var t = Math.min(1, (now - start) / DEMO_MS);
+    var curBoss = Math.max(0, bossHp * (1 - t));
+    var curPlayer = Math.min(playerHp, Math.max(1, playerHp - eBoss * ((now - start) / 1000)));
+    document.getElementById('adBossHp').textContent = Math.round(curBoss);
+    document.getElementById('adBossBar').style.width = (curBoss / b.hp * 100) + '%';
+    document.getElementById('adPlayerHp').textContent = Math.round(curPlayer);
+    document.getElementById('adPlayerBar').style.width = (curPlayer / 150 * 100) + '%';
+    if (t < 1) { requestAnimationFrame(tick); return; }
+    // Victory
+    var gold = b.gold + Math.floor(Math.random() * 25);
+    adGold += gold;
+    document.getElementById('adGold').textContent = adGold;
+    document.getElementById('adBossHp').textContent = '0';
+    document.getElementById('adBossBar').style.width = '0%';
+    var fl = document.getElementById('adFloat');
+    fl.textContent = '+' + gold + ' 💰';
+    fl.style.color = '#facc15'; fl.style.transform = 'translateY(0)';
+    fl.classList.add('show');
+    setTimeout(function() {
+      fl.classList.remove('show'); fl.style.transform = '';
+      adBossIdx++;
+      adInitBoss();
+    }, 1300);
+  })(performance.now());
+}
+
+// Init arena demo
+(function(){ if (document.getElementById('adAtkBtn')) adInitBoss(); })();
+
+// ── Crafting demo ──
+function cdAdd(slot) {
+  if (slot.classList.contains('cd-done')) return;
+  var have = parseInt(slot.dataset.have || 0) + 1;
+  var need = parseInt(slot.dataset.need || 1);
+  slot.dataset.have = have;
+  slot.querySelector('.cd-have').textContent = have;
+  if (have >= need) slot.classList.add('cd-done');
+  var allDone = Array.from(document.querySelectorAll('#demoCraft .cd-slot'))
+    .every(function(s){ return s.classList.contains('cd-done'); });
+  var btn = document.getElementById('cdBtn');
+  if (allDone) { btn.disabled = false; btn.textContent = '⚒️ Forge It!'; }
+}
+
+function cdCraft() {
+  var btn = document.getElementById('cdBtn');
+  btn.disabled = true; btn.textContent = '✦ Forging...';
+  var img = document.getElementById('cdResultImg');
+  img.style.animation = 'none';
+  setTimeout(function(){
+    img.style.animation = 'ldFlash 0.5s ease';
+    img.style.filter = 'drop-shadow(0 0 28px rgba(250,204,21,0.95))';
+    btn.textContent = '✦ Dragonfire Blade crafted!';
+    btn.style.cssText = 'background:linear-gradient(135deg,#4ade80,#22d3ee);color:#000;border:none;cursor:default';
+    setTimeout(function() {
+      document.querySelectorAll('#demoCraft .cd-slot').forEach(function(s){
+        s.classList.remove('cd-done');
+        s.dataset.have = 0;
+        s.querySelector('.cd-have').textContent = 0;
+      });
+      btn.disabled = true; btn.textContent = 'Craft (need materials)';
+      btn.style.cssText = ''; img.style.filter = ''; img.style.animation = '';
+    }, 2200);
+  }, 100);
+}
+
+// ── Marketplace demo ──
+function mdBuy(row) {
+  if (row.classList.contains('md-bought')) return;
+  row.classList.add('md-bought');
+  var toast = document.getElementById('mdToast');
+  toast.textContent = '✓ ' + row.querySelector('.md-name').textContent + ' purchased!';
+  toast.classList.add('show');
+  setTimeout(function(){ toast.classList.remove('show'); }, 2200);
+}
 </script>
 </body>
 </html>
