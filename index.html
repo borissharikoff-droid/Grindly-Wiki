@@ -1560,28 +1560,30 @@
 .bop-equip-btn:hover { transform:translateY(-2px); box-shadow:0 6px 24px rgba(74,222,128,0.5); }
 .bop-reroll-btn { padding:11px 20px; border-radius:9px; border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.6); font-size:13px; font-weight:600; cursor:pointer; transition:background 0.15s; }
 .bop-reroll-btn:hover { background:rgba(255,255,255,0.1); }
-/* ══════ Equipment Screen ══════ */
+/* ══════ Equipment Screen (CharacterPanel) ══════ */
 .equip-screen { padding:56px 24px; background:rgba(0,0,0,0.25); border-top:1px solid rgba(255,255,255,0.05); border-bottom:1px solid rgba(255,255,255,0.05); }
-.eqs-layout { display:flex; gap:36px; justify-content:center; align-items:flex-start; margin-top:32px; flex-wrap:wrap; }
-.eqs-slots { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-.eqs-slot { display:flex; flex-direction:column; align-items:center; gap:5px; padding:14px 12px; border-radius:12px; min-width:110px; background:rgba(255,255,255,0.03); border:2px solid rgba(255,255,255,0.07); transition:all 0.5s; }
-.eqs-slot.equipped { border-color:rgba(129,140,248,0.45); background:rgba(129,140,248,0.07); }
-.eqs-slot.equipped.r-epic { border-color:rgba(192,132,252,0.45); background:rgba(192,132,252,0.07); }
-.eqs-slot.equipped.r-legendary { border-color:rgba(250,204,21,0.45); background:rgba(250,204,21,0.07); }
-.eqs-slot.equipped.r-mythic { border-color:rgba(244,114,182,0.5); background:rgba(244,114,182,0.08); }
-.eqs-slot-lbl { font-family:'JetBrains Mono',monospace; font-size:7px; color:rgba(255,255,255,0.3); text-transform:uppercase; letter-spacing:0.1em; }
-.eqs-slot-img-wrap { width:52px; height:52px; display:flex; align-items:center; justify-content:center; }
-.eqs-slot-img-wrap img { width:52px; height:52px; object-fit:contain; filter:drop-shadow(0 0 10px rgba(129,140,248,0.4)); }
-.eqs-empty { color:rgba(255,255,255,0.12); font-size:20px; }
-.eqs-slot-name { font-size:9px; font-weight:700; color:rgba(255,255,255,0.75); text-align:center; }
-.eqs-slot-rar { font-family:'JetBrains Mono',monospace; font-size:7px; font-weight:700; text-transform:uppercase; }
-.eqs-stats { min-width:210px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:14px; padding:20px 22px; display:flex; flex-direction:column; gap:11px; }
-.eqs-stats-title { font-size:12px; font-weight:700; color:rgba(255,255,255,0.5); padding-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.07); }
-.eqs-stat-row { display:flex; justify-content:space-between; align-items:center; font-size:12px; color:rgba(255,255,255,0.55); }
-.eqs-stat-val { font-family:'JetBrains Mono',monospace; font-size:18px; font-weight:900; color:#fff; transition:all 0.5s; }
-.eqs-ip-bar-wrap { height:4px; background:rgba(255,255,255,0.07); border-radius:2px; overflow:hidden; margin-top:-4px; }
-.eqs-ip-bar { height:100%; background:linear-gradient(90deg,#818cf8,#c084fc); border-radius:2px; transition:width 0.9s cubic-bezier(0.4,0,0.2,1); }
-.eqs-fight-btn { margin-top:6px; background:linear-gradient(135deg,#ef4444,#dc2626); border:none; border-radius:8px; color:#fff; font-size:14px; font-weight:800; padding:12px 20px; cursor:pointer; transition:all 0.2s; width:100%; box-shadow:0 4px 16px rgba(239,68,68,0.3); }
+.char-panel-wrap { max-width:520px; margin:32px auto 0; }
+.char-equip-row { display:flex; gap:6px; height:98px; }
+.char-vslot { width:80px; flex-shrink:0; height:100%; border-radius:4px; overflow:hidden; border:1px solid rgba(255,255,255,0.08); transition:border-color 0.4s; }
+.char-vslot-inner { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; height:100%; padding:0 8px; overflow:hidden; background:rgba(7,7,14,0.84); box-shadow:inset 0 0 14px rgba(0,0,0,0.5); transition:background 0.4s,box-shadow 0.4s; }
+.char-hcol { display:flex; flex-direction:column; gap:6px; flex:1; min-width:0; }
+.char-hslot { height:46px; border-radius:4px; overflow:hidden; border:1px solid rgba(255,255,255,0.07); transition:border-color 0.4s; }
+.char-hslot-inner { display:flex; align-items:center; gap:10px; height:100%; padding:0 10px; overflow:hidden; border-left:3px solid rgba(255,255,255,0.10); background:rgba(7,7,14,0.82); box-shadow:inset 0 0 14px rgba(0,0,0,0.45); transition:border-left-color 0.4s,background 0.4s; }
+.char-slot-lbl { font-family:'JetBrains Mono',monospace; font-size:7px; color:rgba(156,163,175,0.38); text-transform:uppercase; letter-spacing:0.1em; line-height:1; }
+.char-slot-name-v { font-size:8px; font-weight:600; font-family:'JetBrains Mono',monospace; color:rgba(255,255,255,0.18); text-align:center; width:100%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; padding:0 4px; transition:color 0.3s; }
+.char-slot-name-h { font-size:9px; font-weight:600; color:rgba(255,255,255,0.18); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; transition:color 0.3s; margin-top:3px; }
+.char-vslot-icon { width:56px; height:56px; border-radius:4px; display:flex; align-items:center; justify-content:center; overflow:hidden; background:rgba(0,0,0,0.45); border:1px solid rgba(255,255,255,0.08); transition:background 0.4s,border-color 0.4s; }
+.char-vslot-icon img { width:40px; height:40px; object-fit:contain; }
+.char-hslot-icon { width:28px; height:28px; border-radius:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0; overflow:hidden; background:rgba(0,0,0,0.40); border:1px solid rgba(255,255,255,0.07); transition:background 0.4s,border-color 0.4s; }
+.char-hslot-icon img { width:18px; height:18px; object-fit:contain; }
+.char-empty { color:rgba(255,255,255,0.12); font-size:11px; }
+.char-vslot-bar { width:32px; height:2px; border-radius:2px; background:transparent; transition:background 0.5s; }
+.char-stats-row { display:grid; grid-template-columns:repeat(5,1fr); gap:6px; margin-top:6px; }
+.char-stat-chip { display:flex; align-items:center; gap:6px; padding:8px; border-radius:4px; box-shadow:inset 0 0 8px rgba(0,0,0,0.4); }
+.char-stat-icon { font-size:10px; line-height:1; flex-shrink:0; }
+.char-stat-val { font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:900; line-height:1; }
+.char-stat-lbl { font-family:'JetBrains Mono',monospace; font-size:7px; text-transform:uppercase; letter-spacing:0.06em; line-height:1; margin-top:3px; }
+.eqs-fight-btn { margin-top:16px; display:block; width:100%; background:linear-gradient(135deg,#ef4444,#dc2626); border:none; border-radius:8px; color:#fff; font-size:14px; font-weight:800; padding:12px 20px; cursor:pointer; transition:all 0.2s; box-shadow:0 4px 16px rgba(239,68,68,0.3); }
 .eqs-fight-btn:hover { transform:translateY(-1px); box-shadow:0 6px 22px rgba(239,68,68,0.5); }
 /* ══════ Boss Fight ══════ */
 .boss-fight { padding:56px 24px; text-align:center; }
@@ -2134,22 +2136,85 @@
         <h2>Set Equipped</h2>
         <p class="sub">Your stats are locked in — enter the arena</p>
       </div>
-      <div class="eqs-layout">
-        <div class="eqs-slots">
-          <div class="eqs-slot" id="eqsHead"><div class="eqs-slot-lbl">HEAD</div><div class="eqs-slot-img-wrap"><span class="eqs-empty">—</span></div><div class="eqs-slot-name"></div><div class="eqs-slot-rar"></div></div>
-          <div class="eqs-slot" id="eqsTop"><div class="eqs-slot-lbl">ARMOR</div><div class="eqs-slot-img-wrap"><span class="eqs-empty">—</span></div><div class="eqs-slot-name"></div><div class="eqs-slot-rar"></div></div>
-          <div class="eqs-slot" id="eqsAcc"><div class="eqs-slot-lbl">ACCESSORY</div><div class="eqs-slot-img-wrap"><span class="eqs-empty">—</span></div><div class="eqs-slot-name"></div><div class="eqs-slot-rar"></div></div>
-          <div class="eqs-slot" id="eqsAura"><div class="eqs-slot-lbl">WEAPON</div><div class="eqs-slot-img-wrap"><span class="eqs-empty">—</span></div><div class="eqs-slot-name"></div><div class="eqs-slot-rar"></div></div>
+      <div class="char-panel-wrap">
+        <!-- Equipment row: VSlot weapon + 2 HSlot columns -->
+        <div class="char-equip-row">
+          <!-- Left: Weapon — tall VSlot -->
+          <div class="char-vslot" id="eqsWeapon">
+            <div class="char-vslot-inner" id="eqsWeaponInner">
+              <div class="char-slot-lbl">WEAPON</div>
+              <div class="char-vslot-icon" id="eqsWeaponIcon"><span class="char-empty">⚔</span></div>
+              <div class="char-slot-name-v" id="eqsWeaponName">—</div>
+              <div class="char-vslot-bar" id="eqsWeaponBar"></div>
+            </div>
+          </div>
+          <!-- Middle column: Head + Legs -->
+          <div class="char-hcol">
+            <div class="char-hslot" id="eqsHead">
+              <div class="char-hslot-inner" id="eqsHeadInner">
+                <div class="char-hslot-icon" id="eqsHeadIcon"><span class="char-empty">○</span></div>
+                <div style="min-width:0;flex:1">
+                  <div class="char-slot-lbl">HEAD</div>
+                  <div class="char-slot-name-h" id="eqsHeadName">Empty</div>
+                </div>
+              </div>
+            </div>
+            <div class="char-hslot" id="eqsLegs">
+              <div class="char-hslot-inner" id="eqsLegsInner">
+                <div class="char-hslot-icon" id="eqsLegsIcon"><span class="char-empty">○</span></div>
+                <div style="min-width:0;flex:1">
+                  <div class="char-slot-lbl">LEGS</div>
+                  <div class="char-slot-name-h" id="eqsLegsName">Empty</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Right column: Body + Ring -->
+          <div class="char-hcol">
+            <div class="char-hslot" id="eqsBody">
+              <div class="char-hslot-inner" id="eqsBodyInner">
+                <div class="char-hslot-icon" id="eqsBodyIcon"><span class="char-empty">○</span></div>
+                <div style="min-width:0;flex:1">
+                  <div class="char-slot-lbl">BODY</div>
+                  <div class="char-slot-name-h" id="eqsBodyName">Empty</div>
+                </div>
+              </div>
+            </div>
+            <div class="char-hslot" id="eqsRing">
+              <div class="char-hslot-inner" id="eqsRingInner">
+                <div class="char-hslot-icon" id="eqsRingIcon"><span class="char-empty">○</span></div>
+                <div style="min-width:0;flex:1">
+                  <div class="char-slot-lbl">RING</div>
+                  <div class="char-slot-name-h" id="eqsRingName">Empty</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="eqs-stats">
-          <div class="eqs-stats-title">Player Stats</div>
-          <div class="eqs-stat-row"><span>⚔️ Attack</span><span class="eqs-stat-val" id="eqsAtk">24</span></div>
-          <div class="eqs-stat-row"><span>❤️ HP Max</span><span class="eqs-stat-val" id="eqsHp">100</span></div>
-          <div class="eqs-stat-row"><span>💚 Regen/turn</span><span class="eqs-stat-val" id="eqsRegen">1</span></div>
-          <div class="eqs-stat-row"><span>🛡️ Item Power</span><span class="eqs-stat-val" id="eqsIp">0</span></div>
-          <div class="eqs-ip-bar-wrap"><div class="eqs-ip-bar" id="eqsIpBar" style="width:0%"></div></div>
-          <button class="eqs-fight-btn" onclick="goFightBoss()">Enter the Arena →</button>
+        <!-- Stats chips: ATK HP REG DEF IP -->
+        <div class="char-stats-row">
+          <div class="char-stat-chip" style="background:linear-gradient(135deg,rgba(248,113,113,0.07) 0%,rgba(7,7,14,0.90) 60%);border:1px solid rgba(248,113,113,0.16)">
+            <span class="char-stat-icon" style="color:#f87171">⚔</span>
+            <div><div class="char-stat-val" id="eqsAtk" style="color:#f87171">24</div><div class="char-stat-lbl" style="color:rgba(248,113,113,0.4)">ATK/s</div></div>
+          </div>
+          <div class="char-stat-chip" style="background:linear-gradient(135deg,rgba(74,222,128,0.07) 0%,rgba(7,7,14,0.90) 60%);border:1px solid rgba(74,222,128,0.16)">
+            <span class="char-stat-icon" style="color:#4ade80">♥</span>
+            <div><div class="char-stat-val" id="eqsHp" style="color:#4ade80">100</div><div class="char-stat-lbl" style="color:rgba(74,222,128,0.4)">HP</div></div>
+          </div>
+          <div class="char-stat-chip" style="background:linear-gradient(135deg,rgba(34,211,238,0.07) 0%,rgba(7,7,14,0.90) 60%);border:1px solid rgba(34,211,238,0.16)">
+            <span class="char-stat-icon" style="color:#22d3ee">💧</span>
+            <div><div class="char-stat-val" id="eqsRegen" style="color:#22d3ee">1</div><div class="char-stat-lbl" style="color:rgba(34,211,238,0.4)">REG/s</div></div>
+          </div>
+          <div class="char-stat-chip" style="background:linear-gradient(135deg,rgba(129,140,248,0.07) 0%,rgba(7,7,14,0.90) 60%);border:1px solid rgba(129,140,248,0.16)">
+            <span class="char-stat-icon" style="color:#818cf8">🛡</span>
+            <div><div class="char-stat-val" id="eqsDef" style="color:#818cf8">0</div><div class="char-stat-lbl" style="color:rgba(129,140,248,0.4)">DEF</div></div>
+          </div>
+          <div class="char-stat-chip" style="background:linear-gradient(135deg,rgba(252,211,77,0.07) 0%,rgba(7,7,14,0.90) 60%);border:1px solid rgba(252,211,77,0.16)">
+            <span class="char-stat-icon" style="color:#fcd34d">✦</span>
+            <div><div class="char-stat-val" id="eqsIp" style="color:#fcd34d">0</div><div class="char-stat-lbl" style="color:rgba(252,211,77,0.4)">IP</div></div>
+          </div>
         </div>
+        <button class="eqs-fight-btn" onclick="goFightBoss()">Enter the Arena →</button>
       </div>
     </section>
 
@@ -2789,37 +2854,41 @@
 var BOP_SETS = {
   rare: {
     items: [
-      { slot:'HEAD',   name:'Scale Hood',     rarity:'rare',      rarColor:'#38bdf8', img:'img/skins/item_craft_scale_robe.webp',     atk:4,  hp:7,  regen:1 },
-      { slot:'ARMOR',  name:'Chain Plate',    rarity:'rare',      rarColor:'#38bdf8', img:'img/skins/item_craft_troll_aegis.webp',    atk:0,  hp:12, regen:1 },
-      { slot:'RING',   name:'Shadow Ring',    rarity:'epic',      rarColor:'#c084fc', img:'img/skins/item_shadow_ring.webp',           atk:8,  hp:0,  regen:0 },
-      { slot:'WEAPON', name:'Warlord Sigil',  rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_warlord_sigil.webp',        atk:10, hp:0,  regen:0 }
+      { slot:'weapon', name:'Warlord Sigil',  rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_warlord_sigil.webp',       atk:10, hp:0,  regen:0, def:0 },
+      { slot:'head',   name:'Scale Hood',     rarity:'rare',      rarColor:'#38bdf8', img:'img/skins/item_craft_scale_robe.webp',    atk:4,  hp:7,  regen:1, def:2 },
+      { slot:'body',   name:'Chain Plate',    rarity:'rare',      rarColor:'#38bdf8', img:'img/skins/item_craft_troll_aegis.webp',   atk:0,  hp:12, regen:1, def:4 },
+      { slot:'legs',   name:'Scale Leggings', rarity:'rare',      rarColor:'#38bdf8', img:'img/skins/item_craft_scale_robe.webp',    atk:0,  hp:8,  regen:0, def:3 },
+      { slot:'ring',   name:'Shadow Ring',    rarity:'epic',      rarColor:'#c084fc', img:'img/skins/item_shadow_ring.webp',         atk:8,  hp:0,  regen:0, def:0 }
     ],
     boss:{ img:'img/skins/boss_goblin.webp', name:'Goblin Chieftain', zone:'Zone 2 · Goblin Warrens', hp:600,  atk:16, gold:70 }
   },
   epic: {
     items: [
-      { slot:'HEAD',   name:'Scale Hood',  rarity:'epic', rarColor:'#c084fc', img:'img/skins/item_craft_scale_robe.webp', atk:6,  hp:9,  regen:1 },
-      { slot:'ARMOR',  name:'Orc Plate',   rarity:'epic', rarColor:'#c084fc', img:'img/skins/item_craft_orc_plate.webp',  atk:0,  hp:16, regen:1 },
-      { slot:'RING',   name:'Shadow Ring', rarity:'epic', rarColor:'#c084fc', img:'img/skins/item_shadow_ring.webp',      atk:10, hp:0,  regen:0 },
-      { slot:'WEAPON', name:'Troll Aegis', rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_craft_troll_aegis.webp', atk:14, hp:4, regen:0 }
+      { slot:'weapon', name:'Troll Aegis',    rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_craft_troll_aegis.webp',  atk:14, hp:4,  regen:0, def:2 },
+      { slot:'head',   name:'Scale Hood',     rarity:'epic',      rarColor:'#c084fc', img:'img/skins/item_craft_scale_robe.webp',   atk:6,  hp:9,  regen:1, def:3 },
+      { slot:'body',   name:'Orc Plate',      rarity:'epic',      rarColor:'#c084fc', img:'img/skins/item_craft_orc_plate.webp',    atk:0,  hp:16, regen:1, def:6 },
+      { slot:'legs',   name:'Orc Leggings',   rarity:'epic',      rarColor:'#c084fc', img:'img/skins/item_craft_orc_plate.webp',    atk:0,  hp:12, regen:0, def:5 },
+      { slot:'ring',   name:'Shadow Ring',    rarity:'epic',      rarColor:'#c084fc', img:'img/skins/item_shadow_ring.webp',        atk:10, hp:0,  regen:0, def:0 }
     ],
     boss:{ img:'img/skins/boss_orc.webp', name:'Orc Warlord', zone:'Zone 4 · Orc Fortress', hp:1400, atk:28, gold:145 }
   },
   legendary: {
     items: [
-      { slot:'HEAD',   name:'Golden Helm',   rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_golden_helm.webp',          atk:10, hp:14, regen:2 },
-      { slot:'ARMOR',  name:'Golden Plate',  rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_golden_plate.webp',         atk:0,  hp:22, regen:2 },
-      { slot:'RING',   name:'Warlord Sigil', rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_warlord_sigil.webp',        atk:16, hp:0,  regen:0 },
-      { slot:'WEAPON', name:'Dragon Crown',  rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_craft_dragon_crown.webp',   atk:20, hp:8,  regen:1 }
+      { slot:'weapon', name:'Dragon Crown',   rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_craft_dragon_crown.webp', atk:20, hp:8,  regen:1, def:4 },
+      { slot:'head',   name:'Golden Helm',    rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_golden_helm.webp',        atk:10, hp:14, regen:2, def:5 },
+      { slot:'body',   name:'Golden Plate',   rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_golden_plate.webp',       atk:0,  hp:22, regen:2, def:8 },
+      { slot:'legs',   name:'Golden Greaves', rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_golden_plate.webp',       atk:0,  hp:16, regen:1, def:7 },
+      { slot:'ring',   name:'Warlord Sigil',  rarity:'legendary', rarColor:'#facc15', img:'img/skins/item_warlord_sigil.webp',      atk:16, hp:0,  regen:0, def:0 }
     ],
     boss:{ img:'img/skins/boss_troll.webp', name:'Stone Troll', zone:'Zone 5 · Troll Bridge', hp:2800, atk:44, gold:230 }
   },
   mythic: {
     items: [
-      { slot:'HEAD',   name:'Void Helm',  rarity:'mythic', rarColor:'#f472b6', img:'img/skins/item_void_helm.webp',          atk:16, hp:20, regen:3 },
-      { slot:'ARMOR',  name:'Void Plate', rarity:'mythic', rarColor:'#f472b6', img:'img/skins/item_void_plate.webp',         atk:0,  hp:32, regen:3 },
-      { slot:'RING',   name:'Void Ring',  rarity:'mythic', rarColor:'#f472b6', img:'img/skins/item_void_ring.webp',          atk:22, hp:0,  regen:1 },
-      { slot:'WEAPON', name:'Void Blade', rarity:'mythic', rarColor:'#f472b6', img:'img/skins/item_craft_void_blade.webp',   atk:32, hp:0,  regen:0 }
+      { slot:'weapon', name:'Void Blade',     rarity:'mythic',    rarColor:'#f472b6', img:'img/skins/item_craft_void_blade.webp',   atk:32, hp:0,  regen:0, def:0  },
+      { slot:'head',   name:'Void Helm',      rarity:'mythic',    rarColor:'#f472b6', img:'img/skins/item_void_helm.webp',          atk:16, hp:20, regen:3, def:8  },
+      { slot:'body',   name:'Void Plate',     rarity:'mythic',    rarColor:'#f472b6', img:'img/skins/item_void_plate.webp',         atk:0,  hp:32, regen:3, def:12 },
+      { slot:'legs',   name:'Void Leggings',  rarity:'mythic',    rarColor:'#f472b6', img:'img/skins/item_void_plate.webp',         atk:0,  hp:22, regen:2, def:10 },
+      { slot:'ring',   name:'Void Ring',      rarity:'mythic',    rarColor:'#f472b6', img:'img/skins/item_void_ring.webp',          atk:22, hp:0,  regen:1, def:0  }
     ],
     boss:{ img:'img/skins/boss_dragon.webp', name:'Dragon Elder', zone:'Zone 6 · Dragon Lair', hp:4500, atk:65, gold:480 }
   }
@@ -2867,37 +2936,73 @@ function bopOpen() {
 function bopEquip() {
   if (!bopEquipped) return;
   var set = bopEquipped;
-  var slotIds = ['eqsHead','eqsTop','eqsAcc','eqsAura'];
-  var totalAtk=24, totalHp=100, totalRegen=1;
-  set.items.forEach(function(it){ totalAtk+=it.atk||0; totalHp+=it.hp||0; totalRegen+=it.regen||0; });
+  var totalAtk=24, totalHp=100, totalRegen=1, totalDef=0;
+  var ipByRarity = {common:100, rare:150, epic:220, legendary:320, mythic:450};
+  var ip=0;
+  set.items.forEach(function(it){
+    totalAtk+=it.atk||0; totalHp+=it.hp||0; totalRegen+=it.regen||0; totalDef+=it.def||0;
+    ip += ipByRarity[it.rarity]||100;
+  });
+
+  // Reset all slots to empty
+  ['eqsWeapon','eqsHead','eqsBody','eqsLegs','eqsRing'].forEach(function(id) {
+    var el = document.getElementById(id); if (!el) return;
+    el.style.border = '1px solid rgba(255,255,255,0.08)';
+    var inner = document.getElementById(id+'Inner'); if (!inner) return;
+    var iconW = document.getElementById(id+'Icon');
+    var nameEl = document.getElementById(id+'Name');
+    if (id === 'eqsWeapon') {
+      inner.style.background = 'rgba(7,7,14,0.84)'; inner.style.boxShadow = 'inset 0 0 14px rgba(0,0,0,0.5)';
+      iconW.style.background = 'rgba(0,0,0,0.45)'; iconW.style.border = '1px solid rgba(255,255,255,0.08)';
+      iconW.innerHTML = '<span class="char-empty">⚔</span>';
+      nameEl.textContent = '—'; nameEl.style.color = 'rgba(255,255,255,0.18)';
+      document.getElementById(id+'Bar').style.background = 'transparent';
+    } else {
+      inner.style.borderLeft = '3px solid rgba(255,255,255,0.10)'; inner.style.background = 'rgba(7,7,14,0.82)';
+      iconW.style.background = 'rgba(0,0,0,0.40)'; iconW.style.border = '1px solid rgba(255,255,255,0.07)';
+      iconW.innerHTML = '<span class="char-empty">○</span>';
+      nameEl.textContent = 'Empty'; nameEl.style.color = 'rgba(255,255,255,0.18)';
+    }
+  });
+
   var equipEl = document.getElementById('equipScreen');
   equipEl.style.display = '';
-  slotIds.forEach(function(id) {
-    var s = document.getElementById(id);
-    s.className = 'eqs-slot';
-    s.querySelector('.eqs-slot-img-wrap').innerHTML = '<span class="eqs-empty">—</span>';
-    s.querySelector('.eqs-slot-name').textContent = '';
-    s.querySelector('.eqs-slot-rar').textContent = '';
-  });
   setTimeout(function(){ equipEl.scrollIntoView({ behavior:'smooth', block:'center' }); }, 80);
+
   set.items.forEach(function(item, i) {
     setTimeout(function() {
-      var s = document.getElementById(slotIds[i]);
-      s.querySelector('.eqs-slot-img-wrap').innerHTML = '<img src="' + item.img + '">';
-      s.querySelector('.eqs-slot-name').textContent = item.name;
-      var rarEl = s.querySelector('.eqs-slot-rar');
-      rarEl.textContent = item.rarity.toUpperCase(); rarEl.style.color = item.rarColor;
-      s.classList.add('equipped', 'r-' + item.rarity);
-    }, 150 + i * 240);
+      var c = item.rarColor;
+      var id = 'eqs' + item.slot.charAt(0).toUpperCase() + item.slot.slice(1);
+      document.getElementById(id).style.border = '1px solid ' + c;
+      var inner = document.getElementById(id+'Inner');
+      var iconW = document.getElementById(id+'Icon');
+      var nameEl = document.getElementById(id+'Name');
+      if (item.slot === 'weapon') {
+        inner.style.background = 'radial-gradient(ellipse at 50% 42%,'+c+'30 0%,rgba(7,7,14,0.97) 68%)';
+        inner.style.boxShadow = 'inset 0 0 18px rgba(0,0,0,0.55),0 0 8px '+c+'14';
+        iconW.style.background = 'radial-gradient(circle at 50% 40%,'+c+'55 0%,rgba(5,5,10,0.95) 70%)';
+        iconW.style.border = '1px solid '+c+'55';
+        iconW.innerHTML = '<img src="'+item.img+'" style="width:40px;height:40px;object-fit:contain">';
+        nameEl.textContent = item.name; nameEl.style.color = 'rgba(255,255,255,0.65)';
+        document.getElementById(id+'Bar').style.background = 'linear-gradient(90deg,transparent,'+c+',transparent)';
+      } else {
+        inner.style.borderLeft = '3px solid '+c;
+        inner.style.background = 'linear-gradient(90deg,'+c+'28 0%,rgba(7,7,14,0.96) 50%)';
+        iconW.style.background = 'radial-gradient(circle at 50% 40%,'+c+'55 0%,rgba(5,5,10,0.95) 65%)';
+        iconW.style.border = '1px solid '+c+'55';
+        iconW.innerHTML = '<img src="'+item.img+'" style="width:18px;height:18px;object-fit:contain">';
+        nameEl.textContent = item.name; nameEl.style.color = 'rgba(255,255,255,0.88)';
+      }
+    }, 150 + i * 200);
   });
+
   setTimeout(function() {
-    animateCounterVal(document.getElementById('eqsAtk'), 24, totalAtk, 700);
-    animateCounterVal(document.getElementById('eqsHp'), 100, totalHp, 700);
-    animateCounterVal(document.getElementById('eqsRegen'), 1, totalRegen, 700);
-    var ip = totalAtk * 10 + totalHp * 5 + totalRegen * 25;
-    animateCounterVal(document.getElementById('eqsIp'), 0, ip, 800);
-    setTimeout(function(){ document.getElementById('eqsIpBar').style.width = Math.min(100, ip / 15) + '%'; }, 150);
-  }, 150 + set.items.length * 240 + 120);
+    animateCounterVal(document.getElementById('eqsAtk'),   24,        totalAtk,   700);
+    animateCounterVal(document.getElementById('eqsHp'),    100,       totalHp,    700);
+    animateCounterVal(document.getElementById('eqsRegen'), 1,         totalRegen, 700);
+    animateCounterVal(document.getElementById('eqsDef'),   0,         totalDef,   700);
+    animateCounterVal(document.getElementById('eqsIp'),    0,         ip,         800);
+  }, 150 + set.items.length * 200 + 120);
 }
 
 function animateCounterVal(el, from, to, dur) {
