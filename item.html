@@ -758,7 +758,7 @@ var _chartTip = null;
 function getChartTip() {
   if (!_chartTip) {
     _chartTip = document.createElement('div');
-    _chartTip.style.cssText = 'position:fixed;pointer-events:none;background:rgba(8,7,15,0.97);border:1px solid rgba(124,58,237,0.3);border-radius:6px;padding:6px 10px;font-size:11px;font-family:Inter,sans-serif;color:#eae6f5;z-index:999;display:none;box-shadow:0 4px 16px rgba(0,0,0,0.6);line-height:1.5;white-space:nowrap';
+    _chartTip.style.cssText = 'position:fixed;pointer-events:none;background:rgba(20,17,10,0.97);border:1px solid rgba(200,168,75,0.35);border-radius:4px;padding:6px 10px;font-size:11px;font-family:Inter,sans-serif;color:#ede4d0;z-index:999;display:none;box-shadow:0 4px 16px rgba(0,0,0,0.6);line-height:1.5;white-space:nowrap';
     document.body.appendChild(_chartTip);
   }
   return _chartTip;
@@ -780,7 +780,7 @@ function attachChartHover(canvas, getDataFn, getDaysFn, unit) {
     var dayLabel = (days && days[idx]) ? days[idx] : '';
     tip.innerHTML =
       (dayLabel ? '<span style="color:#6b6280;font-size:10px">' + dayLabel + '</span><br>' : '') +
-      '<strong style="color:#d4a843">' + val + '</strong> <span style="color:#6b6280">' + (unit||'gold') + '</span>';
+      '<strong style="color:#c8a84b">' + val + '</strong> <span style="color:#7a6f5a">' + (unit||'gold') + '</span>';
     tip.style.display = 'block';
     var tx = e.clientX + 14;
     var ty = e.clientY - 36;
