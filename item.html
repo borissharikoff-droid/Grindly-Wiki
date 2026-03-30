@@ -791,7 +791,7 @@ function attachChartHover(canvas, getDataFn, getDaysFn, unit) {
   canvas.addEventListener('mouseleave', function() { tip.style.display = 'none'; });
 }
 
-function drawChart(canvas, data, color, fillColor) {
+function drawChart(canvas, data, color, fillColor, days) {
   var ctx = canvas.getContext('2d');
   var dpr = window.devicePixelRatio || 1;
   var w = canvas.clientWidth;
@@ -803,37 +803,63 @@ function drawChart(canvas, data, color, fillColor) {
   var min = Math.min.apply(null, data);
   var max = Math.max.apply(null, data);
   var range = max - min || 1;
-  var padY = 20;
+  var padLeft = 36;
+  var padTop = 14;
+  var padBottom = days && days.length ? 20 : 10;
+  var chartW = w - padLeft;
+  var chartH = h - padTop - padBottom;
 
-  // Grid
-  ctx.strokeStyle = 'rgba(212,168,67,0.08)';
-  ctx.lineWidth = 1;
-  for (var i = 0; i < 5; i++) {
-    var gy = padY + (h - 2*padY) * i / 4;
+  // Grid + Y labels
+  ctx.font = '9px Inter, sans-serif';
+  for (var i = 0; i <= 4; i++) {
+    var val = Math.round(max - (range * i / 4));
+    var gy = padTop + chartH * i / 4;
+    ctx.strokeStyle = 'rgba(200,168,75,0.07)';
+    ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.moveTo(0, gy);
+    ctx.moveTo(padLeft, gy);
     ctx.lineTo(w, gy);
     ctx.stroke();
+    ctx.fillStyle = 'rgba(122,111,90,0.75)';
+    ctx.textAlign = 'right';
+    ctx.fillText(val + 'g', padLeft - 3, gy + 3);
   }
 
-  // Y labels
-  ctx.fillStyle = 'rgba(122,111,90,0.6)';
-  ctx.font = '9px Inter, sans-serif';
-  for (var i = 0; i < 5; i++) {
-    var val = Math.round(max - (range * i / 4));
-    var gy = padY + (h - 2*padY) * i / 4;
-    ctx.fillText(val + 'g', 4, gy - 3);
+  // Baseline
+  ctx.strokeStyle = 'rgba(200,168,75,0.15)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(padLeft, padTop + chartH);
+  ctx.lineTo(w, padTop + chartH);
+  ctx.stroke();
+
+  // X-axis date labels (first and last)
+  if (days && days.length >= 2) {
+    ctx.fillStyle = 'rgba(122,111,90,0.7)';
+    ctx.font = '8px Inter, sans-serif';
+    var fmt = function(d) {
+      try { return new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric'}); } catch(e){ return d; }
+    };
+    ctx.textAlign = 'left';
+    ctx.fillText(fmt(days[0]), padLeft + 2, h - 3);
+    ctx.textAlign = 'right';
+    ctx.fillText(fmt(days[days.length - 1]), w - 2, h - 3);
+    if (days.length > 4) {
+      var mi = Math.floor(days.length / 2);
+      ctx.textAlign = 'center';
+      ctx.fillText(fmt(days[mi]), padLeft + chartW / 2, h - 3);
+    }
   }
 
-  // Fill
+  // Fill area
   ctx.beginPath();
   for (var i = 0; i < data.length; i++) {
-    var x = (i / (data.length - 1)) * w;
-    var y = padY + (1 - (data[i] - min) / range) * (h - 2*padY);
+    var x = padLeft + (i / (data.length - 1)) * chartW;
+    var y = padTop + (1 - (data[i] - min) / range) * chartH;
     if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
   }
-  ctx.lineTo(w, h);
-  ctx.lineTo(0, h);
+  ctx.lineTo(padLeft + chartW, padTop + chartH);
+  ctx.lineTo(padLeft, padTop + chartH);
   ctx.closePath();
   ctx.fillStyle = fillColor;
   ctx.fill();
@@ -841,8 +867,8 @@ function drawChart(canvas, data, color, fillColor) {
   // Line
   ctx.beginPath();
   for (var i = 0; i < data.length; i++) {
-    var x = (i / (data.length - 1)) * w;
-    var y = padY + (1 - (data[i] - min) / range) * (h - 2*padY);
+    var x = padLeft + (i / (data.length - 1)) * chartW;
+    var y = padTop + (1 - (data[i] - min) / range) * chartH;
     if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
   }
   ctx.strokeStyle = color;
@@ -850,7 +876,7 @@ function drawChart(canvas, data, color, fillColor) {
   ctx.stroke();
 }
 
-function drawBarChart(canvas, data, color) {
+function drawBarChart(canvas, data, color, days) {
   var ctx = canvas.getContext('2d');
   var dpr = window.devicePixelRatio || 1;
   var w = canvas.clientWidth;
@@ -860,14 +886,76 @@ function drawBarChart(canvas, data, color) {
   ctx.scale(dpr, dpr);
 
   var max = Math.max.apply(null, data) || 1;
-  var barW = Math.max(1, (w / data.length) - 1);
+  var padLeft = 30;
+  var padBottom = days && days.length ? 22 : 14;
+  var padTop = 20;
+  var chartW = w - padLeft;
+  var chartH = h - padTop - padBottom;
+  var barGap = 2;
+  var barW = Math.max(2, (chartW / data.length) - barGap);
 
+  // Horizontal grid lines + Y labels
+  var yTicks = 3;
+  ctx.font = '9px Inter, sans-serif';
+  for (var i = 0; i <= yTicks; i++) {
+    var val = Math.round(max * (yTicks - i) / yTicks);
+    var gy = padTop + chartH * i / yTicks;
+    ctx.strokeStyle = 'rgba(200,168,75,0.07)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(padLeft, gy);
+    ctx.lineTo(w, gy);
+    ctx.stroke();
+    ctx.fillStyle = 'rgba(122,111,90,0.75)';
+    ctx.textAlign = 'right';
+    ctx.fillText(val, padLeft - 3, gy + 3);
+  }
+
+  // Baseline
+  ctx.strokeStyle = 'rgba(200,168,75,0.2)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(padLeft, padTop + chartH);
+  ctx.lineTo(w, padTop + chartH);
+  ctx.stroke();
+
+  // Bars + value labels
   for (var i = 0; i < data.length; i++) {
-    var barH = (data[i] / max) * (h - 10);
-    var x = (i / data.length) * w;
-    var y = h - barH;
-    ctx.fillStyle = color;
-    ctx.fillRect(x, y, barW, barH);
+    var bh = (data[i] / max) * chartH;
+    var bx = padLeft + (i / data.length) * chartW + barGap / 2;
+    var by = padTop + chartH - bh;
+
+    // Bar fill with gradient
+    var grad = ctx.createLinearGradient(0, by, 0, by + bh);
+    grad.addColorStop(0, color.replace('0.4', '0.65'));
+    grad.addColorStop(1, color.replace('0.4', '0.25'));
+    ctx.fillStyle = grad;
+    ctx.fillRect(bx, by, barW, bh);
+
+    // Value label on top of bar (only if bar is tall enough and value > 0)
+    if (data[i] > 0 && bh > 14) {
+      ctx.fillStyle = 'rgba(200,168,75,0.85)';
+      ctx.font = '8px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(data[i], bx + barW / 2, by - 2);
+    }
+
+    // X-axis date label — show every Nth bar to avoid clutter
+    if (days && days[i]) {
+      var showEvery = data.length <= 10 ? 1 : data.length <= 20 ? 2 : 5;
+      if (i % showEvery === 0 || i === data.length - 1) {
+        var label = days[i];
+        // Format: strip year, keep "Mon DD"
+        try {
+          var d = new Date(label);
+          label = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        } catch(e) {}
+        ctx.fillStyle = 'rgba(122,111,90,0.7)';
+        ctx.font = '8px Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(label, bx + barW / 2, h - 3);
+      }
+    }
   }
 }
 
@@ -1153,7 +1241,7 @@ function renderItem(itemId) {
             if (!canvas) return;
             currentPriceSlice = chartDays > 0 ? prices.slice(-chartDays) : prices;
             currentDaysSlice = history.days ? (chartDays > 0 ? history.days.slice(-chartDays) : history.days) : [];
-            drawChart(canvas, currentPriceSlice, '#d4a843', 'rgba(212,168,67,0.1)');
+            drawChart(canvas, currentPriceSlice, '#c8a84b', 'rgba(200,168,75,0.1)', currentDaysSlice);
           }
           redrawPrice();
           var priceCanvas = document.getElementById('priceChart');
@@ -1175,7 +1263,7 @@ function renderItem(itemId) {
           var volDays = history.days ? history.days.slice(-30) : [];
           function redrawVol() {
             var canvas = document.getElementById('volumeChart');
-            if (canvas) drawBarChart(canvas, volSlice, 'rgba(96,165,250,0.4)');
+            if (canvas) drawBarChart(canvas, volSlice, 'rgba(96,165,250,0.4)', volDays);
           }
           redrawVol();
           var volCanvas = document.getElementById('volumeChart');
