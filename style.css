@@ -5,26 +5,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --bg-page:     #1a1308;
-  --bg-dark:     #0d0a04;
-  --bg-panel:    #1e1710;
-  --bg-card:     #231c12;
-  --card-inner:  #1c1509;
-  --bg-input:    #181208;
-  --border-ornate: #4a3a1e;
-  --border-inner: #3a2e18;
-  --border-light: rgba(212,168,67,0.15);
+  --bg-page:     #08070f;
+  --bg-dark:     #050508;
+  --bg-panel:    #0c0b14;
+  --bg-card:     #0f0e1a;
+  --card-inner:  #0a091200;
+  --bg-input:    #0b0a14;
+  --border-ornate: #2d1b5e;
+  --border-inner: #1e1440;
+  --border-light: rgba(168,85,247,0.12);
   --gold:        #d4a843;
   --gold-dim:    #a8842f;
   --gold-bright: #f0c850;
   --gold-glow:   rgba(212,168,67,0.15);
+  --purple:      #7c3aed;
+  --purple-bright: #a855f7;
+  --purple-dim:  #5b21b6;
+  --purple-glow: rgba(124,58,237,0.2);
+  --purple-glow-strong: rgba(168,85,247,0.3);
   --brown:       #8b6914;
   --brown-dark:  #5a4510;
   --green:       #00ff88;
   --red:         #ef4444;
-  --text:        #c8bda8;
-  --text-dim:    #7a6f5a;
-  --text-bright: #ede4d0;
+  --text:        #c5bcd8;
+  --text-dim:    #6b6280;
+  --text-bright: #eae6f5;
   --link:        #d4a843;
   --link-hover:  #f0c850;
   --font-title:  'Cinzel', 'Georgia', serif;
@@ -42,6 +47,9 @@ body {
   font-size: 13px;
   line-height: 1.6;
   min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse 60% 40% at 15% 0%, rgba(124,58,237,0.04) 0%, transparent 100%),
+    radial-gradient(ellipse 40% 30% at 85% 100%, rgba(124,58,237,0.03) 0%, transparent 100%);
 }
 
 a { color: var(--link); text-decoration: none; transition: color 0.15s; }
@@ -55,9 +63,9 @@ a:hover { color: var(--link-hover); }
 
 /* ══════ Top Bar ══════ */
 .top-bar {
-  background: linear-gradient(180deg, #1a1308 0%, #0d0a04 100%);
+  background: linear-gradient(180deg, #0c0b14 0%, #050508 100%);
   border-bottom: 2px solid var(--border-ornate);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.6);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.6), 0 1px 0 rgba(124,58,237,0.1);
 }
 
 .top-bar-inner {
@@ -182,7 +190,7 @@ a:hover { color: var(--link-hover); }
 }
 
 .search-input::placeholder { color: var(--text-dim); }
-.search-input:focus { border-color: var(--gold-dim); }
+.search-input:focus { border-color: var(--purple); box-shadow: 0 0 0 2px var(--purple-glow); }
 
 .search-wrap {
   position: relative;
@@ -230,8 +238,8 @@ a:hover { color: var(--link-hover); }
 }
 
 .search-result-item:hover {
-  background: var(--gold-glow);
-  color: var(--gold);
+  background: var(--purple-glow);
+  color: var(--purple-bright);
 }
 
 .search-result-item:last-child { border-bottom: none; }
@@ -299,13 +307,15 @@ a:hover { color: var(--link-hover); }
 }
 
 .nav-link:hover {
-  color: var(--gold);
-  background: var(--gold-glow);
+  color: var(--purple-bright);
+  background: var(--purple-glow);
 }
 
 .nav-link.active {
-  color: var(--gold);
-  background: rgba(212,168,67,0.12);
+  color: var(--purple-bright);
+  background: rgba(124,58,237,0.15);
+  border-left: 2px solid var(--purple-bright);
+  padding-left: 6px;
 }
 
 .nav-dot {
@@ -335,7 +345,8 @@ a:hover { color: var(--link-hover); }
 /* ── Hero Banner ── */
 .hero {
   background:
-    linear-gradient(180deg, rgba(212,168,67,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse at 50% 0%, rgba(124,58,237,0.12) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(212,168,67,0.06) 0%, transparent 70%),
     linear-gradient(135deg, var(--bg-panel) 0%, var(--bg-page) 100%);
   border-bottom: 2px solid var(--border-ornate);
   padding: 32px 28px 28px;
