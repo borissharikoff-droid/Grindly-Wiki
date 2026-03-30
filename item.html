@@ -486,7 +486,7 @@ var ITEMS = [
   { id:'star_bloom', name:'Star Bloom', slot:'plant', rarity:'legendary', icon:'\uD83C\uDF1F', desc:'A radiant bloom said to hold cosmic energy.', perks:[{type:'harvested_plant',value:0,desc:'Farm harvest. Sell on the Marketplace.'}] },
   { id:'crystal_root', name:'Crystal Root', slot:'plant', rarity:'legendary', icon:'\uD83D\uDC8E', desc:'A crystalline root pulsing with energy.', perks:[{type:'harvested_plant',value:0,desc:'Farm harvest. Sell on the Marketplace.'}] },
   { id:'void_blossom', name:'Void Blossom', slot:'plant', rarity:'mythic', icon:'\uD83D\uDD2E', desc:'A flower from beyond \u2014 grown from a Void Spore.', perks:[{type:'harvested_plant',value:0,desc:'Farm harvest. Sell on the Marketplace.'}] },
-  { id:'wilted_plant', name:'Wilted Plant', slot:'plant', rarity:'common', icon:'\uD83E\uDD40', desc:'A rotted crop. Can be composted or sold for scraps.', perks:[{type:'harvested_plant',value:0,desc:'Rotted crop salvage.'}] },
+  { id:'wilted_plant', name:'Wilted Plant', slot:'plant', rarity:'common', icon:'\uD83E\uDD40', image:'loot/item_wilted_plant.png', desc:'A rotted crop. Can be composted or sold for scraps.', perks:[{type:'harvested_plant',value:0,desc:'Rotted crop salvage.'}] },
   // Seeds
   { id:'wheat_seed', name:'Wheat Seed', slot:'seed', rarity:'common', icon:'\uD83C\uDF3E', desc:'A common seed. Grows into Wheat in 5 minutes.', perks:[], seed:{grow:'5m',yieldId:'wheat',yieldName:'Wheat',yieldMin:1,yieldMax:3,xpPlant:10,xpHarvest:50} },
   { id:'herb_seed', name:'Herb Seed', slot:'seed', rarity:'common', icon:'\uD83C\uDF3F', desc:'A common herb seed. Grows into Herbs in 8 minutes.', perks:[], seed:{grow:'8m',yieldId:'herbs',yieldName:'Herbs',yieldMin:1,yieldMax:2,xpPlant:10,xpHarvest:80} },
@@ -564,35 +564,35 @@ var ITEMS = [
   { id:'craft_goblin_blade', name:'Goblin Blade', slot:'weapon', rarity:'common', icon:'\uD83D\uDD2A', desc:'A crude but effective weapon studded with goblin teeth.', perks:[{type:'atk_boost',value:4,desc:'+4 ATK'}] },
   { id:'craft_essence_ring', name:'Essence Ring', slot:'ring', rarity:'rare', icon:'\uD83D\uDC8D', desc:'A ring imbued with concentrated magic essence.', perks:[{type:'xp_skill_boost',value:1.08,desc:'+8% XP to all skills'}] },
   { id:'craft_scale_robe', name:'Scale Robe', slot:'body', rarity:'rare', icon:'\uD83E\uDDE5', desc:'Serpentine scales woven into a light robe.', perks:[{type:'hp_boost',value:20,desc:'+20 HP'},{type:'def_boost',value:2,desc:'+2 DEF'}] },
-  { id:'craft_wolf_pendant', name:'Wolf Fang Pendant', slot:'ring', rarity:'rare', icon:'\uD83D\uDC3A', desc:'A pendant strung with wolf fangs \u2014 pulses with primal energy.', perks:[{type:'hp_regen_boost',value:3,desc:'+3 HP Regen/s'}] },
+  { id:'craft_wolf_pendant', name:'Wolf Fang Pendant', slot:'ring', rarity:'rare', icon:'\uD83D\uDC3A', image:'loot/item_craft_wolf_pendant.png', desc:'A pendant strung with wolf fangs \u2014 pulses with primal energy.', perks:[{type:'hp_regen_boost',value:3,desc:'+3 HP Regen/s'}] },
   { id:'craft_orc_plate', name:'Orc Plate', slot:'body', rarity:'rare', icon:'\uD83D\uDEE1\uFE0F', desc:'Crude orcish armor, brutal but effective.', perks:[{type:'hp_boost',value:15,desc:'+15 HP'},{type:'atk_boost',value:3,desc:'+3 ATK'},{type:'def_boost',value:2,desc:'+2 DEF'}] },
   { id:'craft_void_blade', name:'Void Blade', slot:'weapon', rarity:'epic', icon:'\u2694\uFE0F', desc:'A weapon forged from void fragments \u2014 devastates arena bosses.', perks:[{type:'atk_boost',value:12,desc:'+12 ATK'}] },
   { id:'craft_troll_cloak', name:'Troll Cloak', slot:'body', rarity:'epic', icon:'\uD83E\uDDE5', desc:'A thick cloak sewn from troll hide, radiating recovery.', perks:[{type:'hp_boost',value:25,desc:'+25 HP'},{type:'hp_regen_boost',value:5,desc:'+5 HP Regen/s'},{type:'def_boost',value:4,desc:'+4 DEF'}] },
-  { id:'craft_warlord_gauntlets', name:'Warlord Gauntlets', slot:'ring', rarity:'epic', icon:'\uD83D\uDD31', desc:'Gauntlets infused with the Warlord\'s sigil \u2014 devastating strikes.', perks:[{type:'atk_boost',value:6,desc:'+6 ATK'},{type:'hp_boost',value:10,desc:'+10 HP'}] },
+  { id:'craft_warlord_gauntlets', name:'Warlord Gauntlets', slot:'ring', rarity:'epic', icon:'\uD83D\uDD31', image:'loot/item_craft_warlord_gauntlets.png', desc:'Gauntlets infused with the Warlord\'s sigil \u2014 devastating strikes.', perks:[{type:'atk_boost',value:6,desc:'+6 ATK'},{type:'hp_boost',value:10,desc:'+10 HP'}] },
   { id:'craft_dragon_crown', name:'Dragon Crown', slot:'head', rarity:'legendary', icon:'\uD83D\uDC51', desc:'A crown forged from dragon scales \u2014 radiates ancient power.', perks:[{type:'atk_boost',value:12,desc:'+12 ATK'},{type:'hp_boost',value:40,desc:'+40 HP'},{type:'def_boost',value:4,desc:'+4 DEF'}] },
   { id:'craft_troll_aegis', name:'Troll Aegis', slot:'body', rarity:'legendary', icon:'\uD83D\uDEE1\uFE0F', desc:'A legendary shield forged from the heart of a troll king.', perks:[{type:'hp_boost',value:40,desc:'+40 HP'},{type:'hp_regen_boost',value:8,desc:'+8 HP Regen/s'},{type:'def_boost',value:6,desc:'+6 DEF'}] },
   { id:'craft_dragonfire_blade', name:'Dragonfire Blade', slot:'weapon', rarity:'mythic', icon:'\uD83D\uDD25', desc:'Forged in dragonfire \u2014 the ultimate weapon.', perks:[{type:'atk_boost',value:24,desc:'+24 ATK'},{type:'hp_boost',value:20,desc:'+20 HP'},{type:'hp_regen_boost',value:6,desc:'+6 HP Regen/s'}] },
   // Lich Set (Mythic, Zone 7 — Shadow Crypt)
-  { id:'craft_lich_helm', name:'Lich Helm', slot:'head', rarity:'mythic', icon:'\uD83D\uDC80', desc:'A helm carved from lich bone, imbued with necrotic energy.', perks:[{type:'atk_boost',value:18,desc:'+18 ATK'},{type:'hp_boost',value:60,desc:'+60 HP'},{type:'xp_global_boost',value:0.08,desc:'+8% Global XP'}] },
-  { id:'craft_lich_plate', name:'Lich Plate', slot:'body', rarity:'mythic', icon:'\uD83D\uDEE1\uFE0F', desc:'Shadow-forged plate that drinks incoming damage.', perks:[{type:'hp_boost',value:150,desc:'+150 HP'},{type:'atk_boost',value:10,desc:'+10 ATK'},{type:'def_boost',value:8,desc:'+8 DEF'}] },
-  { id:'craft_lich_sword', name:'Lich Blade', slot:'weapon', rarity:'mythic', icon:'\u2694\uFE0F', desc:'A sword of crystallized necromantic energy \u2014 drains life on hit.', perks:[{type:'atk_boost',value:22,desc:'+22 ATK'},{type:'hp_regen_boost',value:6,desc:'+6 HP Regen/s'}] },
-  { id:'craft_lich_legs', name:'Lich Greaves', slot:'legs', rarity:'mythic', icon:'\uD83E\uDDBF', desc:'Greaves inscribed with death runes \u2014 light as shadow.', perks:[{type:'atk_boost',value:16,desc:'+16 ATK'},{type:'hp_boost',value:70,desc:'+70 HP'}] },
-  { id:'craft_lich_ring', name:'Lich Sigil Ring', slot:'ring', rarity:'mythic', icon:'\uD83D\uDC8E', desc:'A ring bearing the Necromancer Lord\'s sigil \u2014 pulses with dark vitality.', perks:[{type:'atk_boost',value:12,desc:'+12 ATK'},{type:'hp_regen_boost',value:7,desc:'+7 HP Regen/s'}] },
+  { id:'craft_lich_helm', name:'Lich Helm', slot:'head', rarity:'mythic', icon:'\uD83D\uDC80', image:'loot/item_craft_lich_helm.png', desc:'A helm carved from lich bone, imbued with necrotic energy.', perks:[{type:'atk_boost',value:18,desc:'+18 ATK'},{type:'hp_boost',value:60,desc:'+60 HP'},{type:'xp_global_boost',value:0.08,desc:'+8% Global XP'}] },
+  { id:'craft_lich_plate', name:'Lich Plate', slot:'body', rarity:'mythic', icon:'\uD83D\uDEE1\uFE0F', image:'loot/item_craft_lich_plate.png', desc:'Shadow-forged plate that drinks incoming damage.', perks:[{type:'hp_boost',value:150,desc:'+150 HP'},{type:'atk_boost',value:10,desc:'+10 ATK'},{type:'def_boost',value:8,desc:'+8 DEF'}] },
+  { id:'craft_lich_sword', name:'Lich Blade', slot:'weapon', rarity:'mythic', icon:'\u2694\uFE0F', image:'loot/item_craft_lich_sword.png', desc:'A sword of crystallized necromantic energy \u2014 drains life on hit.', perks:[{type:'atk_boost',value:22,desc:'+22 ATK'},{type:'hp_regen_boost',value:6,desc:'+6 HP Regen/s'}] },
+  { id:'craft_lich_legs', name:'Lich Greaves', slot:'legs', rarity:'mythic', icon:'\uD83E\uDDBF', image:'loot/item_craft_lich_legs.png', desc:'Greaves inscribed with death runes \u2014 light as shadow.', perks:[{type:'atk_boost',value:16,desc:'+16 ATK'},{type:'hp_boost',value:70,desc:'+70 HP'}] },
+  { id:'craft_lich_ring', name:'Lich Sigil Ring', slot:'ring', rarity:'mythic', icon:'\uD83D\uDC8E', image:'loot/item_craft_lich_ring.png', desc:'A ring bearing the Necromancer Lord\'s sigil \u2014 pulses with dark vitality.', perks:[{type:'atk_boost',value:12,desc:'+12 ATK'},{type:'hp_regen_boost',value:7,desc:'+7 HP Regen/s'}] },
   // Titan Set (Mythic, Zone 8 — Celestial Spire)
-  { id:'craft_titan_helm', name:'Titan Helm', slot:'head', rarity:'mythic', icon:'\u26A1', desc:'Forged from a Titan Core \u2014 channels the power of storms.', perks:[{type:'atk_boost',value:24,desc:'+24 ATK'},{type:'hp_boost',value:100,desc:'+100 HP'},{type:'xp_global_boost',value:0.08,desc:'+8% Global XP'}] },
-  { id:'craft_titan_plate', name:'Titan Plate', slot:'body', rarity:'mythic', icon:'\uD83C\uDF29\uFE0F', desc:'Storm-hardened plate that nullifies the strongest blows.', perks:[{type:'hp_boost',value:200,desc:'+200 HP'},{type:'atk_boost',value:14,desc:'+14 ATK'},{type:'def_boost',value:15,desc:'+15 DEF'},{type:'streak_shield',value:1,desc:'Streak Shield'}] },
-  { id:'craft_titan_sword', name:'Storm Titan Blade', slot:'weapon', rarity:'mythic', icon:'\u26A1', desc:'Lightning crystallized into a blade \u2014 the sky screams when it swings.', perks:[{type:'atk_boost',value:28,desc:'+28 ATK'},{type:'hp_regen_boost',value:8,desc:'+8 HP Regen/s'}] },
-  { id:'craft_titan_legs', name:'Titan Greaves', slot:'legs', rarity:'mythic', icon:'\uD83E\uDDBF', desc:'Greaves charged with celestial static \u2014 each step crackles.', perks:[{type:'atk_boost',value:20,desc:'+20 ATK'},{type:'hp_boost',value:100,desc:'+100 HP'}] },
-  { id:'craft_titan_ring', name:'Titan Core Ring', slot:'ring', rarity:'mythic', icon:'\uD83D\uDD2E', desc:'A ring housing a shard of the Storm Titan\'s core \u2014 radiates limitless energy.', perks:[{type:'atk_boost',value:16,desc:'+16 ATK'},{type:'hp_regen_boost',value:10,desc:'+10 HP Regen/s'},{type:'xp_global_boost',value:0.08,desc:'+8% Global XP'}] },
+  { id:'craft_titan_helm', name:'Titan Helm', slot:'head', rarity:'mythic', icon:'\u26A1', image:'loot/item_craft_titan_helm.png', desc:'Forged from a Titan Core \u2014 channels the power of storms.', perks:[{type:'atk_boost',value:24,desc:'+24 ATK'},{type:'hp_boost',value:100,desc:'+100 HP'},{type:'xp_global_boost',value:0.08,desc:'+8% Global XP'}] },
+  { id:'craft_titan_plate', name:'Titan Plate', slot:'body', rarity:'mythic', icon:'\uD83C\uDF29\uFE0F', image:'loot/item_craft_titan_plate.png', desc:'Storm-hardened plate that nullifies the strongest blows.', perks:[{type:'hp_boost',value:200,desc:'+200 HP'},{type:'atk_boost',value:14,desc:'+14 ATK'},{type:'def_boost',value:15,desc:'+15 DEF'},{type:'streak_shield',value:1,desc:'Streak Shield'}] },
+  { id:'craft_titan_sword', name:'Storm Titan Blade', slot:'weapon', rarity:'mythic', icon:'\u26A1', image:'loot/item_craft_titan_sword.png', desc:'Lightning crystallized into a blade \u2014 the sky screams when it swings.', perks:[{type:'atk_boost',value:28,desc:'+28 ATK'},{type:'hp_regen_boost',value:8,desc:'+8 HP Regen/s'}] },
+  { id:'craft_titan_legs', name:'Titan Greaves', slot:'legs', rarity:'mythic', icon:'\uD83E\uDDBF', image:'loot/item_craft_titan_legs.png', desc:'Greaves charged with celestial static \u2014 each step crackles.', perks:[{type:'atk_boost',value:20,desc:'+20 ATK'},{type:'hp_boost',value:100,desc:'+100 HP'}] },
+  { id:'craft_titan_ring', name:'Titan Core Ring', slot:'ring', rarity:'mythic', icon:'\uD83D\uDD2E', image:'loot/item_craft_titan_ring.png', desc:'A ring housing a shard of the Storm Titan\'s core \u2014 radiates limitless energy.', perks:[{type:'atk_boost',value:16,desc:'+16 ATK'},{type:'hp_regen_boost',value:10,desc:'+10 HP Regen/s'},{type:'xp_global_boost',value:0.08,desc:'+8% Global XP'}] },
   // Raid-exclusive mythic items
-  { id:'raid_ancient_ring', name:'Ancient Relic Ring', slot:'ring', rarity:'mythic', icon:'\uD83D\uDC8D', desc:'Forged in the fires of ancient raids. Untold gold flows to its bearer.', perks:[{type:'atk_boost',value:22,desc:'+22 ATK'},{type:'hp_regen_boost',value:10,desc:'+10 HP Regen'}], source:'Raid' },
-  { id:'raid_void_blade', name:'Void Conqueror Blade', slot:'weapon', rarity:'mythic', icon:'\uD83D\uDDE1\uFE0F', desc:'Wielded only by those who have faced the mythic hydra and lived.', perks:[{type:'atk_boost',value:35,desc:'+35 ATK'},{type:'hp_regen_boost',value:15,desc:'+15 HP Regen'},{type:'xp_global_boost',value:0.10,desc:'+10% Global XP'}], source:'Raid' },
-  { id:'raid_eternal_crown', name:'Eternal Crown', slot:'head', rarity:'mythic', icon:'\uD83D\uDC51', desc:'The crown of the eternal titan. Only the worthy shall wear it.', perks:[{type:'atk_boost',value:28,desc:'+28 ATK'},{type:'hp_boost',value:180,desc:'+180 HP'},{type:'xp_global_boost',value:0.15,desc:'+15% Global XP'},{type:'def_boost',value:12,desc:'+12 DEF'}], source:'Raid' },
+  { id:'raid_ancient_ring', name:'Ancient Relic Ring', slot:'ring', rarity:'mythic', icon:'\uD83D\uDC8D', image:'loot/item_raid_ancient_ring.png', desc:'Forged in the fires of ancient raids. Untold gold flows to its bearer.', perks:[{type:'atk_boost',value:22,desc:'+22 ATK'},{type:'hp_regen_boost',value:10,desc:'+10 HP Regen'}], source:'Raid' },
+  { id:'raid_void_blade', name:'Void Conqueror Blade', slot:'weapon', rarity:'mythic', icon:'\uD83D\uDDE1\uFE0F', image:'loot/item_raid_void_blade.png', desc:'Wielded only by those who have faced the mythic hydra and lived.', perks:[{type:'atk_boost',value:35,desc:'+35 ATK'},{type:'hp_regen_boost',value:15,desc:'+15 HP Regen'},{type:'xp_global_boost',value:0.10,desc:'+10% Global XP'}], source:'Raid' },
+  { id:'raid_eternal_crown', name:'Eternal Crown', slot:'head', rarity:'mythic', icon:'\uD83D\uDC51', image:'loot/item_raid_eternal_crown.png', desc:'The crown of the eternal titan. Only the worthy shall wear it.', perks:[{type:'atk_boost',value:28,desc:'+28 ATK'},{type:'hp_boost',value:180,desc:'+180 HP'},{type:'xp_global_boost',value:0.15,desc:'+15% Global XP'},{type:'def_boost',value:12,desc:'+12 DEF'}], source:'Raid' },
   // Zone 7-8 Crafting Materials
-  { id:'shadow_dust', name:'Shadow Dust', slot:'material', rarity:'epic', icon:'\uD83D\uDC9C', desc:'Crystallized essence of shadow creatures.', perks:[{type:'cosmetic',value:0,desc:'Crafting material \u2014 Shadow Crypt'}], source:'Shadow Crypt mobs (30-50%)' },
-  { id:'lich_crystal', name:'Lich Crystal', slot:'material', rarity:'legendary', icon:'\uD83D\uDC8E', desc:'A shard of pure necromantic energy, pulsing with dark magic.', perks:[{type:'cosmetic',value:0,desc:'Boss material \u2014 Necromancer Lord'}], source:'Boss: Necromancer Lord (\u00D71)' },
-  { id:'storm_shard', name:'Storm Shard', slot:'material', rarity:'epic', icon:'\u26A1', desc:'Solidified lightning from celestial beings.', perks:[{type:'cosmetic',value:0,desc:'Crafting material \u2014 Celestial Spire'}], source:'Celestial Spire mobs (30-50%)' },
-  { id:'titan_core', name:'Titan Core', slot:'material', rarity:'mythic', icon:'\uD83D\uDD2E', desc:'The crystallized heart of a Storm Titan.', perks:[{type:'cosmetic',value:0,desc:'Boss material \u2014 Storm Titan'}], source:'Boss: Storm Titan (\u00D71)' },
+  { id:'shadow_dust', name:'Shadow Dust', slot:'material', rarity:'epic', icon:'\uD83D\uDC9C', image:'loot/item_shadow_dust.png', desc:'Crystallized essence of shadow creatures.', perks:[{type:'cosmetic',value:0,desc:'Crafting material \u2014 Shadow Crypt'}], source:'Shadow Crypt mobs (30-50%)' },
+  { id:'lich_crystal', name:'Lich Crystal', slot:'material', rarity:'legendary', icon:'\uD83D\uDC8E', image:'loot/item_lich_crystal.png', desc:'A shard of pure necromantic energy, pulsing with dark magic.', perks:[{type:'cosmetic',value:0,desc:'Boss material \u2014 Necromancer Lord'}], source:'Boss: Necromancer Lord (\u00D71)' },
+  { id:'storm_shard', name:'Storm Shard', slot:'material', rarity:'epic', icon:'\u26A1', image:'loot/item_storm_shard.png', desc:'Solidified lightning from celestial beings.', perks:[{type:'cosmetic',value:0,desc:'Crafting material \u2014 Celestial Spire'}], source:'Celestial Spire mobs (30-50%)' },
+  { id:'titan_core', name:'Titan Core', slot:'material', rarity:'mythic', icon:'\uD83D\uDD2E', image:'loot/item_titan_core.png', desc:'The crystallized heart of a Storm Titan.', perks:[{type:'cosmetic',value:0,desc:'Boss material \u2014 Storm Titan'}], source:'Boss: Storm Titan (\u00D71)' },
   { id:'death_insurance', name:'Death Insurance', slot:'material', rarity:'rare', icon:'\uD83D\uDCDC', desc:'A protective ward. Auto-consumed on arena death to prevent item loss.', perks:[{type:'cosmetic',value:0,desc:'Consumable \u2014 prevents item loss on death'}], source:'Crafting' },
   // Food
   { id:'food_bread', name:'Bread', slot:'food', rarity:'common', icon:'\uD83C\uDF5E', desc:'Simple wheat bread. Restores a small amount of health.', perks:[{type:'cosmetic',value:0,desc:'Heal 30 HP'}], source:'Cooking' },
@@ -751,6 +751,44 @@ function fetchMarketData(itemId, callback) {
       }
       finish();
     }).catch(function() { finish(); });
+}
+
+// ── Chart hover tooltip ──
+var _chartTip = null;
+function getChartTip() {
+  if (!_chartTip) {
+    _chartTip = document.createElement('div');
+    _chartTip.style.cssText = 'position:fixed;pointer-events:none;background:rgba(8,7,15,0.97);border:1px solid rgba(124,58,237,0.3);border-radius:6px;padding:6px 10px;font-size:11px;font-family:Inter,sans-serif;color:#eae6f5;z-index:999;display:none;box-shadow:0 4px 16px rgba(0,0,0,0.6);line-height:1.5;white-space:nowrap';
+    document.body.appendChild(_chartTip);
+  }
+  return _chartTip;
+}
+
+function attachChartHover(canvas, getDataFn, getDaysFn, unit) {
+  if (!canvas) return;
+  canvas.style.cursor = 'crosshair';
+  var tip = getChartTip();
+  canvas.addEventListener('mousemove', function(e) {
+    var data = getDataFn();
+    if (!data || data.length < 2) return;
+    var days = getDaysFn ? getDaysFn() : null;
+    var rect = canvas.getBoundingClientRect();
+    var rx = e.clientX - rect.left;
+    var idx = Math.round((rx / rect.width) * (data.length - 1));
+    idx = Math.max(0, Math.min(data.length - 1, idx));
+    var val = data[idx];
+    var dayLabel = (days && days[idx]) ? days[idx] : '';
+    tip.innerHTML =
+      (dayLabel ? '<span style="color:#6b6280;font-size:10px">' + dayLabel + '</span><br>' : '') +
+      '<strong style="color:#d4a843">' + val + '</strong> <span style="color:#6b6280">' + (unit||'gold') + '</span>';
+    tip.style.display = 'block';
+    var tx = e.clientX + 14;
+    var ty = e.clientY - 36;
+    if (tx + 160 > window.innerWidth) tx = e.clientX - 160;
+    tip.style.left = tx + 'px';
+    tip.style.top = ty + 'px';
+  });
+  canvas.addEventListener('mouseleave', function() { tip.style.display = 'none'; });
 }
 
 function drawChart(canvas, data, color, fillColor) {
@@ -1108,13 +1146,18 @@ function renderItem(itemId) {
             '<canvas class="price-chart" id="priceChart"></canvas>' +
             '<div class="chart-legend"><div class="chart-legend-item"><div class="chart-legend-dot" style="background:#d4a843"></div> Avg Sale Price (gold)</div></div>';
 
+          var currentPriceSlice = prices.slice(-chartDays);
+          var currentDaysSlice = history.days ? history.days.slice(-chartDays) : [];
           function redrawPrice() {
             var canvas = document.getElementById('priceChart');
             if (!canvas) return;
-            var slice = chartDays > 0 ? prices.slice(-chartDays) : prices;
-            drawChart(canvas, slice, '#d4a843', 'rgba(212,168,67,0.1)');
+            currentPriceSlice = chartDays > 0 ? prices.slice(-chartDays) : prices;
+            currentDaysSlice = history.days ? (chartDays > 0 ? history.days.slice(-chartDays) : history.days) : [];
+            drawChart(canvas, currentPriceSlice, '#d4a843', 'rgba(212,168,67,0.1)');
           }
           redrawPrice();
+          var priceCanvas = document.getElementById('priceChart');
+          attachChartHover(priceCanvas, function(){ return currentPriceSlice; }, function(){ return currentDaysSlice; }, 'gold');
           document.querySelectorAll('#priceTabs .chart-tab').forEach(function(tab) {
             tab.addEventListener('click', function() {
               document.querySelectorAll('#priceTabs .chart-tab').forEach(function(t){t.classList.remove('active')});
@@ -1128,11 +1171,15 @@ function renderItem(itemId) {
 
         if (volumeEl) {
           volumeEl.innerHTML = '<canvas class="price-chart" id="volumeChart"></canvas>';
+          var volSlice = volumes.slice(-30);
+          var volDays = history.days ? history.days.slice(-30) : [];
           function redrawVol() {
             var canvas = document.getElementById('volumeChart');
-            if (canvas) drawBarChart(canvas, volumes.slice(-30), 'rgba(96,165,250,0.4)');
+            if (canvas) drawBarChart(canvas, volSlice, 'rgba(96,165,250,0.4)');
           }
           redrawVol();
+          var volCanvas = document.getElementById('volumeChart');
+          attachChartHover(volCanvas, function(){ return volSlice; }, function(){ return volDays; }, 'traded');
           window.addEventListener('resize', redrawVol);
         }
       } else {
