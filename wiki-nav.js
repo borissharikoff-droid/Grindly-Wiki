@@ -9,6 +9,7 @@
 (function() {
   var NAV_ITEMS = [
     { href: 'index.html',     label: 'Wiki Home',       dot: 'gold' },
+    { href: 'guide.html',     label: 'New Player Guide', dot: 'green' },
     { href: 'equipment.html', label: 'Equipment',        dot: 'gold' },
     { href: 'loot.html',      label: 'Loot Bags',        dot: 'orange' },
     { href: 'materials.html', label: 'Materials',         dot: 'purple' },

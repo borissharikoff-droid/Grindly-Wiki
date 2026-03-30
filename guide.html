@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Player Guide — Grindly Wiki</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<style>
+/* ══════ Guide Article Styles ══════ */
+
+/* Article container */
+.guide-article {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 28px 28px 48px;
+}
+
+/* Hero banner */
+.guide-hero {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(200,168,75,0.12) 0%, transparent 60%),
+    linear-gradient(135deg, #1e1a12 0%, #131009 100%);
+  border-bottom: 2px solid var(--border-ornate);
+  padding: 32px 28px 28px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.guide-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='1' height='1' fill='rgba(200,168,75,0.04)'/%3E%3Crect x='20' y='20' width='1' height='1' fill='rgba(200,168,75,0.03)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.guide-hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 14px; border-radius: 20px;
+  border: 1px solid rgba(200,168,75,0.25); background: rgba(200,168,75,0.07);
+  color: var(--gold); font-size: 11px; font-family: var(--font-mono);
+  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px;
+}
+.guide-hero h1 {
+  font-family: var(--font-title);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--gold-bright);
+  text-shadow: 0 0 40px rgba(200,168,75,0.3), 0 2px 0 rgba(0,0,0,0.5);
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+  position: relative;
+}
+.guide-hero-sub {
+  font-size: 14px;
+  color: var(--text);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.7;
+  position: relative;
+}
+.guide-hero-meta {
+  display: flex; align-items: center; justify-content: center; gap: 20px;
+  margin-top: 18px; flex-wrap: wrap; position: relative;
+}
+.guide-hero-meta-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; font-family: var(--font-mono); color: var(--text-dim);
+}
+.guide-hero-meta-item span { color: var(--gold); font-weight: 600; }
+
+/* Table of Contents */
+.guide-toc {
+  background: var(--bg-card);
+  border: 1px solid var(--border-ornate);
+  border-left: 3px solid var(--gold);
+  border-radius: 6px;
+  padding: 16px 18px;
+  margin-bottom: 28px;
+}
+.guide-toc-title {
+  font-family: var(--font-title);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+.guide-toc ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  columns: 2;
+  column-gap: 16px;
+}
+@media (max-width: 600px) { .guide-toc ol { columns: 1; } }
+.guide-toc li { margin: 3px 0; break-inside: avoid; }
+.guide-toc a {
+  font-size: 12px;
+  color: var(--text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 0;
+  transition: color 0.15s;
+}
+.guide-toc a:hover { color: var(--gold-bright); }
+.guide-toc-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--gold);
+  background: rgba(200,168,75,0.1);
+  border: 1px solid rgba(200,168,75,0.2);
+  border-radius: 3px;
+  padding: 1px 5px;
+  min-width: 22px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* Section anchors */
+.guide-section {
+  margin-bottom: 36px;
+  padding-top: 8px;
+  scroll-margin-top: 80px;
+}
+.guide-section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(200,168,75,0.3);
+  box-shadow: 0 1px 0 rgba(200,168,75,0.06);
+}
+.guide-step-badge {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+  color: #1a1206;
+  font-family: var(--font-title);
+  font-size: 14px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(200,168,75,0.3);
+}
+.guide-section-header h2 {
+  font-family: var(--font-title);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gold-bright);
+  margin: 0;
+}
+.guide-section-icon { font-size: 20px; }
+
+/* Body text */
+.guide-p {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+.guide-p strong { color: var(--text-bright); font-weight: 600; }
+.guide-p a { color: var(--gold); text-decoration: underline; text-decoration-color: rgba(200,168,75,0.3); }
+.guide-p a:hover { color: var(--gold-bright); }
+
+/* Screenshot + text layout */
+.guide-row {
+  display: flex;
+  gap: 20px;
+  margin: 16px 0;
+  align-items: flex-start;
+}
+.guide-row.reverse { flex-direction: row-reverse; }
+@media (max-width: 650px) { .guide-row, .guide-row.reverse { flex-direction: column; } }
+
+.guide-screenshot {
+  flex-shrink: 0;
+  width: 220px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border-ornate);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(200,168,75,0.08);
+  position: relative;
+}
+.guide-screenshot.wide { width: 300px; }
+.guide-screenshot.full { width: 100%; }
+.guide-screenshot img { display: block; width: 100%; height: auto; }
+.guide-screenshot-caption {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  color: var(--text-dim);
+  text-align: center;
+  padding: 6px 8px;
+  background: rgba(0,0,0,0.3);
+  border-top: 1px solid var(--border-inner);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Callout box */
+.guide-callout {
+  display: flex;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 6px;
+  margin: 14px 0;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--text);
+}
+.guide-callout.tip {
+  background: rgba(74,222,128,0.06);
+  border: 1px solid rgba(74,222,128,0.2);
+  border-left: 3px solid #4ade80;
+}
+.guide-callout.gold {
+  background: rgba(200,168,75,0.07);
+  border: 1px solid rgba(200,168,75,0.25);
+  border-left: 3px solid var(--gold);
+}
+.guide-callout.warn {
+  background: rgba(251,146,60,0.07);
+  border: 1px solid rgba(251,146,60,0.25);
+  border-left: 3px solid #fb923c;
+}
+.guide-callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.guide-callout strong { color: var(--text-bright); display: block; margin-bottom: 2px; }
+
+/* Numbered step list */
+.guide-steps {
+  list-style: none;
+  padding: 0;
+  margin: 14px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.guide-steps li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.6;
+  padding: 10px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-inner);
+  border-radius: 6px;
+}
+.guide-steps li:hover { border-color: var(--border-ornate); background: rgba(200,168,75,0.03); }
+.guide-steps li .step-n {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold);
+  background: rgba(200,168,75,0.12);
+  border: 1px solid rgba(200,168,75,0.2);
+  border-radius: 4px;
+  padding: 2px 7px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Skill chips */
+.skill-chips { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0; }
+.skill-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 10px; border-radius: 20px;
+  font-size: 11px; font-family: var(--font-mono); font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+}
+
+/* Stat grid */
+.guide-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin: 14px 0;
+}
+.guide-stat {
+  background: var(--bg-card);
+  border: 1px solid var(--border-inner);
+  border-radius: 6px;
+  padding: 10px 12px;
+  text-align: center;
+}
+.guide-stat-n {
+  font-family: var(--font-title);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold-bright);
+  display: block;
+}
+.guide-stat-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+/* Divider */
+.guide-divider {
+  border: none;
+  border-top: 1px solid var(--border-inner);
+  box-shadow: 0 1px 0 rgba(200,168,75,0.04);
+  margin: 28px 0;
+}
+
+/* Nav highlight for guide page */
+a[href="guide.html"] { color: var(--gold-bright) !important; }
+</style>
+</head>
+<body>
+
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">G</span>
+      <span class="logo-text">Grindly<small>Wiki</small></span>
+    </a>
+    <div class="top-right">
+      <div class="player-count">
+        <span class="pulse-dot"></span>
+        <span id="onlineCount">Productivity RPG</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="page-wrap">
+
+  <aside class="sidebar">
+    <div class="search-box">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search wiki..." autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-title"><span class="arrow">&#9660;</span> Pages</div>
+      <ul class="nav-links" id="wikiNav"></ul>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- Hero Banner -->
+    <div class="guide-hero">
+      <div class="guide-hero-badge">&#9670; New Player Guide</div>
+      <h1>Getting Started with Grindly</h1>
+      <p class="guide-hero-sub">Your complete guide to turning screen time into an RPG — skills, loot, boss fights, crafting, and more.</p>
+      <div class="guide-hero-meta">
+        <div class="guide-hero-meta-item">&#128336; <span>~10 min</span> read</div>
+        <div class="guide-hero-meta-item">&#127381; <span>Updated</span> 2025</div>
+        <div class="guide-hero-meta-item">&#128187; <span>Windows</span> only</div>
+      </div>
+    </div>
+
+    <div class="guide-article">
+
+      <!-- Table of Contents -->
+      <div class="guide-toc">
+        <div class="guide-toc-title">&#9776; Contents</div>
+        <ol>
+          <li><a href="#what-is-grindly"><span class="guide-toc-num">1</span> What is Grindly?</a></li>
+          <li><a href="#install"><span class="guide-toc-num">2</span> Install &amp; Launch</a></li>
+          <li><a href="#tracking"><span class="guide-toc-num">3</span> Activity Tracking</a></li>
+          <li><a href="#skills"><span class="guide-toc-num">4</span> Skills &amp; XP</a></li>
+          <li><a href="#loot"><span class="guide-toc-num">5</span> Loot &amp; Chests</a></li>
+          <li><a href="#inventory"><span class="guide-toc-num">6</span> Inventory &amp; Gear</a></li>
+          <li><a href="#arena"><span class="guide-toc-num">7</span> Arena &amp; Bosses</a></li>
+          <li><a href="#crafting"><span class="guide-toc-num">8</span> Crafting</a></li>
+          <li><a href="#marketplace"><span class="guide-toc-num">9</span> Marketplace</a></li>
+          <li><a href="#tips"><span class="guide-toc-num">10</span> Pro Tips</a></li>
+        </ol>
+      </div>
+
+      <!-- ═══════════════════════════════════════════
+           SECTION 1 — What is Grindly?
+      ════════════════════════════════════════════ -->
+      <div class="guide-section" id="what-is-grindly">
+        <div class="guide-section-header">
+          <div class="guide-step-badge">1</div>
+          <span class="guide-section-icon">&#127918;</span>
+          <h2>What is Grindly?</h2>
+        </div>
+
+        <p class="guide-p">
+          <strong>Grindly</strong> is a Windows desktop app that lives in your system tray and silently watches which apps you use. Every minute you spend coding, designing, gaming, or communicating earns XP in a matching skill — turning your real daily work into an RPG character sheet.
+        </p>
+
+        <div class="guide-stat-grid">
+          <div class="guide-stat"><span class="guide-stat-n">13</span><div class="guide-stat-label">Skills</div></div>
+          <div class="guide-stat"><span class="guide-stat-n">99</span><div class="guide-stat-label">Max Level</div></div>
+          <div class="guide-stat"><span class="guide-stat-n">89+</span><div class="guide-stat-label">Items</div></div>
+          <div class="guide-stat"><span class="guide-stat-n">8</span><div class="guide-stat-label">Arena Zones</div></div>
+          <div class="guide-stat"><span class="guide-stat-n">30+</span><div class="guide-stat-label">Recipes</div></div>
+          <div class="guide-stat"><span class="guide-stat-n">Free</span><div class="guide-stat-label">Always</div></div>
+        </div>
+
+        <p class="guide-p">
+          There is no goal to distract you from real work. Grindly rewards you <em>for</em> doing it. The longer you focus, the more XP you earn, the better loot you unlock, and the harder bosses you can fight.
+        </p>
+
+        <div class="guide-callout gold">
+          <span class="guide-callout-icon">&#9728;&#65039;</span>
+          <div><strong>Zero distraction design</strong>Grindly runs in the background and tracks everything automatically. You never need to open it. The tray icon glows when a session is active.</div>
+        </div>
+      </div>
+
+      <hr class="guide-divider">
+
+      <!-- ═══════════════════════════════════════════
+           SECTION 2 — Install & Launch
+      ════════════════════════════════════════════ -->
+      <div class="guide-section" id="install">
+        <div class="guide-section-header">
+          <div class="guide-step-badge">2</div>
+          <span class="guide-section-icon">&#128190;</span>
+          <h2>Install &amp; Launch</h2>
+        </div>
+
+        <p class="guide-p">Getting Grindly running takes under two minutes. It's a standard Windows installer — no account required to start tracking.</p>
+
+        <ul class="guide-steps">
+          <li><span class="step-n">1</span> Download the latest <strong>.exe</strong> installer from <a href="https://grindly.app" style="color:var(--gold)">grindly.app</a> or the <strong>Download for Windows</strong> button on this page.</li>
+          <li><span class="step-n">2</span> Run the installer. Windows may show a SmartScreen prompt — click <strong>"More info" → "Run anyway"</strong>. Grindly is not signed yet (coming soon).</li>
+          <li><span class="step-n">3</span> Grindly launches and appears in your <strong>system tray</strong> (bottom-right corner of your taskbar). Look for the orange/gold <strong>G</strong> icon.</li>
+          <li><span class="step-n">4</span> Click the tray icon to open the main window. You'll land on the <strong>Home</strong> screen showing your active session.</li>
+          <li><span class="step-n">5</span> <strong>Optional:</strong> Create a free account (Settings → Account) to unlock leaderboards, friends, cloud sync, and the marketplace.</li>
+        </ul>
+
+        <div class="guide-callout tip">
+          <span class="guide-callout-icon">&#128161;</span>
+          <div><strong>Tip!</strong>Grindly starts with Windows automatically. You don't need to remember to launch it — just work normally and XP accumulates in the background.</div>
+        </div>
+      </div>
+
+      <hr class="guide-divider">
+
+      <!-- ═══════════════════════════════════════════
+           SECTION 3 — Activity Tracking
+      ════════════════════════════════════════════ -->
+      <div class="guide-section" id="tracking">
+        <div class="guide-section-header">
+          <div class="guide-step-badge">3</div>
+          <span class="guide-section-icon">&#9201;</span>
+          <h2>Activity Tracking</h2>
+        </div>
+
+        <p class="guide-p">
+          Grindly uses a lightweight PowerShell subprocess to read the <strong>active foreground window</strong> every ~1.5 seconds. It never reads your screen contents, keystrokes, or any data inside your apps — only the process name and window title.
+        </p>
+
+        <div class="guide-row">
+          <div class="guide-screenshot wide">
+            <img src="img/analytics.png" alt="Analytics page showing daily activity breakdown">
+            <div class="guide-screenshot-caption">Stats → Analytics — daily skill breakdown</div>
+          </div>
+          <div style="flex:1">
+            <p class="guide-p">The <strong>Stats page</strong> shows a complete history of every session broken down by skill and day. You can see exactly how much time went to each category.</p>
+            <p class="guide-p">Sessions start automatically when you begin working and end after <strong>5 minutes of inactivity</strong>. Each completed session awards XP proportional to the time spent.</p>
+            <div class="guide-callout tip">
+              <span class="guide-callout-icon">&#128161;</span>
+              <div><strong>Tip!</strong>A session only counts if you're actively using the keyboard or mouse. Pure video watching awards Listener XP, not general XP.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="guide-divider">
+
+      <!-- ═══════════════════════════════════════════
+           SECTION 4 — Skills & XP
+      ════════════════════════════════════════════ -->
+      <div class="guide-section" id="skills">
+        <div class="guide-section-header">
+          <div class="guide-step-badge">4</div>
+          <span class="guide-section-icon">&#9878;&#65039;</span>
+          <h2>Skills &amp; XP</h2>
+        </div>
+
+        <div class="guide-row reverse">
+          <div class="guide-screenshot">
+            <img src="img/skills.png" alt="Skills page showing levels and XP bars">
+            <div class="guide-screenshot-caption">Skills tab — each bar = one skill</div>
+          </div>
+          <div style="flex:1">
+            <p class="guide-p">Grindly has <strong>13 skills</strong> across two categories:</p>
+            <p class="guide-p"><strong>Passive Skills</strong> — earned automatically based on which apps you use:</p>
+            <div class="skill-chips">
+              <span class="skill-chip" style="color:#00ff88;border-color:rgba(0,255,136,0.2)">&#128187; Developer</span>
+              <span class="skill-chip" style="color:#ff6b9d;border-color:rgba(255,107,157,0.2)">&#127912; Designer</span>
+              <span class="skill-chip" style="color:#60a5fa;border-color:rgba(96,165,250,0.2)">&#127918; Gamer</span>
+              <span class="skill-chip" style="color:#34d399;border-color:rgba(52,211,153,0.2)">&#128172; Communicator</span>
+              <span class="skill-chip" style="color:#a78bfa;border-color:rgba(167,139,250,0.2)">&#128270; Researcher</span>
+              <span class="skill-chip" style="color:#f97316;border-color:rgba(249,115,22,0.2)">&#127775; Creator</span>
+              <span class="skill-chip" style="color:#facc15;border-color:rgba(250,204,21,0.2)">&#127891; Learner</span>
+              <span class="skill-chip" style="color:#e879f9;border-color:rgba(232,121,249,0.2)">&#127911; Listener</span>
+            </div>
+            <p class="guide-p"><strong>Active Skills</strong> — earned inside Grindly:</p>
+            <div class="skill-chips">
+              <span class="skill-chip" style="color:#ef4444;border-color:rgba(239,68,68,0.2)">&#9876;&#65039; Warrior</span>
+              <span class="skill-chip" style="color:#22c55e;border-color:rgba(34,197,94,0.2)">&#127807; Farmer</span>
+              <span class="skill-chip" style="color:#f59e0b;border-color:rgba(245,158,11,0.2)">&#128296; Crafter</span>
+              <span class="skill-chip" style="color:#06b6d4;border-color:rgba(6,182,212,0.2)">&#127859; Cook</span>
+              <span class="skill-chip" style="color:#8b5cf6;border-color:rgba(139,92,246,0.2)">&#129419; Trader</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="guide-p">Each skill goes from <strong>Level 1 to 99</strong> using a non-linear XP curve — early levels are fast, late levels require serious grind. At Level 99 you can <a href="prestige.html">prestige</a> for bonus XP multipliers.</p>
+
+        <div class="guide-callout gold">
+          <span class="guide-callout-icon">&#9889;</span>
+          <div><strong>XP Formula</strong>Higher levels need exponentially more XP. Level 50 requires ~700K XP total; Level 99 requires 3.6M. See the full formula on the <a href="skills.html#xp-formula" style="color:var(--gold)">Skills page</a>.</div>
+        </div>
+      </div>
+
+      <hr class="guide-divider">
+
+      <!-- ═══════════════════════════════════════════
+           SECTION 5 — Loot & Chests
+      ════════════════════════════════════════════ -->
+      <div class="guide-section" id="loot">
+        <div class="guide-section-header">
+          <div class="guide-step-badge">5</div>
+          <span class="guide-section-icon">&#127873;</span>
+          <h2>Loot &amp; Chests</h2>
+        </div>
+
+        <p class="guide-p">
+          When a session ends, Grindly awards a <strong>loot chest</strong> based on how long and how focused your session was. Open it to receive random gear, materials, potions, or seeds.
+        </p>
+
+        <div class="guide-row">
+          <div class="guide-screenshot">
+            <img src="img/loot.png" alt="Chest opening screen with item reveal">
+            <div class="guide-screenshot-caption">Chest opening animation</div>
+          </div>
+          <div style="flex:1">
+            <p class="guide-p">There are <strong>4 chest tiers</strong>:</p>
+            <ul class="guide-steps">
+              <li><span class="step-n" style="background:rgba(156,163,175,0.15);color:#9ca3af;border-color:rgba(156,163,175,0.2)">&#x25A0;</span> <strong>Common</strong> — short sessions (~15 min). Basic gear and materials.</li>
+              <li><span class="step-n" style="background:rgba(56,189,248,0.12);color:#38bdf8;border-color:rgba(56,189,248,0.2)">&#x25A0;</span> <strong>Rare</strong> — medium sessions (~45 min). Better gear, more materials.</li>
+              <li><span class="step-n" style="background:rgba(192,132,252,0.12);color:#c084fc;border-color:rgba(192,132,252,0.2)">&#x25A0;</span> <strong>Epic</strong> — long sessions (~2h). Epic items, crafting materials, seeds.</li>
+              <li><span class="step-n" style="background:rgba(250,204,21,0.12);color:#facc15;border-color:rgba(250,204,21,0.2)">&#x25A0;</span> <strong>Legendary</strong> — marathon sessions (~4h+). Legendary/mythic gear, rare materials.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="guide-callout tip">
+          <span class="guide-callout-icon">&#128161;</span>
+          <div><strong>Tip!</strong>You have a <strong>pity system</strong> — if you haven't gotten a legendary item in a while, your next chest has increased odds. Read the <a href="loot.html" style="color:var(--gold)">Loot page</a> for exact drop rates.</div>
+        </div>
+      </div>
+
+      <hr class="guide-divider">
+
+      <!-- ═══════════════════════════════════════════
+           SECTION 6 — Inventory & Gear
+      ════════════════════════════════════════════ -->
+      <div class="guide-section" id="inventory">
+        <div class="guide-section-header">
+          <div class="guide-step-badge">6</div>
+          <span class="guide-section-icon">&#127975;</span>
+          <h2>Inventory &amp; Gear</h2>
+        </div>
+
+        <div class="guide-row reverse">
+          <div class="guide-screenshot">
+            <img src="img/inventory.png" alt="Inventory screen showing equipped gear and item grid">
+            <div class="guide-screenshot-caption">Inventory — character stats + items</div>
+          </div>
+          <div style="flex:1">
+            <p class="guide-p">Open the <strong>Inventory tab</strong> to manage your collected items. Your character has <strong>4 gear slots</strong>:</p>
+            <ul class="guide-steps">
+              <li><span class="step-n">&#9651;</span> <strong>Head</strong> — helms, crowns, cosmetic headgear</li>
+              <li><span class="step-n">&#9679;</span> <strong>Body</strong> — plates, robes, armor</li>
+              <li><span class="step-n">&#9671;</span> <strong>Legs</strong> — greaves, trousers</li>
+              <li><span class="step-n">&#9826;</span> <strong>Ring</strong> — rings, amulets, pendants</li>
+            </ul>
+            <p class="guide-p">Each equipped item contributes <strong>ATK, HP, HP Regen, and DEF</strong> to your combat stats. Better gear = stronger Arena performance.</p>
+          </div>
+        </div>
+
+        <p class="guide-p"><strong>Item Power (IP)</strong> is a single number summarizing an item's strength. It's calculated from its rarity and perks. Use IP to quickly compare upgrades.</p>
+
+        <div class="guide-callout gold">
+          <span class="guide-callout-icon">&#9919;</span>
+          <div><strong>Item Rarities</strong> — <span style="color:#9ca3af">Common</span> → <span style="color:#38bdf8">Rare</span> → <span style="color:#c084fc">Epic</span> → <span style="color:#facc15">Legendary</span> → <span style="color:#f472b6">Mythic</span>. Higher rarity = more powerful perks and higher IP.</div>
+        </div>
+      </div>
+
+      <hr class="guide-divider">
+
+      <!-- ═══════════════════════════════════════════
+           SECTION 7 — Arena & Bosses
+      ════════════════════════════════════════════ -->
+      <div class="guide-section" id="arena">
+        <div class="guide-section-header">
+          <div class="guide-step-badge">7</div>
+          <span class="guide-section-icon">&#9876;&#65039;</span>
+          <h2>Arena &amp; Bosses</h2>
+        </div>
+
+        <div class="guide-row">
+          <div class="guide-screenshot">
+            <img src="img/arena.png" alt="Arena screen showing combat zone and boss fight">
+            <div class="guide-screenshot-caption">Arena — boss combat in Slime Cavern</div>
+          </div>
+          <div style="flex:1">
+            <p class="guide-p">The <strong>Arena tab</strong> is where your gear gets tested. Fight through <strong>8 progressive zones</strong>, each with normal mobs and a zone boss.</p>
+            <p class="guide-p">Combat is <strong>turn-based auto-battle</strong>. Your ATK, HP, and HP Regen stats (from equipped gear) determine how the fight plays out. You win by killing the boss before your HP runs out.</p>
+            <p class="guide-p">Defeating bosses awards:</p>
+            <ul class="guide-steps">
+              <li><span class="step-n">XP</span> <strong>Warrior XP</strong> for your combat skill</li>
+              <li><span class="step-n">&#127775;</span> <strong>Gold</strong> used in the marketplace</li>
+              <li><span class="step-n">&#127974;</span> <strong>Materials</strong> used in crafting recipes</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="guide-callout warn">
+          <span class="guide-callout-icon">&#9888;&#65039;</span>
+          <div><strong>Gear requirement!</strong> Each zone has a minimum ATK/HP requirement. You can't enter a zone until your equipped gear meets the threshold. Upgrade your gear first.</div>
+        </div>
+
+        <p class="guide-p">Zones unlock progressively: <strong>Slime Cavern → Goblin Camp → Orc Fortress → Dragon Lair → Shadow Crypt → Celestial Spire → Storm Peak → Void Realm</strong>. Each zone is harder but drops better materials.</p>
+      </div>
+
+      <hr class="guide-divider">
+
+      <!-- ═══════════════════════════════════════════
+           SECTION 8 — Crafting
+      ════════════════════════════════════════════ -->
+      <div class="guide-section" id="crafting">
+        <div class="guide-section-header">
+          <div class="guide-step-badge">8</div>
+          <span class="guide-section-icon">&#128296;</span>
+          <h2>Crafting</h2>
+        </div>
+
+        <div class="guide-row reverse">
+          <div class="guide-screenshot">
+            <img src="img/craft.png" alt="Craft page showing recipe list and ingredient requirements">
+            <div class="guide-screenshot-caption">Craft tab — recipes unlock by Crafter level</div>
+          </div>
+          <div style="flex:1">
+            <p class="guide-p">The <strong>Craft tab</strong> lets you combine materials from farming, arena, and chests into powerful gear, potions, and special items.</p>
+            <p class="guide-p">Recipes require:</p>
+            <ul class="guide-steps">
+              <li><span class="step-n">LVL</span> A minimum <strong>Crafter level</strong> to unlock</li>
+              <li><span class="step-n">MAT</span> Specific <strong>materials</strong> in your inventory</li>
+              <li><span class="step-n">T</span> Real <strong>time</strong> to craft (5s to 2 hours)</li>
+              <li><span class="step-n">&#127775;</span> Optional <strong>gold</strong> cost for advanced recipes</li>
+            </ul>
+            <p class="guide-p">Crafting awards <strong>Crafter XP</strong>. Higher Crafter level unlocks more powerful recipes including the endgame <strong>Lich Set</strong> and <strong>Titan Set</strong>.</p>
+          </div>
+        </div>
+
+        <div class="guide-callout tip">
+          <span class="guide-callout-icon">&#128161;</span>
+          <div><strong>Tip!</strong> Craft <strong>Compost</strong> first (Wheat + Herbs) — it's free, fast, and gives Crafter XP early. Then work toward <strong>Iron Bar</strong> and <strong>Fang Shard</strong> for your first gear upgrades.</div>
+        </div>
+      </div>
+
+      <hr class="guide-divider">
+
+      <!-- ═══════════════════════════════════════════
+           SECTION 9 — Marketplace
+      ════════════════════════════════════════════ -->
+      <div class="guide-section" id="marketplace">
+        <div class="guide-section-header">
+          <div class="guide-step-badge">9</div>
+          <span class="guide-section-icon">&#127978;</span>
+          <h2>Marketplace</h2>
+        </div>
+
+        <div class="guide-row">
+          <div class="guide-screenshot">
+            <img src="img/marketplace.png" alt="Marketplace showing active listings and buy offers">
+            <div class="guide-screenshot-caption">Marketplace — player-to-player trading</div>
+          </div>
+          <div style="flex:1">
+            <p class="guide-p">The <strong>Marketplace</strong> is a player-to-player trading system. List items you don't need, buy items you do. Prices are set by players and governed by supply and demand.</p>
+            <ul class="guide-steps">
+              <li><span class="step-n">1</span> Tap an item in your inventory and select <strong>"List on Market"</strong> to create a listing.</li>
+              <li><span class="step-n">2</span> Set your <strong>price in gold</strong> and <strong>quantity</strong>.</li>
+              <li><span class="step-n">3</span> Other players browsing the Marketplace can <strong>buy</strong> your listing instantly.</li>
+              <li><span class="step-n">4</span> You can hold up to <strong>5 active listings</strong> at once. Listings expire after 7 days.</li>
+            </ul>
+            <p class="guide-p">Hover over the <strong>price sparkline</strong> on any item to see recent sale history — useful for pricing your items competitively.</p>
+          </div>
+        </div>
+
+        <div class="guide-callout gold">
+          <span class="guide-callout-icon">&#127775;</span>
+          <div><strong>Gold tip!</strong>Earn gold by defeating Arena bosses and selling excess items. Gold is the only currency — there are no premium purchases in Grindly.</div>
+        </div>
+      </div>
+
+      <hr class="guide-divider">
+
+      <!-- ═══════════════════════════════════════════
+           SECTION 10 — Pro Tips
+      ════════════════════════════════════════════ -->
+      <div class="guide-section" id="tips">
+        <div class="guide-section-header">
+          <div class="guide-step-badge">10</div>
+          <span class="guide-section-icon">&#128161;</span>
+          <h2>Pro Tips</h2>
+        </div>
+
+        <p class="guide-p">These are the things veteran Grindly players wish they'd known at the start:</p>
+
+        <ul class="guide-steps">
+          <li><span class="step-n">&#128161;</span> <div><strong>Equip your best gear before Arena runs.</strong> Your stats are read at the start of combat — always check your inventory first.</div></li>
+          <li><span class="step-n">&#128161;</span> <div><strong>Farm during long work sessions.</strong> Plant seeds before a big coding session — they'll be ready to harvest by the time you're done.</div></li>
+          <li><span class="step-n">&#128161;</span> <div><strong>Craft potions early.</strong> ATK and HP potions give a temporary combat boost that can make the difference in tough boss fights.</div></li>
+          <li><span class="step-n">&#128161;</span> <div><strong>Check the Marketplace before crafting.</strong> Sometimes it's faster and cheaper to buy materials than farm them yourself.</div></li>
+          <li><span class="step-n">&#128161;</span> <div><strong>Prestige at Level 99.</strong> Prestiged skills earn a permanent XP multiplier. Prestige your most-used skill first for maximum benefit.</div></li>
+          <li><span class="step-n">&#128161;</span> <div><strong>Use Focus Mode.</strong> Enable Focus Mode (tray right-click menu) to pause tracking during breaks — XP only counts when you're actually working.</div></li>
+          <li><span class="step-n">&#128161;</span> <div><strong>Connect your account.</strong> Account creation unlocks the friends list, global leaderboard, and cross-device cloud sync.</div></li>
+        </ul>
+
+        <div class="guide-callout tip">
+          <span class="guide-callout-icon">&#127881;</span>
+          <div><strong>You're ready!</strong> That's everything you need to get started. Explore the rest of the wiki using the sidebar, or jump straight into the app and start grinding. Good luck, adventurer.</div>
+        </div>
+
+        <div style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap">
+          <a href="skills.html" class="nav-link" style="background:var(--bg-card);border:1px solid var(--border-ornate);padding:8px 14px;border-radius:6px;font-size:12px">&#9878;&#65039; Skills Guide</a>
+          <a href="arena.html" class="nav-link" style="background:var(--bg-card);border:1px solid var(--border-ornate);padding:8px 14px;border-radius:6px;font-size:12px">&#9876;&#65039; Arena &amp; Bosses</a>
+          <a href="crafting.html" class="nav-link" style="background:var(--bg-card);border:1px solid var(--border-ornate);padding:8px 14px;border-radius:6px;font-size:12px">&#128296; Crafting</a>
+          <a href="equipment.html" class="nav-link" style="background:var(--bg-card);border:1px solid var(--border-ornate);padding:8px 14px;border-radius:6px;font-size:12px">&#127975; Equipment</a>
+          <a href="loot.html" class="nav-link" style="background:var(--bg-card);border:1px solid var(--border-ornate);padding:8px 14px;border-radius:6px;font-size:12px">&#127873; Loot Bags</a>
+        </div>
+      </div>
+
+    </div><!-- /guide-article -->
+  </main>
+</div>
+
+<button class="back-to-top" id="backToTop" title="Back to top">&#8593;</button>
+<script>var btt=document.getElementById('backToTop');window.addEventListener('scroll',function(){btt.classList.toggle('visible',window.scrollY>300)});btt.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});</script>
+
+<script>
+(function(){
+  document.querySelectorAll('.nav-group-title').forEach(function(t){
+    t.addEventListener('click',function(){this.parentElement.classList.toggle('collapsed');});
+  });
+})();
+</script>
+<script src="wiki-search.js"></script>
+<script src="wiki-nav.js"></script>
+<script src="wiki-config.js"></script>
+<script src="wiki-skins.js"></script>
+<script src="wiki-online.js"></script>
+</body>
+</html>
