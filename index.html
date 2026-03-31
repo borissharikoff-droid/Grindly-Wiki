@@ -1862,8 +1862,8 @@
         XP, loot, boss fights &amp; leaderboards.
       </p>
       <div class="hero-cta-row">
-        <a href="https://github.com/borissharikoff-droid/Idly/releases/latest" class="btn-primary" target="_blank" rel="noopener">&#128187; Download for Windows</a>
-        <a href="https://github.com/borissharikoff-droid/Idly/releases/latest" class="btn-primary" style="background:var(--card-bg);border:1px solid var(--border);color:var(--text)" target="_blank" rel="noopener">&#63743; Download for Mac</a>
+        <a id="btn-dl-win" href="https://github.com/borissharikoff-droid/Idly/releases/latest" class="btn-primary" target="_blank" rel="noopener">&#128187; Download for Windows</a>
+        <a id="btn-dl-mac" href="https://github.com/borissharikoff-droid/Idly/releases/latest" class="btn-primary" style="background:var(--card-bg);border:1px solid var(--border);color:var(--text)" target="_blank" rel="noopener">&#63743; Download for Mac</a>
         <a href="#sc-skills" class="btn-ghost">See features &#8595;</a>
       </div>
 
@@ -2723,8 +2723,8 @@
     <section class="final-cta">
       <h2>Ready to grind?</h2>
       <p>Free, open source, no account required. Your data stays on your machine.</p>
-      <a href="https://github.com/borissharikoff-droid/Idly/releases/latest" class="btn-primary" target="_blank" rel="noopener">&#128187; Download for Windows</a>
-      <a href="https://github.com/borissharikoff-droid/Idly/releases/latest" class="btn-primary" style="background:var(--card-bg);border:1px solid var(--border);color:var(--text);margin-top:8px" target="_blank" rel="noopener">&#63743; Download for Mac</a>
+      <a id="btn-dl-win-cta" href="https://github.com/borissharikoff-droid/Idly/releases/latest" class="btn-primary" target="_blank" rel="noopener">&#128187; Download for Windows</a>
+      <a id="btn-dl-mac-cta" href="https://github.com/borissharikoff-droid/Idly/releases/latest" class="btn-primary" style="background:var(--card-bg);border:1px solid var(--border);color:var(--text);margin-top:8px" target="_blank" rel="noopener">&#63743; Download for Mac</a>
     </section>
 
     <!-- ══════ Quick Reference ══════ -->
@@ -2927,6 +2927,36 @@
 
 <button class="back-to-top" id="backToTop" title="Back to top">&#8593;</button>
 <script>var btt=document.getElementById('backToTop');window.addEventListener('scroll',function(){btt.classList.toggle('visible',window.scrollY>300)});btt.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});</script>
+<script>
+(function(){
+  var REPO = 'borissharikoff-droid/Idly';
+  var winBtns = [document.getElementById('btn-dl-win'), document.getElementById('btn-dl-win-cta')];
+  var macBtns = [document.getElementById('btn-dl-mac'), document.getElementById('btn-dl-mac-cta')];
+  fetch('https://api.github.com/repos/' + REPO + '/releases/latest')
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      var assets = data.assets || [];
+      var exeAsset = assets.find(function(a){ return a.name.endsWith('.exe'); });
+      var dmgAsset = assets.find(function(a){ return a.name.endsWith('.dmg'); });
+      if(exeAsset){
+        winBtns.forEach(function(b){ if(b) b.href = exeAsset.browser_download_url; });
+      }
+      if(dmgAsset){
+        macBtns.forEach(function(b){ if(b) b.href = dmgAsset.browser_download_url; });
+      } else {
+        macBtns.forEach(function(b){
+          if(!b) return;
+          b.style.opacity = '0.5';
+          b.style.cursor = 'default';
+          b.removeAttribute('href');
+          b.setAttribute('title', 'Mac build coming in the next release');
+          b.innerHTML = '&#63743; Mac — Coming Soon';
+          b.addEventListener('click', function(e){ e.preventDefault(); });
+        });
+      }
+    }).catch(function(){});
+})();
+</script>
 
 <script>
 // Animate skill XP bars on scroll into view
