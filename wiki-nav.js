@@ -17,7 +17,7 @@
     { href: 'raids.html',        label: 'Raids',                  dot: 'purple' },
     { href: 'guilds.html',       label: 'Guilds',                 dot: 'gold' },
     { href: 'crafting.html',     label: 'Crafting',               dot: 'cyan' },
-    { href: 'cooking.html',      label: 'Cooking',                dot: 'orange', badge: 'WIP' },
+    { href: 'cooking.html',      label: 'Cooking',                dot: 'orange' },
     { href: 'farming.html',      label: 'Farming',                dot: 'green' },
     { href: 'pets.html',         label: 'Pets',                   dot: 'orange', badge: 'NEW' },
     { href: 'skills.html',       label: 'Skills',                 dot: 'blue' },
