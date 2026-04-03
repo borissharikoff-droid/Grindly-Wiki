@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pets – Grindly Wiki</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.pt-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:18px}
+.pt-tab{padding:7px 16px;border-radius:8px;border:1px solid var(--border-inner);background:transparent;color:var(--text-dim);font-size:13px;font-family:var(--font-mono);cursor:pointer;transition:all .15s}
+.pt-tab:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
+.pt-tab.active{color:var(--gold);border-color:var(--gold);background:rgba(251,191,36,.08)}
+.pt-panel{display:none}.pt-panel.active{display:block}
+.hunger-bar{height:6px;border-radius:4px;background:var(--surface-0);overflow:hidden;margin-top:4px}
+.hunger-fill{height:100%;border-radius:4px}
+.stat-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:var(--font-mono);border:1px solid}
+.stat-hp{color:#4ade80;border-color:rgba(74,222,128,.35);background:rgba(74,222,128,.07)}
+.stat-atk{color:#f87171;border-color:rgba(248,113,113,.35);background:rgba(248,113,113,.07)}
+.stat-gold{color:#fbbf24;border-color:rgba(251,191,36,.35);background:rgba(251,191,36,.07)}
+.mood-row{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.mood-chip{display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:6px;border:1px solid var(--border-inner);font-size:12px;font-family:var(--font-mono)}
+.milestone-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:12px}
+.milestone-card{padding:12px;border-radius:8px;border:1px solid var(--border-inner);background:var(--surface-1)}
+.milestone-card .mc-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
+.milestone-card .mc-cond{font-size:11px;font-family:var(--font-mono);color:var(--text-dim)}
+.milestone-card .mc-reward{font-size:11px;font-family:var(--font-mono);color:var(--gold);margin-top:4px}
+.lv-table td:first-child{font-family:var(--font-mono);color:var(--gold);font-weight:700}
+</style>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+</head>
+<body>
+
+<!-- Top Bar -->
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">G</span>
+      <span class="logo-text">Grindly<small>Wiki</small></span>
+    </a>
+    <div class="top-right">
+      <div class="player-count">
+        <span class="pulse-dot"></span>
+        <span>Productivity RPG</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Page Layout -->
+<div class="page-wrap">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="search-box">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search wiki..." autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-title"><span class="arrow">&#9660;</span> Pages</div>
+      <ul class="nav-links" id="wikiNav"></ul>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+    <div class="breadcrumbs"><a href="index.html">Home</a><span class="bc-sep">&#9656;</span><span class="bc-current">Pets</span></div>
+
+    <section class="content">
+      <h2 class="section-title"><span class="section-icon">🐾</span> Pets</h2>
+      <p class="section-desc">Pets are companions that buff your skill XP, help in arena combat, go on adventures to find materials, and grow alongside you over time. Roll your first pet for free — re-rolls cost 5,000 gold.</p>
+
+      <!-- Tabs -->
+      <div class="pt-tabs">
+        <button class="pt-tab active" onclick="ptSwitch('species',this)">Species</button>
+        <button class="pt-tab" onclick="ptSwitch('leveling',this)">Leveling</button>
+        <button class="pt-tab" onclick="ptSwitch('buffs',this)">Buffs</button>
+        <button class="pt-tab" onclick="ptSwitch('hunger',this)">Hunger</button>
+        <button class="pt-tab" onclick="ptSwitch('adventures',this)">Adventures</button>
+        <button class="pt-tab" onclick="ptSwitch('abilities',this)">Abilities</button>
+        <button class="pt-tab" onclick="ptSwitch('milestones',this)">Bond Milestones</button>
+        <button class="pt-tab" onclick="ptSwitch('moods',this)">Moods</button>
+      </div>
+
+      <!-- ═══ Species Panel ═══ -->
+      <div id="panel-species" class="pt-panel active">
+        <p class="section-desc" style="margin-bottom:14px">Cat and Dog are starter-only (free first roll). All other species come from the gacha re-roll pool. Rarity affects roll odds and determines base buff strength.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th></th><th>Species</th><th>Rarity</th><th>Buffs Skill</th><th>Base XP Buff (LVL 1)</th><th>Evolved</th><th>How to Get</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>🐱</td><td><strong>Cat</strong></td>
+                <td><span class="rarity common">Common</span></td>
+                <td>All Skills</td><td class="perk">+5%</td><td>😸</td><td>Starter chooser</td>
+              </tr>
+              <tr>
+                <td>🐕</td><td><strong>Dog</strong></td>
+                <td><span class="rarity common">Common</span></td>
+                <td>All Skills</td><td class="perk">+5%</td><td>🐩</td><td>Starter chooser</td>
+              </tr>
+              <tr>
+                <td>🦊</td><td><strong>Fox</strong></td>
+                <td><span class="rarity rare">Rare</span></td>
+                <td>Researcher</td><td class="perk">+8%</td><td>🦊</td><td>Gacha (re-roll)</td>
+              </tr>
+              <tr>
+                <td>🦉</td><td><strong>Owl</strong></td>
+                <td><span class="rarity rare">Rare</span></td>
+                <td>Learner</td><td class="perk">+8%</td><td>🦉</td><td>Gacha (re-roll)</td>
+              </tr>
+              <tr>
+                <td>🐰</td><td><strong>Rabbit</strong></td>
+                <td><span class="rarity rare">Rare</span></td>
+                <td>Developer</td><td class="perk">+8%</td><td>🐇</td><td>Gacha (re-roll)</td>
+              </tr>
+              <tr>
+                <td>🐺</td><td><strong>Wolf</strong></td>
+                <td><span class="rarity epic">Epic</span></td>
+                <td>Gamer</td><td class="perk">+12%</td><td>🐺</td><td>Gacha (re-roll)</td>
+              </tr>
+              <tr>
+                <td>🐍</td><td><strong>Snake</strong></td>
+                <td><span class="rarity epic">Epic</span></td>
+                <td>Creator</td><td class="perk">+12%</td><td>🐍</td><td>Gacha (re-roll)</td>
+              </tr>
+              <tr>
+                <td>🐲</td><td><strong>Dragon</strong></td>
+                <td><span class="rarity legendary">Legendary</span></td>
+                <td>All Skills</td><td class="perk">+15%</td><td>🐉</td><td>Gacha (re-roll)</td>
+              </tr>
+              <tr>
+                <td>🟢</td><td><strong>Slime</strong></td>
+                <td><span class="rarity legendary">Legendary</span></td>
+                <td>Communicator</td><td class="perk">+15%</td><td>💚</td><td>Gacha (re-roll)</td>
+              </tr>
+              <tr>
+                <td>🦅</td><td><strong>Phoenix</strong></td>
+                <td><span class="rarity mythic">Mythic</span></td>
+                <td>All Skills</td><td class="perk">+20%</td><td>🔥</td><td>Gacha (re-roll)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="section-desc" style="margin-top:12px"><strong>Gacha odds:</strong> Common 55% · Rare 28% · Epic 12% · Legendary 4% · Mythic 1%</p>
+      </div>
+
+      <!-- ═══ Leveling Panel ═══ -->
+      <div id="panel-leveling" class="pt-panel">
+        <p class="section-desc" style="margin-bottom:14px">Pets level from 1–10 by feeding and petting. Choose which skill to buff at each level-up (or buff all skills). Higher level = stronger XP buff and better combat stats.</p>
+        <div class="table-wrap">
+          <table class="lv-table">
+            <thead>
+              <tr><th>LVL</th><th>XP to Next</th><th>XP Buff Factor</th><th>HP Regen (Arena)</th><th>ATK (Arena)</th><th>Gold% (Arena)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>10</td><td>×1.0</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>2</td><td>20</td><td>×1.1</td><td>—</td><td>—</td><td>—</td></tr>
+              <tr><td>3</td><td>30</td><td>×1.2</td><td>+1</td><td>—</td><td>—</td></tr>
+              <tr><td>4</td><td>40</td><td>×1.3</td><td>+1</td><td>—</td><td>—</td></tr>
+              <tr><td>5</td><td>50</td><td>×1.4</td><td>+1</td><td>+1</td><td>—</td></tr>
+              <tr><td>6</td><td>65</td><td>×1.5</td><td>+2</td><td>+1</td><td>—</td></tr>
+              <tr><td>7</td><td>80</td><td>×1.6</td><td>+2</td><td>+2</td><td>+3%</td></tr>
+              <tr><td>8</td><td>100</td><td>×1.7</td><td>+2</td><td>+2</td><td>+5%</td></tr>
+              <tr><td>9</td><td>120</td><td>×1.8</td><td>+2</td><td>+3</td><td>+7%</td></tr>
+              <tr><td>10</td><td><em>MAX</em></td><td>×1.9</td><td>+3</td><td>+3</td><td>+10%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="section-desc" style="margin-top:14px">
+          <strong>XP sources:</strong> Feeding (1–8 XP based on food rarity) · Petting (max 10/day, +1 XP each)<br>
+          <strong>Session drop:</strong> Every 5+ minute work session your pet finds 1 random material (shown on session end screen).
+        </div>
+      </div>
+
+      <!-- ═══ Buffs Panel ═══ -->
+      <div id="panel-buffs" class="pt-panel">
+        <h3 class="subsection-title">XP Buff Formula</h3>
+        <p class="section-desc">Your pet multiplies skill XP earned during work sessions.</p>
+        <div class="info-box" style="margin:12px 0;padding:12px;border-radius:8px;border:1px solid var(--border-inner);background:var(--surface-1);font-family:var(--font-mono);font-size:12px;color:var(--text-dim)">
+          effectiveBuff = baseBuffPct × hungerFactor × levelFactor<br>
+          hungerFactor = 1.0 (if hunger ≥ 50%) or hunger / 50 (if hunger &lt; 50%)<br>
+          levelFactor = 1 + (level − 1) × 0.1<br>
+          <span style="color:var(--gold)">finalMultiplier = 1 + effectiveBuff + bondBonus + legendaryBuff</span><br>
+          (×1.5 during Motivation Burst ability)
+        </div>
+        <p class="section-desc">At LVL 10, full hunger, an Epic pet (12% base) gives: 12% × 1.0 × 1.9 = <strong>+22.8% XP</strong> to its skill.</p>
+        <p class="section-desc">A Mythic Phoenix (20% base) at full buff: 20% × 1.9 = <strong>+38% XP</strong> to all skills.</p>
+
+        <h3 class="subsection-title" style="margin-top:20px">Arena Combat Buffs</h3>
+        <p class="section-desc">Global arena stats added based on pet level. All values scale with hunger (0 when starving or on adventure).</p>
+        <div class="mood-row">
+          <div class="stat-badge stat-hp">+HP Regen unlocks at LVL 3</div>
+          <div class="stat-badge stat-atk">+ATK unlocks at LVL 5</div>
+          <div class="stat-badge stat-gold">+Gold% unlocks at LVL 7</div>
+        </div>
+
+        <h3 class="subsection-title" style="margin-top:20px">Legendary Bond (LVL 10 exclusive)</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Species</th><th>Ability</th></tr></thead>
+            <tbody>
+              <tr><td>Cat 😸</td><td>+2% XP to <strong>all</strong> skills (permanent)</td></tr>
+              <tr><td>Dog 🐩</td><td>+10% gold from arena kills (permanent)</td></tr>
+              <tr><td>All others</td><td>Evolved emoji unlocked</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ═══ Hunger Panel ═══ -->
+      <div id="panel-hunger" class="pt-panel">
+        <p class="section-desc">Hunger decays from 100% to 0% over 24 hours. Feed your pet food items to restore it. A hungry pet still gives some buff, but a starving pet gives nothing.</p>
+        <div class="table-wrap" style="margin-top:14px">
+          <table>
+            <thead><tr><th>Hunger</th><th>XP Buff</th><th>Arena Buffs</th><th>Adventures</th></tr></thead>
+            <tbody>
+              <tr><td>50–100% 🟢</td><td>Full (100% of base)</td><td>Full</td><td>✓</td></tr>
+              <tr><td>25–50% 🟡</td><td>Partial (hunger/50 × base)</td><td>Partial</td><td>✓</td></tr>
+              <tr><td>1–25% 🔴</td><td>Very low</td><td>Very low</td><td>✗ (too hungry)</td></tr>
+              <tr><td>0% 💀</td><td>None (collapsed)</td><td>None</td><td>✗</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 class="subsection-title" style="margin-top:18px">Food XP &amp; Hunger Restore</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Food Rarity</th><th>Hunger Restore</th><th>Pet XP</th></tr></thead>
+            <tbody>
+              <tr><td><span class="rarity common">Common</span></td><td>+20%</td><td>+1 XP</td></tr>
+              <tr><td><span class="rarity rare">Rare</span></td><td>+30%</td><td>+2 XP</td></tr>
+              <tr><td><span class="rarity epic">Epic</span></td><td>+45%</td><td>+3 XP</td></tr>
+              <tr><td><span class="rarity legendary">Legendary</span></td><td>+60%</td><td>+5 XP</td></tr>
+              <tr><td><span class="rarity mythic">Mythic</span></td><td>+80%</td><td>+8 XP</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="section-desc" style="margin-top:12px">Cook food in the <a href="cooking.html">Cooking</a> tab to craft higher-rarity meals. Higher rarity food gives more XP and hunger per feeding.</p>
+      </div>
+
+      <!-- ═══ Adventures Panel ═══ -->
+      <div id="panel-adventures" class="pt-panel">
+        <p class="section-desc">Send your pet on timed adventures to find materials while you work. Your pet gives no buff while away. Must have ≥ 25% hunger to depart.</p>
+        <div class="table-wrap" style="margin-top:14px">
+          <table>
+            <thead><tr><th>Adventure</th><th>Duration</th><th>Min LVL</th><th>Rewards</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>🌱 Seed Run</td><td>30 min</td><td>1</td>
+                <td>2–3 random farm seeds</td>
+              </tr>
+              <tr>
+                <td>🏪 Market Forage</td><td>2 h</td><td>1</td>
+                <td>1–2 crafting mats + 20–80 gold</td>
+              </tr>
+              <tr>
+                <td>⚔️ Dungeon Scout</td><td>4 h</td><td>3</td>
+                <td>1–2 rare combat drops + gold</td>
+              </tr>
+              <tr>
+                <td>📚 Ancient Library</td><td>6 h</td><td>5</td>
+                <td>1–2 epic mats + buff food</td>
+              </tr>
+              <tr>
+                <td>🌌 Void Rift</td><td>12 h</td><td>8</td>
+                <td>1–2 legendary mats + gold</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ═══ Abilities Panel ═══ -->
+      <div id="panel-abilities" class="pt-panel">
+        <p class="section-desc">Special abilities unlock at higher pet levels. Cannot use while pet is on adventure.</p>
+        <div class="milestone-grid" style="margin-top:14px">
+          <div class="milestone-card">
+            <div class="mc-title">🔍 Scavenge</div>
+            <div class="mc-cond">Unlocks at LVL 3 · Cooldown: 24 hours</div>
+            <div class="mc-reward">Instantly finds 1–3 common materials (Iron Ore, Slime Gel, Goblin Tooth, Monster Fang)</div>
+          </div>
+          <div class="milestone-card">
+            <div class="mc-title">⚡ Motivation Burst</div>
+            <div class="mc-cond">Unlocks at LVL 6 · Cooldown: 3 days</div>
+            <div class="mc-reward">+50% XP multiplier for 20 minutes on active skill sessions</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Bond Milestones Panel ═══ -->
+      <div id="panel-milestones" class="pt-panel">
+        <p class="section-desc">Bond milestones unlock automatically when conditions are met. A celebration overlay appears when a milestone triggers.</p>
+        <div class="milestone-grid" style="margin-top:14px">
+          <div class="milestone-card">
+            <div class="mc-title">🗓️ First Week</div>
+            <div class="mc-cond">7 days together</div>
+            <div class="mc-reward">Bond milestone badge — your pet is settling in</div>
+          </div>
+          <div class="milestone-card">
+            <div class="mc-title">📅 One Month</div>
+            <div class="mc-cond">30 days together</div>
+            <div class="mc-reward">+1% permanent XP buff (added to all future calculations)</div>
+          </div>
+          <div class="milestone-card">
+            <div class="mc-title">🍗 Loyal Feeder</div>
+            <div class="mc-cond">50 total feedings</div>
+            <div class="mc-reward">Receive 1× Apple Pie (Epic food item)</div>
+          </div>
+          <div class="milestone-card">
+            <div class="mc-title">👨‍🍳 Master Feeder</div>
+            <div class="mc-cond">100 total feedings</div>
+            <div class="mc-reward">Receive 1× Legendary Chest</div>
+          </div>
+          <div class="milestone-card">
+            <div class="mc-title">⭐ Max Bond (LVL 10)</div>
+            <div class="mc-cond">Reach pet level 10</div>
+            <div class="mc-reward">Evolved emoji unlocked + Legendary Bond ability activates</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ Moods Panel ═══ -->
+      <div id="panel-moods" class="pt-panel">
+        <p class="section-desc">Your pet's mood reflects its hunger level and recent interactions. Moods are cosmetic — they don't change buff values (hunger does).</p>
+        <div class="mood-row" style="flex-direction:column;align-items:flex-start">
+          <div class="mood-chip"><span>😄</span><span style="color:var(--text)">Ecstatic</span><span style="color:var(--text-dim)">— hunger ≥ 75%</span></div>
+          <div class="mood-chip"><span>😊</span><span style="color:var(--text)">Happy</span><span style="color:var(--text-dim)">— hunger 50–74%</span></div>
+          <div class="mood-chip"><span>🥳</span><span style="color:#fde047">Playful!</span><span style="color:var(--text-dim)">— within 30 min of feeding or petting</span></div>
+          <div class="mood-chip"><span>😴</span><span style="color:#93c5fd">Sleeping</span><span style="color:var(--text-dim)">— no interaction for 8+ hours (still gives buff if fed)</span></div>
+          <div class="mood-chip"><span>😐</span><span style="color:var(--text)">Hungry</span><span style="color:var(--text-dim)">— hunger 25–49%</span></div>
+          <div class="mood-chip"><span>😢</span><span style="color:#fb923c">Starving</span><span style="color:var(--text-dim)">— hunger 1–24% · buff severely reduced</span></div>
+          <div class="mood-chip"><span>💀</span><span style="color:#6b7280">Collapsed</span><span style="color:var(--text-dim)">— hunger 0% · no buff, can't adventure</span></div>
+        </div>
+        <p class="section-desc" style="margin-top:8px">Pet the active pet up to 10 times per day (+1 XP, +2% hunger, triggers Playful mood for 30 min).</p>
+      </div>
+
+    </section>
+  </main>
+</div>
+
+<script>
+function ptSwitch(id, btn) {
+  document.querySelectorAll('.pt-panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.pt-tab').forEach(function(b){ b.classList.remove('active'); });
+  var panel = document.getElementById('panel-' + id);
+  if (panel) panel.classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+</script>
+<script src="wiki-nav.js"></script>
+<script src="wiki-search.js"></script>
+</body>
+</html>
