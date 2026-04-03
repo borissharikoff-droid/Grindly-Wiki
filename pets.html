@@ -72,11 +72,11 @@
 
     <section class="content">
       <h2 class="section-title"><span class="section-icon">🐾</span> Pets</h2>
-      <p class="section-desc">Pets are companions that buff your skill XP, help in arena combat, go on adventures to find materials, and grow alongside you over time. Roll your first pet for free — re-rolls cost 5,000 gold.</p>
+      <p class="section-desc">Pets are companions that buff your skill XP, help in arena combat, go on adventures to find materials, and grow alongside you over time. Choose your first pet for free when you start.</p>
 
       <!-- Tabs -->
       <div class="pt-tabs">
-        <button class="pt-tab active" onclick="ptSwitch('species',this)">Species</button>
+        <button class="pt-tab active" onclick="ptSwitch('pets',this)">Pets</button>
         <button class="pt-tab" onclick="ptSwitch('leveling',this)">Leveling</button>
         <button class="pt-tab" onclick="ptSwitch('buffs',this)">Buffs</button>
         <button class="pt-tab" onclick="ptSwitch('hunger',this)">Hunger</button>
@@ -86,69 +86,33 @@
         <button class="pt-tab" onclick="ptSwitch('moods',this)">Moods</button>
       </div>
 
-      <!-- ═══ Species Panel ═══ -->
-      <div id="panel-species" class="pt-panel active">
-        <p class="section-desc" style="margin-bottom:14px">Cat and Dog are starter-only (free first roll). All other species come from the gacha re-roll pool. Rarity affects roll odds and determines base buff strength.</p>
+      <!-- ═══ Pets Panel ═══ -->
+      <div id="panel-pets" class="pt-panel active">
+        <p class="section-desc" style="margin-bottom:14px">There are two pets to choose from. Both buff all skills equally. Their appearance changes at every level — 10 unique portraits from LVL 1 to LVL 10.</p>
         <div class="table-wrap">
           <table>
             <thead>
-              <tr><th></th><th>Species</th><th>Rarity</th><th>Buffs Skill</th><th>Base XP Buff (LVL 1)</th><th>Evolved</th><th>How to Get</th></tr>
+              <tr><th></th><th>Pet</th><th>LVL 1 Emoji</th><th>LVL 10 (Evolved)</th><th>Buffs</th><th>Base XP Buff (LVL 1, full hunger)</th></tr>
             </thead>
             <tbody>
               <tr>
-                <td>🐱</td><td><strong>Cat</strong></td>
-                <td><span class="rarity common">Common</span></td>
-                <td>All Skills</td><td class="perk">+5%</td><td>😸</td><td>Starter chooser</td>
+                <td><img src="pets/cat_lv1.png" style="width:36px;height:36px;object-fit:contain" onerror="this.style.display='none'">🐱</td>
+                <td><strong>Cat</strong></td>
+                <td>🐱</td><td>😸</td>
+                <td>All Skills · Arena HP Regen · ATK · Gold%</td>
+                <td class="perk">+5%</td>
               </tr>
               <tr>
-                <td>🐕</td><td><strong>Dog</strong></td>
-                <td><span class="rarity common">Common</span></td>
-                <td>All Skills</td><td class="perk">+5%</td><td>🐩</td><td>Starter chooser</td>
-              </tr>
-              <tr>
-                <td>🦊</td><td><strong>Fox</strong></td>
-                <td><span class="rarity rare">Rare</span></td>
-                <td>Researcher</td><td class="perk">+8%</td><td>🦊</td><td>Gacha (re-roll)</td>
-              </tr>
-              <tr>
-                <td>🦉</td><td><strong>Owl</strong></td>
-                <td><span class="rarity rare">Rare</span></td>
-                <td>Learner</td><td class="perk">+8%</td><td>🦉</td><td>Gacha (re-roll)</td>
-              </tr>
-              <tr>
-                <td>🐰</td><td><strong>Rabbit</strong></td>
-                <td><span class="rarity rare">Rare</span></td>
-                <td>Developer</td><td class="perk">+8%</td><td>🐇</td><td>Gacha (re-roll)</td>
-              </tr>
-              <tr>
-                <td>🐺</td><td><strong>Wolf</strong></td>
-                <td><span class="rarity epic">Epic</span></td>
-                <td>Gamer</td><td class="perk">+12%</td><td>🐺</td><td>Gacha (re-roll)</td>
-              </tr>
-              <tr>
-                <td>🐍</td><td><strong>Snake</strong></td>
-                <td><span class="rarity epic">Epic</span></td>
-                <td>Creator</td><td class="perk">+12%</td><td>🐍</td><td>Gacha (re-roll)</td>
-              </tr>
-              <tr>
-                <td>🐲</td><td><strong>Dragon</strong></td>
-                <td><span class="rarity legendary">Legendary</span></td>
-                <td>All Skills</td><td class="perk">+15%</td><td>🐉</td><td>Gacha (re-roll)</td>
-              </tr>
-              <tr>
-                <td>🟢</td><td><strong>Slime</strong></td>
-                <td><span class="rarity legendary">Legendary</span></td>
-                <td>Communicator</td><td class="perk">+15%</td><td>💚</td><td>Gacha (re-roll)</td>
-              </tr>
-              <tr>
-                <td>🦅</td><td><strong>Phoenix</strong></td>
-                <td><span class="rarity mythic">Mythic</span></td>
-                <td>All Skills</td><td class="perk">+20%</td><td>🔥</td><td>Gacha (re-roll)</td>
+                <td><img src="pets/dog_lv1.png" style="width:36px;height:36px;object-fit:contain" onerror="this.style.display='none'">🐕</td>
+                <td><strong>Dog</strong></td>
+                <td>🐕</td><td>🐩</td>
+                <td>All Skills · Arena HP Regen · ATK · Gold%</td>
+                <td class="perk">+5%</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p class="section-desc" style="margin-top:12px"><strong>Gacha odds:</strong> Common 55% · Rare 28% · Epic 12% · Legendary 4% · Mythic 1%</p>
+        <p class="section-desc" style="margin-top:12px">Legendary Bond at LVL 10: Cat gives <strong>+2% XP to all skills</strong> · Dog gives <strong>+10% gold from arena kills</strong>.</p>
       </div>
 
       <!-- ═══ Leveling Panel ═══ -->
@@ -348,7 +312,7 @@
 function ptSwitch(id, btn) {
   document.querySelectorAll('.pt-panel').forEach(function(p){ p.classList.remove('active'); });
   document.querySelectorAll('.pt-tab').forEach(function(b){ b.classList.remove('active'); });
-  var panel = document.getElementById('panel-' + id);
+  var panel = document.getElementById('panel-' + id) || document.getElementById('panel-pets');
   if (panel) panel.classList.add('active');
   if (btn) btn.classList.add('active');
 }
