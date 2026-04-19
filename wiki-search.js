@@ -213,6 +213,7 @@
     { name: 'Warrior', url: 'skills.html#warrior-bonuses', cat: 'Skill', icon: '\u2694\uFE0F' },
     { name: 'Crafter', url: 'skills.html', cat: 'Skill', icon: '\u2692\uFE0F' },
     { name: 'Chef', url: 'skills.html', cat: 'Skill', icon: '\u{1F468}\u200D\u{1F373}' },
+    { name: 'AI', url: 'skills.html', cat: 'Skill', icon: '\u{1F916}' },
     { name: 'Grindly', url: 'skills.html#grindly-bonuses', cat: 'Skill', icon: '\u{1F3E0}' },
     // Arena zones
     { name: 'Slime Cavern', url: 'arena.html', cat: 'Arena', icon: '\u{1FAE7}' },

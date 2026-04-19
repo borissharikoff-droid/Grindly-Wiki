@@ -361,7 +361,7 @@ a[href="guide.html"] { color: var(--gold-bright) !important; }
       <div class="guide-hero-meta">
         <div class="guide-hero-meta-item">&#128336; <span>~10 min</span> read</div>
         <div class="guide-hero-meta-item">&#127381; <span>Updated</span> 2025</div>
-        <div class="guide-hero-meta-item">&#128187; <span>Windows</span> only</div>
+        <div class="guide-hero-meta-item">&#128187; <span>Windows &amp; macOS</span></div>
       </div>
     </div>
 
@@ -395,15 +395,15 @@ a[href="guide.html"] { color: var(--gold-bright) !important; }
         </div>
 
         <p class="guide-p">
-          <strong>Grindly</strong> is a Windows desktop app that lives in your system tray and silently watches which apps you use. Every minute you spend coding, designing, gaming, or communicating earns XP in a matching skill — turning your real daily work into an RPG character sheet.
+          <strong>Grindly</strong> is a cross-platform desktop app (Windows and macOS) that lives in your system tray or menu bar and silently watches which apps you use. Every minute you spend coding, designing, gaming, or communicating earns XP in a matching skill — turning your real daily work into an RPG character sheet.
         </p>
 
         <div class="guide-stat-grid">
-          <div class="guide-stat"><span class="guide-stat-n">13</span><div class="guide-stat-label">Skills</div></div>
+          <div class="guide-stat"><span class="guide-stat-n">14</span><div class="guide-stat-label">Skills</div></div>
           <div class="guide-stat"><span class="guide-stat-n">99</span><div class="guide-stat-label">Max Level</div></div>
-          <div class="guide-stat"><span class="guide-stat-n">89+</span><div class="guide-stat-label">Items</div></div>
+          <div class="guide-stat"><span class="guide-stat-n">130+</span><div class="guide-stat-label">Items</div></div>
           <div class="guide-stat"><span class="guide-stat-n">8</span><div class="guide-stat-label">Arena Zones</div></div>
-          <div class="guide-stat"><span class="guide-stat-n">30+</span><div class="guide-stat-label">Recipes</div></div>
+          <div class="guide-stat"><span class="guide-stat-n">32</span><div class="guide-stat-label">Recipes</div></div>
           <div class="guide-stat"><span class="guide-stat-n">Free</span><div class="guide-stat-label">Always</div></div>
         </div>
 
@@ -455,7 +455,7 @@ a[href="guide.html"] { color: var(--gold-bright) !important; }
 
         <div class="guide-callout tip">
           <span class="guide-callout-icon">&#128161;</span>
-          <div><strong>Tip!</strong>Grindly starts with Windows automatically. You don't need to remember to launch it — just work normally and XP accumulates in the background.</div>
+          <div><strong>Tip!</strong>Grindly starts at login automatically on both Windows and macOS. You don't need to remember to launch it — just work normally and XP accumulates in the background.</div>
         </div>
       </div>
 
@@ -472,7 +472,7 @@ a[href="guide.html"] { color: var(--gold-bright) !important; }
         </div>
 
         <p class="guide-p">
-          Grindly uses a lightweight PowerShell subprocess to read the <strong>active foreground window</strong> every ~1.5 seconds. It never reads your screen contents, keystrokes, or any data inside your apps — only the process name and window title.
+          Grindly uses a lightweight native subprocess (PowerShell on Windows, a Swift helper on macOS) to read the <strong>active foreground window</strong> every ~1.5 seconds. It never reads your screen contents, keystrokes, or any data inside your apps — only the process name and window title.
         </p>
 
         <div class="guide-row">
@@ -509,7 +509,7 @@ a[href="guide.html"] { color: var(--gold-bright) !important; }
             <div class="guide-screenshot-caption">Skills tab — each bar = one skill</div>
           </div>
           <div style="flex:1">
-            <p class="guide-p">Grindly has <strong>13 skills</strong> across two categories:</p>
+            <p class="guide-p">Grindly has <strong>14 skills</strong> across two categories:</p>
             <p class="guide-p"><strong>Passive Skills</strong> — earned automatically based on which apps you use:</p>
             <div class="skill-chips">
               <span class="skill-chip" style="color:#00ff88;border-color:rgba(0,255,136,0.2)">&#128187; Developer</span>
@@ -520,6 +520,7 @@ a[href="guide.html"] { color: var(--gold-bright) !important; }
               <span class="skill-chip" style="color:#eb459e;border-color:rgba(235,69,158,0.2)">&#127775; Creator</span>
               <span class="skill-chip" style="color:#00d4ff;border-color:rgba(0,212,255,0.2)">&#127891; Learner</span>
               <span class="skill-chip" style="color:#1db954;border-color:rgba(29,185,84,0.2)">&#127911; Listener</span>
+              <span class="skill-chip" style="color:#a78bfa;border-color:rgba(167,139,250,0.2)">&#129302; AI</span>
             </div>
             <p class="guide-p"><strong>Active Skills</strong> — earned inside Grindly:</p>
             <div class="skill-chips">

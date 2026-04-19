@@ -61,10 +61,10 @@
 
     <section class="hero">
       <h1>Activity Tracker</h1>
-      <p class="hero-sub">Grindly uses a background PowerShell process to detect what app you're working in and convert that time into skill XP. Windows-only. No keylogger — only app names are recorded.</p>
+      <p class="hero-sub">Grindly uses a lightweight background process to detect what app you're working in and convert that time into skill XP. Works on Windows and macOS. No keylogger — only app names are recorded.</p>
       <div class="hero-stats">
         <div class="hero-stat"><span class="hero-stat-num">~1.5s</span><span class="hero-stat-label">Update interval</span></div>
-        <div class="hero-stat"><span class="hero-stat-num">13</span><span class="hero-stat-label">Skills tracked</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">14</span><span class="hero-stat-label">Skills tracked</span></div>
         <div class="hero-stat"><span class="hero-stat-num">Win32</span><span class="hero-stat-label">API based</span></div>
       </div>
     </section>
@@ -73,33 +73,33 @@
 
       <!-- How it works -->
       <h2 class="section-title"><span class="section-icon">⚙️</span> How It Works</h2>
-      <p class="section-desc">When you start a grind session, Grindly spawns a PowerShell subprocess that polls Windows APIs every ~1.5 seconds to detect the active foreground window.</p>
+      <p class="section-desc">When you start a grind session, Grindly spawns a native tracker subprocess (PowerShell on Windows, a Swift binary on macOS) that polls the OS every ~1.5 seconds to detect the active foreground window.</p>
 
       <div class="tracker-grid">
         <div class="tracker-card">
           <h4>Active Window Detection</h4>
-          <p>Uses <span class="tech-badge">GetForegroundWindow</span> (Win32) to identify the currently focused app. Reads the process name and window title.</p>
+          <p>On Windows, uses <span class="tech-badge">GetForegroundWindow</span> (Win32). On macOS, uses <span class="tech-badge">NSWorkspace.frontmostApplication</span> via AppKit. Reads the process name and window title.</p>
         </div>
         <div class="tracker-card">
           <h4>Keystroke Activity</h4>
-          <p>Uses <span class="tech-badge">GetAsyncKeyState</span> to count keystrokes in the active window. Used to distinguish active work from passively watching a video.</p>
+          <p>Counts keystrokes in the active window (<span class="tech-badge">GetAsyncKeyState</span> on Windows, <span class="tech-badge">CGEventSource</span> on macOS). Used to distinguish active work from passively watching a video.</p>
         </div>
         <div class="tracker-card">
           <h4>Idle Detection</h4>
-          <p>Uses <span class="tech-badge">GetLastInputInfo</span> to measure time since the last user input. If idle too long, the session pauses automatically.</p>
+          <p>Measures time since the last user input (<span class="tech-badge">GetLastInputInfo</span> on Windows, <span class="tech-badge">CGEventSourceSecondsSinceLastEventType</span> on macOS). If idle too long, the session pauses automatically.</p>
         </div>
         <div class="tracker-card">
           <h4>Local Storage Only</h4>
-          <p>All activity data is stored locally in <span class="tech-badge">%APPDATA%/Grindly/grindly.sqlite</span>. Only aggregated XP totals are synced to the cloud.</p>
+          <p>All activity data is stored locally in SQLite (<span class="tech-badge">%APPDATA%/Grindly/grindly.sqlite</span> on Windows, <span class="tech-badge">~/Library/Application Support/Grindly/grindly.sqlite</span> on macOS). Only aggregated XP totals are synced to the cloud.</p>
         </div>
       </div>
 
       <!-- Data format -->
       <h2 class="section-title"><span class="section-icon">📡</span> Data Format</h2>
-      <p class="section-desc">The PowerShell subprocess outputs a single line every ~1.5 seconds in this format:</p>
+      <p class="section-desc">The tracker subprocess outputs a single line every ~1.5 seconds in this format:</p>
       <div class="info-box" style="margin-bottom:20px">
         <code style="font-size:12px;color:var(--gold)">WIN:ProcessName|WindowTitle|KeystrokeCount|IdleMs</code>
-        <p style="font-size:12px;color:var(--text-dim);margin:8px 0 0">Example: <code>WIN:code.exe|App.tsx — Grindly|42|800</code><br>
+        <p style="font-size:12px;color:var(--text-dim);margin:8px 0 0">Example: <code>WIN:code.exe|App.tsx — Grindly|42|800</code> (Windows) or <code>WIN:Code|App.tsx — Grindly|42|800</code> (macOS).<br>
         The Electron main process parses this and maps the process name to a skill category. Only the category is stored — the full window title is used for display only and is not synced.</p>
       </div>
 
@@ -156,11 +156,16 @@
           <div class="skill-name">🎵 Listener</div>
           <div><div class="skill-cat">music</div><div class="skill-apps">Spotify, Apple Music, VLC (audio), music production apps</div></div>
         </div>
+        <div class="skill-row">
+          <div class="skill-dot" style="background:#818cf8"></div>
+          <div class="skill-name">🤖 AI</div>
+          <div><div class="skill-cat">ai</div><div class="skill-apps">ChatGPT, Claude, Gemini, Copilot, Perplexity, Cursor AI panels</div></div>
+        </div>
       </div>
 
       <div class="info-box" style="margin-bottom:20px">
-        <h4>Warrior, Farmer, Crafter, Chef</h4>
-        <p style="font-size:13px;color:var(--text-dim);margin:6px 0 0">These four skills are earned through <strong>in-game actions</strong>, not tracked app time. Warrior XP comes from arena kills. Farmer XP from harvesting. Crafter XP from crafting. Chef XP from cooking. No desktop app is needed for these.</p>
+        <h4>Warrior, Farmer, Crafter, Chef, Grindly</h4>
+        <p style="font-size:13px;color:var(--text-dim);margin:6px 0 0">These five skills are earned through <strong>in-game actions</strong>, not tracked app time. Warrior XP comes from arena kills. Farmer XP from harvesting. Crafter XP from crafting. Chef XP from cooking. Grindly XP from time spent inside the app itself. No external desktop app is needed for these.</p>
       </div>
 
       <!-- Privacy -->
@@ -179,8 +184,8 @@
           <p>Only cumulative XP per skill is synced to the cloud. Raw activity logs stay on your machine in the local SQLite database.</p>
         </div>
         <div class="tracker-card">
-          <h4>Windows only</h4>
-          <p>The tracker uses Windows-specific Win32 APIs. macOS/Linux are not supported. The app will launch on other OSes but the tracker won't produce XP.</p>
+          <h4>Windows &amp; macOS</h4>
+          <p>Supported on Windows (Win32 APIs) and macOS 11+ (AppKit via a universal x64 + arm64 Swift binary). Linux is not supported — the app launches but the tracker won't produce XP.</p>
         </div>
       </div>
 
